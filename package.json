@@ -1,0 +1,40 @@
+{
+  "name": "databooze-project",
+  "version": "1.0.0",
+  "description": "[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/NdXafPCZ)",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Team:Databooze",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "transform": {
+      "^.+\\.(ts|tsx)?$": "ts-jest",
+      "^.+\\.(js|jsx)$": "babel-jest"
+    }
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
+  },
+  "dependencies": {
+    "@babel/preset-env": "^7.23.9",
+    "babel-jest": "^29.7.0",
+    "ts-jest": "^29.1.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RIT-iSchool/election-project-databooze.git"
+  },
+  "bugs": {
+    "url": "https://github.com/RIT-iSchool/election-project-databooze/issues"
+  },
+  "homepage": "https://github.com/RIT-iSchool/election-project-databooze#readme"
+}

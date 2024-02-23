@@ -19,6 +19,15 @@ function isValidBallot(ballot)
    return true;
 }
 
+function isValidCandidate(candidate){
+    if(/^\s*$/.test(candidate.username) || /^\s*$/.test(candidate.titles) || /^\s*$/.test(candidate.candidateDescription) || /^\s*$/.test(candidate.photo)){
+        return false;
+    }else{
+        return true;
+    }
+}
+
 export{
-    isValidBallot
+    isValidBallot,
+    isValidCandidate
 }

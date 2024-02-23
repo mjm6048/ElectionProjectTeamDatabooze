@@ -26,7 +26,7 @@ CREATE TABLE ballots(
     FOREIGN KEY (societyID) REFERENCES society(societyID)
 );
 
-CREATE TABLE positionBallots( 
+CREATE TABLE position_ballots( 
     positionID int NOT NULL PRIMARY KEY, 
     positionName varchar(25), 
     maxNumCandidates int, 
@@ -44,7 +44,7 @@ CREATE TABLE candidate(
     photo varchar(30),
     CONSTRAINT candidate_key PRIMARY KEY (username, positionID),
     FOREIGN KEY (username) REFERENCES users(username),
-    FOREIGN KEY (positionID) REFERENCES positionBallots(positionID)
+    FOREIGN KEY (positionID) REFERENCES position_ballots(positionID)
 
 );
 
@@ -55,7 +55,7 @@ CREATE TABLE votes(
     FOREIGN KEY (username) REFERENCES users(username)
 );
 
-CREATE TABLE initiativeBallots(
+CREATE TABLE initiative_ballots(
     initiativeID int PRIMARY KEY NOT NULL,
     initiativeName varchar(25),
     initiativeDescription varchar(100), 

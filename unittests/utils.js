@@ -4,6 +4,10 @@
 function isValidBallot(ballot)
 {
    const errors =[];
+   if(ballot.name==null || ballot.description == null || ballot.startDate == null || ballot.endDate == null || ballot.societyID == null)
+   {
+    return false;
+   }
    // Fields cannot be empty string
    if(/^\s*$/.test(ballot.name) || /^\s*$/.test(ballot.description)|| /^\s*$/.test(ballot.startDate) || /^\s*$/.test(ballot.endDate))
    {
@@ -16,7 +20,13 @@ function isValidBallot(ballot)
    {
     return false;
    }
-   return true;
+   //societyID has to be int
+   if(!(/^[0-9]+$/.test(ballot.societyID)))
+  {
+   return false;
+  }
+  return true;
+
 }
 
 function isValidCandidate(candidate){

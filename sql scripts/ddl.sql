@@ -1,8 +1,8 @@
-DROP DATABASE IF EXISTS databooze;
+
 
 CREATE DATABASE databooze;
 USE databooze;
-
+DROP TABLE IF EXISTS users;
 CREATE TABLE users(
     username varchar(25) NOT NULL PRIMARY KEY,
     firstName varchar(25) NOT NULL,
@@ -10,13 +10,13 @@ CREATE TABLE users(
     passwordHash varchar(30) NOT NULL,
     roleID int NOT NULL
 );
-
+DROP TABLE IF EXISTS society;
 CREATE TABLE society(
     societyID INT NOT NULL PRIMARY KEY,
     societyName varchar(25), 
     societyDescription varchar(100)
 );
-
+DROP TABLE IF EXISTS ballots;
 CREATE TABLE ballots(
     ballotID INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
     ballotName varchar(25), 
@@ -25,7 +25,7 @@ CREATE TABLE ballots(
     societyID int,
     FOREIGN KEY (societyID) REFERENCES society(societyID)
 );
-
+DROP TABLE IF EXISTS position_ballots;
 CREATE TABLE position_ballots( 
     positionID int NOT NULL PRIMARY KEY, 
     positionName varchar(25), 
@@ -34,7 +34,7 @@ CREATE TABLE position_ballots(
     ballotID int,
     FOREIGN KEY (ballotID) REFERENCES ballots(ballotID)
 );
-
+DROP TABLE IF EXISTS data;
 CREATE TABLE candidate(
     username varchar(25) NOT NULL,
     positionID int NOT NULL,
@@ -47,14 +47,14 @@ CREATE TABLE candidate(
     FOREIGN KEY (positionID) REFERENCES position_ballots(positionID)
 
 );
-
+DROP TABLE IF EXISTS databooze;
 CREATE TABLE votes( 
     voteID INT NOT NULL PRIMARY KEY, 
     votes JSON,
     username varchar(25) NOT NULL,
     FOREIGN KEY (username) REFERENCES users(username)
 );
-
+DROP TABLE IF EXISTS databooze;
 CREATE TABLE initiative_ballots(
     initiativeID int PRIMARY KEY NOT NULL,
     initiativeName varchar(25),
@@ -64,7 +64,7 @@ CREATE TABLE initiative_ballots(
     options JSON,
     FOREIGN KEY (ballotID) REFERENCES ballots(ballotID)
 );
-
+DROP TABLE IF EXISTS databooze;
 CREATE TABLE users_society(
     username varchar(25) NOT NULL,
     societyID INT NOT NULL,

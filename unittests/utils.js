@@ -29,7 +29,16 @@ function isValidCandidate(candidate) {
     }
 }
 
+function isValidPositionBallot(position_ballot) {
+    if (/^\s*$/.test(position_ballot.positionID) || /^\s*$/.test(position_ballot.positionName) || /^\s*$/.test(position_ballot.maxNumCandidates) || /^\s*$/.test(position_ballot.numVotesAllowed || /^\s*$/.test(position_ballot.ballotID))) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
 export {
     isValidBallot,
-    isValidCandidate
+    isValidCandidate,
+    isValidPositionBallot
 }

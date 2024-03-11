@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/NdXafPCZ)",
   "main": "index.js",
-  "type": "module",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start": "node index.js"
   },
   "author": "Team:Databooze",
   "license": "ISC",
@@ -27,7 +27,9 @@
   "dependencies": {
     "@babel/preset-env": "^7.23.9",
     "babel-jest": "^29.7.0",
-    "ts-jest": "^29.1.2"
+    "express": "^4.18.3",
+    "ts-jest": "^29.1.2",
+    "update": "^0.7.4"
   },
   "repository": {
     "type": "git",

@@ -3,7 +3,9 @@ const bodyParser = require('body-parser');
 const app = express();
 const port = 8000;
 const dl = require('./datalayer');
+var cors = require('cors');
 
+app.use(cors())
 app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
@@ -14,9 +16,11 @@ app.use(
 
 app.post("/users/login",async(req,res)=>{
     const{username,password}=req.body;
-    check = dl.userExists(username, password);
+    
     try{
-        
+         console.log(username);
+    
+        check = dl.userExists(username, password);
         if(check){
             res.status(200).json("Login successful");
         }

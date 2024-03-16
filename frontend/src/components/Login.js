@@ -9,16 +9,19 @@ function Login() {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:8000/users/login", {
+     await axios.post("http://localhost:8000/users/login", {
         username,
         password
-      });
+      })
+      .then(response=>{
       if (response.status === 200) {
         alert("Login successful");
         // Redirect to home page or do any further actions upon successful login
       } else {
+        console.log(response.status);
         alert("Invalid credentials");
       }
+    })
     } catch (error) {
       console.error("Error:", error);
       alert("Internal server error");

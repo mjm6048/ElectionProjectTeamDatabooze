@@ -16,9 +16,9 @@ CREATE DATABASE databooze
 
 DROP TABLE IF EXISTS users;
 CREATE TABLE users(
-    username varchar(25) NOT NULL PRIMARY KEY,
-    firstName varchar(25) NOT NULL,
-    lastName varchar(25) NOT NULL,
+    username varchar(30) NOT NULL PRIMARY KEY,
+    firstName varchar(30) NOT NULL,
+    lastName varchar(30) NOT NULL,
     passwordHash varchar(30) NOT NULL,
     roleID int NOT NULL
 );
@@ -26,14 +26,14 @@ CREATE TABLE users(
 DROP TABLE IF EXISTS society;
 CREATE TABLE society(
     societyID INT NOT NULL PRIMARY KEY,
-    societyName varchar(25), 
+    societyName varchar(50), 
     societyDescription varchar(100)
 );
 
 DROP TABLE IF EXISTS ballots;
 CREATE TABLE ballots(
     ballotID SERIAL NOT NULL PRIMARY KEY, 
-    ballotName varchar(25), 
+    ballotName varchar(30), 
     startDate DATE, 
     endDate DATE,
     societyID int,
@@ -45,7 +45,7 @@ CREATE TABLE ballots(
 DROP TABLE IF EXISTS position_ballots;
 CREATE TABLE position_ballots( 
     positionID int NOT NULL PRIMARY KEY, 
-    positionName varchar(25), 
+    positionName varchar(30), 
     maxNumCandidates int, 
     numVotesAllowed int, 
     ballotID int,
@@ -56,9 +56,9 @@ CREATE TABLE position_ballots(
 
 DROP TABLE IF EXISTS candidate;
 CREATE TABLE candidate(
-    username varchar(25) NOT NULL,
+    username varchar(30) NOT NULL,
     positionID int NOT NULL,
-    titles varchar(15),
+    titles varchar(30),
     candidateDescription varchar(100),
     writeIn boolean,
     photo varchar(30),
@@ -71,7 +71,7 @@ DROP TABLE IF EXISTS votes;
 CREATE TABLE votes( 
     voteID INT NOT NULL PRIMARY KEY, 
     votes JSON,
-    username varchar(25) NOT NULL,
+    username varchar(30) NOT NULL,
 	CONSTRAINT fk_username
     	FOREIGN KEY (username)
 		REFERENCES users (username)
@@ -80,7 +80,7 @@ CREATE TABLE votes(
 DROP TABLE IF EXISTS initiative_ballots;
 CREATE TABLE initiative_ballots(
     initiativeID int PRIMARY KEY NOT NULL,
-    initiativeName varchar(25),
+    initiativeName varchar(30),
     initiativeDescription varchar(100), 
     numVotesAllowed int,
     ballotID int, 
@@ -92,7 +92,7 @@ CREATE TABLE initiative_ballots(
 
 DROP TABLE IF EXISTS users_society;
 CREATE TABLE users_society(
-    username varchar(25) NOT NULL,
+    username varchar(30) NOT NULL,
     societyID INT NOT NULL,
     CONSTRAINT users_society_key PRIMARY KEY (username, societyID),
     FOREIGN KEY (username) REFERENCES users(username),

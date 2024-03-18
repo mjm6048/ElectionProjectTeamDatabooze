@@ -1,5 +1,18 @@
-CREATE DATABASE databooze;
-USE databooze;
+-- Database: databooze
+
+-- DROP DATABASE IF EXISTS databooze;
+
+CREATE DATABASE databooze
+    WITH
+    OWNER = postgres
+    ENCODING = 'UTF8'
+    LC_COLLATE = 'English_United States.1252'
+    LC_CTYPE = 'English_United States.1252'
+    LOCALE_PROVIDER = 'libc'
+    TABLESPACE = pg_default
+    CONNECTION LIMIT = -1
+    IS_TEMPLATE = False;
+	
 
 DROP TABLE IF EXISTS users;
 CREATE TABLE users(
@@ -19,12 +32,14 @@ CREATE TABLE society(
 
 DROP TABLE IF EXISTS ballots;
 CREATE TABLE ballots(
-    ballotID INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+    ballotID SERIAL NOT NULL PRIMARY KEY, 
     ballotName varchar(25), 
     startDate DATE, 
     endDate DATE,
     societyID int,
-    FOREIGN KEY (societyID) REFERENCES society(societyID)
+	CONSTRAINT fk_societyID
+    	FOREIGN KEY (societyID)
+		REFERENCES society (societyID)
 );
 
 DROP TABLE IF EXISTS position_ballots;
@@ -34,7 +49,9 @@ CREATE TABLE position_ballots(
     maxNumCandidates int, 
     numVotesAllowed int, 
     ballotID int,
-    FOREIGN KEY (ballotID) REFERENCES ballots(ballotID)
+	CONSTRAINT fk_ballotID
+    	FOREIGN KEY (ballotID)
+		REFERENCES ballots (ballotID)
 );
 
 DROP TABLE IF EXISTS candidate;
@@ -46,8 +63,8 @@ CREATE TABLE candidate(
     writeIn boolean,
     photo varchar(30),
     CONSTRAINT candidate_key PRIMARY KEY (username, positionID),
-    FOREIGN KEY (username) REFERENCES users(username),
-    FOREIGN KEY (positionID) REFERENCES position_ballots(positionID)
+    FOREIGN KEY (username) REFERENCES users (username),
+    FOREIGN KEY (positionID) REFERENCES position_ballots (positionID)
 );
 
 DROP TABLE IF EXISTS votes;
@@ -55,7 +72,9 @@ CREATE TABLE votes(
     voteID INT NOT NULL PRIMARY KEY, 
     votes JSON,
     username varchar(25) NOT NULL,
-    FOREIGN KEY (username) REFERENCES users(username)
+	CONSTRAINT fk_username
+    	FOREIGN KEY (username)
+		REFERENCES users (username)
 );
 
 DROP TABLE IF EXISTS initiative_ballots;
@@ -66,7 +85,9 @@ CREATE TABLE initiative_ballots(
     numVotesAllowed int,
     ballotID int, 
     options JSON,
-    FOREIGN KEY (ballotID) REFERENCES ballots(ballotID)
+	CONSTRAINT fk_ballotID
+    	FOREIGN KEY (ballotID)
+		REFERENCES ballots (ballotID)
 );
 
 DROP TABLE IF EXISTS users_society;

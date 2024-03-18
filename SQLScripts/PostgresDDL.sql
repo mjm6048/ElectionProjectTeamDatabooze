@@ -14,7 +14,7 @@ CREATE DATABASE databooze
     IS_TEMPLATE = False;
 	
 
-DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS users CASCADE;
 CREATE TABLE users(
     username varchar(30) NOT NULL PRIMARY KEY,
     firstName varchar(30) NOT NULL,
@@ -23,14 +23,14 @@ CREATE TABLE users(
     roleID int NOT NULL
 );
 
-DROP TABLE IF EXISTS society;
+DROP TABLE IF EXISTS society CASCADE;
 CREATE TABLE society(
     societyID INT NOT NULL PRIMARY KEY,
     societyName varchar(50), 
     societyDescription varchar(100)
 );
 
-DROP TABLE IF EXISTS ballots;
+DROP TABLE IF EXISTS ballots CASCADE;
 CREATE TABLE ballots(
     ballotID SERIAL NOT NULL PRIMARY KEY, 
     ballotName varchar(30), 
@@ -42,7 +42,7 @@ CREATE TABLE ballots(
 		REFERENCES society (societyID)
 );
 
-DROP TABLE IF EXISTS position_ballots;
+DROP TABLE IF EXISTS position_ballots CASCADE;
 CREATE TABLE position_ballots( 
     positionID int NOT NULL PRIMARY KEY, 
     positionName varchar(30), 
@@ -54,7 +54,7 @@ CREATE TABLE position_ballots(
 		REFERENCES ballots (ballotID)
 );
 
-DROP TABLE IF EXISTS candidate;
+DROP TABLE IF EXISTS candidate CASCADE;
 CREATE TABLE candidate(
     username varchar(30) NOT NULL,
     positionID int NOT NULL,
@@ -67,7 +67,7 @@ CREATE TABLE candidate(
     FOREIGN KEY (positionID) REFERENCES position_ballots (positionID)
 );
 
-DROP TABLE IF EXISTS votes;
+DROP TABLE IF EXISTS votes CASCADE;
 CREATE TABLE votes( 
     voteID INT NOT NULL PRIMARY KEY, 
     votes JSON,
@@ -77,7 +77,7 @@ CREATE TABLE votes(
 		REFERENCES users (username)
 );
 
-DROP TABLE IF EXISTS initiative_ballots;
+DROP TABLE IF EXISTS initiative_ballots CASCADE;
 CREATE TABLE initiative_ballots(
     initiativeID int PRIMARY KEY NOT NULL,
     initiativeName varchar(30),
@@ -90,7 +90,7 @@ CREATE TABLE initiative_ballots(
 		REFERENCES ballots (ballotID)
 );
 
-DROP TABLE IF EXISTS users_society;
+DROP TABLE IF EXISTS users_society CASCADE;
 CREATE TABLE users_society(
     username varchar(30) NOT NULL,
     societyID INT NOT NULL,

@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const port = 8000;
-const dl = require('./datalayer');
+const bl = require('./businesslayer');
 var cors = require('cors');
 
 app.use(cors())
@@ -18,9 +18,10 @@ app.post("/users/login",async(req,res)=>{
     const{username,password}=req.body;
     
     try{
-         console.log(username);
+         
     
-        check = dl.userExists(username, password);
+        check = await bl.userExists(username, password);
+        console.log(check);
         if(check){
             res.status(200).json("Login successful");
         }

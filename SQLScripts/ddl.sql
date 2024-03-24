@@ -48,7 +48,6 @@ CREATE TABLE candidate(
     CONSTRAINT candidate_key PRIMARY KEY (username, positionID),
     FOREIGN KEY (username) REFERENCES users(username),
     FOREIGN KEY (positionID) REFERENCES position_ballots(positionID)
-
 );
 
 DROP TABLE IF EXISTS votes;

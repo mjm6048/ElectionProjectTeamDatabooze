@@ -26,7 +26,7 @@ app.post("/users/login",async(req,res)=>{
             res.status(200).json("Login successful");
         }
         else{
-            res.status(400).json("Invalid credentials");
+            res.status(401).json("Invalid credentials");
         }
 
     }

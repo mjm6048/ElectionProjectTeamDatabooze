@@ -23,8 +23,15 @@ function Login() {
       }
     })
     } catch (error) {
-      console.error("Error:", error);
-      alert("Internal server error");
+      console.error(error);
+      if (error.response.status === 401)
+      {
+        alert("Invalid Credentials");
+      }
+        else
+      { alert("Internal server error");
+    
+      }
     }
   }
 

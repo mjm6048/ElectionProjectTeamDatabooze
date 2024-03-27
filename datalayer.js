@@ -1,16 +1,19 @@
 
 const Pool = require('pg').Pool
 const pool = new Pool({
-  user: 'postgres',
+  user: 'student',
   host: 'localhost',
-  database: 'databooze',
+  database: 'siteinfo',
+  password: 'student',
   port: 5432,
 })
 
 
 
  const  getUser = async(username)=> {
+  console.log("Dfdsfg");
 try{
+
     const result = await pool.query('SELECT * FROM users WHERE username = $1', [username]);
    
     return result.rows;

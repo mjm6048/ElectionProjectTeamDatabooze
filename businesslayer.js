@@ -2,8 +2,8 @@
 const dl = require('./datalayer');
 const userExists = async(username,password)=>
 {
-    hashedpassword = createHash('sha256').update(password)
-    console.log(hashedpassword);
+    // hashedpassword = createHash('sha256').update(password)
+    // console.log(hashedpassword);
         try{
       user = await dl.getUser(username);
      if(user.length !=0){

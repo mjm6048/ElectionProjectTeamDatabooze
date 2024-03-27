@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-const port = 8001;
+const port = 3000;
 const bl = require('./businesslayer');
 var cors = require('cors');
 
@@ -16,9 +16,9 @@ app.use(
 
 app.post("/users/login",async(req,res)=>{
     const{username,password}=req.body;
-    
+
     try{
-         
+        console.log("smthng");  
     
         check = await bl.userExists(username, password);
         console.log(check);
@@ -31,7 +31,8 @@ app.post("/users/login",async(req,res)=>{
 
     }
     catch(e){
-        res.status(500).json("Internal server error");
+        console.log(e);
+       res.status(500).json("Internal server error");
     }
 
 })

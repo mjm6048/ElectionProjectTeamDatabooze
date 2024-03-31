@@ -9,7 +9,7 @@ const pool = new Pool({
 })
 
 
-// Get User
+// Get User. accepts username and returns: username, firstName, lastName, passwordHash, and roleID 
 const  getUser = async(username)=> {
   try{
     const result = await pool.query('SELECT * FROM users WHERE username = $1', [username]);
@@ -19,6 +19,7 @@ const  getUser = async(username)=> {
     throw error;
   }
 }
+//Get Members and Officers. accepts societyID.
 const getMembersandOfficers = async(societyID)=>{
   try{
     const result = await pool.query('SELECT * FROM users JOIN users_society ON users.username WHERE users_society.societyID = $1 AND users.roleID IN (1,2)', [societyID]);
@@ -28,7 +29,7 @@ const getMembersandOfficers = async(societyID)=>{
     throw error;
   }
 }
-
+//Get Candidates. accpets positionID, and username.
 const  getCandidates = async(positionID, username)=> {
   try{
     if(positionID !== 0){
@@ -77,6 +78,23 @@ const getInititativeVotes= async(voteID,initiativeID)=> {
     throw error;
   }
 }
+//Get Ballot Info. accepts ballotID. returns associated rows
+const getBallotInfo= async(ballotID)=> {
+  try{
+    //finds out if the ballot being searched for is initative or position
+    const result = await pool.query('SELECT * FROM initiative_ballots WHERE ballotID = $1', [ballotID]);
+    //if ballot is not found in initiative_ballots table, query position_ballots and return
+    if(result.rows == null){
+      const result = await pool.query('SELECT * FROM position_ballots WHERE ballotID = $1', [ballotID]);
+      return result.rows
+    }
+    //if ballotID is in initiative_ballots table, return those rows
+    return result.rows
+  }catch(error){
+    console.log(error);
+    throw error;
+  }
+}
 
 
 
@@ -94,5 +112,6 @@ module.exports = {
     getMembersandOfficers,
     getVote,
     countPositionVotes,
-    getInititativeVotes
+    getInititativeVotes,
+    getBallotInfo
 }

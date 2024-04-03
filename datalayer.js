@@ -10,8 +10,9 @@ const pool = new Pool({
 
 
 // Get User
-const  getUser = async(username)=> {
-try{
+const getUser = async(username)=> {
+try
+{
 
     const result = await pool.query('SELECT * FROM users WHERE username = $1', [username]);
    
@@ -25,18 +26,19 @@ catch(error)
   }
 const getMembersandOfficers = async(societyID)=>
 {
-  try{
+  try
+  {
     const result = await pool.query('SELECT * FROM users JOIN users_society ON users.username WHERE users_society.societyID = $1 AND users.roleID IN (1,2)', [societyID]);
     return result.rows;
-}
+  }
 catch(error)
-{   console.log(error);
+  {   console.log(error);
     throw error;
-}
+  }
 }
 
 
-const  getCandidates = async(positionID, username)=> {
+const getCandidates = async(positionID, username)=> {
     try{
     if(positionID !== 0){
         const result = await pool.query('SELECT * FROM candidate WHERE positionID = $1', [positionID]);
@@ -76,6 +78,7 @@ const  getCandidates = async(positionID, username)=> {
           throw error;
       }
   }
+
   const getInititativeVotes= async(voteID,initiativeID)=>
   {
     try{

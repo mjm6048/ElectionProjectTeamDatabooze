@@ -18,8 +18,6 @@ app.post("/users/login",async(req,res)=>{
     const{username,password}=req.body;
 
     try{
-        console.log("smthng");  
-    
         check = await bl.userExists(username, password);
         console.log(check);
         if(check){

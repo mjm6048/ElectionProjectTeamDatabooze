@@ -46,7 +46,7 @@ const viewResults= async(ballotID)=>
    positions =[]; // get all positions part of the ballot 
    positions.array.forEach(position => 
    {
-    candidates = dl.getCandidates(position.positionID,0);
+    candidates =  dl.getCandidates(position.positionID,0);
     candidates.forEach((candidate)=>
     {
         numVotes= countCandidateVotes(candidate.username,poition.positionID)

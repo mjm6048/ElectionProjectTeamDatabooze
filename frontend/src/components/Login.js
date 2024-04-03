@@ -29,7 +29,8 @@ function Login() {
         alert("Invalid Credentials");
       }
         else
-      { alert("Internal server error");
+      { 
+        alert("Internal server error");
     
       }
     }

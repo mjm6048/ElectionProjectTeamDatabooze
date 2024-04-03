@@ -37,6 +37,17 @@ CREATE TABLE position_ballots(
     FOREIGN KEY (ballotID) REFERENCES ballots(ballotID)
 );
 
+DROP TABLE IF EXISTS initiative_ballots;
+CREATE TABLE initiative_ballots(
+    initiativeID int PRIMARY KEY NOT NULL,
+    initiativeName varchar(25),
+    initiativeDescription varchar(100), 
+    numVotesAllowed int,
+    ballotID int, 
+    options JSON,
+    FOREIGN KEY (ballotID) REFERENCES ballots(ballotID)
+);
+
 DROP TABLE IF EXISTS candidate;
 CREATE TABLE candidate(
     username varchar(25) NOT NULL,
@@ -56,17 +67,6 @@ CREATE TABLE votes(
     votes JSON,
     username varchar(25) NOT NULL,
     FOREIGN KEY (username) REFERENCES users(username)
-);
-
-DROP TABLE IF EXISTS initiative_ballots;
-CREATE TABLE initiative_ballots(
-    initiativeID int PRIMARY KEY NOT NULL,
-    initiativeName varchar(25),
-    initiativeDescription varchar(100), 
-    numVotesAllowed int,
-    ballotID int, 
-    options JSON,
-    FOREIGN KEY (ballotID) REFERENCES ballots(ballotID)
 );
 
 DROP TABLE IF EXISTS users_society;

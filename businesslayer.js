@@ -33,12 +33,12 @@ catch(error)
 
 }
 
-const countCandidateVotes= async(candidateusername, positionID)=>
-{
+// const countCandidateVotes= async(candidateusername, positionID)=>
+// {
     
-    numVotes = await dl.getPositionVotes(positionID,candidateusername);
-    return numVotes[0].vote_count;   
-}
+//     numVotes = await dl.getPositionVotes(positionID,candidateusername);
+//     return numVotes[0].vote_count;   
+// }
 
 
 const viewResults= async(ballotID)=>

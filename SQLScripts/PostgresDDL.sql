@@ -14,6 +14,8 @@ CREATE DATABASE databooze
     IS_TEMPLATE = False;
 	
 CREATE TYPE BALLOTITEMTYPE AS ENUM('initiative','position');
+
+
 DROP TABLE IF EXISTS users CASCADE;
 CREATE TABLE users(
     username varchar(50) NOT NULL PRIMARY KEY,
@@ -42,6 +44,18 @@ CREATE TABLE ballots(
 		REFERENCES society (societyID)
 );
 
+
+DROP TABLE IF EXISTS BallotItem CASCADE;
+CREATE TABLE BallotItem(
+    itemID INT NOT NULL PRIMARY KEY,
+    itemName varchar(50),
+    itemType BALLOTITEMTYPE,
+    numVotesAllowed INT,
+    ballotID INT,
+    maxNumCandidates INT,
+    FOREIGN KEY (ballotID) REFERENCES ballots (ballotID)
+);
+
 DROP TABLE IF EXISTS candidate CASCADE;
 CREATE TABLE candidate(
     candidateID int NOT NULL PRIMARY KEY,
@@ -51,8 +65,6 @@ CREATE TABLE candidate(
     titles varchar(50),
     candidateDescription varchar(100),
     photo varchar(150),
-    CONSTRAINT candidate_key PRIMARY KEY (username, positionID),
-    FOREIGN KEY (username) REFERENCES users (username),
     FOREIGN KEY (itemID) REFERENCES BallotItem (itemID)
 );
 

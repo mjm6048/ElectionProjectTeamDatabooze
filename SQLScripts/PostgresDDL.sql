@@ -63,8 +63,8 @@ CREATE TABLE candidate(
     lastName varchar(50) NOT NULL,
     itemID int NOT NULL,
     titles varchar(50),
-    candidateDescription varchar(300),
-    photo varchar(150),
+    candidateDescription varchar(500),
+    photo varchar(500),
     FOREIGN KEY (itemID) REFERENCES BallotItem (itemID)
 );
 

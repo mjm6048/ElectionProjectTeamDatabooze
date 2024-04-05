@@ -1,4 +1,3 @@
-INSERT INTO ballot ('ballotID', 'ballotName', 'startDate','endDate','SocietyID') VALUES (Election ID,'Election Title','Start Date','End Date',Society ID)
 INSERT INTO ballot ('ballotID', 'ballotName', 'startDate','endDate','SocietyID') VALUES (1,'2000 Steering Committee Elections','2000-04-20','2000-05-21',1)
 INSERT INTO ballot ('ballotID', 'ballotName', 'startDate','endDate','SocietyID') VALUES (2,'2001 Board Elections','2001-07-21','2001-09-12',1)
 INSERT INTO ballot ('ballotID', 'ballotName', 'startDate','endDate','SocietyID') VALUES (3,'2002 Council Member Elections','2002-02-22','2002-04-03',1)

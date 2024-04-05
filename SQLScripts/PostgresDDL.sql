@@ -42,7 +42,6 @@ CREATE TABLE ballots(
 		REFERENCES society (societyID)
 );
 
-
 DROP TABLE IF EXISTS candidate CASCADE;
 CREATE TABLE candidate(
     candidateID int NOT NULL PRIMARY KEY,
@@ -79,7 +78,7 @@ CREATE TABLE BallotItem(
     ballotID INT,
     maxNumCandidates INT,
     FOREIGN KEY (ballotID) REFERENCES ballots (ballotID)
-)
+);
 
 DROP TABLE IF EXISTS users_society CASCADE;
 CREATE TABLE users_society(

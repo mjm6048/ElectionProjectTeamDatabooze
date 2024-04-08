@@ -1,33 +1,10 @@
-CREATE OR REPLACE FUNCTION GetMembersOfSociety(IN p_societyID INT)
-RETURNS TABLE (
-    username VARCHAR(100),
-    name VARCHAR(100),
-    roleID INT
-) AS
-$$
-BEGIN
-    RETURN QUERY
-    SELECT
-        u.username,
-        u.name,
-        u.roleID
-    FROM
-        users u
-    INNER JOIN
-        users_society us ON u.username = us.username
-    WHERE
-        us.societyID = p_societyID;
-END;
-$$
-LANGUAGE plpgsql;
-
-CREATE OR REPLACE FUNCTION getBallotCountPerSociety()
+CREATE OR REPLACE FUNCTION getBallotCountPerSociety(p_societyID INT)
 RETURNS TABLE (societyID INT, societyName VARCHAR(100), activeBallots INT, inactiveBallots INT) AS
 $$
 BEGIN
     RETURN QUERY
     SELECT
-        societyID,
+        s.societyID,
         s.name AS societyName,
         COUNT(CASE WHEN b.enddate >= CURRENT_DATE THEN 1 END) AS activeBallots,
         COUNT(CASE WHEN b.enddate < CURRENT_DATE THEN 1 END) AS inactiveBallots
@@ -35,12 +12,41 @@ BEGIN
         society s
     JOIN
         ballots b ON s.societyID = b.societyID
+    WHERE
+        s.societyID = p_societyID
     GROUP BY
         s.societyID, s.name;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION GetAverageMembersVotingPerElection()
+CREATE OR REPLACE FUNCTION GetMembersOfSociety(p_societyID INT)
+RETURNS TABLE (
+    societyID INT,
+    societyName VARCHAR(100),
+    numMembers INT
+) AS
+$$
+BEGIN
+    RETURN QUERY
+    SELECT
+        us.societyID,
+        s.name AS societyName,
+        COUNT(u.username) AS numMembers
+    FROM
+        users_society us
+    INNER JOIN
+        users u ON u.username = us.username
+    INNER JOIN
+        society s ON s.societyID = us.societyID
+    WHERE
+        us.societyID = p_societyID
+    GROUP BY
+        us.societyID, s.name;
+END;
+$$
+LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION GetAverageMembersVotingPerElection(p_societyID INT)
 RETURNS FLOAT AS
 $$
 DECLARE
@@ -48,15 +54,18 @@ DECLARE
     total_elections_count INT;
     average_members_voting FLOAT;
 BEGIN
-    -- Get the total number of votes cast across all elections
-    SELECT COUNT(DISTINCT username)
+    -- Get the total number of votes cast across all elections in the specified society
+    SELECT COUNT(DISTINCT v.username)
     INTO total_votes_count
-    FROM votes;
+    FROM votes v
+    JOIN ballots b ON v.ballotID = b.ballotID
+    WHERE b.societyID = p_societyID;
 
-    -- Get the total number of elections
+    -- Get the total number of elections in the specified society
     SELECT COUNT(DISTINCT ballotID)
     INTO total_elections_count
-    FROM ballots;
+    FROM ballots
+    WHERE societyID = p_societyID;
 
     -- Calculate the average number of members voting per election
     IF total_elections_count > 0 THEN
@@ -66,6 +75,23 @@ BEGIN
     END IF;
 
     RETURN average_members_voting;
+END;
+$$
+LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION GetNumberOfActiveElections()
+RETURNS INT AS
+$$
+DECLARE
+    active_elections_count INT;
+BEGIN
+    -- Get the count of active elections
+    SELECT COUNT(*)
+    INTO active_elections_count
+    FROM ballots
+    WHERE enddate >= CURRENT_DATE;
+
+    RETURN active_elections_count;
 END;
 $$
 LANGUAGE plpgsql;

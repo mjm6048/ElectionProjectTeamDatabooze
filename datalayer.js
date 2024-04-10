@@ -3,7 +3,7 @@ const Pool = require('pg').Pool
 const pool = new Pool({
   user: 'postgres',
   database: 'databooze',
-  password: 'netra',
+  host: 'localhost',
   port: 5432,
 })
 
@@ -45,15 +45,15 @@ catch(error)
   }
 }
 
-const getCandidates = async(positionID, username)=> {
+const getCandidates = async(itemID, candidateID)=> {
     const client = await pool.connect();
     try{
-    if(positionID !== 0){
-        const result = await client.query('SELECT * FROM candidate WHERE positionID = $1', [positionID]);
+    if(itemID !== 0){
+        var result = await client.query('SELECT * FROM candidate WHERE itemID = $1', [itemID]);
     }
     else
     {
-      const result = await client.query('SELECT * FROM candidate WHERE username = $1', [username]);
+        var result = await client.query('SELECT * FROM candidate WHERE candidateID = $1', [candidateID]);
     } 
         return result.rows;
     }
@@ -69,13 +69,13 @@ const getCandidates = async(positionID, username)=> {
       }
 
 
-
  const castVote = async(username,voteType,itemID,votedFor, writein)=>
  {
   
   const client = await pool.connect()
  
   try {
+  
     await client.query('BEGIN');
     var result = await client.query('INSERT INTO votes(votetype,itemid,votedfor,writein,username) VALUES($1,$2,$3,$4,$5);',[voteType,itemID,votedFor,writein,username]);
     await client.query('COMMIT');
@@ -99,11 +99,11 @@ const getBallotAndSociety= async(itemID,ballotID) =>
   try
   {if(itemID!=0)
     {
-    const result = await client.query('SELECT bi.ballotid,b.societyID FROM(SELECT ballotid FROM ballotItem WHERE itemID=($1)) as bi JOIN ballots AS b ON bi.ballotid = b.ballotid',[itemID]);
+    const result = await client.query('SELECT bi.ballotid,b.* FROM(SELECT ballotid FROM ballotItem WHERE itemID=($1)) as bi JOIN ballots AS b ON bi.ballotid = b.ballotid',[itemID]);
     return result.rows;
     }
    else{
-    const result = await client.query('SELECT ballotid, societyID FROM ballots WHERE ballotID=($1)',[ballotID]);
+    const result = await client.query('SELECT * FROM ballots WHERE ballotID=($1)',[ballotID]);
     return result.rows;
    }
   }

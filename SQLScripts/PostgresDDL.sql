@@ -70,7 +70,7 @@ CREATE TABLE candidate(
 
 DROP TABLE IF EXISTS votes CASCADE;
 CREATE TABLE votes( 
-    voteID INT NOT NULL PRIMARY KEY, 
+    voteID SERIAL PRIMARY KEY, 
     voteType BALLOTITEMTYPE,
     itemID int,
     votedFor varchar(50),
@@ -78,7 +78,8 @@ CREATE TABLE votes(
     username varchar(50) NOT NULL,
 	CONSTRAINT fk_username
     	FOREIGN KEY (username)
-		REFERENCES users (username)
+		REFERENCES users (username),
+    CONSTRAINT unique_vote UNIQUE (itemID, votedFor, username)
 );
 
 

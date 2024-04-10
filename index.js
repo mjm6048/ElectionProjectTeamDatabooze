@@ -98,7 +98,7 @@ app.get('/status/:ballotID', async(req,res)=>
  
     
 })
-console.log(bl.getResults(12,"starbreeze10"));
+console.log(bl.castVote('applebreeze16','position',2,'123', false));
 
 app.listen(port,()=>{
     console.log("port connected");

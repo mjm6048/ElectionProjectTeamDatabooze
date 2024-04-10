@@ -92,8 +92,12 @@ catch(error)
 //     return numVotes[0].vote_count;   
 // }
 const findBallotAndSociety = (itemID,ballotID)=>
-{
-    var ballot= ballots.find(ballot=>ballot.ballotid == ballotID);
+{   if(itemID==0)
+    {var ballot= ballots.find(ballot=>ballot.ballotid == ballotID);}
+    else
+    {
+        
+    }
     if(ballot == null)
     {
         return 0;
@@ -105,19 +109,36 @@ const castVote= async(username,voteType,itemID,votedFor, writein)=>
     try
     {  
     // user validation
-       var  user = loggedInUsers.find(Users => Users[username] === username);
-        if(user == null)
-        {
+        var  user = loggedInUsers.find(Users => Users.username === username);
+        //validate user
+        if(user == null || user.roleid>2)
+        { 
             return 0;
         }
-        if (findBallotAndSociety(itemID,0).societyID==user.societyID)
+        var ballot = await dl.getBallotAndSociety(itemID,0);
+        if (ballot === null) {
+            return -1;
+          }
+        // switch current date once data with active elections loaded
+        //validate ballot
+        var current = Date.parse('2001-08-21');
+        if (ballot[0].societyID==user.societyID && Date.parse((ballot[0]).enddate)>current && Date.parse(ballot[0].startdate) < current)
         {
-        var cast = await dl.castVote(username,voteType,itemID,votedFor, writein);
-        console.log(cast);
-        return cast;
+        //validate candidate 
+            var candidateID = parseInt(votedFor);
+            var candidate = await dl.getCandidates(0,candidateID);
+            if (candidate == null || candidate[0].itemid != itemID) {
+                return -2;
+            }
+            var cast = await dl.castVote(username,voteType,itemID,votedFor, writein);
+            console.log(cast);
+            return cast;
         }
         else
+        {
             return -1;
+        }
+        
             
     }
     
@@ -134,6 +155,7 @@ const getResults= async(ballotID, username)=>
     try
     {
         var user = loggedInUsers.find(users => users.username== username);
+      
         if (user == null || user.roleid <2)
         {
             return 0;
@@ -143,7 +165,6 @@ const getResults= async(ballotID, username)=>
         if ((ballot.societyid === user.societyid)&& Date.parse(ballot.enddate)<current)
         {
             var results = await dl.getResults(ballotID);
-            console.log(results);
             return results;
         }
         else

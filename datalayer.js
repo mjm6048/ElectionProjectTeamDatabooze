@@ -68,51 +68,48 @@ const getCandidates = async(positionID, username)=> {
     }
     
       }
-  // const getVote=async(VoteID)=>
-  // {
-  //     const result = await client.query('SELECT * FROM votes WHERE voteID = $1', [voteID]);
-  // }
-  // const countPositionVotes= async(positonID,candidateID)=>
-  // {
-  //   try{
-     
-  //     {
-  //     if(candidateID == 0){
-  //       const result = await client.query(`SELECT COUNT(*) AS vote_count FROM votes WHERE votes->>'VoteType' = 'ballot' AND (votes->>'BallotID')::int = $1`, [positonID]);
-  //     }
-  //     else{
-  //       const result = await client.query(`SELECT COUNT(*) AS vote_count FROM votes WHERE votes->>'VoteType' = 'ballot' AND (votes->>'BallotID')::int = $1 AND (votes->>'VotedFor')::int = $2`, [positonID,candidateID]);
-  //     }
-  //   }
-  //         return result.rows;
-  //     }
-  //     catch(error)
-  //     {   console.log(error);
-  //         throw error;
-  //     }
-  // }
-
-  // const getInititativeVotes= async(voteID,initiativeID)=>
-  // {
-  //   try{
-  //     if(VoteID!==0)
-  //     {
-  //       const result = await pool.query('SELECT * FROM votes WHERE voteID = $1', [voteID]);
-  //     }
-  //     else
-  //     {
-  //       const result = await pool.query(`SELECT * FROM votes WHERE votes->>'VoteType' = 'inititative' AND (votes->>'BallotID')::int = $1`, [initiativeID]);
-  //     } 
-    
-  //         return result.rows;
-  //     }
-  //     catch(error)
-  //     {   console.log(error);
-  //         throw error;
-  //     }
-  // }
 
 
+
+ const castVote = async(username,voteType,itemID,votedFor, writein)=>
+ {
+  
+  const client = await pool.connect()
+ 
+  try {
+    await client.query('BEGIN');
+    var result = await client.query('INSERT INTO votes(votetype,itemid,votedfor,writein,username) VALUES($1,$2,$3,$4,$5);',[voteType,itemID,votedFor,writein,username]);
+    await client.query('COMMIT');
+    return (result.rowCount);
+  } 
+
+  catch (e) {
+    await client.query('ROLLBACK');
+    throw e;
+  } 
+  finally {
+    client.release()
+  }
+
+}
+
+const getResults = async(ballotID)=>
+{
+  const client = await pool.connect();
+  try
+  {
+    const result = await client.query('SELECT DISTINCT sp1.ID, sp1.Type, sp2.vote_count from (select * from get_items_in_ballot($1)) as sp1 JOIN (select * from highest_votes()) as sp2 ON sp1.ID = sp2.itemID;', [ballotID]);
+    return result.rows;
+  }
+  catch(error)
+  {   console.log(error);
+      throw error;
+  }
+  finally
+  {
+    client.release();
+  }
+}
 
 
 
@@ -126,4 +123,6 @@ module.exports = {
     getUser,
     getCandidates,
     getMembersandOfficers,
+    castVote,
+    getResults
 }

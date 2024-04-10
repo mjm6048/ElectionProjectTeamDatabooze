@@ -111,11 +111,16 @@ const getResults = async(ballotID)=>
   }
 }
 
+//returns null if no ballot found, return rows if found, throws if error
 const getBallot = async(ballotID)=>{
   const client = await pool.connect();
   try{
     const result = await client.query('SELECT * FROM ballots WHERE ballotID = $1', [ballotID]);
-    return result.rows;
+    if(result.rows.length === 0){
+      return null;
+    }else{
+      return result.rows;
+    }
   }catch(error){
     console.log(error);
     throw error;
@@ -126,7 +131,11 @@ const getBallotItem = async(itemID)=>{
   const client = await pool.connect();
   try{
     const result = await client.query('SELECT * FROM ballotItem WHERE itemID = $1', [itemID]);
-    return result.rows;
+    if(result.rows.length === 0){
+      return null;
+    }else{
+      return result.rows;
+    }
   }catch(error){
     console.log(error);
     throw error;

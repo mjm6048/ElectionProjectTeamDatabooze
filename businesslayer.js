@@ -59,7 +59,24 @@ const castVote= async(username,voteType,itemID,votedFor, writein)=>
         throw error;
     }
 }
-
+const getResults= async(ballotID, username, societyID)=>
+{
+  
+    try
+    {
+       //user validation
+        var results = await dl.getResults(ballotID);
+        return results;
+            
+    }
+    
+    catch(error)
+    {
+        console.log(error);
+        throw error;
+    }
+    
+}
 
 const getStatus=async(ballotID,username,societyID)=>
 {

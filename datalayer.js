@@ -142,6 +142,36 @@ const getBallotItem = async(itemID)=>{
   }
 }
 
+const candidateExist = async(candidateID)=>{
+  const client = await pool.connect();
+  try{
+    const result = await client.query('SELECT * FROM Candidate WHERE candidateID = $1', [candidateID]);
+    if(result.rows.length === 0){
+      return false;
+    }else{
+      return true;
+    }
+  }catch(error){
+    console.log(error);
+    throw error;
+  }
+}
+
+const CreateEditCandidate = async(candidateID,firstName,lastName,itemID,titles,description,photo)=>{
+  const client = await pool.connect();
+  //does the candidate exist?
+  try{
+    if(candidateExist()){
+      const result = await client.query('INSERT INTO Candidate (candidateID,firstname,lastname,itemID,titles,description,photo) VALUES($1,$2,$3,$4,$5,$6,$7)', [candidateID,firstName,lastName,itemID,titles,description,photo]);
+      return result.rows;
+    }else{
+      return null;
+    }
+  }catch(error){
+    console.log(error);
+    throw error;
+  }
+}
 
 
 
@@ -156,5 +186,7 @@ module.exports = {
     castVote,
     getResults,
     getBallot,
-    getBallotItem
+    getBallotItem,
+    candidateExist,
+    CreateEditCandidate
 }

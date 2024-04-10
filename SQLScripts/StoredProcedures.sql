@@ -40,7 +40,8 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-/* get position and initiative ballots belonging to a ballot */
+
+/* get ballotitems belonging to a ballot */
 CREATE OR REPLACE FUNCTION get_items_in_ballot(BallotIDValue INT)
 RETURNS TABLE (
     ID INT,

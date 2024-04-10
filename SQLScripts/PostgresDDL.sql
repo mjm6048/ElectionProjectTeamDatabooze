@@ -81,16 +81,6 @@ CREATE TABLE votes(
 		REFERENCES users (username)
 );
 
-DROP TABLE IF EXISTS BallotItem CASCADE;
-CREATE TABLE BallotItem(
-    itemID INT,
-    itemName varchar(50),
-    itemType BALLOTITEMTYPE,
-    numVotesAllowed INT,
-    ballotID INT,
-    maxNumCandidates INT,
-    FOREIGN KEY (ballotID) REFERENCES ballots (ballotID)
-);
 
 DROP TABLE IF EXISTS users_society CASCADE;
 CREATE TABLE users_society(

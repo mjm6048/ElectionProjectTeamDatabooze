@@ -36,7 +36,69 @@ app.post("/users/login",async(req,res)=>{
 })
 
 
+app.get('/results/:ballotID', async(req,res)=>
+{
+    const{ballotID}=req.query;
+    try{
+    
+        result = await bl.getResults(ballotID);
+        if(result){
+            res.status(200).json(result);
+        }
+        else{
+            res.status(400).json("Invalid BallotID");
+        }
 
+    }
+    catch(e){
+        console.log(e);
+       res.status(500).json("Internal server error");
+    }
+ 
+    
+})
+app.post("/votes",async(req,res)=>
+{
+    const{username,voteType,itemID,votedFor, writein} = req.body;
+    try{
+    
+        cast = await bl.castVote(username,voteType,itemID,votedFor, writein);
+        if(cast){
+            res.status(200).json("Vote successfully casted");
+        }
+        else{
+            res.status(400).json("Invalid Vote");
+        }
+
+    }
+    catch(e){
+        console.log(e);
+       res.status(500).json("Internal server error");
+    }
+
+})
+app.get('/status/:ballotID', async(req,res)=>
+{
+    const{ballotID}=req.query;
+    try{
+    
+        result = await bl.getStatus(ballotID);
+        if(result){
+            res.status(200).json(result);
+        }
+        else{
+            res.status(400).json("Invalid BallotID");
+        }
+
+    }
+    catch(e){
+        console.log(e);
+       res.status(500).json("Internal server error");
+    }
+ 
+    
+})
+console.log(bl.getResults(12,"starbreeze10"));
 
 app.listen(port,()=>{
     console.log("port connected");

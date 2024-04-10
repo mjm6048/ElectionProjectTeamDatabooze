@@ -1,10 +1,9 @@
 
 const Pool = require('pg').Pool
 const pool = new Pool({
-  user: 'student',
-  host: 'localhost',
-  database: 'siteinfo',
-  password: 'student',
+  user: 'postgres',
+  database: 'databooze',
+  password: 'netra',
   port: 5432,
 })
 
@@ -15,7 +14,7 @@ const getUser = async(username)=> {
   try
   {
 
-      const result = await client.query('SELECT * FROM users WHERE username = $1', [username]);
+      const result = await client.query('SELECT users.*, us.societyID FROM users INNER JOIN users_society us ON users.username = us.username WHERE users.username = $1', [username]);
     
       return result.rows;
   }
@@ -28,6 +27,7 @@ const getUser = async(username)=> {
     client.release();
   }
   }
+
 const getMembersandOfficers = async(societyID)=>
 {const client = await pool.connect();
   try
@@ -45,9 +45,8 @@ catch(error)
   }
 }
 
-
 const getCandidates = async(positionID, username)=> {
-  const client = await pool.connect();
+    const client = await pool.connect();
     try{
     if(positionID !== 0){
         const result = await client.query('SELECT * FROM candidate WHERE positionID = $1', [positionID]);
@@ -93,12 +92,36 @@ const getCandidates = async(positionID, username)=> {
 
 }
 
+
+const getBallotAndSociety= async(itemID,ballotID) => 
+{
+  const client = await pool.connect();
+  try
+  {if(itemID!=0)
+    {
+    const result = await client.query('SELECT bi.ballotid,b.societyID FROM(SELECT ballotid FROM ballotItem WHERE itemID=($1)) as bi JOIN ballots AS b ON bi.ballotid = b.ballotid',[itemID]);
+    return result.rows;
+    }
+   else{
+    const result = await client.query('SELECT ballotid, societyID FROM ballots WHERE ballotID=($1)',[ballotID]);
+    return result.rows;
+   }
+  }
+  catch(error)
+  {   console.log(error);
+      throw error;
+  }
+  finally
+  {
+    client.release();
+  }
+}
 const getResults = async(ballotID)=>
 {
   const client = await pool.connect();
   try
   {
-    const result = await client.query('SELECT DISTINCT sp1.ID, sp1.Type, sp2.vote_count from (select * from get_items_in_ballot($1)) as sp1 JOIN (select * from highest_votes()) as sp2 ON sp1.ID = sp2.itemID;', [ballotID]);
+    const result = await client.query('SELECT DISTINCT sp1.ID, sp1.Type, sp2.votedfor, sp2.vote_count from (select * from get_items_in_ballot($1)) as sp1 JOIN (select * from highest_votes()) as sp2 ON sp1.ID = sp2.itemID;', [ballotID]);
     return result.rows;
   }
   catch(error)
@@ -124,5 +147,6 @@ module.exports = {
     getCandidates,
     getMembersandOfficers,
     castVote,
-    getResults
+    getResults,
+    getBallotAndSociety
 }

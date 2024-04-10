@@ -122,6 +122,17 @@ const getBallot = async(ballotID)=>{
   }
 }
 
+const getBallotItem = async(itemID)=>{
+  const client = await pool.connect();
+  try{
+    const result = await client.query('SELECT * FROM ballotItem WHERE itemID = $1', [itemID]);
+    return result.rows;
+  }catch(error){
+    console.log(error);
+    throw error;
+  }
+}
+
 
 
 
@@ -135,5 +146,6 @@ module.exports = {
     getMembersandOfficers,
     castVote,
     getResults,
-    getBallot
+    getBallot,
+    getBallotItem
 }

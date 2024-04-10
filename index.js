@@ -36,7 +36,7 @@ app.post("/users/login",async(req,res)=>{
 })
 
 //get ballot from ballotID
-app.get("ballots/:ballotID",async(req,re)=>{
+app.get("ballots/:ballotID",async(req,res)=>{
     const ballotID = req.params.ballotID;
     try{
         check = await bl.ballotExists(ballotID);
@@ -46,6 +46,17 @@ app.get("ballots/:ballotID",async(req,re)=>{
         }else{
             res.status(401).json("Ballot does not exist");
         }
+    }catch(error){
+        console.log(error);
+        res.status(500).json("Internal Server Error");
+    }
+})
+
+//Retrieve information about all users or users from a specific society
+app.get("users/:societyID",async(req,res)=>{
+    const societyID = req.params.societyID;
+    try{
+        res.status(200).json(bl.getSocietyUsers());
     }catch(error){
         console.log(error);
         res.status(500).json("Internal Server Error");

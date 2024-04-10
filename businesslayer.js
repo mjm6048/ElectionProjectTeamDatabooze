@@ -98,7 +98,25 @@ const getStatus=async(ballotID,username,societyID)=>
     }
 }
 
+const BallotExists = async(ballotID)=>{
+    try{
+        if(dl.getBallot()){
+            return true;
+        }else{
+            return false;
+        }
+    }catch(error){
+        console.log(error);
+    }
+}
 
+const getBallot = async(ballotID)=>{
+    try{
+        return dl.getBallot();
+    }catch(error){
+        console.log(error);
+    }
+}
 
 
 
@@ -136,6 +154,9 @@ const getStatus=async(ballotID,username,societyID)=>
 module.exports = {
     userExists,
     castVote,
-    getResults
+    getResults,
+    getStatus,
+    getBallot,
+    BallotExists
 }
 

@@ -111,6 +111,16 @@ const getResults = async(ballotID)=>
   }
 }
 
+const getBallot = async(ballotID)=>{
+  const client = await pool.connect();
+  try{
+    const result = await client.query('SELECT * FROM ballots WHERE ballotID = $1', [ballotID]);
+    return result.rows;
+  }catch(error){
+    console.log(error);
+    throw error;
+  }
+}
 
 
 
@@ -124,5 +134,6 @@ module.exports = {
     getCandidates,
     getMembersandOfficers,
     castVote,
-    getResults
+    getResults,
+    getBallot
 }

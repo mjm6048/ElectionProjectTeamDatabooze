@@ -117,6 +117,14 @@ const getBallot = async(ballotID)=>{
         console.log(error);
     }
 }
+//Retrieve information about all users or users from a specific society
+const getSocietyUsers = async(ballotID)=>{
+    try{
+        return dl.getMembersandOfficers();
+    }catch(error){
+        console.log(error);
+    }
+}
 
 
 
@@ -157,6 +165,7 @@ module.exports = {
     getResults,
     getStatus,
     getBallot,
-    BallotExists
+    BallotExists,
+    getSocietyUsers
 }
 

@@ -2,7 +2,6 @@
 const dl = require('./datalayer');
 
 var loggedInUsers =[];
-var ballots = [];
 loggedInUsers.push({
     username: 'applebreeze16',
     firstname: 'Brandon',
@@ -21,32 +20,7 @@ loggedInUsers.push({
   }
   
   )
-ballots.push(
-    {
-        ballotid:1,
-        societyid:1,
-        startdate:'2000-04-20',
-        enddate:'2000-05-21'
-    },
-    {
-        ballotid:2,
-        societyid:1,
-        startdate:'2001-07-21',
-        enddate:'2001-09-12'
-    },
-    {
-        ballotID: 25,
-        societyid:1,
-        startdate:'2024-10-16',
-        enddate:'2001-12-19'
-    },
-    {
-        ballotID: 27, 
-        societyID: 2,
-        startdate:'2001-01-30',
-        enddate:'2001-03-28'
-    }
-)
+
 const userExists = async(username,password)=>
 {
     // hashedpassword = createHash('sha256').update(password)
@@ -85,25 +59,7 @@ catch(error)
 
 }
 
-// const countCandidateVotes= async(candidateusername, positionID)=>
-// {
-    
-//     numVotes = await dl.getPositionVotes(positionID,candidateusername);
-//     return numVotes[0].vote_count;   
-// }
-const findBallotAndSociety = (itemID,ballotID)=>
-{   if(itemID==0)
-    {var ballot= ballots.find(ballot=>ballot.ballotid == ballotID);}
-    else
-    {
-        
-    }
-    if(ballot == null)
-    {
-        return 0;
-    }
-    return ballot;
-}
+
 const castVote= async(username,voteType,itemID,votedFor, writein)=>
 {
     try
@@ -160,9 +116,9 @@ const getResults= async(ballotID, username)=>
         {
             return 0;
         }
-        var ballot = findBallotAndSociety(0,ballotID);
+        var ballot = await dl.getBallotAndSociety(0,ballotID);
         var current = new Date();
-        if ((ballot.societyid === user.societyid)&& Date.parse(ballot.enddate)<current)
+        if ((ballot[0].societyid === user.societyid)&& Date.parse(ballot[0].enddate)<current)
         {
             var results = await dl.getResults(ballotID);
             return results;
@@ -200,38 +156,6 @@ const getStatus=async(ballotID,username,societyID)=>
         throw error;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

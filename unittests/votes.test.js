@@ -20,7 +20,7 @@ test('cannot cast vote for inactive electtion', async () => {
   });
 test('votes counted successfully', async () => {
     const result = await bl.getResults(2,"applebreeze16");
-    expect(JSON.stringify(result)).toBe('[{\"id\":5,\"type\":\"position\",\"votedfor\":\"10\",\"vote_count\":2},{\"id\":4,\"type\":\"position\",\"votedfor\":\"7\",\"vote_count\":2},{\"id\":6,\"type\":\"position\",\"votedfor\":\"12\",\"vote_count\":1}]');
+    expect(JSON.stringify(result)).toBe('{\"result\":[{\"id\":4,\"type\":\"position\",\"voted\":\"7\",\"highest_vote_count\":2},{\"id\":4,\"type\":\"position\",\"voted\":\"8\",\"highest_vote_count\":1},{\"id\":5,\"type\":\"position\",\"voted\":\"10\",\"highest_vote_count\":2},{\"id\":5,\"type\":\"position\",\"voted\":\"11\",\"highest_vote_count\":1},{\"id\":6,\"type\":\"position\",\"voted\":\"12\",\"highest_vote_count\":1}],\"status\":{\"usernames\":[{\"username\":\"chestnutrainbow1\"},{\"username\":\"peachwind18\"},{\"username\":\"sealstorm15\"},{\"username\":\"applebreeze16\"}],\"usernumber\":\"12\"}}');
 });
 
 test('votes should not display for user if ballot hasnt ended', async()=>
@@ -46,4 +46,8 @@ test('votes should not display for user if ballot is not accessible', async()=>
     const result= await bl.getResults(27,"applebreeze16");
     expect(result).toBe(-1);
 
+});
+test('ballot status obtained successfully', async () => {
+  const result = await bl.getStatus(2,"applebreeze16");
+  expect(JSON.stringify(result)).toBe('{\"usernames\":[{\"username\":\"chestnutrainbow1\"},{\"username\":\"peachwind18\"},{\"username\":\"sealstorm15\"},{\"username\":\"applebreeze16\"}],\"usernumber\":\"12\"}')
 });

@@ -66,7 +66,7 @@ RETURN QUERY
 SELECT itemID as ID, votedFor, (CAST(COUNT(*) AS INT)) AS vote_count
 FROM votes
 GROUP BY itemID, votedFor 
-ORDER BY itemID, vote_count DESC;
+ORDER BY itemID;
 END;
 $$ LANGUAGE plpgsql;
 

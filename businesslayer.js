@@ -21,6 +21,7 @@ loggedInUsers.push({
   
   )
 
+
 const userExists = async(username,password)=>
 {
     // hashedpassword = createHash('sha256').update(password)
@@ -58,6 +59,7 @@ catch(error)
 }
 
 }
+
 
 
 const castVote= async(username,voteType,itemID,votedFor, writein)=>
@@ -116,6 +118,7 @@ const getResults= async(ballotID, username)=>
         {
             return 0;
         }
+        var ballot = await dl.getBallotAndSociety(0,ballotID);
         var ballot = await dl.getBallotAndSociety(0,ballotID);
         var current = new Date();
         if (ballot === null) {
@@ -178,38 +181,6 @@ const getStatus=async(ballotID,username)=>
         throw error;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

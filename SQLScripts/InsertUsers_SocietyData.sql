@@ -19998,3 +19998,11 @@ INSERT INTO users_society (username, societyid) VALUES ('tigerice18', 28);
 INSERT INTO users_society (username, societyid) VALUES ('applewater17', 22);
 INSERT INTO users_society (username, societyid) VALUES ('dragonfly9', 59);
 INSERT INTO users_society (username, societyid) VALUES ('seastorm3', 18);
+UPDATE users
+SET roleID = 3
+WHERE username IN (
+    SELECT us.username
+    FROM users_society us
+    GROUP BY us.username
+    HAVING COUNT(*) > 1
+);

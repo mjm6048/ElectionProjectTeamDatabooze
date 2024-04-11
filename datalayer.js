@@ -3,12 +3,12 @@ const Pool = require('pg').Pool
 const pool = new Pool({
   user: 'postgres',
   database: 'databooze',
-  host: 'localhost',
+  password:'netra',
   port: 5432,
 })
 
 
-// Get User
+// Get Users
 const getUser = async(username)=> {
   const client = await pool.connect();
   try
@@ -121,8 +121,30 @@ const getResults = async(ballotID)=>
   const client = await pool.connect();
   try
   {
-    const result = await client.query('SELECT DISTINCT sp1.ID, sp1.Type, sp2.votedfor, sp2.vote_count from (select * from get_items_in_ballot($1)) as sp1 JOIN (select * from highest_votes()) as sp2 ON sp1.ID = sp2.itemID;', [ballotID]);
+    const result = await client.query('SELECT DISTINCT sp1.ID, sp1.Type, sp2.voted, sp2.highest_vote_count from (select * from get_items_in_ballot($1)) as sp1 JOIN (select * from count_votes()) as sp2 ON sp1.ID = sp2.ID ORDER BY sp1.ID;', [ballotID]);
     return result.rows;
+  }
+  catch(error)
+  {   console.log(error);
+      throw error;
+  }
+  finally
+  {
+    client.release();
+  }
+}
+const getStatus = async(ballotID)=>
+{
+  const client = await pool.connect();
+  try
+  {
+    const result1 = await client.query('SELECT DISTINCT sp2.username from (select * from get_items_in_ballot($1)) as sp1 JOIN (select * from votes) as sp2 ON sp1.ID = sp2.itemID;', [ballotID]);
+    const result2 = await client.query('SELECT COUNT(users.username) AS user_count FROM ballots JOIN users_society ON users_society.societyID = ballots.societyID JOIN users ON users.username = users_society.username WHERE ballots.ballotid = ($1) AND users.roleid IN (1, 2);',[ballotID])
+    const result = {
+      usernames: result1.rows,
+      usernumber:result2.rows[0].user_count
+    }
+    return result;
   }
   catch(error)
   {   console.log(error);
@@ -148,5 +170,6 @@ module.exports = {
     getMembersandOfficers,
     castVote,
     getResults,
-    getBallotAndSociety
+    getBallotAndSociety,
+    getStatus
 }

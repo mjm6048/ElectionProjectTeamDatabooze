@@ -63,6 +63,21 @@ app.get("users/:societyID",async(req,res)=>{
     }
 })
 
+//createEditUser 
+//should there be a password . . . ?
+app.post("users/:username",async(req,res)=>{
+    const username = req.params.username;
+    const password = req.params.password;
+    const name = req.params.name;
+    const roleID = req.params.roleID;
+    try{
+        bl.createEditUser(username, password, name, roleID);
+    }catch(error){
+        console.log(error);
+        res.status(500).json("Internal Server Error");
+    }
+})
+
 
 
 

@@ -1,10 +1,10 @@
 
 const Pool = require('pg').Pool
 const pool = new Pool({
-  user: 'student',
+  user: 'postgres',
   host: 'localhost',
-  database: 'siteinfo',
-  password: 'student',
+  database: 'databooze',
+  password: '',
   port: 5432,
 })
 

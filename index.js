@@ -53,7 +53,7 @@ app.get("ballots/:ballotID",async(req,res)=>{
 })
 
 //Retrieve information about all users or users from a specific society
-app.get("users/:societyID",async(req,res)=>{
+app.get("users/societyID",async(req,res)=>{
     const societyID = req.params.societyID;
     try{
         res.status(200).json(bl.getSocietyUsers());

@@ -173,6 +173,27 @@ const CreateEditCandidate = async(candidateID,firstName,lastName,itemID,titles,d
   }
 }
 
+const editUser = async(username, password, name, roleID)=>{
+  const client = await pool.connect();
+  try{
+    const result = await client.query("UPDATE users SET username = '$1', password = '$2', name = '$3', roleID = '$4' WHERE username = '$1'", [username, password, name, roleID]);
+    return result.rows;
+  }catch(error){
+    console.log(error);
+    throw error;
+  }
+}
+
+const createUser = async(username, password, name, roleID)=>{
+  const client = await pool.connect();
+  try{
+    const result = await client.query('INSERT INTO users (username, password, name, roleID) VALUES ($1,$2,$3,$4)', [username,password,name,roleID]);
+    return result.rows;
+  }catch(error){
+    console.log(error);
+    throw error;
+  }
+}
 
 
 
@@ -188,5 +209,7 @@ module.exports = {
     getBallot,
     getBallotItem,
     candidateExist,
-    CreateEditCandidate
+    CreateEditCandidate,
+    editUser,
+    createUser
 }

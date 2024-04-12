@@ -132,9 +132,9 @@ const createEditUser = async(username, password, name, roleID)=>{
         //validate name
         //validate roleID
         if(userExists(username, password)){
-            dl.editUser(username, password, name, roleID);
+            return dl.editUser(username, password, name, roleID);
         }else{
-            dl.createUser(username, password, name, roleID);
+            return dl.createUser(username, password, name, roleID);
         }
     }catch(error){
         console.log(error);

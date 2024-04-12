@@ -33,10 +33,10 @@ app.post("/users/login",async(req,res)=>{
        res.status(500).json("Internal server error");
     }
 
-})
+});
 
 //get ballot from ballotID
-app.get("ballots/:ballotID",async(req,res)=>{
+app.get("ballots/ballotID",async(req,res)=>{
     const ballotID = req.params.ballotID;
     try{
         check = await bl.ballotExists(ballotID);
@@ -50,7 +50,7 @@ app.get("ballots/:ballotID",async(req,res)=>{
         console.log(error);
         res.status(500).json("Internal Server Error");
     }
-})
+});
 
 //Retrieve information about all users or users from a specific society
 app.get("users/societyID",async(req,res)=>{
@@ -61,11 +61,11 @@ app.get("users/societyID",async(req,res)=>{
         console.log(error);
         res.status(500).json("Internal Server Error");
     }
-})
+});
 
 //createEditUser 
 //should there be a password . . . ?
-app.post("users/:username",async(req,res)=>{
+app.post("users/username",async(req,res)=>{
     const username = req.params.username;
     const password = req.params.password;
     const name = req.params.name;
@@ -76,7 +76,7 @@ app.post("users/:username",async(req,res)=>{
         console.log(error);
         res.status(500).json("Internal Server Error");
     }
-})
+});
 
 
 

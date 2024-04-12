@@ -91,3 +91,12 @@ CREATE TABLE users_society(
     FOREIGN KEY (username) REFERENCES users(username),
     FOREIGN KEY (societyID) REFERENCES society(societyID)
 );
+
+DROP TABLE IF EXIST ballots_users CASCADE;
+CREATE TABLE ballots_users(
+    ballotID INT NOT NULL,
+    username varchar(50) NOT NULL,
+    CONSTRAINT users_ballot_key PRIMARY KEY (ballotID,username),
+    FOREIGN KEY (username) REFERENCES users(username),
+    FOREIGN KEY (ballotID) REFERENCES ballots(ballotID)
+);

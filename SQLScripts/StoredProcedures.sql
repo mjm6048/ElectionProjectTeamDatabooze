@@ -23,10 +23,11 @@ END;
 $$ LANGUAGE plpgsql;
 
 /*get active ballots of a society*/
+
 CREATE OR REPLACE FUNCTION get_ballots_in_society(SocietyIDValue INT)
 RETURNS TABLE (
     ballotID INT,
-    ballotName TEXT
+    ballotName varchar(50)
     -- Add other fields from the ballot table as needed
 ) AS $$
 BEGIN

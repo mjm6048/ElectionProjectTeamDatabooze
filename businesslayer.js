@@ -2,24 +2,6 @@
 const dl = require('./datalayer');
 
 var loggedInUsers =[];
-loggedInUsers.push({
-    username: 'applebreeze16',
-    firstname: 'Brandon',
-    lastname: 'Holland',
-    passwordhash: '1d707811988069ca760826861d6d63a10e8c3b7f171c4441a6472ea58c11711b',
-    roleid: 2,
-    societyid: 1
-  },
-  {
-    username: 'starbreeze10',
-    firstname: 'Judith',
-    lastname: 'King',
-    passwordhash: '1d707811988069ca760826861d6d63a10e8c3b7f171c4441a6472ea58c11711b',
-    roleid: 1,
-    societyid: 12
-  }
-  
-  )
 
 
 const userExists = async(username,password)=>
@@ -28,7 +10,7 @@ const userExists = async(username,password)=>
     // console.log(hashedpassword);
     try
     {
-        user = await dl.getUser(username);
+       var user = await dl.getUser(username);
         if(user.length !=0)
         {
             
@@ -38,7 +20,16 @@ const userExists = async(username,password)=>
             { 
                 
                 loggedInUsers.push(user[0]);
-                console.log(loggedInUsers);
+                if(user[0].roleid <3)
+                {
+                    var result = await dl.getActiveBallots(user[0].societyid);
+                    console.log(result);
+                }
+                // return members of society and all ballots that havent started if role>=3
+                else
+                {
+
+                }
                 return true;
             }
             else
@@ -67,7 +58,7 @@ const castVote= async(username,voteType,itemID,votedFor, writein)=>
     try
     {  
     // user validation
-        var  user = loggedInUsers.find(Users => Users.username === username);
+        var  user = loggedInUsers.find(users => users.username === username);
         //validate user
         if(user == null || user.roleid>2)
         { 

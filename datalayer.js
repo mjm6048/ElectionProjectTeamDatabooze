@@ -15,6 +15,7 @@ const getUser = async(username)=> {
   {
 
       const result = await client.query('SELECT users.*, us.societyID FROM users INNER JOIN users_society us ON users.username = us.username WHERE users.username = $1', [username]);
+      
     
       return result.rows;
   }
@@ -27,6 +28,22 @@ const getUser = async(username)=> {
     client.release();
   }
   }
+const getActiveBallots=async(societyID)=>
+{  const client = await pool.connect();
+  try{
+    const result = await client.query('SELECT * FROM get_ballots_in_society($1)', [societyID]);
+    if(result.rows.length === 0){
+      return null;
+    }else{
+      return result.rows;
+    }
+  }catch(error){
+    console.log(error);
+    throw error;
+  }
+
+
+}
 
 const getMembersandOfficers = async(societyID)=>
 {const client = await pool.connect();
@@ -171,5 +188,6 @@ module.exports = {
     castVote,
     getResults,
     getBallotAndSociety,
-    getStatus
+    getStatus,
+    getActiveBallots
 }

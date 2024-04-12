@@ -71,7 +71,7 @@ app.post("users/:username",async(req,res)=>{
     const name = req.params.name;
     const roleID = req.params.roleID;
     try{
-        bl.createEditUser(username, password, name, roleID);
+       res.status(200).json(bl.createEditUser(username, password, name, roleID));
     }catch(error){
         console.log(error);
         res.status(500).json("Internal Server Error");

@@ -56,7 +56,7 @@ app.get("ballots/ballotID",async(req,res)=>{
 app.get("users/societyID",async(req,res)=>{
     const societyID = req.params.societyID;
     try{
-        res.status(200).json(bl.getSocietyUsers());
+        res.status(200).json(bl.getSocietyUsers(societyID));
     }catch(error){
         console.log(error);
         res.status(500).json("Internal Server Error");

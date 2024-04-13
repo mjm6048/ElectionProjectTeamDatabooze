@@ -118,9 +118,9 @@ const getBallot = async(ballotID)=>{
     }
 }
 //Retrieve information about all users or users from a specific society
-const getSocietyUsers = async(ballotID)=>{
+const getSocietyUsers = async(societyID)=>{
     try{
-        return dl.getMembersandOfficers();
+        return dl.getMembersandOfficers(societyID);
     }catch(error){
         console.log(error);
     }

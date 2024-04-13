@@ -156,12 +156,61 @@ const getStatus = async(ballotID)=>
   }
 }
 
+const getAllSocieties = async()=>
+{
+  const client = await pool.connect();
+  try
+  {
+    const result = await client.query('SELECT * FROM society;');
+    return result.rows;
+  }
+  catch(error)
+  {   console.log(error);
+      throw error;
+  }
+  finally
+  {
+    client.release();
+  }
+}
 
+const getSociety = async(societyID)=>
+{
+  const client = await pool.connect();
+  try
+  {
+    const result = await client.query('SELECT * FROM society WHERE societyID=($1);',[societyID]);
+    return result.rows;
+  }
+  catch(error)
+  {   console.log(error);
+      throw error;
+  }
+  finally
+  {
+    client.release();
+  }
+}
 
+const createNewSociety = async(societyID, societyName, societyDescription)=>
+{
+  const client = await pool.connect()
 
+  try {
+    await client.query('BEGIN');
+    var result = await client.query('INSERT INTO society(societyID,societyName,societyDescription) VALUES($1,$2,$3);',[societyID,societyName,societyDescription]);
+    await client.query('COMMIT');
+    return (result.rowCount);
+  } 
 
-
-
+  catch (e) {
+    await client.query('ROLLBACK');
+    throw e;
+  } 
+  finally {
+    client.release()
+  }
+}
 
 // this should be the name of the function to check login, refer to index.js for return type and arguments
 module.exports = {

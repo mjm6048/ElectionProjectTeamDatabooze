@@ -180,9 +180,45 @@ const getStatus=async(ballotID,username)=>
         console.log(error);
         throw error;
     }
-}
+};
 
+const getAllSocieties = async()=>{
+    try{
+        if(dl.getBallot()){
+            return true;
+        }else{
+            return false;
+        }
+    }catch(error){
+        console.log(error);
+    }
+};
 
+const getSociety = async(societyID)=>{
+    try{
+        if(dl.getSociety(societyID)){
+            return true;
+        }else{
+            return false;
+        }
+    }catch(error){
+        console.log(error);
+    }
+};
+
+const createNewSociety = async(societyID, societyName, societyDescription)=>
+{
+    try{
+        if(dl.createNewSociety(societyID, societyName, societyDescription)){
+            return true;
+        }else{
+            return false;
+        }
+    }catch(error){
+        console.log(error);
+        throw error;
+    }
+};
 
 // this should be the name of the function to check login, refer to index.js for return type and arguments
 module.exports = {

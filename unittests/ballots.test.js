@@ -31,3 +31,22 @@ test(`Valid Ballot`, () => {
     expect(result).toBe(true);
 
 });
+
+import * as bl from '../businesslayer.js';
+
+/* Acutal Ballot unit tests */
+test('BallotExists returns true', () => {
+    const result = bl.BallotExists(2);
+    expect(result).toBe(true);
+});
+
+test('BallotExists return false ', () => {
+    const result = bl.BallotExists(0);
+    expect(result).toBe(false);
+});
+
+test('getBallot returns a ballot ', () => {
+    const result = bl.getBallot(2);
+    expect(result).toBe('[{ballotID: 2,ballotName: \"2001 Board Elections\",startDate: \"2001-07-21\",endDate: \"2001-09-12\",SocietyID: 1,}]');
+});
+

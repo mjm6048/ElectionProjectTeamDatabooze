@@ -13,6 +13,8 @@ CREATE DATABASE databooze
     CONNECTION LIMIT = -1
     IS_TEMPLATE = False;
 	
+CREATE TYPE BALLOTITEMTYPE AS ENUM('initiative','position');
+
 
 DROP TABLE IF EXISTS users CASCADE;
 CREATE TABLE users(
@@ -42,53 +44,44 @@ CREATE TABLE ballots(
 		REFERENCES society (societyID)
 );
 
-DROP TABLE IF EXISTS position_ballots CASCADE;
-CREATE TABLE position_ballots( 
-    positionID int NOT NULL PRIMARY KEY, 
-    positionName varchar(50), 
-    maxNumCandidates int, 
-    numVotesAllowed int, 
-    ballotID int,
-	CONSTRAINT fk_ballotID
-    	FOREIGN KEY (ballotID)
-		REFERENCES ballots (ballotID)
+
+DROP TABLE IF EXISTS BallotItem CASCADE;
+CREATE TABLE BallotItem(
+    itemID INT NOT NULL PRIMARY KEY,
+    itemName varchar(50),
+    itemType BALLOTITEMTYPE,
+    numVotesAllowed INT,
+    ballotID INT,
+    maxNumCandidates INT,
+    FOREIGN KEY (ballotID) REFERENCES ballots (ballotID)
 );
 
 DROP TABLE IF EXISTS candidate CASCADE;
 CREATE TABLE candidate(
-    username varchar(50) NOT NULL,
-    positionID int NOT NULL,
+    candidateID int NOT NULL PRIMARY KEY,
+    firstName varchar(50) NOT NULL,
+    lastName varchar(50) NOT NULL,
+    itemID int NOT NULL,
     titles varchar(50),
-    candidateDescription varchar(100),
-    writeIn boolean,
-    photo varchar(150),
-    CONSTRAINT candidate_key PRIMARY KEY (username, positionID),
-    FOREIGN KEY (username) REFERENCES users (username),
-    FOREIGN KEY (positionID) REFERENCES position_ballots (positionID)
+    candidateDescription varchar(500),
+    photo varchar(500),
+    FOREIGN KEY (itemID) REFERENCES BallotItem (itemID)
 );
 
 DROP TABLE IF EXISTS votes CASCADE;
 CREATE TABLE votes( 
-    voteID INT NOT NULL PRIMARY KEY, 
-    votes JSON,
+    voteID SERIAL PRIMARY KEY, 
+    voteType BALLOTITEMTYPE,
+    itemID int,
+    votedFor varchar(50),
+    writein BOOLEAN,
     username varchar(50) NOT NULL,
 	CONSTRAINT fk_username
     	FOREIGN KEY (username)
-		REFERENCES users (username)
+		REFERENCES users (username),
+    CONSTRAINT unique_vote UNIQUE (itemID, votedFor, username)
 );
 
-DROP TABLE IF EXISTS initiative_ballots CASCADE;
-CREATE TABLE initiative_ballots(
-    initiativeID int PRIMARY KEY NOT NULL,
-    initiativeName varchar(50),
-    initiativeDescription varchar(100), 
-    numVotesAllowed int,
-    ballotID int, 
-    options JSON,
-	CONSTRAINT fk_ballotID
-    	FOREIGN KEY (ballotID)
-		REFERENCES ballots (ballotID)
-);
 
 DROP TABLE IF EXISTS users_society CASCADE;
 CREATE TABLE users_society(

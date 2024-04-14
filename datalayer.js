@@ -7,15 +7,16 @@ const pool = new Pool({
   port: 5432
 });
 
-// Get User
+// Get Users
 const getUser = async (username) => {
+  console.log("data layer enter");
   const client = await pool.connect();
   try {
     const result = await client.query(
       "SELECT users.*, us.societyID FROM users INNER JOIN users_society us ON users.username = us.username WHERE users.username = $1",
       [username]
     );
-
+    console.log(result);
     return result.rows;
   } catch (error) {
     console.log(error);
@@ -38,39 +39,6 @@ const getMembersandOfficers = async (societyID) => {
     throw error;
   } finally {
     client.release();
-  }
-};
-
-const getMembersOfSociety = async (societyID) => {
-  try {
-    const client = await pool.connect();
-
-    const { rows } = await client.query(
-      "SELECT * FROM GetMembersOfSociety($1)",
-      [societyID]
-    );
-
-    client.release();
-    return rows;
-  } catch (error) {
-    console.error("Error executing stored procedure:", error);
-    throw error;
-  }
-};
-
-const getavgMembers = async (societyID) => {
-  const client = await pool.connect();
-  try {
-    const { rows } = await client.query(
-      "SELECT GetAverageMembersVotingPerElection($1) AS average_members_voting",
-      [societyID]
-    );
-
-    const averageMembersVoting = rows[0].average_members_voting;
-
-    return averageMembersVoting;
-  } catch (error) {
-    console.error("Error executing stored procedure:", error);
   }
 };
 
@@ -154,21 +122,6 @@ const getResults = async (ballotID) => {
     client.release();
   }
 };
-
-const getBallotCountPerSociety = async (societyID) => {
-  const client = await pool.connect();
-  try {
-    console.log("inside data layer");
-    const result = await client.query(
-      "SELECT * FROM getBallotCountPerSociety($1)",
-      [societyID]
-    );
-    return result.rows;
-  } catch (error) {
-    console.error("Error executing stored procedure:", error);
-  }
-};
-
 const getStatus = async (ballotID) => {
   const client = await pool.connect();
   try {
@@ -193,15 +146,172 @@ const getStatus = async (ballotID) => {
   }
 };
 
-const calculateAverageQueryTime = async () => {
+const getAllSocieties = async () => {
+  const client = await pool.connect();
   try {
-    const client = await pool.connect();
+    const result = await client.query("SELECT * FROM society;");
+    return result.rows;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  } finally {
+    client.release();
+  }
+};
 
-    const { rows } = await client.query(
+//returns null if no ballot found, return rows if found, throws if error
+const getBallot = async (ballotID) => {
+  const client = await pool.connect();
+  try {
+    const result = await client.query(
+      "SELECT * FROM ballots WHERE ballotID = $1",
+      [ballotID]
+    );
+    if (result.rows.length === 0) {
+      return null;
+    } else {
+      return result.rows;
+    }
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+const getBallotItem = async (itemID) => {
+  const client = await pool.connect();
+  try {
+    const result = await client.query(
+      "SELECT * FROM ballotItem WHERE itemID = $1",
+      [itemID]
+    );
+    if (result.rows.length === 0) {
+      return null;
+    } else {
+      return result.rows;
+    }
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+const candidateExist = async (candidateID) => {
+  const client = await pool.connect();
+  try {
+    const result = await client.query(
+      "SELECT * FROM Candidate WHERE candidateID = $1",
+      [candidateID]
+    );
+    if (result.rows.length === 0) {
+      return false;
+    } else {
+      return true;
+    }
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+const CreateEditCandidate = async (
+  candidateID,
+  firstName,
+  lastName,
+  itemID,
+  titles,
+  description,
+  photo
+) => {
+  const client = await pool.connect();
+  //does the candidate exist?
+  try {
+    if (candidateExist()) {
+      const result = await client.query(
+        "INSERT INTO Candidate (candidateID,firstname,lastname,itemID,titles,description,photo) VALUES($1,$2,$3,$4,$5,$6,$7)",
+        [candidateID, firstName, lastName, itemID, titles, description, photo]
+      );
+      return result.rows;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+const editUser = async (username, password, name, roleID) => {
+  const client = await pool.connect();
+  try {
+    const result = await client.query(
+      "UPDATE users SET username = '$1', password = '$2', name = '$3', roleID = '$4' WHERE username = '$1'",
+      [username, password, name, roleID]
+    );
+    return result.rowCount;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+const createUser = async (username, password, name, roleID) => {
+  const client = await pool.connect();
+  try {
+    const result = await client.query(
+      "INSERT INTO users (username, password, name, roleID) VALUES ($1,$2,$3,$4)",
+      [username, password, name, roleID]
+    );
+    return result.rows;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+const getSociety = async (societyID) => {
+  const client = await pool.connect();
+  try {
+    const result = await client.query(
+      "SELECT * FROM society WHERE societyID=($1);",
+      [societyID]
+    );
+    return result.rows;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  } finally {
+    client.release();
+  }
+};
+
+const createNewSociety = async (societyID, societyName, societyDescription) => {
+  const client = await pool.connect();
+
+  try {
+    await client.query("BEGIN");
+    var result = await client.query(
+      "INSERT INTO society(societyID,societyName,societyDescription) VALUES($1,$2,$3);",
+      [societyID, societyName, societyDescription]
+    );
+    await client.query("COMMIT");
+    return result.rowCount;
+  } catch (e) {
+    await client.query("ROLLBACK");
+    throw e;
+  } finally {
+    client.release();
+  }
+};
+
+const calculateAverageQueryTime = async () => {
+  const client = await pool.connect();
+  try {
+    const result = await client.query(
       "SELECT * FROM calculate_average_query_time()"
     );
-    const averageQueryTime = rows[0].calculate_average_query_time;
-    return averageQueryTime;
+
+    return result.rows;
   } catch (error) {
     console.error("Error executing stored procedure:", error);
     throw error;
@@ -214,77 +324,87 @@ const getNumberOfActiveElections = async () => {
   try {
     const client = await pool.connect();
 
-    const { rows } = await client.query(
+    const result = await client.query(
       "SELECT GetNumberOfActiveElections() AS active_elections_count"
     );
 
     client.release();
 
-    const activeElectionsCount = rows[0].active_elections_count;
-
-    return activeElectionsCount;
+    return result.rows;
   } catch (error) {
     console.error("Error executing stored procedure:", error);
     throw error;
   }
 };
 
-// const getVote=async(VoteID)=>
-// {
-//     const result = await client.query('SELECT * FROM votes WHERE voteID = $1', [voteID]);
-// }
-// const countPositionVotes= async(positonID,candidateID)=>
-// {
-//   try{
+const getBallotCountPerSociety = async (societyID) => {
+  const client = await pool.connect();
+  try {
+    console.log("inside data layer");
+    const result = await client.query(
+      "SELECT * FROM getBallotCountPerSociety($1)",
+      [societyID]
+    );
+    return result.rows;
+  } catch (error) {
+    console.error("Error executing stored procedure:", error);
+  }
+};
 
-//     {
-//     if(candidateID == 0){
-//       const result = await client.query(`SELECT COUNT(*) AS vote_count FROM votes WHERE votes->>'VoteType' = 'ballot' AND (votes->>'BallotID')::int = $1`, [positonID]);
-//     }
-//     else{
-//       const result = await client.query(`SELECT COUNT(*) AS vote_count FROM votes WHERE votes->>'VoteType' = 'ballot' AND (votes->>'BallotID')::int = $1 AND (votes->>'VotedFor')::int = $2`, [positonID,candidateID]);
-//     }
-//   }
-//         return result.rows;
-//     }
-//     catch(error)
-//     {   console.log(error);
-//         throw error;
-//     }
-// }
+const getavgMembers = async (societyID) => {
+  const client = await pool.connect();
+  try {
+    const { rows } = await client.query(
+      "SELECT GetAverageMembersVotingPerElection($1) AS average_members_voting",
+      [societyID]
+    );
 
-// const getInititativeVotes= async(voteID,initiativeID)=>
-// {
-//   try{
-//     if(VoteID!==0)
-//     {
-//       const result = await pool.query('SELECT * FROM votes WHERE voteID = $1', [voteID]);
-//     }
-//     else
-//     {
-//       const result = await pool.query(`SELECT * FROM votes WHERE votes->>'VoteType' = 'inititative' AND (votes->>'BallotID')::int = $1`, [initiativeID]);
-//     }
+    const averageMembersVoting = rows[0].average_members_voting;
 
-//         return result.rows;
-//     }
-//     catch(error)
-//     {   console.log(error);
-//         throw error;
-//     }
-// }
+    return averageMembersVoting;
+  } catch (error) {
+    console.error("Error executing stored procedure:", error);
+  }
+};
+
+const getMembersOfSociety = async (societyID) => {
+  try {
+    const client = await pool.connect();
+
+    const { rows } = await client.query(
+      "SELECT * FROM GetMembersOfSociety($1)",
+      [societyID]
+    );
+
+    client.release();
+    return rows;
+  } catch (error) {
+    console.error("Error executing stored procedure:", error);
+    throw error;
+  }
+};
 
 // this should be the name of the function to check login, refer to index.js for return type and arguments
 module.exports = {
   getUser,
   getCandidates,
   getMembersandOfficers,
-  getavgMembers,
-  getBallotCountPerSociety,
-  getMembersOfSociety,
-  calculateAverageQueryTime,
-  getNumberOfActiveElections,
   castVote,
   getResults,
   getBallotAndSociety,
-  getStatus
+  getStatus,
+  createNewSociety,
+  getSociety,
+  getAllSocieties,
+  getBallot,
+  getBallotItem,
+  candidateExist,
+  CreateEditCandidate,
+  editUser,
+  createUser,
+  getavgMembers,
+  getBallotCountPerSociety,
+  getMembersOfSociety,
+  getNumberOfActiveElections,
+  calculateAverageQueryTime
 };

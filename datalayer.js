@@ -220,5 +220,8 @@ module.exports = {
     castVote,
     getResults,
     getBallotAndSociety,
-    getStatus
+    getStatus,
+    createNewSociety,
+    getSociety,
+    getAllSocieties
 }

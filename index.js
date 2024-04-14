@@ -30,11 +30,12 @@ app.post("/users/login", async (req, res) => {
   }
 });
 
-app.get("/reports/society-statistics/:societyID", async (req, res) => {
-  const societyID = parseInt(req.params.societyID);
+app.get("/users/society-statistics", async (req, res) => {
+  const {societyID} = parseInt(req.body);
 
   try {
-    const report = await generateSocietyStatistics(societyID);
+    const report = await bl.generateSocietyStatistics(societyID);
+    console.log("in api");
     res.status(200).json(report);
   } catch (error) {
     console.error("Error generating society statistics report:", error);
@@ -42,9 +43,10 @@ app.get("/reports/society-statistics/:societyID", async (req, res) => {
   }
 });
 
-app.get("/reports/system-statistics", async (req, res) => {
+app.get("/users/system-statistics", async (req, res) => {
   try {
-    const report = await getSystemStatistics();
+    console("top api");
+    const report = await bl.getSystemStatistics();
     res.status(200).json(report);
   } catch (error) {
     console.error("Error generating system statistics report:", error);

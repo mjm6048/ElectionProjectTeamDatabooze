@@ -180,8 +180,51 @@ const getStatus=async(ballotID,username)=>
         console.log(error);
         throw error;
     }
-};
+}
 
+const BallotExists = async(ballotID)=>{
+    try{
+        if(dl.getBallot()){
+            return true;
+        }else{
+            return false;
+        }
+    }catch(error){
+        console.log(error);
+    }
+}
+
+const getBallot = async(ballotID)=>{
+    try{
+        return dl.getBallot();
+    }catch(error){
+        console.log(error);
+    }
+}
+//Retrieve information about all users or users from a specific society
+const getSocietyUsers = async(societyID)=>{
+    try{
+        return dl.getMembersandOfficers(societyID);
+    }catch(error){
+        console.log(error);
+    }
+}
+
+const createEditUser = async(username, password, name, roleID)=>{
+    try{
+        //validate username
+        //validate name
+        //validate roleID
+        if(userExists(username, password)){
+            return dl.editUser(username, password, name, roleID);
+        }else{
+            return dl.createUser(username, password, name, roleID);
+        }
+    }catch(error){
+        console.log(error);
+        throw error;
+    }
+}
 const getAllSocieties = async()=>{
     try{
         if(dl.getBallot()){
@@ -218,13 +261,47 @@ const createNewSociety = async(societyID, societyName, societyDescription)=>
         console.log(error);
         throw error;
     }
-};
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // this should be the name of the function to check login, refer to index.js for return type and arguments
 module.exports = {
     userExists,
     castVote,
     getResults,
+    getStatus,
+    getBallot,
+    BallotExists,
+    getSocietyUsers,
+    createEditUser,
     getStatus
 }
 

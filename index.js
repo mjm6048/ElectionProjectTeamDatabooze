@@ -163,7 +163,48 @@ app.get('/status/:ballotID', async (req, res) => {
     }
 });
 console.log(bl.castVote('applebreeze16', 'position', 2, '123', false));
+//get ballot from ballotID
+app.get("ballots/ballotID",async(req,res)=>{
+    const ballotID = req.params.ballotID;
+    try{
+        check = await bl.ballotExists(ballotID);
+        if(check){
+            blResponse = bl.getBallot();
+            res.status(200).json(blResponse);
+        }else{
+            res.status(401).json("Ballot does not exist");
+        }
+    }catch(error){
+        console.log(error);
+        res.status(500).json("Internal Server Error");
+    }
+});
 
+//Retrieve information about all users or users from a specific society
+app.get("users/societyID",async(req,res)=>{
+    const societyID = req.params.societyID;
+    try{
+        res.status(200).json(bl.getSocietyUsers(societyID));
+    }catch(error){
+        console.log(error);
+        res.status(500).json("Internal Server Error");
+    }
+});
+
+//createEditUser 
+//should there be a password . . . ?
+app.post("users/username",async(req,res)=>{
+    const username = req.params.username;
+    const password = req.params.password;
+    const name = req.params.name;
+    const roleID = req.params.roleID;
+    try{
+       res.status(200).json(bl.createEditUser(username, password, name, roleID));
+    }catch(error){
+        console.log(error);
+        res.status(500).json("Internal Server Error");
+    }
+});
 app.listen(port, () => {
     console.log("port connected");
 });

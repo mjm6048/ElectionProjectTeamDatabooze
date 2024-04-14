@@ -2,8 +2,9 @@
 const Pool = require('pg').Pool
 const pool = new Pool({
   user: 'postgres',
+  host: 'localhost',
   database: 'databooze',
-  password:'netra',
+  password: '',
   port: 5432,
 })
 
@@ -174,8 +175,91 @@ const getAllSocieties = async()=>
   }
 }
 
-const getSociety = async(societyID)=>
-{
+//returns null if no ballot found, return rows if found, throws if error
+const getBallot = async(ballotID)=>{
+  const client = await pool.connect();
+  try{
+    const result = await client.query('SELECT * FROM ballots WHERE ballotID = $1', [ballotID]);
+    if(result.rows.length === 0){
+      return null;
+    }else{
+      return result.rows;
+    }
+  }catch(error){
+    console.log(error);
+    throw error;
+  }
+}
+
+const getBallotItem = async(itemID)=>{
+  const client = await pool.connect();
+  try{
+    const result = await client.query('SELECT * FROM ballotItem WHERE itemID = $1', [itemID]);
+    if(result.rows.length === 0){
+      return null;
+    }else{
+      return result.rows;
+    }
+  }catch(error){
+    console.log(error);
+    throw error;
+  }
+}
+
+const candidateExist = async(candidateID)=>{
+  const client = await pool.connect();
+  try{
+    const result = await client.query('SELECT * FROM Candidate WHERE candidateID = $1', [candidateID]);
+    if(result.rows.length === 0){
+      return false;
+    }else{
+      return true;
+    }
+  }catch(error){
+    console.log(error);
+    throw error;
+  }
+}
+
+const CreateEditCandidate = async(candidateID,firstName,lastName,itemID,titles,description,photo)=>{
+  const client = await pool.connect();
+  //does the candidate exist?
+  try{
+    if(candidateExist()){
+      const result = await client.query('INSERT INTO Candidate (candidateID,firstname,lastname,itemID,titles,description,photo) VALUES($1,$2,$3,$4,$5,$6,$7)', [candidateID,firstName,lastName,itemID,titles,description,photo]);
+      return result.rows;
+    }else{
+      return null;
+    }
+  }catch(error){
+    console.log(error);
+    throw error;
+  }
+}
+
+const editUser = async(username, password, name, roleID)=>{
+  const client = await pool.connect();
+  try{
+    const result = await client.query("UPDATE users SET username = '$1', password = '$2', name = '$3', roleID = '$4' WHERE username = '$1'", [username, password, name, roleID]);
+    return result.rowCount;
+  }catch(error){
+    console.log(error);
+    throw error;
+  }
+}
+
+const createUser = async(username, password, name, roleID)=>{
+  const client = await pool.connect();
+  try{
+    const result = await client.query('INSERT INTO users (username, password, name, roleID) VALUES ($1,$2,$3,$4)', [username,password,name,roleID]);
+    return result.rows;
+  }catch(error){
+    console.log(error);
+    throw error;
+  }
+}
+
+const getSociety = async(societyID)=>{
   const client = await pool.connect();
   try
   {
@@ -192,8 +276,7 @@ const getSociety = async(societyID)=>
   }
 }
 
-const createNewSociety = async(societyID, societyName, societyDescription)=>
-{
+const createNewSociety = async(societyID, societyName, societyDescription)=>{
   const client = await pool.connect()
 
   try {
@@ -210,6 +293,7 @@ const createNewSociety = async(societyID, societyName, societyDescription)=>
   finally {
     client.release()
   }
+
 }
 
 // this should be the name of the function to check login, refer to index.js for return type and arguments
@@ -220,5 +304,11 @@ module.exports = {
     castVote,
     getResults,
     getBallotAndSociety,
-    getStatus
+    getStatus,
+    getBallot,
+    getBallotItem,
+    candidateExist,
+    CreateEditCandidate,
+    editUser,
+    createUser,
 }

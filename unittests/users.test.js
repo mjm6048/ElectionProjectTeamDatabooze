@@ -118,3 +118,10 @@ test(`Valid `, () => {
   });
   expect(result).toBe(true);
 });
+
+import * as bl from '../businesslayer.js';
+
+test('valid', () => {
+  const result = bl.createEditUser('moomincloud45' , '1d707811988069ca760826861d6d63a10e8c3b7f171c4441a6472ea58c11711b', 'Jeffery' , 1);
+  expect(result).toBe(1);
+});

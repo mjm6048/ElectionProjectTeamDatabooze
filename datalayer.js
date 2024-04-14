@@ -4,7 +4,6 @@ const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
   database: 'databooze',
-  password: '',
   port: 5432,
 })
 

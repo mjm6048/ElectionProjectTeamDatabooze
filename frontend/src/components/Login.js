@@ -16,6 +16,7 @@ function Login() {
       .then(response=>{
       if (response.status === 200) {
         alert("Login successful");
+        
         // Redirect to home page or do any further actions upon successful login
       } else {
         console.log(response.status);

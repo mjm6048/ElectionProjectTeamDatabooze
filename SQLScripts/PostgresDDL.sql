@@ -73,13 +73,16 @@ CREATE TABLE votes(
     voteID SERIAL PRIMARY KEY, 
     voteType BALLOTITEMTYPE,
     itemID int,
-    votedFor varchar(50),
-    writein BOOLEAN,
+    candidateID int,
+    initiativeResponse varchar(50),
+    writein varchar(50),
     username varchar(50) NOT NULL,
 	CONSTRAINT fk_username
     	FOREIGN KEY (username)
 		REFERENCES users (username),
-    CONSTRAINT unique_vote UNIQUE (itemID, votedFor, username)
+    CONSTRAINT fk_candidate FOREIGN KEY (candidateID) REFERENCES candidate (candidateID),
+    CONSTRAINT unique_vote UNIQUE (itemID, candidateID, username),
+    CONSTRAINT unique_initiative UNIQUE (itemID,initiativeResponse, username)
 );
 
 

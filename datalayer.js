@@ -1,3 +1,5 @@
+const { query } = require('express');
+const format = require('pg-format');
 
 const Pool = require('pg').Pool
 const pool = new Pool({
@@ -8,6 +10,7 @@ const pool = new Pool({
 })
 
 
+
 // Get Users
 const getUser = async(username)=> {
   const client = await pool.connect();
@@ -15,8 +18,7 @@ const getUser = async(username)=> {
   {
 
       const result = await client.query('SELECT users.*, us.societyID FROM users INNER JOIN users_society us ON users.username = us.username WHERE users.username = $1', [username]);
-      
-    
+   
       return result.rows;
   }
   catch(error)
@@ -28,6 +30,7 @@ const getUser = async(username)=> {
     client.release();
   }
   }
+
 const getActiveBallots=async(societyID)=>
 {  const client = await pool.connect();
   try{
@@ -86,26 +89,66 @@ const getCandidates = async(itemID, candidateID)=> {
       }
 
 
- const castVote = async(username,voteType,itemID,votedFor, writein)=>
- {
+//  const castVote = async(username,voteType,itemID,votedFor, writein)=>
+//  {
   
-  const client = await pool.connect()
+//   const client = await pool.connect()
  
-  try {
+//   try {
   
-    await client.query('BEGIN');
-    var result = await client.query('INSERT INTO votes(votetype,itemid,votedfor,writein,username) VALUES($1,$2,$3,$4,$5);',[voteType,itemID,votedFor,writein,username]);
-    await client.query('COMMIT');
-    return (result.rowCount);
-  } 
+//     await client.query('BEGIN');
+//     var result = await client.query('INSERT INTO votes(votetype,itemid,votedfor,writein,username) VALUES($1,$2,$3,$4,$5);',[voteType,itemID,votedFor,writein,username]);
+//     await client.query('COMMIT');
+//     return (result.rowCount);
+//   } 
 
-  catch (e) {
-    await client.query('ROLLBACK');
-    throw e;
-  } 
-  finally {
-    client.release()
-  }
+//   catch (e) {
+//     await client.query('ROLLBACK');
+//     throw e;
+//   } 
+//   finally {
+//     client.release()
+//   }
+
+// }
+const castVote = async(username,positionvotes, initiativevotes)=>
+{
+ 
+ const client = await pool.connect();
+ 
+ var positionvalues =[];
+ for( let i=0; i< positionvotes.length;i++)
+ { 
+  positionvalues.push([positionvotes[i].voteType,positionvotes[i].itemID,positionvotes[i].candidateID,positionvotes[i].writein,username]);
+ }
+ var initiativevalues =[];
+ for( let i=0; i< initiativevotes.length;i++)
+ { 
+  initiativevalues.push([initiativevotes[i].voteType,initiativevotes[i].itemID,initiativevotes[i].initiativeResponse,initiativevotes[i].writein,username]);
+ }
+ try {
+ 
+   await client.query('BEGIN');
+   if(positionvalues.length!=0)
+   {
+    var result = await client.query(format('INSERT INTO votes(votetype,itemid,candidateid,writein,username) VALUES %L',positionvalues));
+   }
+   if(initiativevalues.length!=0)
+   {
+   var result = await client.query(format('INSERT INTO votes(votetype,itemid,initiativeresponse,writein,username) VALUES %L',initiativevalues));
+   }
+   await client.query('COMMIT');
+   return (result.rowCount);
+ } 
+
+ catch (e) {
+
+   await client.query('ROLLBACK');
+   throw e;
+ } 
+ finally {
+   client.release()
+ }
 
 }
 

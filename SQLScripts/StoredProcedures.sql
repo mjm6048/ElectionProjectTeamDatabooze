@@ -41,6 +41,24 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+/*get active ballots of a society*/
+
+CREATE OR REPLACE FUNCTION get_ballots_in_society(SocietyIDValue INT)
+RETURNS TABLE (
+    ballotID INT,
+    ballotName varchar(50)
+    -- Add other fields from the ballot table as needed
+) AS $$
+BEGIN
+    RETURN QUERY
+    SELECT b.ballotID, b.ballotName
+    FROM ballots b
+    JOIN society s ON b.SocietyID = s.SocietyID
+    WHERE b.societyID = SocietyIDValue
+    AND b.startDate <= CURRENT_DATE
+    AND b.endDate >= CURRENT_DATE;
+END;
+$$ LANGUAGE plpgsql;
 
 /* get ballotitems belonging to a ballot */
 CREATE OR REPLACE FUNCTION get_items_in_ballot(BallotIDValue INT)

@@ -5,7 +5,7 @@ function Ballot() {
 const handleViewResults = async (ballotID) => {
   try {
     // Make the API call with the ID parameter
-    const response = await fetch(`https://databooze-dev.webdev.gccis.rit.edu/users/login/${ballotID}`);
+    const response = await fetch(`https://localhost:50001/users/login`);
     const data = await response.json();
     
     navigate('/results', {state: { results: data }});

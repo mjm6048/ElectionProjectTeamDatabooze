@@ -18,7 +18,6 @@ const getUser = async(username)=> {
   {
 
       const result = await client.query('SELECT users.*, us.societyID FROM users INNER JOIN users_society us ON users.username = us.username WHERE users.username = $1', [username]);
-   
       return result.rows;
   }
   catch(error)

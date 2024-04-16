@@ -21,7 +21,6 @@ app.post("/users/login",async(req,res)=>{
     try{
         
         check = await bl.userExists(username, password);
-        console.log(check);
         if(check){
             const token = jwt.sign({ username }, secretKey , {
                 expiresIn: "5h"
@@ -48,7 +47,7 @@ app.get('/ballots', async (req, res) => {
             req.headers
                 .authorization.split(' ')[1];
         //Authorization: 'Bearer TOKEN'
-        const {societyId} = req.query;
+        const {societyID} = req.query;
         if (!token) {
             res.status(600)
                 .json(
@@ -59,15 +58,59 @@ app.get('/ballots', async (req, res) => {
                 );
         }
         //Decoding the token
-        const decodedToken =
-            jwt.verify(token, "dean");
+        const decodedToken = jwt.verify(token, "dean");
         username = decodedToken.username;
-        result = await bl.getBallots(societyId,username);
+        result = await bl.getBallots(societyID,username);
         if(result){
+            if(result == -1)
+            {
+                res.status(401).json("Invalid society");
+            }
             res.status(200).json(result);
         }
         else{
-            res.status(400).json("Invalid society");
+            res.status(400).json("Invalid User");
+        }
+
+    }
+    catch(e){
+        console.log(e);
+        res.status(500).json("Internal server error");
+    }
+
+});
+
+
+app.get('/ballotitems', async (req, res) => {
+    try
+    {
+	    const token =
+            req.headers
+                .authorization.split(' ')[1];
+        //Authorization: 'Bearer TOKEN'
+        const {ballotID} = req.query;
+        if (!token) {
+            res.status(600)
+                .json(
+                    {
+                        success: false,
+                        message: "Error!Token was not provided."
+                    }
+                );
+        }
+        //Decoding the token
+        const decodedToken = jwt.verify(token, "dean");
+        username = decodedToken.username;
+        result = await bl.getBallotItems(ballotID,username);
+        if(result){
+            if(result == -1)
+            {
+                res.status(401).json("Invalid ballot");
+            }
+            res.status(200).json(result);
+        }
+        else{
+            res.status(400).json("Invalid user");
         }
 
     }
@@ -80,115 +123,169 @@ app.get('/ballots', async (req, res) => {
 
 
 
-
-app.get('/ballotitems/:ballotID'), async(req,res)=>
-{
-    const{ballotID}=req.query;
-    try{
-    
-        result = await bl.getBallots(ballotID,username);
-        if(result){
-            res.status(200).json(result);
+app.get('/candidates', async (req, res) => {
+    try
+    {
+	    const token =
+            req.headers
+                .authorization.split(' ')[1];
+        //Authorization: 'Bearer TOKEN'
+        const {ballotID} = req.query;
+        if (!token) {
+            res.status(600)
+                .json(
+                    {
+                        success: false,
+                        message: "Error!Token was not provided."
+                    }
+                );
         }
-        else{
-            res.status(400).json("Invalid ballot");
-        }
-
-    }
-    catch(e){
-        console.log(e);
-       res.status(500).json("Internal server error");
-    }
- 
-}
-
-app.get('/candidates/:ballotID'), async(req,res)=>
-{
-    const{ballotID}=req.query;
-    try{
-    
+        //Decoding the token
+        const decodedToken = jwt.verify(token, "dean");
+        username = decodedToken.username;
         result = await bl.getCandidates(ballotID,username);
         if(result){
+            if(result == -1)
+            {
+                res.status(401).json("Invalid ballot");
+            }
             res.status(200).json(result);
         }
         else{
-            res.status(400).json("Invalid ballot");
+            res.status(400).json("Invalid user");
         }
 
     }
     catch(e){
         console.log(e);
-       res.status(500).json("Internal server error");
+        res.status(500).json("Internal server error");
     }
- 
-}
+
+});
 
 
-app.get('/results/:ballotID', async(req,res)=>
-{
-    const{ballotID}=req.query;
-    try{
-    
+app.get('/results', async (req, res) => {
+    try
+    {
+	    const token =
+            req.headers
+                .authorization.split(' ')[1];
+        //Authorization: 'Bearer TOKEN'
+        const {ballotID} = req.query;
+        if (!token) {
+            res.status(600)
+                .json(
+                    {
+                        success: false,
+                        message: "Error!Token was not provided."
+                    }
+                );
+        }
+        //Decoding the token
+        const decodedToken = jwt.verify(token, "dean");
+        username = decodedToken.username;
         result = await bl.getResults(ballotID,username);
         if(result){
+            if(result == -1)
+            {
+                res.status(401).json("Invalid ballot");
+            }
             res.status(200).json(result);
         }
         else{
-            res.status(400).json("Invalid BallotID");
+            res.status(400).json("Invalid User");
         }
 
     }
     catch(e){
         console.log(e);
-       res.status(500).json("Internal server error");
+        res.status(500).json("Internal server error");
     }
- 
-    
-})
 
-app.get('/status/:ballotID', async(req,res)=>
-{
-    const{ballotID}=req.query;
-    try{
-    
+});
+
+app.get('/status', async (req, res) => {
+    try
+    {
+	    const token =
+            req.headers
+                .authorization.split(' ')[1];
+        //Authorization: 'Bearer TOKEN'
+        const {ballotID} = req.query;
+        if (!token) {
+            res.status(600)
+                .json(
+                    {
+                        success: false,
+                        message: "Error!Token was not provided."
+                    }
+                );
+        }
+        //Decoding the token
+        const decodedToken = jwt.verify(token, "dean");
+        username = decodedToken.username;
         result = await bl.getStatus(ballotID,username);
         if(result){
             res.status(200).json(result);
+            if(result == -1)
+            {
+                res.status(401).json("Invalid ballot");
+            }
         }
         else{
-            res.status(400).json("Invalid BallotID");
+            res.status(400).json("Invalid User");
         }
 
     }
     catch(e){
         console.log(e);
-       res.status(500).json("Internal server error");
+        res.status(500).json("Internal server error");
     }
- 
-    
-})
-app.post("/votes",async(req,res)=>
-{
-    const{ballotID,positionVotes, initiativeVotes} = req.body;
-    try{
-    
-        cast = await bl.castVote(ballotID,positionVotes, initiativeVotes, username);
-        if(cast){
-            res.status(200).json("Vote successfully casted");
+
+});
+
+app.post('/votes', async (req, res) => {
+    try
+    {
+	    const token =
+            req.headers
+                .authorization.split(' ')[1];
+        //Authorization: 'Bearer TOKEN'
+        if (!token) {
+            res.status(600)
+                .json(
+                    {
+                        success: false,
+                        message: "Error!Token was not provided."
+                    }
+                );
+        }
+        //Decoding the token
+        const decodedToken = jwt.verify(token, "dean");
+        const{ballotID,positionVotes, initiativeVotes} = req.body;
+        username = decodedToken.username;
+        result = await bl.castVote(username,ballotID,positionVotes, initiativeVotes);
+        if(result){
+            if(result == -1)
+            {
+                res.status(401).json("Invalid ballot");
+            }
+            res.status(200).json("Vote successfully cast");
         }
         else{
-            res.status(400).json("Invalid Vote");
+            res.status(400).json("Vote not cast");
         }
 
     }
     catch(e){
         console.log(e);
-       res.status(500).json("Internal server error");
+        res.status(500).json("Internal server error");
     }
 
-})
+});
 
-console.log(bl.castVote('applebreeze16','position',2,'123', false));
+
+
 
 app.listen(port,()=>{
     console.log("port connected");

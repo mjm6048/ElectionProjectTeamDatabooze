@@ -42,6 +42,31 @@ END;
 $$ LANGUAGE plpgsql;
 
 /*get active ballots of a society*/
+CREATE OR REPLACE FUNCTION GetBallotsWithIsActive(IN SocietyIDValue INT)
+RETURNS TABLE (
+    ballotID INT,
+    ballotName varchar(50),
+    isActive BOOLEAN
+    -- Add other fields from the ballot table as needed
+) AS $$
+BEGIN
+    RETURN QUERY
+    SELECT 
+        b.ballotID, 
+        b.ballotName,
+        CASE 
+            WHEN CURRENT_DATE BETWEEN b.startDate AND b.endDate THEN TRUE
+            ELSE FALSE
+        END AS isActive
+    FROM 
+        ballots b
+    JOIN 
+        society s ON b.SocietyID = s.SocietyID
+    WHERE 
+        b.societyID = SocietyIDValue;
+END;
+$$ LANGUAGE plpgsql;
+
 
 CREATE OR REPLACE FUNCTION get_ballots_in_society(SocietyIDValue INT)
 RETURNS TABLE (
@@ -74,18 +99,22 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 /* count votes */
-CREATE OR REPLACE FUNCTION count_votes()
+CREATE OR REPLACE FUNCTION count_position_votes()
 RETURNS TABLE (
     ID INT,
-    voted varchar(50),
-    highest_vote_count INT
+    candidateid INT,
+    firstname varchar(50),
+    lastname varchar(50),
+    num_votes INT
+
 ) AS $$
 BEGIN
 RETURN QUERY
-SELECT itemID as ID, votedFor, (CAST(COUNT(*) AS INT)) AS vote_count
-FROM votes
-GROUP BY itemID, votedFor 
-ORDER BY itemID;
+SELECT v.itemid,v.candidateid, c.firstname, c.lastname, COUNT(*)::INT AS num_votes 
+FROM votes v 
+JOIN candidate c ON v.candidateid = c.candidateid 
+WHERE v.votetype = 'position' 
+GROUP BY v.itemid, c.firstname, c.lastname,  v.candidateid;
 END;
 $$ LANGUAGE plpgsql;
 

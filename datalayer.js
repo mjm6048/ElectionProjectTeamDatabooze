@@ -29,12 +29,27 @@ const getUser = async(username)=> {
   {
     client.release();
   }
-  }
-
-const getActiveBallots=async(societyID)=>
+}
+const getBallots=async(societyID)=>
 {  const client = await pool.connect();
   try{
-    const result = await client.query('SELECT * FROM get_ballots_in_society($1)', [societyID]);
+    const result = await client.query('select * from GetBallotsWithIsActive($1)', [societyID]);
+    if(result.rows.length === 0){
+      return null;
+    }else{
+      return result.rows;
+    }
+  }catch(error){
+    console.log(error);
+    throw error;
+  }
+
+
+}
+const getBallotItems=async(ballotID)=>
+{  const client = await pool.connect();
+  try{
+    const result = await client.query('select * from ballotitem where ballotid=($1)', [ballotID]);
     if(result.rows.length === 0){
       return null;
     }else{
@@ -65,16 +80,11 @@ catch(error)
   }
 }
 
-const getCandidates = async(itemID, candidateID)=> {
+const getCandidates = async(ballotID)=> {
     const client = await pool.connect();
     try{
-    if(itemID !== 0){
-        var result = await client.query('SELECT * FROM candidate WHERE itemID = $1', [itemID]);
-    }
-    else
-    {
-        var result = await client.query('SELECT * FROM candidate WHERE candidateID = $1', [candidateID]);
-    } 
+    
+        var result = await client.query(' SELECT c.* FROM candidate c JOIN ballotitem b ON c.itemID = b.itemID WHERE b.ballotID = ($1)', [ballotID]);
         return result.rows;
     }
     catch(error)
@@ -88,111 +98,28 @@ const getCandidates = async(itemID, candidateID)=> {
     
       }
 
-
-//  const castVote = async(username,voteType,itemID,votedFor, writein)=>
-//  {
-  
-//   const client = await pool.connect()
- 
-//   try {
-  
-//     await client.query('BEGIN');
-//     var result = await client.query('INSERT INTO votes(votetype,itemid,votedfor,writein,username) VALUES($1,$2,$3,$4,$5);',[voteType,itemID,votedFor,writein,username]);
-//     await client.query('COMMIT');
-//     return (result.rowCount);
-//   } 
-
-//   catch (e) {
-//     await client.query('ROLLBACK');
-//     throw e;
-//   } 
-//   finally {
-//     client.release()
-//   }
-
-// }
-const castVote = async(username,positionvotes, initiativevotes)=>
-{
- 
- const client = await pool.connect();
- 
- var positionvalues =[];
- for( let i=0; i< positionvotes.length;i++)
- { 
-  positionvalues.push([positionvotes[i].voteType,positionvotes[i].itemID,positionvotes[i].candidateID,positionvotes[i].writein,username]);
- }
- var initiativevalues =[];
- for( let i=0; i< initiativevotes.length;i++)
- { 
-  initiativevalues.push([initiativevotes[i].voteType,initiativevotes[i].itemID,initiativevotes[i].initiativeResponse,initiativevotes[i].writein,username]);
- }
- try {
- 
-   await client.query('BEGIN');
-   if(positionvalues.length!=0)
-   {
-    var result = await client.query(format('INSERT INTO votes(votetype,itemid,candidateid,writein,username) VALUES %L',positionvalues));
-   }
-   if(initiativevalues.length!=0)
-   {
-   var result = await client.query(format('INSERT INTO votes(votetype,itemid,initiativeresponse,writein,username) VALUES %L',initiativevalues));
-   }
-   await client.query('COMMIT');
-   return (result.rowCount);
- } 
-
- catch (e) {
-
-   await client.query('ROLLBACK');
-   throw e;
- } 
- finally {
-   client.release()
- }
-
-}
+      const getResults = async(ballotID)=>
+      {
+        const client = await pool.connect();
+        try
+        {
+          const result = await client.query('SELECT DISTINCT sp2.ID, sp1.candidateid, sp1.firstname, sp1.lastname, sp1.num_votes from (select * from get_items_in_ballot($1)) as sp2 JOIN (select * from count_position_votes()) as sp1 ON sp2.ID = sp1.ID ORDER BY sp2.ID;', [ballotID]);
+          return result.rows;
+        }
+        catch(error)
+        {   console.log(error);
+            throw error;
+        }
+        finally
+        {
+          client.release();
+        }
+      }
 
 
-const getBallotAndSociety= async(itemID,ballotID) => 
-{
-  const client = await pool.connect();
-  try
-  {if(itemID!=0)
-    {
-    const result = await client.query('SELECT bi.ballotid,b.* FROM(SELECT ballotid FROM ballotItem WHERE itemID=($1)) as bi JOIN ballots AS b ON bi.ballotid = b.ballotid',[itemID]);
-    return result.rows;
-    }
-   else{
-    const result = await client.query('SELECT * FROM ballots WHERE ballotID=($1)',[ballotID]);
-    return result.rows;
-   }
-  }
-  catch(error)
-  {   console.log(error);
-      throw error;
-  }
-  finally
-  {
-    client.release();
-  }
-}
-const getResults = async(ballotID)=>
-{
-  const client = await pool.connect();
-  try
-  {
-    const result = await client.query('SELECT DISTINCT sp1.ID, sp1.Type, sp2.voted, sp2.highest_vote_count from (select * from get_items_in_ballot($1)) as sp1 JOIN (select * from count_votes()) as sp2 ON sp1.ID = sp2.ID ORDER BY sp1.ID;', [ballotID]);
-    return result.rows;
-  }
-  catch(error)
-  {   console.log(error);
-      throw error;
-  }
-  finally
-  {
-    client.release();
-  }
-}
+
+
+
 const getStatus = async(ballotID)=>
 {
   const client = await pool.connect();
@@ -215,9 +142,66 @@ const getStatus = async(ballotID)=>
     client.release();
   }
 }
+const castVote = async(username,positionvotes, initiativevotes)=>
+{
+ 
+ const client = await pool.connect();
+ 
+ var positionvalues =[];
+ for( let i=0; i< positionvotes.length;i++)
+ { 
+  positionvalues.push([positionvotes[i].voteType,positionvotes[i].itemID,positionvotes[i].candidateID,positionvotes[i].writein,username]);
+ }
+ var initiativevalues =[];
+ for( let i=0; i< initiativevotes.length;i++)
+ { 
+  initiativevalues.push([initiativevotes[i].voteType,initiativevotes[i].itemID,initiativevotes[i].initiativeResponse,initiativevotes[i].writein,username]);
+ }
+ try {
+  
+   await client.query('BEGIN');
+   if(positionvalues.length!=0)
+   {
+    var result = await client.query(format('INSERT INTO votes(votetype,itemid,candidateid,writein,username) VALUES %L',positionvalues));
+   }
+   if(initiativevalues.length!=0)
+   {
+     var result = await client.query(format('INSERT INTO votes(votetype,itemid,initiativeresponse,writein,username) VALUES %L',initiativevalues));
+   }
+   await client.query('COMMIT');
+   return (result.rowCount);
+ } 
+
+ catch (e) {
+
+   await client.query('ROLLBACK');
+   throw e;
+ } 
+ finally {
+   client.release()
+ }
+
+}
 
 
-
+const getBallot= async(ballotID) => 
+{
+  const client = await pool.connect();
+  try
+  {
+    const result = await client.query('SELECT * FROM ballots WHERE ballotID=($1)',[ballotID]);
+    return result.rows;
+   
+  }
+  catch(error)
+  {   console.log(error);
+      throw error;
+  }
+  finally
+  {
+    client.release();
+  }
+}
 
 
 
@@ -226,11 +210,12 @@ const getStatus = async(ballotID)=>
 // this should be the name of the function to check login, refer to index.js for return type and arguments
 module.exports = {
     getUser,
+    getBallots,
+    getBallotItems,
     getCandidates,
     getMembersandOfficers,
     castVote,
     getResults,
-    getBallotAndSociety,
-    getStatus,
-    getActiveBallots
+    getBallot,
+    getStatus
 }

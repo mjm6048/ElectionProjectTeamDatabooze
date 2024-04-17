@@ -2,54 +2,51 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-
-
-
-// function HandleLoggedIn()
-// { 
-//   const history = useNavigate();
-//   var uname = localStorage.getItem("adusername");
-//   history("/memberhome")
-// }
-
-// window.onload =()=>
-// {
-//   if (localStorage.getItem("adtoken"))
-//   { 
-//     HandleLoggedin();
-//   }
-  
-// }
-
-
-
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
   const history = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  useEffect(()=>
+  useEffect( ()=>
   {
+
+    const getBallots = async () =>
+    {
+      var token= localStorage.getItem("adtoken");
+      await axios.get("http://localhost:5001/ballots?societyID=1",{ headers: {"Authorization" : `Bearer ${token}`} })
+      .then((res) => {
+        var ballots = res.data;
+        history("/memberhome",{state: { ballots }} );
+    });
+    }
+  
     if (localStorage.getItem("adtoken"))
     {
       var uname = localStorage.getItem("adusername");
-      console.log(uname);
-      history("/memberhome",{state: { username: uname}} )
+      setIsLoggedIn(true);
+      getBallots();
+      
     }
   },[])
+
  
   async function submit(e) {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5001/users/login", {
+      let response = await axios.post("http://localhost:5001/users/login", {
           username,
           password
-        })
-        .then(response=>{
+        });
         if (response.status === 200) {
           alert("Login successful");
-          history("/memberhome",{state:{username:username}})
-          localStorage.setItem("adtoken",JSON.stringify(response.data.token));
+          var ballots =[];
+          axios.get("http://localhost:5001/ballots?societyID=1",{ headers: {"Authorization" : `Bearer ${response.data.token}`} })
+          .then((res) => {
+            history("/memberhome",{state: { res }} );
+        });
+         
+          localStorage.setItem("adtoken",response.data.token);
           localStorage.setItem("adusername",username);
           setIsLoggedIn(true);
           // Redirect to home page or do any further actions upon successful login
@@ -57,7 +54,7 @@ function Login() {
           console.log(response.status);
           alert("Invalid credentials");
         }
-      })
+      
     }
 
     catch (error) {

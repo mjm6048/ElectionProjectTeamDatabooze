@@ -1,25 +1,22 @@
 import React from 'react';
-
+import { useNavigate, useLocation } from 'react-router-dom';
 function Results(props) {
   // Access the passed state containing the results
-
-  const results = props.location.state.results.result;
-  const status =  props.location.state.results.status;
+  const navigate = useNavigate();
+  const { state } = useLocation();
+ const results = state.results.result;
+  const status  = state.results.status;
 
   // Render the results
   return (
     <div>
       <h2>Results</h2>
       <ul>
-        {results.map((result, index) => (
-          <li key={index}>{result}</li>
-        ))}
+      
       </ul>
       <h2>Results</h2>
       <ul>
-        {status.map((state, index) => (
-          <li key={index}>{state}</li>
-        ))}
+]
       </ul>
     </div>
   );

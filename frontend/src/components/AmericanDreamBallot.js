@@ -12,7 +12,13 @@ export default class AmericanDreamBallot extends React.Component{
     render(){
         return(
             <>
-            <p>This is a ballot (trust me)</p>
+                <div>
+                    <p>This is where the infromation for the ballot will do, candidates, initative ect.</p>
+                </div>
+                <div>
+                    <p>this button will either say edit or results based on if the ballot has expired yet</p>
+                    <button>Click me</button>
+                </div>
             </>
         )
     }

@@ -1,7 +1,9 @@
 const bl = require('../businesslayer');
 
 test('vote successfully cast', async () => {
-    const result = await bl.castVote('applebreeze16','position',6,'12', false);
+    const login = await bl.userExists('starbreeze10','1d707811988069ca760826861d6d63a10e8c3b7f171c4441a6472ea58c11711b');
+    console.log(login);
+    const result = await bl.castVote('starbreeze10','position',6,'12', false);
     expect(result).toBe(1);
   });
 

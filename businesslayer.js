@@ -1,29 +1,12 @@
 const dl = require("./datalayer");
 
 var loggedInUsers = [];
-loggedInUsers.push({
-  username: "starbreeze10",
-  firstname: "Judith",
-  lastname: "King",
-  passwordhash:
-    "1d707811988069ca760826861d6d63a10e8c3b7f171c4441a6472ea58c11711b",
-  roleid: 1,
-  societyid: 12
-});
 
 const userExists = async (username, password) => {
-  // hashedpassword = createHash('sha256').update(password)
-  // console.log(hashedpassword);
-  console.log("buisness layer enetered");
   try {
     user = await dl.getUser(username);
-    console.log(user);
     if (user.length != 0) {
-      console.log("length not 0");
       if (user[0].passwordhash == password) {
-        console.log("same pass");
-        // uncomment below and delete above when you've figured out what password was used -Netra
-        // if (user[0].passwordhash == hashedpassword)
         loggedInUsers.push(user[0]);
         console.log(loggedInUsers);
         return true;
@@ -37,22 +20,6 @@ const userExists = async (username, password) => {
   }
 };
 
-// const countCandidateVotes= async(candidateusername, positionID)=>
-// {
-
-//     numVotes = await dl.getPositionVotes(positionID,candidateusername);
-//     return numVotes[0].vote_count;
-// }
-
-const viewResults = async (ballotID) => {
-  positions = []; // get all positions part of the ballot
-  positions.array.forEach((position) => {
-    candidates = dl.getCandidates(position.positionID, 0);
-    candidates.forEach((candidate) => {
-      numVotes = countCandidateVotes(candidate.username, poition.positionID);
-    });
-  });
-};
 const generateSocietyStatistics = async (societyID) => {
   try {
     console.log("inside the function");
@@ -101,6 +68,5 @@ const getSystemStatistics = async () => {
 module.exports = {
   userExists,
   generateSocietyStatistics,
-  getSystemStatistics,
-  viewResults
+  getSystemStatistics
 };

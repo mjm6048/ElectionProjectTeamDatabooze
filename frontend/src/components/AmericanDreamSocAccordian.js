@@ -16,7 +16,7 @@ export default class AmericanDreamSocAccordian extends React.Component {
         }
     }
     render(){
-        const {societyName,ballots,description,courses,note} = this.state;
+        const {societyName,ballots,societyID} = this.state;
         return (
             <div className='Accordion'>
                 <Accordion>
@@ -30,7 +30,13 @@ export default class AmericanDreamSocAccordian extends React.Component {
                     </AccordionSummary>
                     {/* actual content of the accordian when expanded */}
                     <AccordionDetails>
-                        <AmericanDreamSocBallotAccordian {...ballots}/>
+                        <AmericanDreamSocBallotAccordian 
+                            ballotID = {ballots.ballotID}
+                            ballotName = {ballots.ballotName}
+                            startDate = {ballots.startDate}
+                            endDate = {ballots.endDate}
+                            societyID = {societyID}
+                        />
                     </AccordionDetails>
                     {/* button to create new ballot at bottom of accordian */}
                     <AccordionActions>

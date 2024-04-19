@@ -263,6 +263,15 @@ const createNewSociety = async(societyID, societyName, societyDescription)=>
     }
 }
 
+//for a provided SocietyID return the ballots for it.
+const getBallotForSociety = async(societyID) => {
+    try{
+        return dl.getBallotForSociety(societyID);
+    }catch(error){
+        console.log(error);
+        throw error;
+    }
+}
 
 
 
@@ -302,6 +311,7 @@ module.exports = {
     BallotExists,
     getSocietyUsers,
     createEditUser,
-    getStatus
+    getStatus,
+    getBallotForSociety
 }
 

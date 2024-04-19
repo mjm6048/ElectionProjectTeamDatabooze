@@ -40,8 +40,34 @@ export default class AmericanDreamSocAccordian extends React.Component {
             </div>
         );
     }
-    componentDidMount(){
+    /* 
+    axios.get("https://databooze-dev.webdev.gccis.rit.edu/societies", {
+        params: {
+            societyID: {societyID}
+        }
+    })
+    */
+    async componentDidMount(){
         //runs when render is in the DOM
         //get all ballots for socID
+        try {
+            axios.get("https://databooze-dev.webdev.gccis.rit.edu/ballots/:societyID", {
+                params: {
+                    societyID: this.state.societyID
+                }
+            })
+            .then(response=> { 
+                if (response.status === 200) {
+                    this.setState({
+                        ballots:response
+                    });
+                } else {
+                    console.log(response.status);
+                    alert("Unable to get ballots for society");
+                }
+           })
+        }catch(error){
+            alert("Error encountered while getting ballots");
+        }
     }
 }

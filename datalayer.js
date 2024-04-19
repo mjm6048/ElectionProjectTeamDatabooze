@@ -295,6 +295,18 @@ const createNewSociety = async(societyID, societyName, societyDescription)=>{
 
 }
 
+//for a provided socID get ballots.
+const getBallotForSociety = async(societyID)=>{
+  const client = await pool.connect();
+  try{
+    var result = await client.query("SELECT * FROM Ballots WHERE societyID = $1;",[societyID]);
+    return result.rows;
+  }catch(error){
+    console.log(error);
+    throw(error);
+  }
+}
+
 // this should be the name of the function to check login, refer to index.js for return type and arguments
 module.exports = {
     getUser,
@@ -313,4 +325,5 @@ module.exports = {
     CreateEditCandidate,
     editUser,
     createUser,
+    getBallotForSociety,
 }

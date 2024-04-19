@@ -1,18 +1,20 @@
 // BallotItem.js
 import React from 'react';
 import Candidate from './candidate';
+import '../index.css';
 
-const PositionItem = ({ positionName, PositionId, candidates, onVoteChange }) => {
+const PositionItem = ({ positionName, positionId, candidates, onVoteChange }) => {
    // Filter candidates based on currentItem's itemid
-  const filteredcandidates = candidates.find(candidate => candidate.itemid === PositionId);
+  const filteredcandidates = candidates.filter(candidate => candidate.itemid === positionId);
   const handleVoteChange = (candidateId) => {
     onVoteChange(candidateId);
   };
   return (
-    <div>
+    <div className='ballot-item'>
       <h3>{positionName}</h3>
+      <div className='candidate-container'>
       {filteredcandidates.map(candidate => (
-        <Candidate
+        <Candidate className = "candidate"
           key={candidate.candidateid}
           firstName={candidate.firstname}
           lastName={candidate.lastname}
@@ -22,6 +24,7 @@ const PositionItem = ({ positionName, PositionId, candidates, onVoteChange }) =>
           onVoteChange={() => handleVoteChange(candidate.candidateid)}
         />
       ))}
+      </div>
     </div>
   );
 };

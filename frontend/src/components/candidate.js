@@ -9,8 +9,8 @@ const Candidate = ({ firstName, lastName,titles, photoUrl, description, onVoteCh
   return (
     <div>
       <img src={photoUrl} alt={`${firstName} ${lastName}`} />
-      <h4>{`${firstName} ${lastName}`}</h4>
-      <p>{description}</p>
+      <h4 className='candidate-name'>{`${firstName} ${lastName}`}</h4>
+      <p className='candidate-details'>{description}</p>
       <button onClick={handleVoteChange}>Vote</button>
     </div>
   );

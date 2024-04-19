@@ -68,12 +68,18 @@ code {
 .ballot-item h3 {
   margin-top: 0;
 }
+.candidate-container {
+  display: flex;
+  flex-wrap: wrap; /* Allow candidates to wrap to the next line if they exceed the container width */
+  gap: 20px; /* Adjust the gap between candidates */
+
+}
 
 /* Candidate.css */
 .candidate {
   display: flex;
-  align-items: center;
-  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  padding: 10px;
 }
 
 .candidate img {

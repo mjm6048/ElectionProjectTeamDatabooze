@@ -87,8 +87,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-/* get ballotitems belonging to a ballot */
-DROP FUNCTION get_items_in_ballot;
+/* get ballotitems belonging to a ballot */np
 CREATE OR REPLACE FUNCTION get_items_in_ballot(BallotIDValue INT)
 RETURNS TABLE (
     ID INT,

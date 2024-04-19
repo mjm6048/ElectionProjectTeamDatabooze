@@ -29,7 +29,7 @@ function MemberHome(props) {
       const itemdata = await itemresponse.data;
       const candidateresponse = await  axios.get(`http://localhost:5001/candidates?ballotID=${ballotID}`,{ headers: {"Authorization" : `Bearer ${token}`} });
       const candidatedata =  await candidateresponse.data;
-      navigate('/voting', {state: { ballots: itemdata, candidates: candidatedata }});
+      navigate('/voting', {state: { ballots: itemdata, candidates: candidatedata, ballotid: ballotID }});
     } catch (error) {
       console.error('Error fetching results:', error);
     }

@@ -2,27 +2,59 @@
 import React, { useState } from 'react';
 import PositionItem from '../components/positionitem';
 import { useNavigate, useLocation } from 'react-router-dom';
-
+import axios from "axios";
 const Voting = (props) => {
-  const [formData, setFormData] = useState({});
+  const [positionVotes, setPositionVotes] = useState([]);
   const { state } = useLocation();
+  const token = localStorage.getItem('adtoken');
+  const ballotid = state.ballotid;
   const ballotItems = state.ballots;
   const candidates = state.candidates;
-  console.log(ballotItems);
-  console.log(candidates);
+
   const handleVoteChange = (positionId, candidateId) => {
-    setFormData(prevData => ({
-      ...prevData,
-      [positionId]: candidateId
-    }));
+    const existingvote = positionVotes.findIndex(vote => vote.itemID === positionId);
+    
+    if (existingvote !== -1) {
+        // If a vote exists for the same position, update it
+        setPositionVotes(prevData => {
+          const updatedData = [...prevData];
+          updatedData[existingvote] = {
+            ...updatedData[existingvote],
+            candidateID: candidateId
+          };
+          return updatedData;
+        });
+      } else {
+        // If no vote exists for the same position, add a new vote
+        setPositionVotes(prevData => ([
+          ...prevData,
+          {
+            voteType: 'position',
+            itemID: positionId,
+            candidateID: candidateId,
+            writein: ""
+          }
+        ]));
+      }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async(event) => {
+    const initiativeVotes=[];
+    event.preventDefault();
+   
+   
+  };
+  const handleSubmitVote = async(event) => {
+    const initiativeVotes=[];
+    console.log('Form data submitted:', {ballotid,positionVotes,initiativeVotes});
     event.preventDefault();
     // Here you can handle the submission of form data
-    console.log('Form data submitted:', formData);
-  };
-
+    // const response = await axios.post(`http://localhost:5001/votes`,{ headers: {"Authorization" : `Bearer ${token}`} }, {
+    //     ballotid,
+    //     positionVotes,
+    //     initiativeVotes
+    //});
+  }
   return (
     <form onSubmit={handleSubmit}>
       {ballotItems.map(ballotItem => (
@@ -34,7 +66,7 @@ const Voting = (props) => {
           onVoteChange={(candidateId) =>handleVoteChange(ballotItem.itemid, candidateId)}
         />
       ))}
-      <button type="submit">Submit Vote</button>
+      <button onClick={handleSubmitVote} type="submit">Submit Vote</button>
     </form>
   );
 };

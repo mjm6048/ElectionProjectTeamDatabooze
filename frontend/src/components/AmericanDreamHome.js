@@ -42,8 +42,8 @@ export default class AmericanDreamHome extends React.Component{
                     alert("Invalid credentials");
                 }
            })
-    }catch(error){
-        alert("Error encountered while getting societies");
-    }
+        }catch(error){
+            alert("Error encountered while getting societies");
+        }
     }
 }

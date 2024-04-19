@@ -16,7 +16,6 @@ function MemberHome(props) {
       // Make the API call with the ID parameter
       const response = await axios.get(`http://localhost:5001/results?ballotID=${ballotID}`,{ headers: {"Authorization" : `Bearer ${token}`} });
       const data = await response.data;
-      
       navigate('/results', {state: { results: data }});
     } catch (error) {
       console.error('Error fetching results:', error);
@@ -26,10 +25,11 @@ function MemberHome(props) {
   const handleVote = async (ballotID) => {
     try {
       // Make the API call with the ID parameter
-      const response = await  axios.get(`http://localhost:5001/ballotitems?ballotID=${ballotID}`,{ headers: {"Authorization" : `Bearer ${token}`} });
-      const data = await response.data;
-      
-      navigate('/voting', {state: { ballots: data }});
+      const itemresponse = await  axios.get(`http://localhost:5001/ballotitems?ballotID=${ballotID}`,{ headers: {"Authorization" : `Bearer ${token}`} });
+      const itemdata = await itemresponse.data;
+      const candidateresponse = await  axios.get(`http://localhost:5001/candidates?ballotID=${ballotID}`,{ headers: {"Authorization" : `Bearer ${token}`} });
+      const candidatedata =  await candidateresponse.data;
+      navigate('/voting', {state: { ballots: itemdata, candidates: candidatedata }});
     } catch (error) {
       console.error('Error fetching results:', error);
     }
@@ -51,23 +51,37 @@ function MemberHome(props) {
     <div>
       <h2>Home</h2>
       <div>
-      <div>
-      {ballots.map((ballot, index) => (
-        <Ballot
-          key={index}
-          name={ballot.ballotname}
-          isActive={ballot.isactive}
-          onVote={() => handleVote(ballot.ballotid)} // You need to implement handleVote
-          onViewResults={() => handleViewResults(ballot.ballotid)} // You need to implement handleViewResults
-        />
-      ))}
+      {ballots.map((ballot, index) => {
+         if (ballot.ballotstatus === 'active') {
+          return (
+            <Ballot
+              key={index}
+              name={ballot.ballotname}
+              status={ballot.ballotstatus}
+              onVote={() => handleVote(ballot.ballotid)} // You need to implement handleVote
+              onViewStatus={() => handleViewStatus(ballot.ballotid)} // You need to implement handleViewResults
+            />
+          );
+        } else if (ballot.ballotstatus === 'completed') {
+          return (
+            <Ballot
+              key={index}
+              name={ballot.ballotname}
+              status={ballot.ballotstatus}
+              onViewResults={() => handleViewResults(ballot.ballotid)} // You need to implement handleViewResults
+            />
+          );
+        } 
+        else {
+          return null; // Don't render the ballot if status is 'not started'
+        }
+      })}
+
     </div>
       </div>
 
 
-    
-    </div>
-  );
+    );
 }
 
 export default MemberHome;

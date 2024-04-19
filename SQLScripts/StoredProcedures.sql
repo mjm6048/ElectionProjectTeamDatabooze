@@ -41,12 +41,12 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-/*get active ballots of a society*/
-CREATE OR REPLACE FUNCTION GetBallotsWithIsActive(IN SocietyIDValue INT)
+/*get  ballots of a society*/
+CREATE OR REPLACE FUNCTION GetBallotsWithStatus(SocietyIDValue INT)
 RETURNS TABLE (
     ballotID INT,
-    ballotName varchar(50),
-    isActive BOOLEAN
+    ballotName VARCHAR(50),
+    ballotStatus VARCHAR(20)
     -- Add other fields from the ballot table as needed
 ) AS $$
 BEGIN
@@ -55,9 +55,10 @@ BEGIN
         b.ballotID, 
         b.ballotName,
         CASE 
-            WHEN CURRENT_DATE BETWEEN b.startDate AND b.endDate THEN TRUE
-            ELSE FALSE
-        END AS isActive
+            WHEN CURRENT_DATE > b.endDate THEN 'completed'::VARCHAR(20)
+            WHEN CURRENT_DATE BETWEEN b.startDate AND b.endDate THEN 'active'::VARCHAR(20)
+            ELSE 'not started'::VARCHAR(20)
+        END AS ballotStatus
     FROM 
         ballots b
     JOIN 
@@ -66,6 +67,7 @@ BEGIN
         b.societyID = SocietyIDValue;
 END;
 $$ LANGUAGE plpgsql;
+
 
 
 CREATE OR REPLACE FUNCTION get_ballots_in_society(SocietyIDValue INT)
@@ -86,14 +88,16 @@ END;
 $$ LANGUAGE plpgsql;
 
 /* get ballotitems belonging to a ballot */
+DROP FUNCTION get_items_in_ballot;
 CREATE OR REPLACE FUNCTION get_items_in_ballot(BallotIDValue INT)
 RETURNS TABLE (
     ID INT,
-    Type BALLOTITEMTYPE
+    Type BALLOTITEMTYPE,
+    name varchar(50)
 ) AS $$
 BEGIN
     RETURN QUERY
-    SELECT itemID as ID, itemType as Type
+    SELECT itemID as ID, itemType as Type, itemname as name
     FROM BallotItem
     WHERE ballotID = BallotIDValue;
 END;

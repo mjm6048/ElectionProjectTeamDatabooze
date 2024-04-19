@@ -47,7 +47,7 @@ app.get('/ballots', async (req, res) => {
             req.headers
                 .authorization.split(' ')[1];
         //Authorization: 'Bearer TOKEN'
-        const {societyID} = req.query;
+
         if (!token) {
             res.status(600)
                 .json(
@@ -59,8 +59,12 @@ app.get('/ballots', async (req, res) => {
         }
         //Decoding the token
         const decodedToken = jwt.verify(token, "dean");
+        if (decodedToken == null)
+        {
+            res.status(501).json("Invalid token");
+        }
         username = decodedToken.username;
-        result = await bl.getBallots(societyID,username);
+        result = await bl.getBallots(username);
         if(result){
             if(result == -1)
             {
@@ -75,7 +79,7 @@ app.get('/ballots', async (req, res) => {
     }
     catch(e){
         console.log(e);
-        res.status(500).json("Internal server error");
+        res.status(500).json("Internal server error ");
     }
 
 });

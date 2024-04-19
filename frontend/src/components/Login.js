@@ -14,7 +14,7 @@ function Login() {
     const getBallots = async () =>
     {
       var token= localStorage.getItem("adtoken");
-      await axios.get("http://localhost:5001/ballots?societyID=1",{ headers: {"Authorization" : `Bearer ${token}`} })
+      await axios.get("http://localhost:5001/ballots",{ headers: {"Authorization" : `Bearer ${token}`} })
       .then((res) => {
         var ballots = res.data;
         history("/memberhome",{state: { ballots }} );
@@ -41,7 +41,7 @@ function Login() {
         if (response.status === 200) {
           alert("Login successful");
           var ballots =[];
-          axios.get("http://localhost:5001/ballots?societyID=1",{ headers: {"Authorization" : `Bearer ${response.data.token}`} })
+          axios.get("http://localhost:5001/ballots",{ headers: {"Authorization" : `Bearer ${response.data.token}`} })
           .then((res) => {
             history("/memberhome",{state: { res }} );
         });

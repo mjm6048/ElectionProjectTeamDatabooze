@@ -49,27 +49,19 @@ catch(error)
 
 }
 
-const getBallots =async(societyID,username)=>
+const getBallots =async(username)=>
 {
     try
     {       
         var user = loggedInUsers.find(users => users.username== username);
+
         if (user == null)
         {
             return 0;
         }
-          if (societyID==user.societyid)
-        {
-            // check if ballot votes has already been casted from ballots_users
-            var ballots = await dl.getBallots(societyID);
-            
-            
-            return ballots;
-        }
-        else
-        {
-            return -1;
-        }
+        // check if ballot votes has already been casted from ballots_users
+        var ballots = await dl.getBallots(user.societyid);            
+        return ballots;
 }
 catch(error)
 {
@@ -272,7 +264,7 @@ const castVote = async(username,ballotID, positionvotes, initiativevotes) =>
             return 0;
         }
         var ballot = await dl.getBallot(ballotID);
-        var current = Date.parse('2001-08-21');
+        var current = new Date();
         if (ballot === null) {
             return -1;
           }

@@ -29,10 +29,11 @@ const getUser = async(username)=> {
     client.release();
   }
 }
+
 const getBallots=async(societyID)=>
 {  const client = await pool.connect();
   try{
-    const result = await client.query('select * from GetBallotsWithIsActive($1)', [societyID]);
+    const result = await client.query('select * from GetBallotsWithStatus($1)', [societyID]);
     if(result.rows.length === 0){
       return null;
     }else{
@@ -102,7 +103,7 @@ const getCandidates = async(ballotID)=> {
         const client = await pool.connect();
         try
         {
-          const result = await client.query('SELECT DISTINCT sp2.ID, sp1.candidateid, sp1.firstname, sp1.lastname, sp1.num_votes from (select * from get_items_in_ballot($1)) as sp2 JOIN (select * from count_position_votes()) as sp1 ON sp2.ID = sp1.ID ORDER BY sp2.ID;', [ballotID]);
+          const result = await client.query('SELECT DISTINCT sp2.ID, sp2.name, sp2.type, sp1.candidateid, sp1.firstname, sp1.lastname, sp1.num_votes from (select * from get_items_in_ballot($1)) as sp2 JOIN (select * from count_position_votes()) as sp1 ON sp2.ID = sp1.ID ORDER BY sp2.ID;', [ballotID]);
           return result.rows;
         }
         catch(error)

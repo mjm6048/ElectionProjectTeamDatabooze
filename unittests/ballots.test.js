@@ -1,5 +1,5 @@
 import * as utils from './utils.js';
-
+const bl = require('../businesslayer');
 test(`Name cannot be null or empty spaces`, () => {
     const result = utils.isValidBallot({ name: " ", description: "dfsdfgsd", startDate: "1.10.2024", endDate: "2.10.2024", societyID: 12 });
     expect(result).toBe(false);
@@ -31,3 +31,4 @@ test(`Valid Ballot`, () => {
     expect(result).toBe(true);
 
 });
+

@@ -1,50 +1,42 @@
 import React, { useEffect, useState } from 'react';
-import Chart from 'chart.js/auto';
-
-const ItemResult = ({ data }) => {
-  const [chart, setChart] = useState(null);
-
-  useEffect(() => {
-    if (data && data.result) {
-      const ctx = document.getElementById('myChart');
-      const labels = [];
-      const percentages = [];
-
-      // Calculate percentage for each candidate
-      const totalVotes = data.result.reduce((acc, curr) => acc + parseInt(curr.voted), 0);
-      data.result.forEach(candidate => {
-        const percentage = (parseInt(candidate.voted) / totalVotes) * 100;
-        // Get candidate name
-        labels.push(`Candidate ${candidate.id}`);
-        percentages.push(percentage.toFixed(2));
+import { PieChart } from '@mui/x-charts/PieChart';
+const ItemResult = ({data, id}) => {
+const resultsdata = [];
+    if (data) {
+        data.forEach(vote => {
+      
+        if(vote.type == 'position'){
+        const candidatename = vote.firstname + " " + vote.lastname;
+        resultsdata.push({value:parseInt(vote.num_votes), label:candidatename});
+        }
+        else
+        { const intitiativeResponse =  vote.intitiativeResponse;
+          resultsdata.push({value:parseInt(vote.num_votes), label:intitiativeResponse});
+        }
       });
-
-      // Create the chart
-      if (ctx) {
-        const newChart = new Chart(ctx, {
-          type: 'pie',
-          data: {
-            labels: labels,
-            datasets: [{
-              data: percentages,
-              backgroundColor: [
-                'red', 'blue', 'green', 'orange', 'purple' // Add more colors if needed
-              ]
-            }]
-          },
-          options: {
-            responsive: true
-          }
-        });
-        setChart(newChart);
-      }
-    }
-  }, [data]);
-
-  return (
+    };
+return (
     <div>
-      <canvas id="myChart" width="400" height="400"></canvas>
-      <div id ="status">Status</div>
+      <h2>Results</h2>
+      <h3>{id}</h3>
+
+<PieChart
+  series={[
+    {
+      data: resultsdata,
+      innerRadius: 30,
+      outerRadius: 100,
+      paddingAngle: 5,
+      cornerRadius: 5,
+      startAngle: -90,
+      endAngle: 180,
+      cx: 150,
+      cy: 150,
+    }
+  ]}
+  width={500}
+  height={300}
+/>
     </div>
   );
 };

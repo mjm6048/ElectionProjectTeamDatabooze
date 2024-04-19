@@ -1,5 +1,5 @@
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1,'2000 Steering Committee Elections','2000-04-20','2000-05-21',1);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (2,'2001 Board Elections','2001-07-21','2001-09-12',1);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (2,'2024 Board Elections','2024-03-21','2024-09-12',1);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (3,'2002 Council Member Elections','2002-02-22','2002-04-03',1);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (4,'2003 Executive Board Elections','2003-10-22','2003-12-06',1);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (5,'2004 Officer Appointments','2004-05-20','2004-07-17',1);
@@ -24,7 +24,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (24,'2023 Management Elections','2023-03-22','2023-05-15',1);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (25,'2024 Chairperson Elections','2024-10-26','2024-12-19',1);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (26,'2000 Board Member Elections','2000-05-03','2000-06-12',2);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (27,'2001 Executive Committee Elections','2001-01-30','2001-03-28',2);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (27,'2024 Executive Committee Elections','2024-01-30','2024-03-28',2);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (28,'2002 Presidential Elections','2002-05-16','2002-07-05',2);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (29,'2003 Director General Elections','2003-08-17','2003-09-30',2);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (30,'2004 Executive Committee Elections','2004-04-13','2004-05-16',2);
@@ -49,7 +49,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (49,'2023 Directorship Elections','2023-09-09','2023-11-08',2);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (50,'2024 Directorship Elections','2024-09-26','2024-11-08',2);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (51,'2000 Committee Elections','2000-02-26','2000-04-06',3);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (52,'2001 Governing Body Elections','2001-01-07','2001-02-13',3);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (52,'2024 Governing Body Elections','2024-01-07','2024-02-13',3);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (53,'2002 Trustee Elections','2002-03-13','2002-04-15',3);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (54,'2003 Management Elections','2003-11-20','2003-12-28',3);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (55,'2004 Council Presidency Elections','2004-04-30','2004-06-25',3);
@@ -74,7 +74,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (74,'2023 Governing Body Elections','2023-07-26','2023-08-30',3);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (75,'2024 Director Elections','2024-06-13','2024-07-31',3);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (76,'2000 Committee Chairperson Elections','2000-07-23','2000-08-26',4);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (77,'2001 Committee Elections','2001-01-31','2001-03-15',4);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (77,'2024 Committee Elections','2024-01-31','2024-03-15',4);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (78,'2002 Trustee Elections','2002-07-15','2002-09-05',4);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (79,'2003 Committee Chair Elections','2003-09-24','2003-10-30',4);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (80,'2004 Presidential Elections','2004-09-08','2004-10-21',4);
@@ -98,8 +98,8 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (98,'2022 Council Presidency Elections','2022-07-26','2022-08-26',4);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (99,'2023 Steering Committee Elections','2023-08-04','2023-09-04',4);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (100,'2024 Executive Committee Elections','2024-08-10','2024-09-13',4);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (101,'2000 Leadership Elections','2000-11-28','2001-01-14',5);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (102,'2001 Executive Elections','2001-12-14','2002-01-25',5);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (101,'2000 Leadership Elections','2000-11-28','2024-01-14',5);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (102,'2024 Executive Elections','2024-12-14','2002-01-25',5);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (103,'2002 Committee Chair Elections','2002-12-21','2003-01-28',5);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (104,'2003 Board Chair Elections','2003-05-27','2003-07-13',5);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (105,'2004 Officer Selection','2004-05-24','2004-07-08',5);
@@ -124,7 +124,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (124,'2023 Committee Chair Elections','2023-05-07','2023-07-02',5);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (125,'2024 Committee Chairperson Elections','2024-06-25','2024-08-10',5);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (126,'2000 Chairperson Elections','2000-04-10','2000-05-18',6);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (127,'2001 Committee Chairperson Elections','2001-04-28','2001-06-01',6);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (127,'2024 Committee Chairperson Elections','2024-04-28','2024-06-01',6);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (128,'2002 Committee Chairperson Selection','2002-03-15','2002-05-06',6);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (129,'2003 Committee Chairperson Selection','2003-09-30','2003-11-20',6);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (130,'2004 Steering Committee Elections','2004-02-26','2004-04-09',6);
@@ -149,7 +149,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (149,'2023 Leadership Elections','2023-11-28','2023-12-30',6);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (150,'2024 Officer Selection','2024-08-04','2024-09-10',6);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (151,'2000 Councilor Elections','2000-03-12','2000-05-07',7);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (152,'2001 Executive Elections','2001-02-02','2001-03-04',7);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (152,'2024 Executive Elections','2024-02-02','2024-03-04',7);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (153,'2002 Committee Elections','2002-10-28','2002-12-19',7);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (154,'2003 Management Elections','2003-12-12','2004-01-24',7);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (155,'2004 Executive Elections','2004-04-06','2004-05-07',7);
@@ -174,7 +174,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (174,'2023 Leadership Elections','2023-10-18','2023-12-09',7);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (175,'2024 Executive Elections','2024-04-18','2024-05-20',7);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (176,'2000 Executive Board Elections','2000-01-28','2000-03-02',8);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (177,'2001 Executive Committee Elections','2001-04-14','2001-05-15',8);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (177,'2024 Executive Committee Elections','2024-04-14','2024-05-15',8);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (178,'2002 President Selection','2002-10-10','2002-11-15',8);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (179,'2003 Director General Elections','2003-06-27','2003-08-12',8);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (180,'2004 Executive Board Elections','2004-04-21','2004-06-16',8);
@@ -199,7 +199,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (199,'2023 Executive Elections','2023-12-01','2024-01-04',8);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (200,'2024 Executive Elections','2024-05-06','2024-06-07',8);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (201,'2000 Director Elections','2000-09-03','2000-10-20',9);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (202,'2001 Trustee Elections','2001-08-30','2001-10-11',9);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (202,'2024 Trustee Elections','2024-08-30','2024-10-11',9);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (203,'2002 Director Elections','2002-08-07','2002-09-14',9);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (204,'2003 Directorship Elections','2003-01-09','2003-03-05',9);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (205,'2004 Council Member Elections','2004-09-13','2004-10-19',9);
@@ -224,7 +224,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (224,'2023 Officer Appointments','2023-03-23','2023-05-21',9);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (225,'2024 Committee Elections','2024-11-18','2025-01-14',9);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (226,'2000 Committee Elections','2000-10-17','2000-11-23',10);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (227,'2001 President Selection','2001-06-27','2001-08-17',10);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (227,'2024 President Selection','2024-06-27','2024-08-17',10);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (228,'2002 Board Elections','2002-05-30','2002-06-30',10);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (229,'2003 Committee Chairperson Elections','2003-10-22','2003-12-12',10);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (230,'2004 Council Elections','2004-11-23','2005-01-14',10);
@@ -248,8 +248,8 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (248,'2022 Executive Committee Elections','2022-07-05','2022-08-28',10);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (249,'2023 Leadership Elections','2023-03-12','2023-05-06',10);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (250,'2024 Councilor Elections','2024-05-23','2024-07-13',10);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (251,'2000 Committee Chairperson Selection','2000-12-23','2001-02-04',11);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (252,'2001 President Selection','2001-11-10','2002-01-01',11);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (251,'2000 Committee Chairperson Selection','2000-12-23','2024-02-04',11);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (252,'2024 President Selection','2024-11-10','2002-01-01',11);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (253,'2002 Committee Chairperson Elections','2002-02-04','2002-03-07',11);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (254,'2003 Committee Elections','2003-02-16','2003-04-10',11);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (255,'2004 Council Member Elections','2004-03-20','2004-04-24',11);
@@ -274,7 +274,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (274,'2023 Executive Elections','2023-05-24','2023-07-16',11);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (275,'2024 Board Elections','2024-07-23','2024-09-17',11);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (276,'2000 Executive Elections','2000-02-28','2000-04-16',12);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (277,'2001 Secretary-General Elections','2001-08-31','2001-10-28',12);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (277,'2024 Secretary-General Elections','2024-08-31','2024-10-28',12);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (278,'2002 Committee Chair Elections','2002-11-06','2002-12-09',12);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (279,'2003 Committee Chairperson Selection','2003-09-25','2003-11-05',12);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (280,'2004 Presidential Elections','2004-09-17','2004-10-18',12);
@@ -299,7 +299,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (299,'2023 Governing Body Elections','2023-07-02','2023-08-05',12);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (300,'2024 Board Elections','2024-12-09','2025-02-04',12);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (301,'2000 Board Member Elections','2000-05-04','2000-06-23',13);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (302,'2001 Trustee Elections','2001-09-04','2001-10-21',13);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (302,'2024 Trustee Elections','2024-09-04','2024-10-21',13);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (303,'2002 Executive Board Elections','2002-02-25','2002-04-13',13);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (304,'2003 Director General Elections','2003-07-09','2003-08-24',13);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (305,'2004 Board Member Elections','2004-08-21','2004-10-09',13);
@@ -324,7 +324,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (324,'2023 Director General Elections','2023-08-09','2023-09-16',13);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (325,'2024 Council Elections','2024-03-08','2024-04-09',13);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (326,'2000 Executive Director Elections','2000-09-26','2000-11-04',14);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (327,'2001 Committee Chairperson Selection','2001-09-18','2001-11-08',14);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (327,'2024 Committee Chairperson Selection','2024-09-18','2024-11-08',14);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (328,'2002 Governing Body Elections','2002-11-21','2003-01-07',14);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (329,'2003 Secretary-General Elections','2003-02-04','2003-03-18',14);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (330,'2004 Executive Committee Elections','2004-06-14','2004-08-05',14);
@@ -349,7 +349,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (349,'2023 Officer Appointments','2023-12-10','2024-01-27',14);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (350,'2024 Presidential Elections','2024-05-08','2024-06-19',14);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (351,'2000 Committee Elections','2000-07-25','2000-09-04',15);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (352,'2001 Board Elections','2001-08-16','2001-10-02',15);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (352,'2024 Board Elections','2024-08-16','2024-10-02',15);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (353,'2002 Executive Committee Elections','2002-05-26','2002-07-19',15);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (354,'2003 Executive Board Elections','2003-09-02','2003-11-01',15);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (355,'2004 Trustee Elections','2004-07-31','2004-09-21',15);
@@ -374,7 +374,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (374,'2023 Board Member Elections','2023-11-20','2024-01-12',15);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (375,'2024 Council Presidency Elections','2024-10-15','2024-11-22',15);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (376,'2000 Committee Chairperson Selection','2000-02-06','2000-03-31',16);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (377,'2001 Officer Appointments','2001-04-23','2001-06-10',16);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (377,'2024 Officer Appointments','2024-04-23','2024-06-10',16);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (378,'2002 Board Elections','2002-09-27','2002-11-24',16);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (379,'2003 Committee Elections','2003-02-05','2003-03-10',16);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (380,'2004 Council Elections','2004-07-10','2004-09-07',16);
@@ -399,7 +399,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (399,'2023 Board Elections','2023-05-22','2023-07-11',16);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (400,'2024 Council Presidency Elections','2024-06-29','2024-08-08',16);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (401,'2000 President Selection','2000-09-20','2000-10-30',17);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (402,'2001 Officer Appointments','2001-01-26','2001-03-27',17);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (402,'2024 Officer Appointments','2024-01-26','2024-03-27',17);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (403,'2002 Council Presidency Elections','2002-12-10','2003-02-06',17);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (404,'2003 Chairperson Elections','2003-06-21','2003-07-31',17);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (405,'2004 Governing Body Elections','2004-06-07','2004-07-28',17);
@@ -424,7 +424,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (424,'2023 Officer Selection','2023-09-11','2023-11-01',17);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (425,'2024 Officer Selection','2024-03-04','2024-05-03',17);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (426,'2000 Board Member Elections','2000-01-07','2000-03-07',18);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (427,'2001 President Selection','2001-01-11','2001-03-05',18);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (427,'2024 President Selection','2024-01-11','2024-03-05',18);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (428,'2002 Steering Committee Elections','2002-07-21','2002-08-30',18);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (429,'2003 Chairperson Elections','2003-07-21','2003-09-10',18);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (430,'2004 Council Member Elections','2004-04-14','2004-05-30',18);
@@ -449,7 +449,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (449,'2023 Executive Director Elections','2023-10-08','2023-11-29',18);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (450,'2024 Board Chair Elections','2024-10-19','2024-11-30',18);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (451,'2000 Steering Committee Elections','2000-07-09','2000-08-19',19);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (452,'2001 Committee Chairperson Elections','2001-01-11','2001-03-05',19);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (452,'2024 Committee Chairperson Elections','2024-01-11','2024-03-05',19);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (453,'2002 Board Elections','2002-05-11','2002-07-07',19);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (454,'2003 Chairperson Elections','2003-04-20','2003-05-22',19);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (455,'2004 Executive Elections','2004-08-07','2004-10-01',19);
@@ -474,7 +474,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (474,'2023 Governing Body Elections','2023-08-31','2023-10-24',19);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (475,'2024 Chairperson Selection','2024-04-27','2024-06-26',19);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (476,'2000 Executive Director Elections','2000-01-20','2000-02-23',20);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (477,'2001 Officer Selection','2001-10-14','2001-11-28',20);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (477,'2024 Officer Selection','2024-10-14','2024-11-28',20);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (478,'2002 Council Presidency Elections','2002-03-19','2002-05-07',20);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (479,'2003 Committee Chair Elections','2003-06-25','2003-08-21',20);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (480,'2004 Officer Selection','2004-08-05','2004-09-20',20);
@@ -499,7 +499,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (499,'2023 Governing Body Elections','2023-12-07','2024-01-30',20);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (500,'2024 Trustee Elections','2024-04-30','2024-05-30',20);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (501,'2000 Leadership Elections','2000-08-11','2000-10-08',21);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (502,'2001 Executive Committee Elections','2001-04-14','2001-05-15',21);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (502,'2024 Executive Committee Elections','2024-04-14','2024-05-15',21);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (503,'2002 Committee Chairperson Selection','2002-01-26','2002-03-16',21);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (504,'2003 Trustee Elections','2003-09-08','2003-10-14',21);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (505,'2004 Steering Committee Elections','2004-07-20','2004-08-25',21);
@@ -524,7 +524,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (524,'2023 Executive Elections','2023-03-27','2023-05-23',21);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (525,'2024 Executive Elections','2024-10-31','2024-12-23',21);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (526,'2000 Governing Body Elections','2000-09-27','2000-11-04',22);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (527,'2001 Governing Body Elections','2001-11-08','2002-01-01',22);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (527,'2024 Governing Body Elections','2024-11-08','2002-01-01',22);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (528,'2002 Council Member Elections','2002-09-15','2002-11-06',22);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (529,'2003 Council Elections','2003-10-02','2003-12-01',22);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (530,'2004 Council Presidency Elections','2004-06-15','2004-08-08',22);
@@ -549,7 +549,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (549,'2023 Governing Body Elections','2023-01-18','2023-03-05',22);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (550,'2024 Director Elections','2024-12-21','2025-01-22',22);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (551,'2000 Officer Appointments','2000-07-30','2000-09-04',23);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (552,'2001 Council Member Elections','2001-12-21','2002-02-07',23);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (552,'2024 Council Member Elections','2024-12-21','2002-02-07',23);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (553,'2002 Chairperson Selection','2002-04-01','2002-05-13',23);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (554,'2003 Director Elections','2003-02-25','2003-04-15',23);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (555,'2004 Management Elections','2004-12-12','2005-01-17',23);
@@ -574,7 +574,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (574,'2023 Chairperson Selection','2023-09-12','2023-10-18',23);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (575,'2024 Director Elections','2024-03-08','2024-04-23',23);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (576,'2000 Steering Committee Elections','2000-10-19','2000-12-15',24);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (577,'2001 Executive Board Elections','2001-07-06','2001-08-23',24);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (577,'2024 Executive Board Elections','2024-07-06','2024-08-23',24);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (578,'2002 Committee Chair Elections','2002-04-07','2002-05-12',24);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (579,'2003 Director Elections','2003-05-08','2003-06-15',24);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (580,'2004 Executive Committee Elections','2004-02-14','2004-03-26',24);
@@ -599,7 +599,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (599,'2023 Directorship Elections','2023-01-20','2023-03-10',24);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (600,'2024 Presidential Elections','2024-08-20','2024-10-09',24);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (601,'2000 Board Member Elections','2000-02-28','2000-04-05',25);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (602,'2001 Committee Chair Elections','2001-10-07','2001-11-20',25);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (602,'2024 Committee Chair Elections','2024-10-07','2024-11-20',25);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (603,'2002 Committee Elections','2002-02-17','2002-04-13',25);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (604,'2003 Committee Chairperson Selection','2003-12-09','2004-01-12',25);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (605,'2004 Officer Appointments','2004-04-13','2004-06-04',25);
@@ -624,7 +624,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (624,'2023 Council Presidency Elections','2023-08-03','2023-09-19',25);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (625,'2024 Governing Body Elections','2024-09-21','2024-11-10',25);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (626,'2000 Director Elections','2000-06-06','2000-07-09',26);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (627,'2001 Board Chair Elections','2001-09-12','2001-10-23',26);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (627,'2024 Board Chair Elections','2024-09-12','2024-10-23',26);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (628,'2002 Chairperson Elections','2002-03-21','2002-04-30',26);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (629,'2003 Executive Director Elections','2003-09-29','2003-11-07',26);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (630,'2004 Executive Elections','2004-08-17','2004-10-10',26);
@@ -649,7 +649,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (649,'2023 Officer Selection','2023-12-29','2024-02-08',26);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (650,'2024 Directorship Elections','2024-05-05','2024-06-06',26);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (651,'2000 Executive Elections','2000-09-25','2000-11-09',27);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (652,'2001 Council Elections','2001-11-16','2001-12-26',27);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (652,'2024 Council Elections','2024-11-16','2024-12-26',27);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (653,'2002 Officer Selection','2002-03-22','2002-05-07',27);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (654,'2003 Governing Body Elections','2003-12-03','2004-01-27',27);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (655,'2004 Committee Chair Elections','2004-07-10','2004-09-07',27);
@@ -674,7 +674,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (674,'2023 Trustee Elections','2023-04-15','2023-05-24',27);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (675,'2024 President Selection','2024-08-05','2024-09-11',27);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (676,'2000 Director General Elections','2000-11-02','2000-12-12',28);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (677,'2001 Committee Chairperson Elections','2001-04-15','2001-06-01',28);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (677,'2024 Committee Chairperson Elections','2024-04-15','2024-06-01',28);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (678,'2002 Executive Elections','2002-10-22','2002-12-16',28);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (679,'2003 Secretary-General Elections','2003-04-13','2003-05-30',28);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (680,'2004 Executive Committee Elections','2004-04-02','2004-06-01',28);
@@ -698,8 +698,8 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (698,'2022 Leadership Elections','2022-04-30','2022-06-27',28);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (699,'2023 President Selection','2023-09-11','2023-11-08',28);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (700,'2024 Steering Committee Elections','2024-05-05','2024-06-27',28);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (701,'2000 Executive Elections','2000-12-26','2001-01-28',29);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (702,'2001 Council Member Elections','2001-10-09','2001-11-20',29);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (701,'2000 Executive Elections','2000-12-26','2024-01-28',29);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (702,'2024 Council Member Elections','2024-10-09','2024-11-20',29);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (703,'2002 Council Member Elections','2002-06-01','2002-07-24',29);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (704,'2003 Executive Board Elections','2003-05-30','2003-07-19',29);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (705,'2004 Council Member Elections','2004-10-10','2004-11-19',29);
@@ -724,7 +724,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (724,'2023 Board Chair Elections','2023-01-10','2023-03-06',29);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (725,'2024 Director Elections','2024-09-20','2024-10-20',29);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (726,'2000 Chairperson Selection','2000-10-11','2000-11-25',30);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (727,'2001 Board Member Elections','2001-01-01','2001-02-27',30);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (727,'2024 Board Member Elections','2024-01-01','2024-02-27',30);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (728,'2002 Board Elections','2002-06-06','2002-07-25',30);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (729,'2003 Executive Committee Elections','2003-10-03','2003-11-21',30);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (730,'2004 Committee Chairperson Selection','2004-10-02','2004-11-02',30);
@@ -749,7 +749,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (749,'2023 Executive Board Elections','2023-12-13','2024-01-20',30);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (750,'2024 Council Presidency Elections','2024-10-10','2024-12-07',30);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (751,'2000 Director General Elections','2000-07-20','2000-09-03',31);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (752,'2001 Management Elections','2001-08-16','2001-10-14',31);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (752,'2024 Management Elections','2024-08-16','2024-10-14',31);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (753,'2002 Steering Committee Elections','2002-10-28','2002-12-16',31);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (754,'2003 Committee Chair Elections','2003-10-29','2003-12-10',31);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (755,'2004 Presidential Elections','2004-08-01','2004-09-04',31);
@@ -774,7 +774,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (774,'2023 Committee Chairperson Elections','2023-01-18','2023-03-05',31);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (775,'2024 President Selection','2024-03-02','2024-04-29',31);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (776,'2000 Executive Board Elections','2000-09-05','2000-10-27',32);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (777,'2001 Chairperson Elections','2001-09-12','2001-10-14',32);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (777,'2024 Chairperson Elections','2024-09-12','2024-10-14',32);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (778,'2002 Officer Selection','2002-11-08','2002-12-17',32);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (779,'2003 Chairperson Selection','2003-10-23','2003-12-11',32);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (780,'2004 Councilor Elections','2004-04-08','2004-05-25',32);
@@ -799,7 +799,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (799,'2023 Executive Committee Elections','2023-11-23','2024-01-17',32);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (800,'2024 Governing Body Elections','2024-07-08','2024-08-20',32);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (801,'2000 Secretary-General Elections','2000-04-01','2000-05-16',33);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (802,'2001 Committee Chairperson Selection','2001-07-05','2001-08-25',33);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (802,'2024 Committee Chairperson Selection','2024-07-05','2024-08-25',33);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (803,'2002 Director General Elections','2002-03-23','2002-05-06',33);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (804,'2003 Council Presidency Elections','2003-10-30','2003-12-12',33);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (805,'2004 Officer Selection','2004-09-02','2004-10-29',33);
@@ -824,7 +824,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (824,'2023 Officer Appointments','2023-03-17','2023-04-18',33);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (825,'2024 Leadership Elections','2024-04-13','2024-06-01',33);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (826,'2000 Leadership Elections','2000-10-31','2000-12-19',34);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (827,'2001 Management Elections','2001-12-09','2002-02-06',34);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (827,'2024 Management Elections','2024-12-09','2002-02-06',34);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (828,'2002 Board Elections','2002-05-17','2002-07-05',34);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (829,'2003 Chairperson Elections','2003-12-14','2004-02-08',34);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (830,'2004 Councilor Elections','2004-08-04','2004-09-08',34);
@@ -849,7 +849,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (849,'2023 Councilor Elections','2023-09-01','2023-10-10',34);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (850,'2024 Officer Appointments','2024-05-20','2024-06-27',34);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (851,'2000 Governing Body Elections','2000-10-25','2000-12-16',35);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (852,'2001 President Selection','2001-06-27','2001-07-27',35);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (852,'2024 President Selection','2024-06-27','2024-07-27',35);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (853,'2002 Committee Chairperson Selection','2002-10-27','2002-12-03',35);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (854,'2003 Executive Committee Elections','2003-05-04','2003-06-25',35);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (855,'2004 Trustee Elections','2004-02-26','2004-04-07',35);
@@ -873,8 +873,8 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (873,'2022 Steering Committee Elections','2022-03-22','2022-05-17',35);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (874,'2023 President Selection','2023-05-28','2023-07-05',35);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (875,'2024 Presidential Elections','2024-12-25','2025-01-31',35);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (876,'2000 Executive Committee Elections','2000-12-20','2001-02-14',36);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (877,'2001 Executive Committee Elections','2001-01-04','2001-02-06',36);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (876,'2000 Executive Committee Elections','2000-12-20','2024-02-14',36);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (877,'2024 Executive Committee Elections','2024-01-04','2024-02-06',36);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (878,'2002 Officer Selection','2002-02-06','2002-03-21',36);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (879,'2003 Governing Body Elections','2003-05-31','2003-07-15',36);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (880,'2004 Board Member Elections','2004-01-07','2004-02-29',36);
@@ -899,7 +899,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (899,'2023 Committee Elections','2023-04-16','2023-05-31',36);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (900,'2024 Committee Chair Elections','2024-03-07','2024-05-02',36);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (901,'2000 Steering Committee Elections','2000-04-16','2000-05-30',37);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (902,'2001 Executive Elections','2001-09-29','2001-11-20',37);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (902,'2024 Executive Elections','2024-09-29','2024-11-20',37);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (903,'2002 Committee Elections','2002-12-24','2003-01-25',37);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (904,'2003 Committee Chairperson Selection','2003-12-06','2004-01-21',37);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (905,'2004 Executive Board Elections','2004-09-14','2004-10-27',37);
@@ -924,7 +924,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (924,'2023 Council Elections','2023-08-09','2023-09-12',37);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (925,'2024 Committee Chair Elections','2024-12-30','2025-02-23',37);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (926,'2000 Director General Elections','2000-06-12','2000-07-16',38);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (927,'2001 Executive Committee Elections','2001-06-09','2001-08-07',38);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (927,'2024 Executive Committee Elections','2024-06-09','2024-08-07',38);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (928,'2002 Chairperson Elections','2002-03-02','2002-04-14',38);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (929,'2003 Director General Elections','2003-08-24','2003-09-26',38);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (930,'2004 Committee Elections','2004-09-03','2004-10-06',38);
@@ -948,8 +948,8 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (948,'2022 Secretary-General Elections','2022-12-26','2023-02-11',38);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (949,'2023 Council Presidency Elections','2023-06-20','2023-08-12',38);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (950,'2024 Executive Board Elections','2024-06-09','2024-08-05',38);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (951,'2000 Council Elections','2000-11-08','2001-01-04',39);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (952,'2001 Trustee Elections','2001-10-18','2001-11-28',39);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (951,'2000 Council Elections','2000-11-08','2024-01-04',39);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (952,'2024 Trustee Elections','2024-10-18','2024-11-28',39);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (953,'2002 Executive Committee Elections','2002-05-11','2002-06-26',39);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (954,'2003 Chairperson Selection','2003-04-01','2003-05-09',39);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (955,'2004 Presidential Elections','2004-12-30','2005-02-14',39);
@@ -974,7 +974,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (974,'2023 Trustee Elections','2023-01-01','2023-02-24',39);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (975,'2024 Executive Board Elections','2024-12-11','2025-01-31',39);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (976,'2000 Board Chair Elections','2000-06-27','2000-08-10',40);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (977,'2001 Officer Selection','2001-05-05','2001-06-22',40);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (977,'2024 Officer Selection','2024-05-05','2024-06-22',40);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (978,'2002 Executive Elections','2002-01-15','2002-02-16',40);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (979,'2003 Board Chair Elections','2003-04-27','2003-06-07',40);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (980,'2004 Councilor Elections','2004-01-01','2004-02-08',40);
@@ -998,8 +998,8 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (998,'2022 Board Member Elections','2022-06-13','2022-07-18',40);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (999,'2023 Officer Appointments','2023-10-29','2023-12-27',40);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1000,'2024 Leadership Elections','2024-11-17','2024-12-30',40);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1001,'2000 Management Elections','2000-03-28','2000-05-26',41);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1002,'2001 Council Member Elections','2001-03-14','2001-04-13',41);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1024,'2000 Management Elections','2000-03-28','2000-05-26',41);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1002,'2024 Council Member Elections','2024-03-14','2024-04-13',41);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1003,'2002 Officer Appointments','2002-09-19','2002-10-19',41);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1004,'2003 President Selection','2003-03-01','2003-04-10',41);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1005,'2004 Councilor Elections','2004-08-30','2004-10-21',41);
@@ -1024,7 +1024,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1024,'2023 Committee Chairperson Elections','2023-09-20','2023-11-13',41);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1025,'2024 Steering Committee Elections','2024-09-11','2024-10-29',41);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1026,'2000 Officer Selection','2000-03-03','2000-04-27',42);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1027,'2001 Council Member Elections','2001-05-15','2001-06-16',42);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1027,'2024 Council Member Elections','2024-05-15','2024-06-16',42);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1028,'2002 Committee Chairperson Selection','2002-03-05','2002-04-22',42);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1029,'2003 Trustee Elections','2003-09-28','2003-10-28',42);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1030,'2004 Board Elections','2004-08-26','2004-10-03',42);
@@ -1049,7 +1049,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1049,'2023 Secretary-General Elections','2023-03-20','2023-05-12',42);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1050,'2024 Board Chair Elections','2024-08-06','2024-10-01',42);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1051,'2000 Committee Chairperson Selection','2000-05-02','2000-06-06',43);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1052,'2001 Board Elections','2001-12-02','2002-01-17',43);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1052,'2024 Board Elections','2024-12-02','2002-01-17',43);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1053,'2002 Council Elections','2002-09-16','2002-10-20',43);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1054,'2003 Council Presidency Elections','2003-09-14','2003-10-30',43);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1055,'2004 Committee Chair Elections','2004-06-11','2004-08-04',43);
@@ -1074,7 +1074,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1074,'2023 Governing Body Elections','2023-08-10','2023-10-07',43);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1075,'2024 Board Member Elections','2024-08-03','2024-09-02',43);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1076,'2000 Committee Chairperson Selection','2000-02-22','2000-04-15',44);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1077,'2001 Board Elections','2001-05-29','2001-07-26',44);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1077,'2024 Board Elections','2024-05-29','2024-07-26',44);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1078,'2002 Executive Committee Elections','2002-12-06','2003-01-14',44);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1079,'2003 Council Member Elections','2003-01-06','2003-02-06',44);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1080,'2004 Management Elections','2004-10-23','2004-12-08',44);
@@ -1099,7 +1099,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1099,'2023 Executive Director Elections','2023-09-20','2023-10-31',44);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1100,'2024 Leadership Elections','2024-06-07','2024-07-12',44);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1101,'2000 Councilor Elections','2000-09-05','2000-10-31',45);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1102,'2001 Committee Chairperson Elections','2001-02-17','2001-03-19',45);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1102,'2024 Committee Chairperson Elections','2024-02-17','2024-03-19',45);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1103,'2002 President Selection','2002-03-04','2002-04-05',45);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1104,'2003 Executive Board Elections','2003-04-30','2003-06-09',45);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1105,'2004 President Selection','2004-02-08','2004-03-26',45);
@@ -1124,7 +1124,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1124,'2023 Council Member Elections','2023-02-12','2023-04-05',45);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1125,'2024 Council Elections','2024-04-21','2024-06-02',45);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1126,'2000 President Selection','2000-02-21','2000-04-20',46);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1127,'2001 Directorship Elections','2001-01-03','2001-02-28',46);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1127,'2024 Directorship Elections','2024-01-03','2024-02-28',46);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1128,'2002 Presidential Elections','2002-03-21','2002-04-23',46);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1129,'2003 Officer Selection','2003-06-17','2003-08-06',46);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1130,'2004 Steering Committee Elections','2004-10-24','2004-12-03',46);
@@ -1149,7 +1149,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1149,'2023 Council Presidency Elections','2023-10-19','2023-12-09',46);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1150,'2024 Officer Selection','2024-12-06','2025-02-01',46);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1151,'2000 Director General Elections','2000-07-04','2000-08-30',47);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1152,'2001 Steering Committee Elections','2001-05-23','2001-07-14',47);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1152,'2024 Steering Committee Elections','2024-05-23','2024-07-14',47);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1153,'2002 Board Elections','2002-01-08','2002-02-20',47);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1154,'2003 President Selection','2003-10-09','2003-11-17',47);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1155,'2004 Chairperson Selection','2004-02-02','2004-03-25',47);
@@ -1174,7 +1174,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1174,'2023 Chairperson Elections','2023-01-25','2023-03-24',47);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1175,'2024 Committee Chairperson Elections','2024-06-21','2024-08-11',47);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1176,'2000 Director General Elections','2000-09-22','2000-11-08',48);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1177,'2001 Board Elections','2001-12-05','2002-01-15',48);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1177,'2024 Board Elections','2024-12-05','2002-01-15',48);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1178,'2002 Councilor Elections','2002-05-11','2002-07-08',48);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1179,'2003 Chairperson Elections','2003-06-29','2003-08-11',48);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1180,'2004 Executive Elections','2004-08-16','2004-10-13',48);
@@ -1199,7 +1199,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1199,'2023 Board Chair Elections','2023-01-29','2023-03-05',48);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1200,'2024 Council Member Elections','2024-10-10','2024-12-03',48);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1201,'2000 Governing Body Elections','2000-11-05','2000-12-15',49);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1202,'2001 Chairperson Selection','2001-09-27','2001-11-25',49);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1202,'2024 Chairperson Selection','2024-09-27','2024-11-25',49);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1203,'2002 Trustee Elections','2002-09-03','2002-10-30',49);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1204,'2003 Management Elections','2003-02-04','2003-04-01',49);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1205,'2004 Committee Chair Elections','2004-07-28','2004-09-02',49);
@@ -1223,8 +1223,8 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1223,'2022 Council Elections','2022-02-20','2022-04-01',49);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1224,'2023 Executive Director Elections','2023-12-25','2024-01-30',49);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1225,'2024 Management Elections','2024-12-15','2025-01-23',49);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1226,'2000 Management Elections','2000-12-28','2001-02-08',50);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1227,'2001 Executive Elections','2001-01-16','2001-02-24',50);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1226,'2000 Management Elections','2000-12-28','2024-02-08',50);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1227,'2024 Executive Elections','2024-01-16','2024-02-24',50);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1228,'2002 Directorship Elections','2002-06-16','2002-07-25',50);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1229,'2003 Executive Director Elections','2003-07-24','2003-09-15',50);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1230,'2004 Governing Body Elections','2004-12-11','2005-01-13',50);
@@ -1249,7 +1249,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1249,'2023 Board Chair Elections','2023-06-03','2023-07-04',50);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1250,'2024 Chairperson Selection','2024-08-18','2024-10-15',50);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1251,'2000 Council Presidency Elections','2000-08-16','2000-10-05',51);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1252,'2001 Executive Committee Elections','2001-05-27','2001-07-15',51);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1252,'2024 Executive Committee Elections','2024-05-27','2024-07-15',51);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1253,'2002 Board Member Elections','2002-05-02','2002-06-18',51);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1254,'2003 Officer Selection','2003-03-13','2003-05-03',51);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1255,'2004 Council Elections','2004-04-28','2004-06-24',51);
@@ -1273,8 +1273,8 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1273,'2022 Officer Selection','2022-02-12','2022-03-23',51);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1274,'2023 Committee Chair Elections','2023-03-29','2023-05-08',51);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1275,'2024 Council Presidency Elections','2024-07-12','2024-09-01',51);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1276,'2000 Chairperson Elections','2000-12-18','2001-01-17',52);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1277,'2001 Council Elections','2001-07-22','2001-09-11',52);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1276,'2000 Chairperson Elections','2000-12-18','2024-01-17',52);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1277,'2024 Council Elections','2024-07-22','2024-09-11',52);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1278,'2002 Committee Chair Elections','2002-02-06','2002-03-09',52);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1279,'2003 Director General Elections','2003-08-22','2003-10-08',52);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1280,'2004 Secretary-General Elections','2004-01-30','2004-03-01',52);
@@ -1299,7 +1299,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1299,'2023 Secretary-General Elections','2023-04-21','2023-06-20',52);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1300,'2024 Chairperson Selection','2024-07-18','2024-08-24',52);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1301,'2000 Committee Chair Elections','2000-11-01','2000-12-06',53);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1302,'2001 Executive Director Elections','2001-11-15','2002-01-13',53);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1302,'2024 Executive Director Elections','2024-11-15','2002-01-13',53);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1303,'2002 Director Elections','2002-02-20','2002-03-23',53);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1304,'2003 Director General Elections','2003-04-15','2003-05-31',53);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1305,'2004 Secretary-General Elections','2004-08-09','2004-09-24',53);
@@ -1323,8 +1323,8 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1323,'2022 Management Elections','2022-01-17','2022-03-06',53);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1324,'2023 President Selection','2023-12-25','2024-02-16',53);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1325,'2024 Board Member Elections','2024-08-06','2024-09-25',53);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1326,'2000 President Selection','2000-12-03','2001-01-13',54);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1327,'2001 Trustee Elections','2001-12-04','2002-01-28',54);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1326,'2000 President Selection','2000-12-03','2024-01-13',54);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1327,'2024 Trustee Elections','2024-12-04','2002-01-28',54);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1328,'2002 Council Member Elections','2002-08-03','2002-09-17',54);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1329,'2003 Presidential Elections','2003-10-21','2003-12-07',54);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1330,'2004 Executive Committee Elections','2004-06-02','2004-07-11',54);
@@ -1348,8 +1348,8 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1348,'2022 Management Elections','2022-03-19','2022-05-18',54);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1349,'2023 Executive Elections','2023-01-21','2023-03-02',54);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1350,'2024 Committee Chairperson Selection','2024-08-16','2024-09-29',54);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1351,'2000 Secretary-General Elections','2000-12-07','2001-01-19',55);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1352,'2001 Presidential Elections','2001-03-16','2001-04-17',55);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1351,'2000 Secretary-General Elections','2000-12-07','2024-01-19',55);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1352,'2024 Presidential Elections','2024-03-16','2024-04-17',55);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1353,'2002 Directorship Elections','2002-01-13','2002-02-16',55);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1354,'2003 Committee Chairperson Selection','2003-06-11','2003-07-22',55);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1355,'2004 Committee Chairperson Selection','2004-02-29','2004-04-05',55);
@@ -1373,8 +1373,8 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1373,'2022 Committee Chairperson Elections','2022-06-22','2022-08-07',55);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1374,'2023 Board Member Elections','2023-04-14','2023-05-17',55);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1375,'2024 Committee Chairperson Selection','2024-01-16','2024-03-09',55);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1376,'2000 Directorship Elections','2000-11-25','2001-01-13',56);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1377,'2001 Steering Committee Elections','2001-01-12','2001-02-12',56);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1376,'2000 Directorship Elections','2000-11-25','2024-01-13',56);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1377,'2024 Steering Committee Elections','2024-01-12','2024-02-12',56);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1378,'2002 Executive Director Elections','2002-06-17','2002-08-16',56);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1379,'2003 Governing Body Elections','2003-10-19','2003-12-06',56);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1380,'2004 Board Chair Elections','2004-05-26','2004-07-23',56);
@@ -1399,7 +1399,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1399,'2023 Board Chair Elections','2023-10-07','2023-11-21',56);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1400,'2024 Committee Chairperson Elections','2024-08-11','2024-09-27',56);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1401,'2000 Council Member Elections','2000-08-27','2000-10-17',57);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1402,'2001 Council Elections','2001-07-10','2001-08-23',57);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1402,'2024 Council Elections','2024-07-10','2024-08-23',57);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1403,'2002 Committee Chair Elections','2002-02-05','2002-03-26',57);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1404,'2003 Officer Selection','2003-12-12','2004-01-21',57);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1405,'2004 Councilor Elections','2004-03-12','2004-04-24',57);
@@ -1424,7 +1424,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1424,'2023 Executive Director Elections','2023-08-22','2023-10-04',57);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1425,'2024 Council Member Elections','2024-05-12','2024-06-23',57);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1426,'2000 Management Elections','2000-08-13','2000-10-04',58);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1427,'2001 Council Member Elections','2001-07-13','2001-09-02',58);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1427,'2024 Council Member Elections','2024-07-13','2024-09-02',58);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1428,'2002 Executive Elections','2002-11-11','2002-12-30',58);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1429,'2003 Council Elections','2003-06-22','2003-07-31',58);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1430,'2004 Presidential Elections','2004-02-09','2004-03-28',58);
@@ -1449,7 +1449,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1449,'2023 Executive Elections','2023-10-27','2023-12-04',58);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1450,'2024 Council Presidency Elections','2024-04-04','2024-05-13',58);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1451,'2000 Committee Elections','2000-10-02','2000-11-04',59);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1452,'2001 Committee Chairperson Elections','2001-06-14','2001-08-08',59);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1452,'2024 Committee Chairperson Elections','2024-06-14','2024-08-08',59);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1453,'2002 Council Elections','2002-07-20','2002-09-06',59);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1454,'2003 Committee Chairperson Elections','2003-10-20','2003-11-19',59);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1455,'2004 President Selection','2004-10-28','2004-11-29',59);
@@ -1474,7 +1474,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1474,'2023 Officer Selection','2023-03-22','2023-05-02',59);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1475,'2024 Management Elections','2024-05-17','2024-06-30',59);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1476,'2000 Officer Appointments','2000-07-22','2000-09-13',60);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1477,'2001 Councilor Elections','2001-02-23','2001-04-13',60);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1477,'2024 Councilor Elections','2024-02-23','2024-04-13',60);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1478,'2002 Board Elections','2002-06-15','2002-08-06',60);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1479,'2003 Committee Chairperson Elections','2003-10-22','2003-12-18',60);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1480,'2004 Board Chair Elections','2004-11-29','2005-01-05',60);
@@ -1499,7 +1499,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1499,'2023 Trustee Elections','2023-04-06','2023-06-01',60);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1500,'2024 Secretary-General Elections','2024-01-30','2024-03-17',60);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1501,'2000 Board Chair Elections','2000-03-13','2000-04-12',61);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1502,'2001 President Selection','2001-06-24','2001-08-14',61);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1502,'2024 President Selection','2024-06-24','2024-08-14',61);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1503,'2002 Committee Chairperson Selection','2002-03-06','2002-05-03',61);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1504,'2003 Council Presidency Elections','2003-06-01','2003-07-20',61);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1505,'2004 Director General Elections','2004-07-10','2004-09-04',61);
@@ -1523,8 +1523,8 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1523,'2022 Executive Elections','2022-12-21','2023-01-30',61);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1524,'2023 Leadership Elections','2023-01-16','2023-02-19',61);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1525,'2024 Committee Chair Elections','2024-12-30','2025-01-31',61);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1526,'2000 Council Presidency Elections','2000-11-13','2001-01-04',62);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1527,'2001 Trustee Elections','2001-05-31','2001-07-01',62);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1526,'2000 Council Presidency Elections','2000-11-13','2024-01-04',62);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1527,'2024 Trustee Elections','2024-05-31','2024-07-01',62);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1528,'2002 Executive Committee Elections','2002-08-07','2002-09-23',62);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1529,'2003 Council Presidency Elections','2003-08-10','2003-09-27',62);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1530,'2004 Director Elections','2004-09-30','2004-11-27',62);
@@ -1549,7 +1549,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1549,'2023 Councilor Elections','2023-08-25','2023-10-20',62);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1550,'2024 Board Chair Elections','2024-09-03','2024-11-02',62);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1551,'2000 Presidential Elections','2000-01-19','2000-02-18',63);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1552,'2001 President Selection','2001-09-18','2001-10-27',63);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1552,'2024 President Selection','2024-09-18','2024-10-27',63);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1553,'2002 Board Chair Elections','2002-07-05','2002-08-23',63);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1554,'2003 Committee Chair Elections','2003-10-08','2003-11-19',63);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1555,'2004 Officer Selection','2004-04-01','2004-05-20',63);
@@ -1574,7 +1574,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1574,'2023 Presidential Elections','2023-06-05','2023-07-24',63);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1575,'2024 Officer Selection','2024-08-21','2024-10-15',63);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1576,'2000 Trustee Elections','2000-05-12','2000-06-20',64);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1577,'2001 Executive Director Elections','2001-05-08','2001-07-05',64);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1577,'2024 Executive Director Elections','2024-05-08','2024-07-05',64);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1578,'2002 Directorship Elections','2002-11-14','2002-12-24',64);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1579,'2003 Board Elections','2003-05-06','2003-07-05',64);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1580,'2004 Committee Elections','2004-09-06','2004-10-27',64);
@@ -1599,7 +1599,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1599,'2023 Chairperson Elections','2023-11-04','2023-12-15',64);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1600,'2024 Chairperson Elections','2024-02-05','2024-03-27',64);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1601,'2000 Executive Elections','2000-01-07','2000-02-14',65);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1602,'2001 Chairperson Selection','2001-03-27','2001-05-24',65);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1602,'2024 Chairperson Selection','2024-03-27','2024-05-24',65);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1603,'2002 Board Elections','2002-09-28','2002-11-17',65);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1604,'2003 President Selection','2003-11-20','2003-12-29',65);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1605,'2004 Officer Selection','2004-06-21','2004-08-06',65);
@@ -1624,7 +1624,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1624,'2023 Officer Appointments','2023-06-17','2023-08-09',65);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1625,'2024 Chairperson Selection','2024-03-01','2024-04-15',65);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1626,'2000 Officer Appointments','2000-10-28','2000-12-15',66);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1627,'2001 Secretary-General Elections','2001-07-09','2001-08-16',66);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1627,'2024 Secretary-General Elections','2024-07-09','2024-08-16',66);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1628,'2002 Councilor Elections','2002-08-21','2002-09-23',66);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1629,'2003 Directorship Elections','2003-09-05','2003-10-14',66);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1630,'2004 President Selection','2004-01-22','2004-02-26',66);
@@ -1649,7 +1649,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1649,'2023 Executive Elections','2023-09-20','2023-11-09',66);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1650,'2024 Presidential Elections','2024-09-10','2024-10-22',66);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1651,'2000 Management Elections','2000-08-12','2000-09-14',67);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1652,'2001 Committee Chairperson Elections','2001-08-28','2001-10-09',67);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1652,'2024 Committee Chairperson Elections','2024-08-28','2024-10-09',67);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1653,'2002 Officer Appointments','2002-07-20','2002-09-05',67);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1654,'2003 Committee Chair Elections','2003-12-08','2004-01-20',67);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1655,'2004 Executive Board Elections','2004-10-13','2004-11-30',67);
@@ -1674,7 +1674,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1674,'2023 Executive Committee Elections','2023-08-26','2023-09-26',67);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1675,'2024 Chairperson Selection','2024-02-19','2024-04-19',67);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1676,'2000 Secretary-General Elections','2000-09-29','2000-11-05',68);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1677,'2001 President Selection','2001-04-01','2001-05-03',68);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1677,'2024 President Selection','2024-04-01','2024-05-03',68);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1678,'2002 Management Elections','2002-02-23','2002-04-13',68);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1679,'2003 Director Elections','2003-02-16','2003-04-08',68);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1680,'2004 Committee Chairperson Selection','2004-10-06','2004-11-27',68);
@@ -1699,7 +1699,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1699,'2023 Presidential Elections','2023-12-03','2024-01-19',68);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1700,'2024 Leadership Elections','2024-08-04','2024-09-08',68);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1701,'2000 Committee Chair Elections','2000-10-31','2000-12-01',69);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1702,'2001 Leadership Elections','2001-04-28','2001-05-30',69);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1702,'2024 Leadership Elections','2024-04-28','2024-05-30',69);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1703,'2002 Secretary-General Elections','2002-03-28','2002-04-27',69);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1704,'2003 Committee Elections','2003-04-06','2003-05-30',69);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1705,'2004 Officer Selection','2004-04-02','2004-05-03',69);
@@ -1724,7 +1724,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1724,'2023 Committee Chair Elections','2023-12-23','2024-02-17',69);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1725,'2024 Secretary-General Elections','2024-01-22','2024-03-07',69);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1726,'2000 Committee Chairperson Elections','2000-09-15','2000-10-31',70);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1727,'2001 Board Elections','2001-11-12','2001-12-27',70);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1727,'2024 Board Elections','2024-11-12','2024-12-27',70);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1728,'2002 Councilor Elections','2002-11-23','2003-01-08',70);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1729,'2003 Committee Chairperson Elections','2003-01-23','2003-03-21',70);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1730,'2004 Council Member Elections','2004-10-01','2004-11-07',70);
@@ -1749,7 +1749,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1749,'2023 Directorship Elections','2023-09-25','2023-11-01',70);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1750,'2024 Committee Chair Elections','2024-02-18','2024-04-08',70);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1751,'2000 Committee Chairperson Elections','2000-02-10','2000-03-24',71);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1752,'2001 Board Member Elections','2001-06-04','2001-07-23',71);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1752,'2024 Board Member Elections','2024-06-04','2024-07-23',71);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1753,'2002 Executive Board Elections','2002-09-25','2002-10-28',71);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1754,'2003 Governing Body Elections','2003-11-28','2004-01-20',71);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1755,'2004 Executive Elections','2004-05-20','2004-06-23',71);
@@ -1774,7 +1774,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1774,'2023 President Selection','2023-11-14','2023-12-21',71);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1775,'2024 Board Member Elections','2024-04-13','2024-05-18',71);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1776,'2000 Directorship Elections','2000-02-01','2000-03-17',72);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1777,'2001 Board Member Elections','2001-08-12','2001-10-11',72);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1777,'2024 Board Member Elections','2024-08-12','2024-10-11',72);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1778,'2002 Board Elections','2002-05-22','2002-07-17',72);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1779,'2003 Committee Chairperson Elections','2003-11-07','2003-12-28',72);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1780,'2004 Officer Selection','2004-07-03','2004-08-04',72);
@@ -1799,7 +1799,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1799,'2023 Committee Chairperson Selection','2023-11-11','2023-12-14',72);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1800,'2024 Committee Chair Elections','2024-08-02','2024-09-20',72);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1801,'2000 Council Elections','2000-02-15','2000-03-30',73);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1802,'2001 Directorship Elections','2001-08-15','2001-10-03',73);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1802,'2024 Directorship Elections','2024-08-15','2024-10-03',73);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1803,'2002 Committee Elections','2002-09-16','2002-10-18',73);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1804,'2003 Officer Appointments','2003-01-16','2003-03-10',73);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1805,'2004 Trustee Elections','2004-04-24','2004-06-22',73);
@@ -1824,7 +1824,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1824,'2023 Directorship Elections','2023-05-18','2023-07-11',73);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1825,'2024 Executive Elections','2024-12-23','2025-02-04',73);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1826,'2000 Council Elections','2000-04-30','2000-06-05',74);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1827,'2001 Committee Chair Elections','2001-01-14','2001-02-22',74);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1827,'2024 Committee Chair Elections','2024-01-14','2024-02-22',74);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1828,'2002 Presidential Elections','2002-05-08','2002-07-04',74);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1829,'2003 Committee Chairperson Selection','2003-11-10','2004-01-05',74);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1830,'2004 Secretary-General Elections','2004-11-16','2004-12-19',74);
@@ -1849,7 +1849,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1849,'2023 Officer Appointments','2023-06-28','2023-08-17',74);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1850,'2024 Director General Elections','2024-07-22','2024-08-27',74);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1851,'2000 Chairperson Selection','2000-02-19','2000-04-12',75);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1852,'2001 Steering Committee Elections','2001-11-26','2002-01-19',75);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1852,'2024 Steering Committee Elections','2024-11-26','2002-01-19',75);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1853,'2002 Committee Chairperson Elections','2002-08-05','2002-09-27',75);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1854,'2003 Committee Chairperson Selection','2003-06-17','2003-08-15',75);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1855,'2004 Executive Board Elections','2004-05-21','2004-07-17',75);
@@ -1874,7 +1874,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1874,'2023 Chairperson Elections','2023-04-05','2023-05-27',75);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1875,'2024 Management Elections','2024-07-22','2024-09-10',75);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1876,'2000 Executive Committee Elections','2000-07-16','2000-08-31',76);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1877,'2001 Executive Board Elections','2001-07-06','2001-08-30',76);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1877,'2024 Executive Board Elections','2024-07-06','2024-08-30',76);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1878,'2002 Leadership Elections','2002-06-29','2002-08-28',76);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1879,'2003 Executive Elections','2003-02-11','2003-03-28',76);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1880,'2004 Director General Elections','2004-09-16','2004-10-30',76);
@@ -1899,7 +1899,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1899,'2023 Steering Committee Elections','2023-09-30','2023-11-19',76);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1900,'2024 Committee Chair Elections','2024-08-11','2024-09-20',76);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1901,'2000 Director Elections','2000-09-11','2000-10-11',77);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1902,'2001 Board Chair Elections','2001-12-17','2002-01-17',77);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1902,'2024 Board Chair Elections','2024-12-17','2002-01-17',77);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1903,'2002 Leadership Elections','2002-01-26','2002-03-22',77);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1904,'2003 Executive Director Elections','2003-07-27','2003-08-28',77);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1905,'2004 Governing Body Elections','2004-09-01','2004-10-04',77);
@@ -1923,8 +1923,8 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1923,'2022 Officer Appointments','2022-01-17','2022-02-20',77);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1924,'2023 Chairperson Selection','2023-09-02','2023-10-03',77);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1925,'2024 Director General Elections','2024-02-26','2024-04-14',77);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1926,'2000 Directorship Elections','2000-11-29','2001-01-19',78);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1927,'2001 Council Presidency Elections','2001-06-16','2001-07-30',78);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1926,'2000 Directorship Elections','2000-11-29','2024-01-19',78);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1927,'2024 Council Presidency Elections','2024-06-16','2024-07-30',78);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1928,'2002 Executive Elections','2002-01-14','2002-02-24',78);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1929,'2003 Secretary-General Elections','2003-10-29','2003-12-22',78);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1930,'2004 Officer Selection','2004-12-25','2005-02-21',78);
@@ -1949,7 +1949,7 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1949,'2023 Executive Board Elections','2023-08-15','2023-09-28',78);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1950,'2024 Executive Committee Elections','2024-06-08','2024-07-26',78);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1951,'2000 Council Member Elections','2000-09-07','2000-11-06',79);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1952,'2001 Committee Chair Elections','2001-09-19','2001-11-05',79);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1952,'2024 Committee Chair Elections','2024-09-19','2024-11-05',79);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1953,'2002 Committee Chair Elections','2002-02-07','2002-04-08',79);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1954,'2003 Governing Body Elections','2003-05-28','2003-07-06',79);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1955,'2004 Management Elections','2004-07-05','2004-09-02',79);
@@ -1973,8 +1973,8 @@ INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1973,'2022 Council Elections','2022-12-30','2023-02-17',79);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1974,'2023 Trustee Elections','2023-04-28','2023-06-10',79);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1975,'2024 Committee Elections','2024-03-29','2024-04-28',79);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1976,'2000 Council Elections','2000-12-05','2001-01-10',80);
-INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1977,'2001 Secretary-General Elections','2001-07-12','2001-08-27',80);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1976,'2000 Council Elections','2000-12-05','2024-01-10',80);
+INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1977,'2024 Secretary-General Elections','2024-07-12','2024-08-27',80);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1978,'2002 Chairperson Elections','2002-12-25','2003-01-25',80);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1979,'2003 Executive Board Elections','2003-12-24','2004-01-26',80);
 INSERT INTO ballots (ballotID, ballotName, startDate, endDate, SocietyID) VALUES (1980,'2004 Director Elections','2004-08-09','2004-09-20',80);

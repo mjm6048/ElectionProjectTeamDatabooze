@@ -22,3 +22,74 @@ code {
 .ballot-box h3 {
   margin-top: 0;
 }
+
+/* Voting.css */
+.ballot-item {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.ballot-item h3 {
+  margin-top: 0;
+}
+
+.candidate {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.candidate img {
+  width: 80px; /* Adjust as needed */
+  height: 80px; /* Adjust as needed */
+  margin-right: 10px;
+}
+
+.candidate-details {
+  flex-grow: 1;
+}
+
+.candidate-name {
+  font-weight: bold;
+}
+
+.buttons {
+  margin-top: 10px;
+}
+
+/* BallotItem.css */
+.ballot-item {
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.ballot-item h3 {
+  margin-top: 0;
+}
+
+/* Candidate.css */
+.candidate {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.candidate img {
+  width: 80px; /* Adjust as needed */
+  height: 80px; /* Adjust as needed */
+  margin-right: 10px;
+}
+
+.candidate-details {
+  flex-grow: 1;
+}
+
+.candidate-name {
+  font-weight: bold;
+}
+
+.buttons {
+  margin-top: 10px;
+}

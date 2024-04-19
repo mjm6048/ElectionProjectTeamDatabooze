@@ -13,6 +13,17 @@ app.use(
     })
 );
 
+//get all ballots for provided societyID
+app.get("/ballots/:societyID", async (req,res) => {
+    const {societyID} = req.body;
+    try{
+        result = bl.getBallotForSociety(societyID);
+        res.status(200).json(result);
+    }catch(error){
+        console.log(error);
+        res.status(500).json("Internal Server error");
+    }
+});
 
 app.post("/users/login", async (req, res) => {
     const { username, password } = req.body;

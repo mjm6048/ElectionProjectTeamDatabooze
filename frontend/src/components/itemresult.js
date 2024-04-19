@@ -17,9 +17,7 @@ const resultsdata = [];
     };
 return (
     <div>
-      <h2>Results</h2>
       <h3>{id}</h3>
-
 <PieChart
   series={[
     {

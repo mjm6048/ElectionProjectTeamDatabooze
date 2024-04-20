@@ -1,17 +1,17 @@
 // Candidate.js
 import React from 'react';
 
-const Candidate = ({ firstName, lastName,titles, photoUrl, description, onVoteChange }) => {
+const Candidate = ({ firstName, lastName,titles, photoUrl, description, onVoteChange,pressed }) => {
   const handleVoteChange = () => {
     onVoteChange();
   };
 
   return (
-    <div>
+    <div className={`candidate ${pressed ? 'pressed' : ''}`}>
       <img src={photoUrl} alt={`${firstName} ${lastName}`} />
       <h4 className='candidate-name'>{`${firstName} ${lastName}`}</h4>
       <p className='candidate-details'>{description}</p>
-      <button onClick={handleVoteChange}>Vote</button>
+      <button className = 'vote-button' onClick={handleVoteChange}>Vote</button>
     </div>
   );
 };

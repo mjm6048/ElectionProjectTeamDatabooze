@@ -99,3 +99,9 @@ code {
 .buttons {
   margin-top: 10px;
 }
+
+.candidate.pressed .vote-button {
+  /* Add styles for pressed button */
+  background-color: gray;
+  /* Adjust other styles as needed */
+}

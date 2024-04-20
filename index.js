@@ -20,12 +20,12 @@ app.post("/users/login",async(req,res)=>{
     const{username,password}=req.body;
     try{
         
-        check = await bl.userExists(username, password);
-        if(check){
+        roleid = await bl.userExists(username, password);
+        if(roleid!=-1){
             const token = jwt.sign({ username }, secretKey , {
                 expiresIn: "5h"
               });
-            res.status(200).json({token});
+            res.status(200).json({token,roleid});
         }
         else{
             res.status(401).json("Invalid credentials");

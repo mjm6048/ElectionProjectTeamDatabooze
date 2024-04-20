@@ -8,7 +8,13 @@ import axios from "axios";
 function MemberHome(props) {
   const navigate = useNavigate();
   const { state } = useLocation();
-  const ballots = Object.values(state)[0];
+  if(state!=null){
+  var ballots = Object.values(state)[0];
+  }
+  else
+  {
+    navigate('/');
+  }
   console.log(ballots);
   const token = localStorage.getItem('adtoken');
   const handleViewResults = async (ballotID) => {

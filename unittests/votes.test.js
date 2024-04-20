@@ -52,6 +52,10 @@ test('votes should not display for user if ballot is not accessible', async()=>
 
 });
 test('ballot status obtained successfully', async () => {
+
   const result = await bl.getStatus(2,"applebreeze16");
   expect(JSON.stringify(result)).toBe('{\"usernames\":[{\"username\":\"chestnutrainbow1\"},{\"username\":\"peachwind18\"},{\"username\":\"sealstorm15\"}],\"usernumber\":\"12\"}')
 });
+ // chestnutrainbow1
+ //plumtiger10
+ //cashewrabbit16

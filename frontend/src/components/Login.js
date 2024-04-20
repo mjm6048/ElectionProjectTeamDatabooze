@@ -22,10 +22,18 @@ function Login() {
     }
   
     if (localStorage.getItem("adtoken"))
-    {
-      var uname = localStorage.getItem("adusername");
-      setIsLoggedIn(true);
-      getBallots();
+    { var token= localStorage.getItem("adtoken");
+      var decodedjwt = JSON.parse(atob(token.split(".")[1]));
+      if(decodedjwt.exp*1000<Date.now())
+      {
+        localStorage.removeItem("adtoken");
+        localStorage.removeItem("adusername");
+      }
+      else{
+        var uname = localStorage.getItem("adusername");
+        setIsLoggedIn(true);
+        getBallots();
+      }
       
     }
   },[])
@@ -41,13 +49,18 @@ function Login() {
         if (response.status === 200) {
           alert("Login successful");
           var ballots =[];
+          if(response.data.roleid<3)
+          {
           axios.get("http://localhost:5001/ballots",{ headers: {"Authorization" : `Bearer ${response.data.token}`} })
           .then((res) => {
-            history("/memberhome",{state: { res }} );
+            var ballots = res.data;
+            history("/memberhome",{state: { ballots }} );
         });
+      }
          
           localStorage.setItem("adtoken",response.data.token);
           localStorage.setItem("adusername",username);
+          localStorage.setItem("adroleid",response.data.roleid);
           setIsLoggedIn(true);
           // Redirect to home page or do any further actions upon successful login
         } else {

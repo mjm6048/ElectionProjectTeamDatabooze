@@ -28,17 +28,17 @@ const userExists = async(username,password)=>
                 }
                 
                 
-                return true;
+                return user[0].roleid;
             }
             else
             {
-                return false;
+                return -1;
             }
             
 
         }
         else
-            return false;
+            return -1;
     }
     
 catch(error)
@@ -52,15 +52,30 @@ catch(error)
 const getBallots =async(username)=>
 {
     try
-    {       
+    {    
         var user = loggedInUsers.find(users => users.username== username);
 
         if (user == null)
-        {
-            return 0;
+        {   var user = await dl.getUser(username);
+            if(user.length==0)
+              {
+                return 0;
+              }
+            else
+            {
+                loggedInUsers.push(user[0]);
+                user = user[0];
+            }
         }
         // check if ballot votes has already been casted from ballots_users
-        var ballots = await dl.getBallots(user.societyid);            
+     
+        var ballots = await dl.getBallots(user.societyid);  
+        if(user.roleid == 1)
+        {
+        ballots = ballots.filter(ballot=>ballot.ballotstatus === 'active');
+        }
+            
+       
         return ballots;
 }
 catch(error)

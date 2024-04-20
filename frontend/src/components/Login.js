@@ -43,7 +43,8 @@ function Login() {
           var ballots =[];
           axios.get("http://localhost:5001/ballots",{ headers: {"Authorization" : `Bearer ${response.data.token}`} })
           .then((res) => {
-            history("/memberhome",{state: { res }} );
+            var ballots = res.data;
+            history("/memberhome",{state: { ballots }} );
         });
          
           localStorage.setItem("adtoken",response.data.token);

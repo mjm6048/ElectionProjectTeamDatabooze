@@ -3,6 +3,7 @@ import Home from "./pages/memberhome";
 import Login from "./components/Login";
 import Results from "./pages/results";
 import Voting from "./pages/voting";
+import AmericanDreamHome from "./components/AmericanDreamHome";
 import { BrowserRouter as Router, Routes, Route, Switch } from "react-router-dom";
 import { useState } from "react";
 
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/memberhome" element={<Home />} />
+          <Route path="/AmericanDreamHome" element={<AmericanDreamHome />} />
           <Route path="/results" element={<Results />} />
           <Route path="/voting" element={<Voting />} />
         </Routes>

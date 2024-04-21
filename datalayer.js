@@ -5,7 +5,7 @@ const Pool = require('pg').Pool
 const pool = new Pool({
   user: 'postgres',
   database: 'databooze',
-  password:'netra',
+  // password:'netra',
   port: 5432,
 })
 

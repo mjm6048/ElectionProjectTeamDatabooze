@@ -1,6 +1,22 @@
 const dl = require("./datalayer");
 
 var loggedInUsers = [];
+let totalResponseTime = 0;
+let totalRequests = 0;
+
+const recordResponseTime = (req, res, next) => {
+    const start = process.hrtime();
+    res.on("finish", () => {
+      const elapsed = process.hrtime(start);
+      const responseTimeMs = elapsed[0] * 1000 + elapsed[1] / 1000000;
+      console.log(`Response Time: ${responseTimeMs} ms`);
+      totalResponseTime += responseTimeMs; 
+      totalRequests++; 
+      console.log(`Total Response Time: ${totalResponseTime} ms`);
+      console.log(`Total Requests: ${totalRequests}`);
+    });
+    next();
+  };
 
 const userExists = async (username, password) => {
   try {
@@ -50,11 +66,13 @@ const getSystemStatistics = async () => {
     const averageQueryTime = await dl.calculateAverageQueryTime();
     const activeElections = await dl.getNumberOfActiveElections();
     const loggedInUserArrayLength = loggedInUsers.length;
+    const averageResponseTime = totalRequests > 0 ? totalResponseTime / totalRequests : 0;
 
     const systemStatistics = {
       averageQueryTime,
       activeElections,
-      loggedInUserArrayLength
+      loggedInUserArrayLength,
+      averageResponseTime
     };
 
     return systemStatistics;
@@ -68,5 +86,6 @@ const getSystemStatistics = async () => {
 module.exports = {
   userExists,
   generateSocietyStatistics,
-  getSystemStatistics
+  getSystemStatistics,
+  recordResponseTime
 };

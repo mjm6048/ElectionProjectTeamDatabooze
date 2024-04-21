@@ -16,7 +16,7 @@ export default class Home extends React.Component{
   //render shows the structure of the page before and after data is loaded
   render(){
     const {loaded,about} = this.state;
-    if(!loaded)return(<AltLoading/>);
+   // if(!loaded)return(<AltLoading/>);
       return(
         <div>
           <h2>Home Page</h2>

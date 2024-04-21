@@ -24,8 +24,12 @@ const SystemStatistics = () => {
     return <div>Loading...</div>;
   }
 
-  const { averageQueryTime, activeElections, loggedInUserArrayLength } =
-    statistics;
+  const {
+    averageQueryTime,
+    activeElections,
+    loggedInUserArrayLength,
+    averageResponseTime
+  } = statistics;
 
   return (
     <div className="system-statistics">
@@ -49,10 +53,6 @@ const SystemStatistics = () => {
         <div className="statistics-column">
           <div className="query-time-logging">
             <h3>Query Time Logging:</h3>
-            <p>
-              Stats for Query times which is then extrapolated into a bar chart
-              or pie chart to show average
-            </p>
             <div className="query-time-value">
               {averageQueryTime[0].calculate_average_query_time}
             </div>
@@ -61,11 +61,7 @@ const SystemStatistics = () => {
         <div className="statistics-column">
           <div className="http-time-logging">
             <h3>HTTP Time Logging:</h3>
-            <p>
-              Stats for HTTP response times which is then extrapolated into a
-              bar chart or pie chart to show average
-            </p>
-            {/* You can add a chart component here to visualize the HTTP response times */}
+            {averageResponseTime}
           </div>
         </div>
       </div>

@@ -40,53 +40,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-/* get ballotitems belonging to a ballot */
-CREATE OR REPLACE FUNCTION get_items_in_ballot(BallotIDValue INT)
-RETURNS TABLE (
-    ID INT,
-    Type BALLOTITEMTYPE
-) AS $$
-BEGIN
-    RETURN QUERY
-    SELECT itemID as ID, itemType as Type
-    FROM BallotItem
-    WHERE ballotID = BallotIDValue;
-END;
-$$ LANGUAGE plpgsql;
-/* count votes */
-CREATE OR REPLACE FUNCTION count_votes()
-RETURNS TABLE (
-    ID INT,
-    voted varchar(50),
-    highest_vote_count INT
-) AS $$
-BEGIN
-RETURN QUERY
-SELECT itemID as ID, votedFor, (CAST(COUNT(*) AS INT)) AS vote_count
-FROM votes
-GROUP BY itemID, votedFor 
-ORDER BY itemID;
-END;
-$$ LANGUAGE plpgsql;
 
-/* count max votes */
-CREATE OR REPLACE FUNCTION highest_votes()
-RETURNS TABLE (
-    itemID INT,
-    votedfor varchar(50),
-    vote_count INT
-) AS $$
-BEGIN
-RETURN QUERY
-SELECT id as itemid, voted as votedfor, highest_vote_count as vote_count
-FROM (
-    SELECT id, voted, highest_vote_count,
-           ROW_NUMBER() OVER (PARTITION BY id ORDER BY highest_vote_count DESC) AS row_num
-    FROM count_votes()
-) AS ranked
-WHERE row_num = 1;
-END;
-$$ LANGUAGE plpgsql;
 
 CREATE OR REPLACE FUNCTION getBallotCountPerSociety(p_societyID INT)
 RETURNS TABLE (societyID INT, societyName VARCHAR(100), activeBallots INT, inactiveBallots INT) AS
@@ -109,33 +63,6 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-
-CREATE OR REPLACE FUNCTION GetMembersOfSociety(p_societyID INT)
-RETURNS TABLE (
-    societyID INT,
-    societyName VARCHAR(100),
-    numMembers INT
-) AS
-$$
-BEGIN
-    RETURN QUERY
-    SELECT
-        us.societyID,
-        s.societyName AS societyName,
-        COUNT(u.username)::INT AS numMembers
-    FROM
-        users_society us
-    INNER JOIN
-        users u ON u.username = us.username
-    INNER JOIN
-        society s ON s.societyID = us.societyID
-    WHERE
-        us.societyID = p_societyID
-    GROUP BY
-        us.societyID, s.societyName;
-END;
-$$
-LANGUAGE plpgsql;
 
 CREATE OR REPLACE FUNCTION GetAverageMembersVotingPerElection(p_societyID INT)
 RETURNS FLOAT AS

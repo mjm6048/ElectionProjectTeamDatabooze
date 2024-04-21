@@ -13,6 +13,8 @@ app.use(
   })
 );
 
+app.use(bl.recordResponseTime);
+
 app.post("/users/login", async (req, res) => {
   const { username, password } = req.body;
 

@@ -15,7 +15,6 @@ function MemberHome(props) {
   {
     navigate('/');
   }
-  console.log(ballots);
   const token = localStorage.getItem('adtoken');
   const handleViewResults = async (ballotID) => {
     try {

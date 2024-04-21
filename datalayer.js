@@ -207,7 +207,8 @@ const getBallot= async(ballotID) =>
 const getAssignedSocieties = async(username) => {
   const client = await pool.connect();
   try{
-    const result = await client.query("SELECT society.societyID, society.societyName, society.societyDescription FROM users_society JOIN society ON users_society.societyID = society.societyID WHERE users_society.username = '$1'",[username]);
+    const result = await client.query("SELECT society.societyID, society.societyName, society.societyDescription FROM users_society JOIN society ON users_society.societyID = society.societyID WHERE users_society.username = $1",[username]);
+    //return societyID, societyName, societyDescription
     return result.rows;
   }catch(error){
     console.log(error);
@@ -216,8 +217,22 @@ const getAssignedSocieties = async(username) => {
   finally{
     client.release();
   }
-}//getSocieties
+}//getAssignedSocieties
 
+//get all societies
+const getAllSocieties = async() => {
+  const client = await pool.connect();
+  try{
+    const result = await client.query("SELECT societyID, societyName, societyDescription FROM society ");
+    return result.rows;
+  }catch(error){
+    console.log(error);
+    throw error;
+  }//try catch
+  finally{
+    client.release();
+  }
+}//getAllSocieties
 
 
 // this should be the name of the function to check login, refer to index.js for return type and arguments
@@ -231,5 +246,6 @@ module.exports = {
     getResults,
     getBallot,
     getStatus,
-    getAssignedSocieties
+    getAssignedSocieties,
+    getAllSocieties
 }

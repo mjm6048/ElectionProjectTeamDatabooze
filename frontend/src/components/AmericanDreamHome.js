@@ -7,20 +7,22 @@ export default class AmericanDreamHome extends React.Component{
         super(props);
         this.state = {
             //define varables to be used in content
-            societies: {},
+            societies: [],
         }
     }
     //show content
     render(){
+        const {societies} = this.state;
         return(
             <>
             <p>American Dream Homepage</p>
             <p>View all societies</p>
                 {
-                    societies.map((society) => {
+                    societies.map((societies, index) => {
                         return(
-                            <div>
-                                <AmericanDreamSocAccordian {...society}/>
+                            <div key={index}>
+                                <p>A Society</p>
+                                <AmericanDreamSocAccordian {...societies}/>
                             </div>
                         );
                     })
@@ -30,19 +32,16 @@ export default class AmericanDreamHome extends React.Component{
     }
     async componentDidMount(){
         //runs when render is in the DOM
-        //get all Soc 
+        //get Soc 
         try {
-            await axios.get("https://databooze-dev.webdev.gccis.rit.edu/societies")
-            .then(response=> { 
-                if (response.status === 200) {
-                    this.setState({
-                        societies:response
-                    });
-                } else {
-                    console.log(response.status);
-                    alert("Invalid credentials");
-                }
-           })
+            var token = localStorage.getItem("adtoken");
+            await axios.get("http://localhost:5001/societies",{ headers: {"Authorization" : `Bearer ${token}`} })
+            .then((res) => {
+                this.setState({
+                    societies:res
+                });
+                
+          });
         }catch(error){
             alert("Error encountered while getting societies");
         }

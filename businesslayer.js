@@ -289,6 +289,30 @@ catch(error)
 
 }
 
+//gets all soc (if Employee only get ones you can see)
+const getSocieties = async (username) => {
+    try{
+        var user = loggedInUsers.find(users => users.username== username);
+        //must determin  if user is Admin (return all) Employee (return associated) or other (tell them to ** off)
+        if (user.roleid == 3){
+            //return associated
+            var queryRes = await dl.getAssignedSocieties(username);
+            return queryRes;
+        }else if (user.roleid == 4){
+            //return all
+            var queryRes = await dl.getAllSocieties();
+            return queryRes;
+        }else{
+            //return nothing of value
+            //idk if return null is valid. hopefully hitting that doesnt kill the prgm :)
+            return null;
+        }
+    }catch(error){
+        console.log(error);
+        throw error;
+    }
+}
+
 
 
 
@@ -301,6 +325,6 @@ module.exports = {
     getResults,
     getStatus,
     castVote,
-    
+    getSocieties
 }
 

@@ -3,7 +3,7 @@ import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+// import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { AccordionActions } from '@mui/material';
 import axios from "axios";
 // This page will show all societies in an accordian. when expanded will display ADBALLOTACCORDIAN 
@@ -23,7 +23,7 @@ export default class AmericanDreamSocAccordian extends React.Component {
                 <Accordion>
                     {/* headding for accordian, just soc name */}
                     <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
+                    // expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1a-content"
                     id="panel1a-header"
                     >
@@ -31,13 +31,13 @@ export default class AmericanDreamSocAccordian extends React.Component {
                     </AccordionSummary>
                     {/* actual content of the accordian when expanded */}
                     <AccordionDetails>
-                        <AmericanDreamSocBallotAccordian 
+                        {/* <AmericanDreamSocBallotAccordian 
                             ballotID = {ballots.ballotID}
                             ballotName = {ballots.ballotName}
                             startDate = {ballots.startDate}
                             endDate = {ballots.endDate}
                             societyID = {societyID}
-                        />
+                        /> */}
                     </AccordionDetails>
                     {/* button to create new ballot at bottom of accordian */}
                     <AccordionActions>

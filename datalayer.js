@@ -203,7 +203,20 @@ const getBallot= async(ballotID) =>
   }
 }
 
-
+//get Assigned societies for username provided
+const getAssignedSocieties = async(username) => {
+  const client = await pool.connect();
+  try{
+    const result = await client.query("SELECT society.societyID, society.societyName, society.societyDescription FROM users_society JOIN society ON users_society.societyID = society.societyID WHERE users_society.username = '$1'",[username]);
+    return result.rows;
+  }catch(error){
+    console.log(error);
+    throw error;
+  }//try catch
+  finally{
+    client.release();
+  }
+}//getSocieties
 
 
 
@@ -217,5 +230,6 @@ module.exports = {
     castVote,
     getResults,
     getBallot,
-    getStatus
+    getStatus,
+    getAssignedSocieties
 }

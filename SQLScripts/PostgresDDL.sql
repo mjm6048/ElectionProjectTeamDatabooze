@@ -21,21 +21,21 @@ CREATE TABLE users(
     username varchar(50) NOT NULL PRIMARY KEY,
     firstName varchar(50) NOT NULL,
     lastName varchar(50) NOT NULL,
-    passwordHash varchar(100) NOT NULL,
+    passwordHash varchar(300) NOT NULL,
     roleID int NOT NULL
 );
 
 DROP TABLE IF EXISTS society CASCADE;
 CREATE TABLE society(
     societyID INT NOT NULL PRIMARY KEY,
-    societyName varchar(100), 
-    societyDescription varchar(100)
+    societyName varchar(200), 
+    societyDescription varchar(500)
 );
 
 DROP TABLE IF EXISTS ballots CASCADE;
 CREATE TABLE ballots(
     ballotID SERIAL NOT NULL PRIMARY KEY, 
-    ballotName varchar(50), 
+    ballotName varchar(100), 
     startDate DATE, 
     endDate DATE,
     societyID int,
@@ -62,9 +62,9 @@ CREATE TABLE candidate(
     firstName varchar(50) NOT NULL,
     lastName varchar(50) NOT NULL,
     itemID int NOT NULL,
-    titles varchar(50),
-    candidateDescription varchar(500),
-    photo varchar(500),
+    titles varchar(100),
+    candidateDescription varchar(1000),
+    photo varchar(1000),
     FOREIGN KEY (itemID) REFERENCES BallotItem (itemID)
 );
 

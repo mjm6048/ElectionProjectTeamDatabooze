@@ -28,7 +28,7 @@ export default class AmericanDreamSocAccordian extends React.Component {
                     aria-controls="panel1a-content"
                     id="panel1a-header"
                     >
-                        <Typography variant="button"><b>{societyName}</b></Typography>
+                        <Typography variant="button"><b>SocietyName: {societyName}</b></Typography>
                     </AccordionSummary>
                     {/* actual content of the accordian when expanded */}
                     <AccordionDetails>

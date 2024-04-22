@@ -294,11 +294,11 @@ const getSocieties = async (username) => {
     try{
         var user = loggedInUsers.find(users => users.username== username);
         //must determin  if user is Admin (return all) Employee (return associated) or other (tell them to ** off)
-        if (user.roleid == 3){
+        if (user.roleid === 3){
             //return associated
             var queryRes = await dl.getAssignedSocieties(username);
             return queryRes;
-        }else if (user.roleid == 4){
+        }else if (user.roleid === 4){
             //return all
             var queryRes = await dl.getAllSocieties();
             return queryRes;

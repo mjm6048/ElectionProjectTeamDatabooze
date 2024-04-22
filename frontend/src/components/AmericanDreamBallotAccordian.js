@@ -28,7 +28,7 @@ export default class AmericanDreamBallotAccordian extends React.Component {
                     aria-controls="panel1a-content"
                     id="panel1a-header"
                     >
-                        <Typography variant="button"><b>{ballotName}</b></Typography>
+                        <Typography variant="button"><b>BallotName:{ballotName}</b></Typography>
                     </AccordionSummary>
                     {/* actual content of the accordian when expanded */}
                     <AccordionDetails>

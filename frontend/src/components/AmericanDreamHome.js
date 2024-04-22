@@ -21,7 +21,6 @@ export default class AmericanDreamHome extends React.Component{
                     Object.values(societies).map((society, index) => {
                         return (
                             <div key={index}>
-                                <p>A Society</p>
                                 <AmericanDreamSocAccordian {...society}/>
                             </div>
                         );

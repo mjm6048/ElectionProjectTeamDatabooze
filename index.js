@@ -314,6 +314,29 @@ app.get('/societies', async (req,res) => {
     }//catch
 });
 
+//gets all ballots for a society
+app.get('/societies/ballots', async (req,res) => {
+    try{
+        const token =req.headers.authorization.split(' ')[1];
+        if (!token) {
+            res.status(600).json({
+                success: false,
+                message: "Error!Token was not provided."
+            });
+        }//if !token
+        const decodedToken = jwt.verify(token, "dean");
+        username = decodedToken.username;
+        socID = req.body.societyID;
+        //where anything actually happens lol
+        //still need to write BL
+        result = await bl.getAllBallotsForSociety(username, socID);
+        res.status(200).json(result);
+    }catch(e){
+        console.log(e);
+        res.status(500).json("Internal server error");
+    }//catch
+});
+
 
 
 

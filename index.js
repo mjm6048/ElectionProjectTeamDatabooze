@@ -111,7 +111,9 @@ app.get('/ballotitems', async (req, res) => {
             {
                 res.status(401).json("Invalid ballot");
             }
+            else{
             res.status(200).json(result);
+            }
         }
         else{
             res.status(400).json("Invalid user");
@@ -153,7 +155,10 @@ app.get('/candidates', async (req, res) => {
             {
                 res.status(401).json("Invalid ballot");
             }
-            res.status(200).json(result);
+            else
+            {
+                res.status(200).json(result);
+            }
         }
         else{
             res.status(400).json("Invalid user");
@@ -194,7 +199,10 @@ app.get('/results', async (req, res) => {
             {
                 res.status(401).json("Invalid ballot");
             }
-            res.status(200).json(result);
+            else
+            {
+             res.status(200).json(result);
+            }  
         }
         else{
             res.status(400).json("Invalid User");

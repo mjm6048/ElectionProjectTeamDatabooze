@@ -38,7 +38,9 @@ const Voting = (props) => {
     //const existingvote = positionVotes.filter(vote => vote.itemID === positionId);
         // If no vote exists for the same position, add a new vote
         setPositionVotes(prevData => {
-          var newdata = [...prevData,
+          var exisitngIndex = prevData.findIndex(item=>item.itemID == positionId);
+          if(exisitngIndex == -1)
+          {var newdata = [...prevData,
             {
               voteType: 'position',
               itemID: positionId,
@@ -46,24 +48,105 @@ const Voting = (props) => {
               writein: ""
             }];
           return newdata;
+          }
+          else
+          {
+            prevData[exisitngIndex]=   {
+              voteType: 'position',
+              itemID: positionId,
+              candidateID: candidateId,
+              writein: ""
+            };
+            return prevData;
+          }
         });
         
       console.log(positionVotes);
   };
+  const handleWriteIn=(itemid,type,e)=>
+  {
+    
+    
+    if(type == 'position')
+    {
+      setPositionVotes(prevData => {
+        var exisitngIndex = prevData.findIndex(item=>item.itemID == itemid);
+        if(exisitngIndex == -1)
+        {var newdata = [...prevData,
+          {
+            voteType: 'position',
+            itemID: itemid,
+            writein: e
+          }];
+        return newdata;
+        }
+        else
+        {
+          prevData[exisitngIndex]=   {
+            voteType: 'position',
+            itemID: itemid,
+            writein: e
+          };
+          return prevData;
+        }
+      });
+     
+    }
+    else
+    {var writein = e.target.value;
+      setInitiativeVotes(prevData => {
+        var exisitngIndex = prevData.findIndex(item=>item.itemID == itemid);
+        if(exisitngIndex == -1)
+        {var newdata = [...prevData,
+          {
+            voteType: 'initiative',
+            itemID: itemid,
+            writein: writein
+          }];
+        return newdata;
+        }
+        else
+        {
+          prevData[exisitngIndex]=   {
+            voteType: 'initiative',
+            itemID: itemid,
+            writein: writein
+          };
+          return prevData;
+        }
+      });
+    }
+    
+    
+    console.log(initiativeVotes);
+  }
+
   const updateInitiativeData = (itemid,response)=>
   {
     setInitiativeVotes(prevData => {
-      var newdata = [...prevData,
+      var exisitngIndex = prevData.findIndex(item=>item.itemID == itemid);
+      if(exisitngIndex == -1)
+      {var newdata = [...prevData,
         {
           voteType: 'initiative',
           itemID: itemid,
-          initiativeResponse: response,
+          initiativeResponse:response,
           writein: ""
         }];
       return newdata;
+      }
+      else
+      {
+        prevData[exisitngIndex]=   {
+          voteType: 'initiative',
+          itemID: itemid,
+          initiativeResponse: response,
+          writein:""
+        };
+        return prevData;
+      }
     });
-    
-  console.log(initiativeVotes);
+  console.log(positionVotes);
   }
 
   const handleSubmit = async(event) => {
@@ -73,7 +156,7 @@ const Voting = (props) => {
   };
   const handleResetVote=()=>
   {
-
+    window.location.reload();
   };
   const handleSubmitVote = async(event) => {
     const headers = {
@@ -107,6 +190,11 @@ catch(error)
     
       }
   }
+  
+  }
+  const isButtonClicked=(id,res) =>{ 
+    var r = initiativeVotes.some(vote => vote.itemID === id && vote.initiativeResponse==res);
+    return r;
   }
   return (
     <form onSubmit={handleSubmit}>
@@ -119,15 +207,20 @@ catch(error)
               positionId={ballotItem.itemid}
               candidates={candidates}
               numVotesAllowed={ballotItem.numvotesallowed}
-              onVoteChange={(candidateId) => handleVoteChange(ballotItem.itemid, candidateId)}
+              onWriteIn={(writein)=>handleWriteIn(ballotItem.itemid,ballotItem.itemtype,writein)}
+              onVoteChange={(candidateId) => handleVoteChange(ballotItem.itemid,candidateId)}
             />
           );
         } else {
+
           return (
             <div>
             <h2 key={ballotItem.itemid}>{ballotItem.itemname}</h2>
-            <button onClick ={()=>updateInitiativeData(ballotItem.itemid,"yes")} disabled = {initiativeVotes.some(vote => vote.itemID === ballotItem.itemid && vote.initiativeResponse!="yes")}>Yes</button>
-            <button onClick ={()=>updateInitiativeData(ballotItem.itemid,"no")} disabled = {initiativeVotes.some(vote => vote.itemID === ballotItem.itemid && vote.initiativeResponse!="no")}>No</button>
+            <button className={isButtonClicked(ballotItem.itemid,"yes") ? 'gray-button' : ''} onClick ={()=>updateInitiativeData(ballotItem.itemid,"yes")} disabled = {initiativeVotes.some(vote => vote.itemID === ballotItem.itemid && vote.initiativeResponse!="yes") }>Yes</button>
+            <button className={isButtonClicked(ballotItem.itemid,"no") ? 'gray-button' : ''} onClick ={()=>updateInitiativeData(ballotItem.itemid,"no")} disabled = {initiativeVotes.some(vote => vote.itemID === ballotItem.itemid && vote.initiativeResponse!="no")}>No</button>
+            <label>write in :
+            <input type = "text" key ={ballotItem.itemid} onChange={(e)=>handleWriteIn(ballotItem.itemid,ballotItem.itemtype,e)}></input>
+            </label>
             </div>
           );
         }

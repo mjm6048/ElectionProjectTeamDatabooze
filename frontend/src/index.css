@@ -107,3 +107,9 @@ code {
   /* Adjust other styles as needed */
 }
 
+.gray-button {
+  /* Add styles for pressed button */
+  background-color: gray;
+  transform: translateY(2px);
+  /* Adjust other styles as needed */
+}

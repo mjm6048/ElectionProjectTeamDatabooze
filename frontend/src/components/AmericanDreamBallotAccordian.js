@@ -46,6 +46,7 @@ export default class AmericanDreamBallotAccordian extends React.Component {
                                             maxNumCandidates={bi.maxnumcandidates}
                                             ballotID={this.state.ballotID}
                                         />
+                                        <hr />
                                     </>
                                 )
                             })

@@ -18,18 +18,30 @@ export default class AmericanDreamBallot extends React.Component{
       const {itemID,itemName,itemType,numVotesAllowed,maxNumCandidates} = this.state;
         return(
             <>
-                <div>
-                    <p>This is where the infromation for the ballot will do, candidates, initative ect.</p>
-                </div>
-                <div>
-                    <p>this button will either say edit or results based on if the ballot has expired yet</p>
-                    <button>Click me</button>
-                </div>
+              <form>
+                <label htmlFor="itemID">Item ID:</label>
+                <input type="number" id="itemID" name="itemID" readOnly value={itemID} /><br /><br />
+                
+                <label htmlFor="itemName">Item Name:</label>
+                <input type="text" id="itemName" name="itemName" readOnly value={itemName} /><br /><br />
+                
+                <label htmlFor="itemType">Item Type:</label>
+                <select id="itemType" name="itemType" disabled value={itemType}>
+                  <option value="initiative">Initiative</option>
+                  <option value="position">Position</option>
+                </select><br /><br />
+                
+                <label htmlFor="numVotesAllowed">Number of Votes Allowed:</label>
+                <input type="number" id="numVotesAllowed" name="numVotesAllowed" readOnly value={numVotesAllowed} /><br /><br />
+                
+                <label htmlFor="maxNumCandidates">Max Number of Candidates:</label>
+                <input type="number" id="maxNumCandidates" name="maxNumCandidates" readOnly value={maxNumCandidates} /><br /><br />
+              </form>
             </>
         )
     }
     //once the You may call setState() immediately in componentDidMount(). It will trigger an extra rendering, but it will happen before the browser updates the screen.
     componentDidMount(){
-        //called after added to dom.
+      //called after added to dom.
   }
 }

@@ -304,14 +304,25 @@ const getSocieties = async (username) => {
             return queryRes;
         }else{
             //return nothing of value
-            //idk if return null is valid. hopefully hitting that doesnt kill the prgm :)
             return null;
         }
     }catch(error){
         console.log(error);
         throw error;
     }
-}
+}//getSocieties
+
+//gets all Ballots from a society for socID
+const getAllBallotsForSociety = async (username,societyID) => {
+    try{
+        //Data sinkhole or whatever ¯\_(ツ)_/¯ basically just passes socID to database lmao
+        var queryRes = await dl.getBallotsBySocietyID(societyID);
+        return queryRes;
+    }catch(error){
+        console.log(error);
+        throw error;
+    }//try catch 
+}//getAllBallotsForSociety
 
 
 
@@ -325,6 +336,7 @@ module.exports = {
     getResults,
     getStatus,
     castVote,
-    getSocieties
+    getSocieties,
+    getAllBallotsForSociety
 }
 

@@ -5,11 +5,17 @@ export default class AmericanDreamBallot extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      data: {}
+      itemID: props.itemID,
+      itemName: props.itemName,
+      itemType: props.itemType,
+      numVotesAllowed: props.numVotesAllowed,
+      maxNumCandidates: props.maxNumCandidates,
+      ballotID: props.ballotID
     }
   }
   //render shows the structure of the page before and after data is loaded
     render(){
+      const {itemID,itemName,itemType,numVotesAllowed,maxNumCandidates} = this.state;
         return(
             <>
                 <div>

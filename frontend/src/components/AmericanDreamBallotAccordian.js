@@ -16,10 +16,11 @@ export default class AmericanDreamBallotAccordian extends React.Component {
             startDate: props.startDate,
             endDate: props.endDate,
             societyID: props.societyID,
+            ballotItems: []
         }
     }
     render(){
-        const {ballotID,ballotName,startDate,endDate} = this.state;
+        const {ballotID,ballotName,startDate,endDate,ballotItems} = this.state;
         return (
             <div className='Accordion'>
                 <Accordion>
@@ -34,7 +35,20 @@ export default class AmericanDreamBallotAccordian extends React.Component {
                     {/* actual content of the accordian when expanded */}
                     <AccordionDetails>
                         {
-                            <AmericanDreamBallot />
+                            ballotItems.map((bi) => {
+                                return (
+                                    <>
+                                        <AmericanDreamBallot 
+                                            itemID={bi.itemid}
+                                            itemName={bi.itemname}
+                                            itemType={bi.itemtype}
+                                            numVotesAllowed={bi.numvotesallowed}
+                                            maxNumCandidates={bi.maxnumcandidates}
+                                            ballotID={this.state.ballotID}
+                                        />
+                                    </>
+                                )
+                            })
                         }
                     </AccordionDetails>
                 </Accordion>
@@ -44,18 +58,18 @@ export default class AmericanDreamBallotAccordian extends React.Component {
     async componentDidMount(){
         //runs when render is in the DOM
         //get all ballots for socID
-        const {ballotID} = this.state;
         try {
             var token = localStorage.getItem("adtoken");
-            await axios.get("http://localhost:5001/ballotitems",{ headers: {"Authorization" : `Bearer ${token}`}, params: {"ballotID" : ballotID} })
+            await axios.get("http://localhost:5001/ballotitems",{ headers: {"Authorization" : `Bearer ${token}`}, params: {"ballotID" : this.state.ballotID} })
             .then((res) => {
                 console.log(res);
                 this.setState({
-                    ballots:res.data
+                    ballotItems:res.data
                 });
           });
         }catch(error){
-            alert("Error encountered while getting ballots");
+            console.log(error);
+            // alert("Error encountered while getting ballot items");
         }
     }
 }

@@ -18,10 +18,13 @@ export default class AmericanDreamHome extends React.Component{
             <p>American Dream Homepage</p>
             <p>View all societies</p>
                 {
-                    Object.values(societies).map((society, index) => {
+                    societies.map((s) => {
                         return (
-                            <div key={index}>
-                                <AmericanDreamSocAccordian {...society}/>
+                            <div key={s.societyid}>
+                                <AmericanDreamSocAccordian 
+                                    societyName={s.societyname}
+                                    societyID={s.societyid}
+                                />
                             </div>
                         );
                     })
@@ -36,8 +39,9 @@ export default class AmericanDreamHome extends React.Component{
             var token = localStorage.getItem("adtoken");
             await axios.get("http://localhost:5001/societies",{ headers: {"Authorization" : `Bearer ${token}`} })
             .then((res) => {
+                console.log(res);
                 this.setState({
-                    societies:res
+                    societies:res.data
                 });
           });
         }catch(error){

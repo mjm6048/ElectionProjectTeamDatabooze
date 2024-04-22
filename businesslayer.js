@@ -313,7 +313,7 @@ const getSocieties = async (username) => {
 }//getSocieties
 
 //gets all Ballots from a society for socID
-const getAllBallotsForSociety = async (username,societyID) => {
+const getAllBallotsForSociety = async (societyID) => {
     try{
         //Data sinkhole or whatever ¯\_(ツ)_/¯ basically just passes socID to database lmao
         var queryRes = await dl.getBallotsBySocietyID(societyID);

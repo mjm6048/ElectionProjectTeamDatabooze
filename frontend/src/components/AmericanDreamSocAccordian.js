@@ -14,11 +14,12 @@ export default class AmericanDreamSocAccordian extends React.Component {
         this.state = {
             societyName: props.societyName,
             societyID: props.societyID,
-            ballots: {},
+            ballots: [],
         }
     }
     render(){
         const {societyName,ballots,societyID} = this.state;
+        // console.log(this.state.ballots);
         return (
             <div className='Accordion'>
                 <Accordion>
@@ -32,13 +33,21 @@ export default class AmericanDreamSocAccordian extends React.Component {
                     </AccordionSummary>
                     {/* actual content of the accordian when expanded */}
                     <AccordionDetails>
-                        <AmericanDreamBallotAccordian 
-                            ballotID = {ballots.ballotID}
-                            ballotName = {ballots.ballotName}
-                            startDate = {ballots.startDate}
-                            endDate = {ballots.endDate}
-                            societyID = {societyID}
-                        />
+                    {
+                        ballots.map((b) => {
+                            return (
+                                <div>
+                                    <AmericanDreamBallotAccordian 
+                                        ballotID={b.ballotid}
+                                        ballotName={b.ballotname}
+                                        startDate={b.startdate}
+                                        endDate={b.enddate}
+                                        societyID={societyID}
+                                    />
+                                </div>
+                            );
+                        })
+                    }
                     </AccordionDetails>
                     {/* button to create new ballot at bottom of accordian */}
                     <AccordionActions>
@@ -63,8 +72,9 @@ export default class AmericanDreamSocAccordian extends React.Component {
             var token = localStorage.getItem("adtoken");
             await axios.get("http://localhost:5001/societies/ballots",{ headers: {"Authorization" : `Bearer ${token}`}, params: {"societyID" : societyID} })
             .then((res) => {
+                console.log(res);
                 this.setState({
-                    ballots:res
+                    ballots:res.data
                 });
           });
         }catch(error){

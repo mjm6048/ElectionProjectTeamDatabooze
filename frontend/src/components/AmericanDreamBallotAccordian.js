@@ -10,8 +10,8 @@ export default class AmericanDreamBallotAccordian extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            ballotID: props.societyName,
-            ballotName: props.societyID,
+            ballotID: props.ballotID,
+            ballotName: props.ballotName,
             startDate: props.startDate,
             endDate: props.endDate,
             societyID: props.societyID,
@@ -28,7 +28,7 @@ export default class AmericanDreamBallotAccordian extends React.Component {
                     aria-controls="panel1a-content"
                     id="panel1a-header"
                     >
-                        <Typography variant="button"><b>BallotName:{ballotName}</b></Typography>
+                        <Typography variant="button">{ballotName}</Typography>
                     </AccordionSummary>
                     {/* actual content of the accordian when expanded */}
                     <AccordionDetails>

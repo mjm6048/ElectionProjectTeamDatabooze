@@ -326,9 +326,11 @@ app.get('/societies/ballots', async (req,res) => {
         }//if !token
         const decodedToken = jwt.verify(token, "dean");
         username = decodedToken.username;
-        socID = req.params.societyID;
         //where anything actually happens lol
-        result = await bl.getAllBallotsForSociety(username, socID);
+        // console.log(req);
+        socID = req.query.societyID;
+        // console.log(socID);
+        result = await bl.getAllBallotsForSociety(socID);
         res.status(200).json(result);
     }catch(e){
         console.log(e);

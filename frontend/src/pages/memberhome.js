@@ -8,12 +8,27 @@ import axios from "axios";
 function MemberHome(props) {
   const navigate = useNavigate();
   const { state } = useLocation();
-  if(state!=null){
-  var ballots = Object.values(state)[0];
-  }
-  else
+  const [ballots,setBallots]=useState([]);
+
+  useEffect( ()=>
   {
-    navigate('/');
+  
+    if (localStorage.getItem("adtoken"))
+    {
+       getBallots();
+      
+     
+       
+    }
+
+  },[])
+  
+  const getBallots = async () =>
+  {
+    var token= localStorage.getItem("adtoken");
+    var res = await axios.get("http://localhost:5001/ballots",{ headers: {"Authorization" : `Bearer ${token}`} });
+    console.log(res.data);
+    setBallots(Object.values(res.data));
   }
   const token = localStorage.getItem('adtoken');
   const handleViewResults = async (ballotID) => {
@@ -29,12 +44,9 @@ function MemberHome(props) {
 
   const handleVote = async (ballotID) => {
     try {
-      // Make the API call with the ID parameter
-      const itemresponse = await  axios.get(`http://localhost:5001/ballotitems?ballotID=${ballotID}`,{ headers: {"Authorization" : `Bearer ${token}`} });
-      const itemdata = await itemresponse.data;
-      const candidateresponse = await  axios.get(`http://localhost:5001/candidates?ballotID=${ballotID}`,{ headers: {"Authorization" : `Bearer ${token}`} });
-      const candidatedata =  await candidateresponse.data;
-      navigate('/voting', {state: { ballots: itemdata, candidates: candidatedata, ballotid: ballotID }});
+   
+        navigate('/voting', {state: { ballotid: ballotID }});
+  
     } catch (error) {
       console.error('Error fetching results:', error);
     }
@@ -63,8 +75,9 @@ function MemberHome(props) {
               key={index}
               name={ballot.ballotname}
               status={ballot.ballotstatus}
-              onVote={() => handleVote(ballot.ballotid)} // You need to implement handleVote
-              onViewStatus={() => handleViewStatus(ballot.ballotid)} // You need to implement handleViewResults
+              onVote={()=> handleVote(ballot.ballotid)} 
+              onViewStatus={() => handleViewStatus(ballot.ballotid)} 
+              disabled = {ballot.uservoted}
             />
           );
         } else if (ballot.ballotstatus === 'completed') {

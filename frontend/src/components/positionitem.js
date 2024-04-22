@@ -30,6 +30,7 @@ const PositionItem = ({ positionName, positionId, candidates, onVoteChange,numVo
           onVoteChange={() => handleVoteChange(candidate.candidateid)}
           disabled={selectedVotes >= numVotesAllowed} 
         />
+
       ))}
       </div>
     </div>

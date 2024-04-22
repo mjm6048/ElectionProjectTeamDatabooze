@@ -13,21 +13,22 @@ function Login() {
 
     const getBallots = async () =>
     {
-      var token= localStorage.getItem("adtoken");
-      await axios.get("http://localhost:5001/ballots",{ headers: {"Authorization" : `Bearer ${token}`} })
-      .then((res) => {
-        var ballots = res.data;
-        history("/memberhome",{state: { ballots }} );
-    });
+     // var token= localStorage.getItem("adtoken");
+     // await axios.get("http://localhost:5001/ballots",{ headers: {"Authorization" : `Bearer ${token}`} })
+     // .then((res) => {
+        //var ballots = res.data;
+        history("/memberhome");
+   // });
     }
   
     if (localStorage.getItem("adtoken"))
     { var token= localStorage.getItem("adtoken");
       var decodedjwt = JSON.parse(atob(token.split(".")[1]));
-      if(decodedjwt.exp*1000<Date.now())
+      if(decodedjwt.exp*1000>Date.now())
       {
         localStorage.removeItem("adtoken");
         localStorage.removeItem("adusername");
+        localStorage.removeItem("adroleid");
       }
       else{
         var uname = localStorage.getItem("adusername");
@@ -51,11 +52,11 @@ function Login() {
           var ballots =[];
           if(response.data.roleid<3)
           {
-          axios.get("http://localhost:5001/ballots",{ headers: {"Authorization" : `Bearer ${response.data.token}`} })
-          .then((res) => {
-            var ballots = res.data;
-            history("/memberhome",{state: { ballots }} );
-        });
+          //axios.get("http://localhost:5001/ballots",{ headers: {"Authorization" : `Bearer ${response.data.token}`} })
+         // .then((res) => {
+          //  var ballots = res.data;
+            history("/memberhome");
+        //});
       }
          
           localStorage.setItem("adtoken",response.data.token);
@@ -63,16 +64,16 @@ function Login() {
           localStorage.setItem("adroleid",response.data.roleid);
           setIsLoggedIn(true);
           // Redirect to home page or do any further actions upon successful login
-        } else {
-          console.log(response.status);
+        } 
+        else {
           alert("Invalid credentials");
         }
       
     }
-
     catch (error) {
       console.error(error);
-      if (error.response.status === 401)
+      
+      if (error.response.status!=null && error.response.status === 401)
       {
         alert("Invalid Credentials");
       }

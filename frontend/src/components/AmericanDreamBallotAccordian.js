@@ -3,7 +3,7 @@ import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+// import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AmericanDreamBallot from './AmericanDreamBallot.js';
 // this page will display an accordian of all ballots for the given soc. when expanded will display ADBallot
 export default class AmericanDreamBallotAccordian extends React.Component {
@@ -24,7 +24,7 @@ export default class AmericanDreamBallotAccordian extends React.Component {
                 <Accordion>
                     {/* headding for accordian, just soc name */}
                     <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
+                    // expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1a-content"
                     id="panel1a-header"
                     >

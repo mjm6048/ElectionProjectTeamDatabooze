@@ -18,11 +18,11 @@ export default class AmericanDreamHome extends React.Component{
             <p>American Dream Homepage</p>
             <p>View all societies</p>
                 {
-                    societies.map((societies, index) => {
-                        return(
+                    Object.values(societies).map((society, index) => {
+                        return (
                             <div key={index}>
                                 <p>A Society</p>
-                                <AmericanDreamSocAccordian {...societies}/>
+                                <AmericanDreamSocAccordian {...society}/>
                             </div>
                         );
                     })
@@ -40,7 +40,6 @@ export default class AmericanDreamHome extends React.Component{
                 this.setState({
                     societies:res
                 });
-                
           });
         }catch(error){
             alert("Error encountered while getting societies");

@@ -5,6 +5,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 // import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AmericanDreamBallot from './AmericanDreamBallot.js';
+import axios from 'axios';
 // this page will display an accordian of all ballots for the given soc. when expanded will display ADBallot
 export default class AmericanDreamBallotAccordian extends React.Component {
     constructor(props){
@@ -32,14 +33,29 @@ export default class AmericanDreamBallotAccordian extends React.Component {
                     </AccordionSummary>
                     {/* actual content of the accordian when expanded */}
                     <AccordionDetails>
-                        <AmericanDreamBallot />
+                        {
+                            <AmericanDreamBallot />
+                        }
                     </AccordionDetails>
                 </Accordion>
             </div>
         );
     }
-    componentDidMount(){
+    async componentDidMount(){
         //runs when render is in the DOM
         //get all ballots for socID
+        const {ballotID} = this.state;
+        try {
+            var token = localStorage.getItem("adtoken");
+            await axios.get("http://localhost:5001/ballotitems",{ headers: {"Authorization" : `Bearer ${token}`}, params: {"ballotID" : ballotID} })
+            .then((res) => {
+                console.log(res);
+                this.setState({
+                    ballots:res.data
+                });
+          });
+        }catch(error){
+            alert("Error encountered while getting ballots");
+        }
     }
 }

@@ -328,7 +328,6 @@ app.get('/societies/ballots', async (req,res) => {
         username = decodedToken.username;
         socID = req.body.societyID;
         //where anything actually happens lol
-        //still need to write BL
         result = await bl.getAllBallotsForSociety(username, socID);
         res.status(200).json(result);
     }catch(e){

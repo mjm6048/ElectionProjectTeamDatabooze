@@ -6,6 +6,7 @@
 \ir InsertBallotItemData.sql
 \ir InsertCandidateData.sql
 \ir InsertVoteData.sql
+\ir InsertInititatives.sql
 \ir StoredProcedures.sql
 
 -- While inside psql

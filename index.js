@@ -250,7 +250,7 @@ app.get('/status', async (req, res) => {
 
 app.post('/votes', async (req, res) => {
     try
-    {
+    {  
 	    const token = req.headers.authorization.split(' ')[1];
         //Authorization: 'Bearer TOKEN'
         if (!token) {
@@ -264,15 +264,18 @@ app.post('/votes', async (req, res) => {
         }
         //Decoding the token
         const decodedToken = jwt.verify(token, "dean");
-        const{ballotID,positionVotes, initiativeVotes} = req.body;
+        const{ballotid,positionVotes, initiativeVotes} = req.body;
         username = decodedToken.username;
-        result = await bl.castVote(username,ballotID,positionVotes, initiativeVotes);
+        result = await bl.castVote(username,ballotid,positionVotes, initiativeVotes);
         if(result){
             if(result == -1)
             {
-                res.status(401).json("Invalid ballot");
+                res.status(401).json("Invalid ballot, vote not cast");
             }
-            res.status(200).json("Vote successfully cast");
+            else
+                { 
+                    res.status(200).json("Vote successfully cast");
+            }
         }
         else{
             res.status(400).json("Vote not cast");

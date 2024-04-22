@@ -7,7 +7,7 @@ function Results(props) {
  const results = state.results.result;
  const usersvoted = state.results.status.usernames;
 const votednum = usersvoted.length;
- const percentage = votednum/parseInt(state.results.status.usernumber);
+const percentage = votednum/parseInt(state.results.status.usernumber);
 
  const groupedResults = results.reduce((acc, result) => {
   if (!acc[result.id]) {

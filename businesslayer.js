@@ -69,7 +69,7 @@ const getBallots =async(username)=>
         }
         // check if ballot votes has already been casted from ballots_users
      
-        var ballots = await dl.getBallots(user.societyid);  
+        var ballots = await dl.getBallots(user.societyid, username);  
         if(user.roleid == 1)
         {
         ballots = ballots.filter(ballot=>ballot.ballotstatus === 'active');
@@ -92,7 +92,9 @@ const getBallotItems =async(ballotID,username)=>
         
         if (user == null)
         {
-            return 0;
+            var user = await dl.getUser(username);
+            loggedInUsers.push(user[0]);
+            user = user[0];
         }
 
         var ballot = await dl.getBallot(ballotID);
@@ -126,7 +128,10 @@ const getCandidates =async(ballotID,username)=>
         
         if (user == null)
         {
-            return 0;
+            var user = await dl.getUser(username);
+            loggedInUsers.push(user[0]);
+            user = user[0];
+        
         }
 
         var ballot = await dl.getBallot(ballotID);
@@ -280,15 +285,19 @@ const castVote = async(username,ballotID, positionvotes, initiativevotes) =>
         }
         var ballot = await dl.getBallot(ballotID);
         var current = new Date();
-        if (ballot === null) {
+        if (ballot.length==0) {
+
             return -1;
           }
       
           if (ballot[0].societyid==user.societyid && Date.parse((ballot[0]).enddate)>current && Date.parse(ballot[0].startdate) < current)
         {
             // check if ballot votes has already been casted from ballots_users
-            var cast = await dl.castVote(username,positionvotes, initiativevotes);
-            
+            var cast = await dl.castVote(username,positionvotes, initiativevotes,ballotID);
+            if (cast>0)
+            {
+                var update = await dl.updateVotedBallots(username,ballotID);
+            }
             return cast;
         }
         else

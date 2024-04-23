@@ -42,11 +42,13 @@ END;
 $$ LANGUAGE plpgsql;
 
 /*get  ballots of a society*/
-CREATE OR REPLACE FUNCTION GetBallotsWithStatus(SocietyIDValue INT)
+DROP FUNCTION GetBallotsWithStatus;
+CREATE OR REPLACE FUNCTION GetBallotsWithStatus(UserNamevalue varchar(50),SocietyIDValue INT)
 RETURNS TABLE (
     ballotID INT,
     ballotName VARCHAR(50),
-    ballotStatus VARCHAR(20)
+    ballotStatus VARCHAR(20),
+    userVoted BOOLEAN
     -- Add other fields from the ballot table as needed
 ) AS $$
 BEGIN
@@ -58,7 +60,11 @@ BEGIN
             WHEN CURRENT_DATE > b.endDate THEN 'completed'::VARCHAR(20)
             WHEN CURRENT_DATE BETWEEN b.startDate AND b.endDate THEN 'active'::VARCHAR(20)
             ELSE 'not started'::VARCHAR(20)
-        END AS ballotStatus
+        END AS ballotStatus,
+        EXISTS (
+            SELECT 1 FROM ballots_users bu 
+            WHERE bu.ballotID = b.ballotID AND bu.username = UserNamevalue
+        ) AS userVoted
     FROM 
         ballots b
     JOIN 
@@ -87,7 +93,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-/* get ballotitems belonging to a ballot */np
+/* get ballotitems belonging to a ballot */
 CREATE OR REPLACE FUNCTION get_items_in_ballot(BallotIDValue INT)
 RETURNS TABLE (
     ID INT,
@@ -121,21 +127,20 @@ GROUP BY v.itemid, c.firstname, c.lastname,  v.candidateid;
 END;
 $$ LANGUAGE plpgsql;
 
-/* count max votes */
-CREATE OR REPLACE FUNCTION highest_votes()
+CREATE OR REPLACE FUNCTION count_initiative_votes()
 RETURNS TABLE (
-    itemID INT,
-    votedfor varchar(50),
-    vote_count INT
+    ID INT,
+    response varchar(50),
+    num_votes INT
+
 ) AS $$
 BEGIN
 RETURN QUERY
-SELECT id as itemid, voted as votedfor, highest_vote_count as vote_count
-FROM (
-    SELECT id, voted, highest_vote_count,
-           ROW_NUMBER() OVER (PARTITION BY id ORDER BY highest_vote_count DESC) AS row_num
-    FROM count_votes()
-) AS ranked
-WHERE row_num = 1;
+SELECT v.itemid,v.initiativeResponse as response, COUNT(*)::INT AS num_votes 
+FROM votes v 
+WHERE v.votetype = 'initiative' 
+GROUP BY v.itemid, v.initiativeResponse;
 END;
 $$ LANGUAGE plpgsql;
+
+/* count max votes */

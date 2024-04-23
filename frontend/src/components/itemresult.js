@@ -10,7 +10,7 @@ const resultsdata = [];
         resultsdata.push({value:parseInt(vote.num_votes), label:candidatename});
         }
         else
-        { const intitiativeResponse =  vote.intitiativeResponse;
+        { const intitiativeResponse =  vote.response;
           resultsdata.push({value:parseInt(vote.num_votes), label:intitiativeResponse});
         }
       });

@@ -6,7 +6,7 @@ test('vote successfully cast', async () => {
       {voteType:'position',itemID: 5,candidateID: 11, writein: ''}
     ]
     const login = await bl.userExists('peachwind18','Password!1');
-    const login2 = await bl.userExists('applebreeze16','Password!1');
+    const login2 = await bl.userExists('applefire9','Password!1');
     const result = await bl.castVote('peachwind18',2,votes,[]);
     expect(result).toBe(votes.length);
   });
@@ -23,7 +23,7 @@ test('vote successfully cast', async () => {
   //   expect(result).toBe(-2);
   // });
 test('votes counted successfully', async () => {
-    const result = await bl.getResults(2,"applebreeze16");
+    const result = await bl.getResults(1,"applefire9");
     expect(JSON.stringify(result)).toBe('{\"result\":[{\"id\":4,\"candidateid\":7,\"firstname\":\"Dylan\",\"lastname\":\"King\",\"num_votes\":2},{\"id\":4,\"candidateid\":8,\"firstname\":\"Laura\",\"lastname\":\"Mitchell\",\"num_votes\":1},{\"id\":5,\"candidateid\":10,\"firstname\":\"Aaron\",\"lastname\":\"Gonzalez\",\"num_votes\":2},{\"id\":5,\"candidateid\":11,\"firstname\":\"Betty\",\"lastname\":\"Hanson\",\"num_votes\":2},{\"id\":6,\"candidateid\":12,\"firstname\":\"Mary\",\"lastname\":\"Reed\",\"num_votes\":1}],\"status\":{\"usernames\":[{\"username\":\"chestnutrainbow1\"},{\"username\":\"peachwind18\"},{\"username\":\"sealstorm15\"}],\"usernumber\":\"12\"}}');
 });
 

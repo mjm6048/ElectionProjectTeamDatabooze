@@ -103,3 +103,6 @@ CREATE TABLE ballots_users(
     FOREIGN KEY (username) REFERENCES users(username),
     FOREIGN KEY (ballotID) REFERENCES ballots(ballotID)
 );
+
+
+

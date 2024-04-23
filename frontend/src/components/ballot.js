@@ -1,14 +1,14 @@
 import '../index.css';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-function Ballot({name, status, onVote, onViewResults, onViewStatus}) {
+function Ballot({name, status, onVote, onViewResults, onViewStatus,disabled}) {
 const roleid = localStorage.getItem('adroleid');
 return (
   <div className = "ballot-box">
     <h3>{name}</h3>
     {status === 'active' && (
         <div>
-          <button onClick={onVote}>Vote</button>
+          <button onClick={onVote} disabled = {disabled}>Vote</button>
           { roleid == 2 &&(
           <button onClick={onViewStatus}>View Status</button>
           )

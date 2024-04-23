@@ -64,7 +64,16 @@ app.get('/ballots', async (req, res) => {
             res.status(501).json("Invalid token");
         }
         username = decodedToken.username;
-        result = await bl.getBallots(username);
+        const {societyID} = req.query;
+        if(societyID == null)
+        { 
+            result = await bl.getBallots(username, 0);
+            console.log(result);
+        }
+        else
+        {
+            result = await bl.getBallots(username, societyID);
+        }
         if(result){
             if(result == -1)
             {

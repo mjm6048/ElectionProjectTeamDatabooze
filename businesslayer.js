@@ -49,7 +49,7 @@ catch(error)
 
 }
 
-const getBallots =async(username)=>
+const getBallots =async(username, societyID)=>
 {
     try
     {    
@@ -68,13 +68,23 @@ const getBallots =async(username)=>
             }
         }
         // check if ballot votes has already been casted from ballots_users
-     
-        var ballots = await dl.getBallots(user.societyid, username);  
+        var ballots =[];
+        if(societyID==0)
+        {
+         ballots = await dl.getBallots(user.societyid, username);  
+      
         if(user.roleid == 1)
         {
         ballots = ballots.filter(ballot=>ballot.ballotstatus === 'active');
         }
-            
+        }
+        else
+        {
+            ballots = await dl.getBallots(societyID, username);
+        }
+    
+
+
        
         return ballots;
 }

@@ -1,6 +1,5 @@
 INSERT INTO VOTES(voteType, itemID,candidateID, username) VALUES ('position',1,1,'peachwind18');
 INSERT INTO VOTES(voteType, itemID,candidateID, username) VALUES ('position',1,1,'chestnutrainbow1');
-INSERT INTO VOTES(voteType, itemID,candidateID, username) VALUES ('position',1,2,'sealstorm15');
 INSERT INTO VOTES(voteType, itemID,candidateID, username) VALUES ('position',2,3,'peachwind18');
 INSERT INTO VOTES(voteType, itemID,candidateID, username) VALUES ('position',2,5,'chestnutrainbow1');
 INSERT INTO VOTES(voteType, itemID,candidateID,username) VALUES ('position',2,5,'sealstorm15');

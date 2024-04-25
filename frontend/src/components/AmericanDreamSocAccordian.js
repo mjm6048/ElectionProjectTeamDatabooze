@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import { AccordionActions } from '@mui/material';
 import axios from "axios";
 import AmericanDreamBallotAccordian from './AmericanDreamBallotAccordian';
+import AmericanDreamCreateBallot from './AmericanDreamCreateBallot';
 // This page will show all societies in an accordian. when expanded will display ADBALLOTACCORDIAN 
 export default class AmericanDreamSocAccordian extends React.Component {
     constructor(props){
@@ -34,6 +35,14 @@ export default class AmericanDreamSocAccordian extends React.Component {
                     {/* actual content of the accordian when expanded */}
                     <AccordionDetails>
                     {
+                        // We need a unique key created every time when multiple accordions are loaded
+                        // onto the same page. So we need to map keys.
+                        // ballots.map((b) => {
+                            // const numbers = [1, 2, 3, 4, 5];
+                            // const listItems = numbers.map((number) =>
+                            // <li key={number.toString()}>    {number}
+                            // </li>
+                            // );
                         ballots.map((b) => {
                             return (
                                 <div>
@@ -48,10 +57,11 @@ export default class AmericanDreamSocAccordian extends React.Component {
                             );
                         })
                     }
+                    {/* after rendering all of the existing ballots, 'render' createBallot */}
                     </AccordionDetails>
                     {/* button to create new ballot at bottom of accordian */}
+                        {/* <AmericanDreamCreateBallot societyID={this.state.societyID}/> */}
                     <AccordionActions>
-                        <button>Create A New Ballot</button>
                     </AccordionActions>
                 </Accordion>
             </div>

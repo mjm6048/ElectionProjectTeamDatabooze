@@ -214,31 +214,30 @@ app.post("/votes", async (req, res) => {
   }
 });
 
-//gets all soc (if Employee only get ones you can see)
-// app.get("/societies", async (req, res) => {
-//   try {
-//     const token = req.headers.authorization.split(" ")[1];
-//     if (!token) {
-//       res.status(600).json({
-//         success: false,
-//         message: "Error!Token was not provided."
-//       });
-//     } //if !token
-//     const decodedToken = jwt.verify(token, "dean");
-//     username = decodedToken.username;
-//     //where anything actually happens lol
-//     //still need to respond with socties:[]
-//     result = await bl.getSocieties(username);
-//     if (result == null) {
-//       res.status(400).json("Unable to get societies");
-//     } else {
-//       res.status(200).json(result);
-//     }
-//   } catch (e) {
-//     console.log(e);
-//     res.status(500).json("Internal server error");
-//   } //catch
-// });
+// gets all soc (if Employee only get ones you can see)
+app.get("/societies", async (req, res) => {
+  try {
+    const token = req.headers.authorization.split(" ")[1];
+    if (!token) {
+      res.status(600).json({
+        success: false,
+        message: "Error!Token was not provided."
+      });
+    } //if !token
+    const decodedToken = jwt.verify(token, "dean");
+    username = decodedToken.username;
+    //where anything actually happens lol
+    result = await bl.getSocieties(username);
+    if (result == null) {
+      res.status(400).json("Unable to get societies");
+    } else {
+      res.status(200).json(result);
+    }
+  } catch (e) {
+    console.log(e);
+    res.status(500).json("Internal server error");
+  } //catch
+});
 
 //gets all ballots for a society
 app.get("/societies/ballots", async (req, res) => {

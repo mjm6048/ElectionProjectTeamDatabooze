@@ -27,9 +27,9 @@ CREATE TABLE users(
 
 DROP TABLE IF EXISTS society CASCADE;
 CREATE TABLE society(
-    societyID INT NOT NULL PRIMARY KEY,
-    societyName varchar(200), 
-    societyDescription varchar(500)
+    societyID SERIAL PRIMARY KEY,
+    societyName VARCHAR(200), 
+    societyDescription VARCHAR(500)
 );
 
 DROP TABLE IF EXISTS ballots CASCADE;

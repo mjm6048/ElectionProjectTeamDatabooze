@@ -4,11 +4,17 @@ import Login from "./components/Login";
 import Results from "./pages/results";
 import Voting from "./pages/voting";
 import AmericanDreamHome from "./components/AmericanDreamHome";
-import { BrowserRouter as Router, Routes, Route, Switch } from "react-router-dom";
+import Society from "./components/CreateSociety";
+import User from "./components/CreateUser";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Switch
+} from "react-router-dom";
 import { useState } from "react";
 
 function App() {
-
   return (
     <div className="App">
       <Router>
@@ -18,6 +24,8 @@ function App() {
           <Route path="/AmericanDreamHome" element={<AmericanDreamHome />} />
           <Route path="/results" element={<Results />} />
           <Route path="/voting" element={<Voting />} />
+          <Route path="/createSociety" element={<Society />} />
+          <Route path="/createUser" element={<User />} />
         </Routes>
       </Router>
     </div>

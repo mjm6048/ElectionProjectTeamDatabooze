@@ -35,17 +35,9 @@ export default class AmericanDreamSocAccordian extends React.Component {
                     {/* actual content of the accordian when expanded */}
                     <AccordionDetails>
                     {
-                        // We need a unique key created every time when multiple accordions are loaded
-                        // onto the same page. So we need to map keys.
-                        // ballots.map((b) => {
-                            // const numbers = [1, 2, 3, 4, 5];
-                            // const listItems = numbers.map((number) =>
-                            // <li key={number.toString()}>    {number}
-                            // </li>
-                            // );
                         ballots.map((b) => {
                             return (
-                                <div>
+                                <div key={b.ballotID}>
                                     <AmericanDreamBallotAccordian 
                                         ballotID={b.ballotid}
                                         ballotName={b.ballotname}

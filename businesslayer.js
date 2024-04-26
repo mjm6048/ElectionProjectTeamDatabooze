@@ -1,18 +1,13 @@
+const dl = require("./datalayer");
+const { createHash } = require("crypto");
+var loggedInUsers = [];
 
-const dl = require('./datalayer');
-const {createHash } = require('crypto');
-var loggedInUsers =[];
+const userExists = async (username, password) => {
+  // hashedpassword = createHash('sha256').update(password)
+  // console.log(hashedpassword);
 
-
-const userExists = async(username,password)=>
-{
-    // hashedpassword = createHash('sha256').update(password)
-    // console.log(hashedpassword);
-  
-   
-    try
-    {
-       var user = await dl.getUser(username);
+  try {
+    var user = await dl.getUser(username);
 
         if(user.length !=0)
         {   var hash = createHash('sha256').update(password).digest('hex');
@@ -49,10 +44,10 @@ catch(error)
 
 }
 
-const getBallots =async(username, societyID)=>
+const getBallots =async(username,societyID)=>
 {
     try
-    {    
+    {       
         var user = loggedInUsers.find(users => users.username== username);
 
         if (user == null)
@@ -107,28 +102,23 @@ const getBallotItems =async(ballotID,username)=>
             user = user[0];
         }
 
-        var ballot = await dl.getBallot(ballotID);
-        if (ballot === null) {
-            return -1;
-          }
+    var ballot = await dl.getBallot(ballotID);
+    if (ballot === null) {
+      return -1;
+    }
 
-          if (ballot[0].societyid==user.societyid)
-        {
-            // check if ballot votes has already been casted from ballots_users
-            var ballotitems = await dl.getBallotItems(ballotID);
-            return ballotitems;
-        }
-        else
-        {
-            return -1;
-        }
-}
-catch(error)
-{
+    if (ballot[0].societyid == user.societyid) {
+      // check if ballot votes has already been casted from ballots_users
+      var ballotitems = await dl.getBallotItems(ballotID);
+      return ballotitems;
+    } else {
+      return -1;
+    }
+  } catch (error) {
     console.log(error);
     throw error;
-}
-}
+  }
+};
 
 const getCandidates =async(ballotID,username)=>
 {
@@ -144,110 +134,89 @@ const getCandidates =async(ballotID,username)=>
         
         }
 
-        var ballot = await dl.getBallot(ballotID);
-        if (ballot === null) {
-            return -1;
-          }
-          if (ballot[0].societyid==user.societyid)
-        {
-            // check if ballot votes has already been casted from ballots_users
-            var candidates = await dl.getCandidates(ballotID);
-            return candidates;
-        }
-        else
-        {
-            return -1;
-        }
-}
-catch(error)
-{
+    var ballot = await dl.getBallot(ballotID);
+    if (ballot === null) {
+      return -1;
+    }
+    if (ballot[0].societyid == user.societyid) {
+      // check if ballot votes has already been casted from ballots_users
+      var candidates = await dl.getCandidates(ballotID);
+      return candidates;
+    } else {
+      return -1;
+    }
+  } catch (error) {
     console.log(error);
     throw error;
-}
-}
-const getResults= async(ballotID, username)=>
-{
-  
-    try
-    {
-        var user = loggedInUsers.find(users => users.username== username);
-      
-        if (user == null || user.roleid <2)
-        {
-            return 0;
-        }
-        var ballot = await dl.getBallot(ballotID);
-        var current = new Date();
-        if (ballot === null) {
-            return -1;
-          }
-        if ((ballot[0].societyid === user.societyid)&& Date.parse(ballot[0].enddate)<current)
-        {
-            var results = await dl.getResults(ballotID);
-            var status = await dl.getStatus(ballotID);
-            var report = {
-                'result':results,
-                'status':status
-            }
-            return report;
-        }
-        else
-        {
-            return -1;
-        }
-     
-    }
-    
-    catch(error)
-    {
-        console.log(error);
-        throw error;
-    }
-    
-}
-const getStatus=async(ballotID,username)=>
-{
-    try
-    {   var user = loggedInUsers.find(users => users.username== username);
-        if (user == null || user.roleid <2)
-        {
-            return 0;
-        }
-        var ballot = await dl.getBallot(ballotID);
-        if (ballot === null) {
-            return -1;
-          }
-        //validate ballot
-        var current = new Date()
-        if (ballot[0].societyid==user.societyid && Date.parse(ballot[0].startdate) <= current)
-        {
-            var results = await dl.getStatus(ballotID);
-            return results;
-        }
-        else
-        {
-            return -1;
-        }
+  }
+};
+const getResults = async (ballotID, username) => {
+  try {
+    var user = loggedInUsers.find((users) => users.username == username);
 
+    if (user == null || user.roleid < 2) {
+      return 0;
     }
-            
-    
-    catch(error)
-    {
-        console.log(error);
-        throw error;
+    var ballot = await dl.getBallot(ballotID);
+    var current = new Date();
+    if (ballot === null) {
+      return -1;
     }
-}
+    if (
+      ballot[0].societyid === user.societyid &&
+      Date.parse(ballot[0].enddate) < current
+    ) {
+      var results = await dl.getResults(ballotID);
+      var status = await dl.getStatus(ballotID);
+      var report = {
+        result: results,
+        status: status
+      };
+      return report;
+    } else {
+      return -1;
+    }
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+const getStatus = async (ballotID, username) => {
+  try {
+    var user = loggedInUsers.find((users) => users.username == username);
+    if (user == null || user.roleid < 2) {
+      return 0;
+    }
+    var ballot = await dl.getBallot(ballotID);
+    if (ballot === null) {
+      return -1;
+    }
+    //validate ballot
+    var current = new Date();
+    if (
+      ballot[0].societyid == user.societyid &&
+      Date.parse(ballot[0].startdate) <= current
+    ) {
+      var results = await dl.getStatus(ballotID);
+      return results;
+    } else {
+      return -1;
+    }
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
 
 // const castVote= async(username,voteType,itemID,votedFor, writein)=>
 // {
 //     try
-//     {  
+//     {
 //     // user validation
 //         var  user = loggedInUsers.find(users => users.username === username);
 //         //validate user
 //         if(user == null || user.roleid>2)
-//         { 
+//         {
 //             return 0;
 //         }
 //         var ballot = await dl.getBallotAndSociety(itemID,0);
@@ -259,7 +228,7 @@ const getStatus=async(ballotID,username)=>
 //         var current = Date.parse('2001-08-21');
 //         if (ballot[0].societyID==user.societyID && Date.parse((ballot[0]).enddate)>current && Date.parse(ballot[0].startdate) < current)
 //         {
-//         //validate candidate 
+//         //validate candidate
 //             var candidateID = parseInt(votedFor);
 //             var candidate = await dl.getCandidates(0,candidateID);
 //             if (candidate == null || candidate[0].itemid != itemID) {
@@ -273,10 +242,9 @@ const getStatus=async(ballotID,username)=>
 //         {
 //             return -1;
 //         }
-        
-            
+
 //     }
-    
+
 //     catch(error)
 //     {
 //         console.log(error);
@@ -284,57 +252,125 @@ const getStatus=async(ballotID,username)=>
 //     }
 // }
 
-const castVote = async(username,ballotID, positionvotes, initiativevotes) =>
-{
-    try
-    {
-        var user = loggedInUsers.find(users => users.username== username);
-        if (user == null || user.roleid >2)
-        {
-            return 0;
-        }
-        var ballot = await dl.getBallot(ballotID);
-        var current = new Date();
-        if (ballot.length==0) {
+const castVote = async (username, ballotID, positionvotes, initiativevotes) => {
+  try {
+    var user = loggedInUsers.find((users) => users.username == username);
+    if (user == null || user.roleid > 2) {
+      return 0;
+    }
+    var ballot = await dl.getBallot(ballotID);
+    var current = new Date();
+    if (ballot.length==0) {
 
-            return -1;
-          }
-      
-          if (ballot[0].societyid==user.societyid && Date.parse((ballot[0]).enddate)>current && Date.parse(ballot[0].startdate) < current)
-        {
-            // check if ballot votes has already been casted from ballots_users
-            var cast = await dl.castVote(username,positionvotes, initiativevotes,ballotID);
+      return -1;
+    }
+
+    if (
+      ballot[0].societyid == user.societyid &&
+      Date.parse(ballot[0].enddate) > current &&
+      Date.parse(ballot[0].startdate) < current
+    ) {
+      // check if ballot votes has already been casted from ballots_users
+      var cast = await dl.castVote(username, positionvotes, initiativevotes,ballotID);
             if (cast>0)
             {
                 var update = await dl.updateVotedBallots(username,ballotID);
-            }
-            return cast;
-        }
-        else
-        {
-            return -1;
-        }
 }
-catch(error)
-{
+      return cast;
+    } else {
+      return -1;
+    }
+  } catch (error) {
     console.log(error);
     throw error;
-}
+  }
+};
 
-}
+//gets all soc (if Employee only get ones you can see)
+const getSocieties = async (username) => {
+  try {
+    var user = loggedInUsers.find((users) => users.username == username);
+    //must determin  if user is Admin (return all) Employee (return associated) or other (tell them to ** off)
+    if (user.roleid === 3) {
+      //return associated
+      var queryRes = await dl.getAssignedSocieties(username);
+      return queryRes;
+    } else if (user.roleid === 4) {
+      //return all
+      var queryRes = await dl.getAllSocieties();
+      return queryRes;
+    } else {
+      //return nothing of value
+      return null;
+    }
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}; //getSocieties
 
+//gets all Ballots from a society for socID
+const getAllBallotsForSociety = async (societyID) => {
+  try {
+    //Data sinkhole or whatever ¯\_(ツ)_/¯ basically just passes socID to database lmao
+    var queryRes = await dl.getBallotsBySocietyID(societyID);
+    return queryRes;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  } //try catch
+}; //getAllBallotsForSociety
 
+const getUserByUsername = async (username) => {
+  try {
+    return await dl.getUserByUsername(username);
+  } catch (error) {
+    throw error;
+  }
+};
 
+const createUser = async (
+  username,
+  firstName,
+  lastName,
+  password,
+  societyIDs, // Update to accept an array of societyIDs
+  roleID
+) => {
+  try {
+    // Hash the password
+    const passwordHash = await hashPassword(password);
+    await dl.createUser(
+      username,
+      firstName,
+      lastName,
+      roleID,
+      passwordHash,
+      societyIDs
+    ); // Pass societyIDs as an array
+  } catch (error) {
+    throw error;
+  }
+};
+
+const createNewSociety = async (societyName, societyDescription) => {
+  // Add any business logic or validation here
+  console.log("in buis layer");
+  return await dl.createSociety(societyName, societyDescription);
+};
 
 // this should be the name of the function to check login, refer to index.js for return type and arguments
 module.exports = {
-    userExists,
-    getBallots,
-    getBallotItems,
-    getCandidates,
-    getResults,
-    getStatus,
-    castVote,
-    
-}
-
+  userExists,
+  getBallots,
+  getBallotItems,
+  getCandidates,
+  getResults,
+  getStatus,
+  castVote,
+  getSocieties,
+  getAllBallotsForSociety,
+  getUserByUsername,
+  createUser,
+  createNewSociety
+};

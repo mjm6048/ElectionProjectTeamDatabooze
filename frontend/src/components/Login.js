@@ -58,6 +58,10 @@ function Login() {
             history("/memberhome");
         //});
       }
+      else
+      {
+        history("/AmericanDreamHome");
+      }
          
           localStorage.setItem("adtoken",response.data.token);
           localStorage.setItem("adusername",username);

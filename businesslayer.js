@@ -285,6 +285,7 @@ const createUser = async (
   try {
     // Hash the password
     const passwordHash = await hashPassword(password);
+    console.log("in bl");
     await dl.createUser(
       username,
       firstName,

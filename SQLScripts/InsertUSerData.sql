@@ -19998,3 +19998,4 @@ INSERT INTO users (username, firstName, lastName, passwordHash, roleID) VALUES (
 INSERT INTO users (username, firstName, lastName, passwordHash, roleID) VALUES ('applewater17', 'Stephen', 'Jones', 'be6fded9eba153d774245490f8f4120cebe2a6d3a5467603eca3343de90d6275', 1);
 INSERT INTO users (username, firstName, lastName, passwordHash, roleID) VALUES ('dragonfly9', 'Elizabeth', 'Ellis', 'be6fded9eba153d774245490f8f4120cebe2a6d3a5467603eca3343de90d6275', 1);
 INSERT INTO users (username, firstName, lastName, passwordHash, roleID) VALUES ('seastorm3', 'Larry', 'Henry', 'be6fded9eba153d774245490f8f4120cebe2a6d3a5467603eca3343de90d6275', 1);
+INSERT INTO users (username, firstName, lastName, passwordHash, roleID) VALUES ('ahurtvonnegut', 'Krishnan', 'Netra', 'be6fded9eba153d774245490f8f4120cebe2a6d3a5467603eca3343de90d6275', 4);

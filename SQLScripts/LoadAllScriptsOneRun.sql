@@ -6,8 +6,8 @@
 \ir InsertBallotItemData.sql
 \ir InsertCandidateData.sql
 \ir InsertVoteData.sql
-\ir InsertInititatives.sql
+\ir InsertInitiatives.sql
 \ir StoredProcedures.sql
-
+\ir InsertAdmin.sql
 -- While inside psql
 -- \i /path/to/file/LoadAllScriptsOneRun.sql

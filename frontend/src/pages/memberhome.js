@@ -15,7 +15,14 @@ function MemberHome(props) {
   
     if (localStorage.getItem("adtoken"))
     {
-       getBallots();
+      if(state!=null)
+      {
+        getBallots(state.society)
+      }
+      else
+      {
+      getBallots(0);
+      }
       
      
        
@@ -23,11 +30,16 @@ function MemberHome(props) {
 
   },[])
   
-  const getBallots = async () =>
+  const getBallots = async (societyID) =>
   {
     var token= localStorage.getItem("adtoken");
-    var res = await axios.get("http://localhost:5001/ballots",{ headers: {"Authorization" : `Bearer ${token}`} });
-    console.log(res.data);
+    if(societyID ==0)
+    {var res = await axios.get("http://localhost:5001/ballots",{ headers: {"Authorization" : `Bearer ${token}`} });}
+    else
+    {
+      var res = await  axios.get(`http://localhost:5001/ballots?societyID=${societyID}`,{ headers: {"Authorization" : `Bearer ${token}`} });
+    }
+    //console.log(res.data);
     setBallots(Object.values(res.data));
   }
   const token = localStorage.getItem('adtoken');
@@ -62,6 +74,16 @@ function MemberHome(props) {
       console.error('Error fetching results:', error);
     }
   };
+  const handleEdit = async(ballotID)=>
+  {
+    try {
+      // Make the API call with the ID parameter
+
+      navigate('/editBallot', {state: { ballotid:ballotID }});
+    } catch (error) {
+      console.error('Error fetching results:', error);
+    }
+  }
 
 
   return (
@@ -77,6 +99,7 @@ function MemberHome(props) {
               status={ballot.ballotstatus}
               onVote={()=> handleVote(ballot.ballotid)} 
               onViewStatus={() => handleViewStatus(ballot.ballotid)} 
+              onView={()=>navigate('/voting', {state:{ballotid:ballot.ballotid}})}
               disabled = {ballot.uservoted}
             />
           );
@@ -86,12 +109,21 @@ function MemberHome(props) {
               key={index}
               name={ballot.ballotname}
               status={ballot.ballotstatus}
-              onViewResults={() => handleViewResults(ballot.ballotid)} // You need to implement handleViewResults
+              onViewResults={() => handleViewResults(ballot.ballotid)} 
+              onView={()=>navigate('/voting', {state:{ballotid:ballot.ballotid}})}// You need to implement handleViewResults
             />
           );
         } 
         else {
-          return null; // Don't render the ballot if status is 'not started'
+          return (
+            <Ballot
+              key={index}
+              name={ballot.ballotname}
+              status={ballot.ballotstatus}
+              onEdit={() => handleEdit(ballot.ballotid)} 
+              onView={()=>navigate('/voting', {state:{ballotid:ballot.ballotid, status:'not started'}})}// You need to implement handleViewResults
+            />
+          ); 
         }
       })}
 

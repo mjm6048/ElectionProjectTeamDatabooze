@@ -10,16 +10,16 @@ const votednum = usersvoted.length;
 
   // Render the results
   return (
-    <div>
-  <h2>Status</h2>
-  <h3>Users that voted</h3>
-  <ul>
+  <div>
+    <h2>Status</h2>
+    <h3>Users that voted</h3>
+    <ul>
         {usersvoted.map((user, index) => (
           <li key={index}>{user.username}</li>
         ))}
-      </ul>
+    </ul>
     <h3>Percentage: {percentage}%</h3>
-    </div>
+  </div>
   );
 }
 

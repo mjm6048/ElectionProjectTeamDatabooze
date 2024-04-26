@@ -23,15 +23,15 @@ const percentage = votednum/parseInt(state.results.status.usernumber);
        {Object.keys(groupedResults).map((id, index) => (
         <ItemResult key={index} data={groupedResults[id]} id ={groupedResults[id][0].name} />
       ))}
-  <h2>Status</h2>
-  <h3>Users that voted</h3>
-  <ul>
+      <h2>Status</h2>
+      <h3>Users that voted</h3>
+      <ul>
         {usersvoted.map((user, index) => (
           <li key={index}>{user.username}</li>
         ))}
       </ul>
-    <h3>Percentage: {percentage}%</h3>
-    </div>
+      <h3>Percentage: {percentage}%</h3>
+  </div>
   );
 }
 

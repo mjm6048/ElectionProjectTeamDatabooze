@@ -3,6 +3,12 @@ const dl = require('./datalayer');
 const {createHash } = require('crypto');
 var loggedInUsers =[];
 
+const hashPassword = (password) => {
+    const hash = createHash("sha256");
+    hash.update(password);
+    return hash.digest("hex");
+  };
+  
 
 const userExists = async(username,password)=>
 {
@@ -313,8 +319,62 @@ catch(error)
 
 }
 
+const getSocieties = async (username) => {
+    try {
+      var user = loggedInUsers.find((users) => users.username == username);
+      //must determin  if user is Admin (return all) Employee (return associated) or other (tell them to ** off)
+      if (user.roleid === 3) {
+        //return associated
+        var queryRes = await dl.getAssignedSocieties(username);
+        return queryRes;
+      } else if (user.roleid === 4) {
+        //return all
+        var queryRes = await dl.getAllSocieties();
+        return queryRes;
+      } else {
+        //return nothing of value
+        return null;
+      }
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  }; //getSocieties
 
-
+  const createUser = async (
+    username,
+    firstName,
+    lastName,
+    password,
+    societyIDs, // Update to accept an array of societyIDs
+    roleID
+  ) => {
+    try {
+      // Hash the password
+      const passwordHash = await hashPassword(password);
+      console.log("in bl");
+      await dl.createUser(
+        username,
+        firstName,
+        lastName,
+        roleID,
+        passwordHash,
+        societyIDs
+      ); // Pass societyIDs as an array
+    } catch (error) {
+      throw error;
+    }
+  };
+  
+const createNewSociety = async (societyName, societyDescription) => {
+    // Add any business logic or validation here
+    console.log("in buis layer");
+    return await dl.createSociety(societyName, societyDescription);
+  };
+const getBallot = async(ballotID)=>
+{
+    return await dl.getBallot(ballotID);
+}
 
 // this should be the name of the function to check login, refer to index.js for return type and arguments
 module.exports = {
@@ -325,6 +385,9 @@ module.exports = {
     getResults,
     getStatus,
     castVote,
-    
+    getSocieties,
+    createUser,
+    createNewSociety,
+    getBallot
 }
 

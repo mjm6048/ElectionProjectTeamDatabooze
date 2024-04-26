@@ -113,3 +113,19 @@ code {
   transform: translateY(2px);
   /* Adjust other styles as needed */
 }
+
+/* Style for the container div */
+.society-container {
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  display: flex; /* Use flexbox for layout */
+  justify-content: space-between; /* Align items with space between them */
+}
+
+
+/* Style for the view button */
+society-button {
+  order: 2; /* Change the order of the button to move it to the right */
+}

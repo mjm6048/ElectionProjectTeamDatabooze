@@ -1,11 +1,13 @@
 
 import Candidate from './candidate';
 import React, { useEffect, useState } from "react";
+import { useNavigate, useLocation } from 'react-router-dom';
 import '../index.css';
 
-const PositionItem = ({ positionName, positionId, candidates, onVoteChange, onWriteIn, numVotesAllowed }) => {
-   // Filter candidates based on currentItem's itemid
- const [writeIn, setWriteIn] = useState("");
+const PositionItem = ({ positionName, positionId, candidates, onVoteChange, onWriteIn, editable, numVotesAllowed }) => {
+  const navigate =  useNavigate();
+  const roleid = localStorage.getItem('adroleid');
+  const [writeIn, setWriteIn] = useState("");
   const [selectedVotes, setSelectedVotes] = useState(0);
   const filteredcandidates = candidates.filter(candidate => candidate.itemid === positionId);
   const handleVoteChange = (candidateId) => {
@@ -17,7 +19,6 @@ const PositionItem = ({ positionName, positionId, candidates, onVoteChange, onWr
   };
   const handleWriteIn =(e)=>
   {
-   console.log(e.target.value);
     var writein = e.target.value;
     onWriteIn(writein);
   }
@@ -40,11 +41,17 @@ const PositionItem = ({ positionName, positionId, candidates, onVoteChange, onWr
 
       ))}
       </div>
-      <label>write in: 
-<input type = "text"  disabled = {selectedVotes>0} onChange={handleWriteIn}></input>
-</label>
-    </div>
-  );
+      {roleid < 3 ? (
+        <label>
+          Write in:
+          <input type="text" disabled={selectedVotes > 0} onChange={handleWriteIn} />
+        </label>
+        ) : roleid > 2 && editable ? (
+          <button onClick={() => navigate("/addCandidate", { state: { itemid: positionId } })}>Add candidate</button>
+        ) : null
+      }
+            </div>
+      );
 };
 
 export default PositionItem;

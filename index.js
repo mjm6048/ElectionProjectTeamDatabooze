@@ -54,7 +54,9 @@ app.get("/ballots", async (req, res) => {
       if (result == -1) {
         res.status(401).json("Invalid society");
       }
-      res.status(200).json(result);
+      else {
+        res.status(200).json(result);
+      }
     } else {
       res.status(400).json("Invalid User");
     }
@@ -81,9 +83,10 @@ app.get("/ballotitems", async (req, res) => {
     result = await bl.getBallotItems(ballotID, username);
     if (result) {
       if (result == -1) {
-        res.status(401).json("Invalid ballot");
+        res.status(401).json("Invalid ballot item");
+      }else{
+        res.status(200).json(result);
       }
-      res.status(200).json(result);
     } else {
       res.status(400).json("Invalid user");
     }
@@ -110,7 +113,7 @@ app.get("/candidates", async (req, res) => {
     result = await bl.getCandidates(ballotID, username);
     if (result) {
       if (result == -1) {
-        res.status(401).json("Invalid ballot");
+        res.status(401).json("Invalid candidate");
       }
       res.status(200).json(result);
     } else {
@@ -139,7 +142,7 @@ app.get("/results", async (req, res) => {
     result = await bl.getResults(ballotID, username);
     if (result) {
       if (result == -1) {
-        res.status(401).json("Invalid ballot");
+        res.status(401).json("Invalid results");
       }
       res.status(200).json(result);
     } else {
@@ -169,7 +172,7 @@ app.get("/status", async (req, res) => {
     if (result) {
       res.status(200).json(result);
       if (result == -1) {
-        res.status(401).json("Invalid ballot");
+        res.status(401).json("Invalid status");
       }
     } else {
       res.status(400).json("Invalid User");
@@ -202,7 +205,7 @@ app.post("/votes", async (req, res) => {
     );
     if (result) {
       if (result == -1) {
-        res.status(401).json("Invalid ballot");
+        res.status(401).json("Invalid vote");
       }
       res.status(200).json("Vote successfully cast");
     } else {
@@ -323,6 +326,36 @@ app.post("/societies", async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+
+app.get("/ballotitem", async (req, res) => {
+  try {
+    const token = req.headers.authorization.split(" ")[1];
+    //Authorization: 'Bearer TOKEN'
+    const { ballotID } = req.query;
+    if (!token) {
+      res.status(600).json({
+        success: false,
+        message: "Error!Token was not provided."
+      });
+    }
+    //Decoding the token
+    const decodedToken = jwt.verify(token, "dean");
+    username = decodedToken.username;
+    //where the magic happens
+    result = await bl.getBallotItem(ballotID);
+    //send response
+    console.log("from endpoint ballotID:" + ballotID);
+    if(result == -1){
+      res.status(403).json("Unable to get BallotItem");
+    }else{
+      res.status(200).json(result);
+    }
+  } catch (e) {
+    console.log(e);
+    res.status(500).json("Internal server error");
   }
 });
 

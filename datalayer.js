@@ -5,7 +5,7 @@ const Pool = require("pg").Pool;
 const pool = new Pool({
   user: "postgres",
   database: "databooze",
-  // password: "password",
+  //password: "student",
   port: 5432
 });
 
@@ -52,6 +52,25 @@ const getBallotItems = async (ballotID) => {
     );
     if (result.rows.length === 0) {
       return null;
+    } else {
+      return result.rows;
+    }
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+//get an individual ballotItem
+const getBallotItem = async (ballotID) => {
+  const client = await pool.connect();
+  try {
+    const result = await client.query(
+      "select * from ballotitem where ballotid=($1)",
+      [ballotID]
+    );
+    if (result.rows.length == 0) {
+      console.log("result.rows.length is 0 from getBallotItem" + ballotID);
+      return -1;
     } else {
       return result.rows;
     }
@@ -339,5 +358,6 @@ module.exports = {
   getBallotsBySocietyID,
   getUserByUsername,
   createSociety,
-  createUser
+  createUser,
+  getBallotItem
 };

@@ -304,6 +304,22 @@ const createNewSociety = async (societyName, societyDescription) => {
   return await dl.createSociety(societyName, societyDescription);
 };
 
+//get a single ballot Item for display on AD
+const getBallotItem = async (ballotID) => {
+  try {
+    // var user = loggedInUsers.find((users) => users.username == username);
+    let response = dl.getBallotItem(ballotID);
+    if(response == -1){
+      return -1;
+    }else{
+      return response;
+    }
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
 // this should be the name of the function to check login, refer to index.js for return type and arguments
 module.exports = {
   userExists,
@@ -317,5 +333,6 @@ module.exports = {
   getAllBallotsForSociety,
   getUserByUsername,
   createUser,
-  createNewSociety
+  createNewSociety,
+  getBallotItem
 };

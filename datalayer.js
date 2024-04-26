@@ -200,11 +200,13 @@ const createUser = async (
   lastName,
   roleID,
   passwordHash,
-  societyID
+  societyIDs
 ) => {
   const client = await pool.connect();
   try {
+    console.log("in dl");
     await client.query("BEGIN"); // Start a transaction
+
     // Insert or update user
     const userQuery = `
       INSERT INTO users (username, firstname, lastname, roleid, passwordhash)
@@ -213,27 +215,28 @@ const createUser = async (
     const userValues = [username, firstName, lastName, roleID, passwordHash];
     await client.query(userQuery, userValues);
 
-    // Check if the provided societyID exists in the society table
-    const societyCheckQuery = `
-      SELECT 1 FROM society WHERE societyid = $1;
-    `;
-    const societyCheckValues = [societyID];
-    const societyCheckResult = await client.query(
-      societyCheckQuery,
-      societyCheckValues
-    );
+    // Check and insert/update user_society for each societyID
+    for (const societyID of societyIDs) {
+      const societyCheckQuery = `
+        SELECT 1 FROM society WHERE societyid = $1;
+      `;
+      const societyCheckValues = [societyID];
+      const societyCheckResult = await client.query(
+        societyCheckQuery,
+        societyCheckValues
+      );
 
-    if (societyCheckResult.rowCount === 0) {
-      throw new Error(`Society with ID ${societyID} does not exist.`);
+      if (societyCheckResult.rowCount === 0) {
+        throw new Error(`Society with ID ${societyID} does not exist.`);
+      }
+
+      const societyQuery = `
+        INSERT INTO users_society (username, societyid)
+        VALUES ($1, $2)
+      `;
+      const societyValues = [username, societyID];
+      await client.query(societyQuery, societyValues);
     }
-
-    // Insert or update user society
-    const societyQuery = `
-      INSERT INTO users_society (username, societyid)
-      VALUES ($1, $2);
-    `;
-    const societyValues = [username, societyID];
-    await client.query(societyQuery, societyValues);
 
     await client.query("COMMIT"); // Commit the transaction
   } catch (error) {

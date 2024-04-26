@@ -40,12 +40,13 @@ const CreateUser = () => {
 
         // Make POST request with token included in headers
         const response = await axios.post(
-          `http://localhost:5001/api/users/${username}`,
+          `http://localhost:5001/users/${username}`,
           {
             firstName,
             lastName,
             password,
-            societyID: roleID === "1" || roleID === "2" ? societyID : societies,
+            societyIDs:
+              roleID === "1" || roleID === "2" ? [societyID] : societies, // Send societyID as an array if roleID is 1 or 2, otherwise send the societies array
             roleID
           },
           {
@@ -54,7 +55,7 @@ const CreateUser = () => {
             }
           }
         );
-
+        console.log(username);
         console.log(response.data);
         // Handle successful response
       } catch (error) {
@@ -65,7 +66,6 @@ const CreateUser = () => {
       setErrors(validationErrors);
     }
   };
-
   const validateForm = () => {
     const errors = {};
 

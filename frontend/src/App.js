@@ -10,6 +10,8 @@ import { useState } from "react";
 import CreateUser from "./pages/createUser";
 import CreateSociety from "./pages/createSociety";
 import EditBallotPage from "./pages/createEditBallot";
+import AddBallotItemPage from "./pages/addBallotItem";
+import CreateCandidatePage from "./pages/createCandidate";
 
 
 function App() {
@@ -24,9 +26,9 @@ function App() {
           <Route path="/status" element={<Status />} />
           <Route path="/voting" element={<Voting />} />
           <Route path ="/societies" element={<ADHome/>}/>
-
+          <Route path ="/createCandidate" element={<CreateCandidatePage/>}/>
           <Route path ="/editBallot" element={<EditBallotPage/>}/>
-
+          <Route path ="/addBallotItem" element={<AddBallotItemPage/>}/>
         </Routes>
       </Router>
     </div>

@@ -90,7 +90,7 @@ const getCandidates = async(ballotID)=> {
     const client = await pool.connect();
     try{
     
-        var result = await client.query(' SELECT c.* FROM candidate c JOIN ballotitem b ON c.itemID = b.itemID WHERE b.ballotID = ($1)', [ballotID]);
+        var result = await client.query('SELECT c.*,ci.itemid FROM candidate c JOIN candidate_items ci on c.candidateid = ci.candidateid JOIN ballotitem b ON ci.itemID = b.itemID WHERE b.ballotID = ($1)', [ballotID]);
         return result.rows;
     }
     catch(error)
@@ -378,7 +378,71 @@ const createBallot= async(ballotid,ballotname,startdate,enddate,societyid)=>
     client.release();
   }
 }
+const createBallotItem = async(ballotid,itemtype,itemid,itemname,numvotesallowed,maxnumcandidates)=>
+{
+  const client = await pool.connect();
+  try{
+    await client.query('BEGIN');
+    const result = await client.query('INSERT INTO ballotitem values($1,$2,$3,$4,$5,$6)',[itemid,itemname,itemtype,numvotesallowed,ballotid,maxnumcandidates])
+    await client.query('COMMIT');
+   
+    return result.rowCount;
+    
+  }catch(error){
+    console.log(error);
+    await client.query('ROLLBACK');
+    throw error;
+  }
 
+  finally
+  {
+    client.release();
+  }
+}
+
+const addCandidate=async(itemid,candidateid)=>
+{
+  const client = await pool.connect();
+  try{
+    await client.query('BEGIN');
+    const result = await client.query('INSERT INTO candidate_items values($1,$2)',[candidateid,itemid])
+    await client.query('COMMIT');
+   
+    return result.rowCount;
+    
+  }catch(error){
+    console.log(error);
+    await client.query('ROLLBACK');
+    throw error;
+  }
+
+  finally
+  {
+    client.release();
+  }
+}
+
+const createCandidate= async(candidateid,firstname,lastname,titles,description,photo)=>
+{
+  const client = await pool.connect();
+  try{
+    await client.query('BEGIN');
+    const result = await client.query('INSERT INTO candidate values($1,$2,$3,$4,$5,$6)',[candidateid,firstname,lastname,titles,description,photo])
+    await client.query('COMMIT');
+   
+    return result.rowCount;
+    
+  }catch(error){
+    console.log(error);
+    await client.query('ROLLBACK');
+    throw error;
+  }
+
+  finally
+  {
+    client.release();
+  }
+}
 // this should be the name of the function to check login, refer to index.js for return type and arguments
 module.exports = {
     getUser,
@@ -396,5 +460,8 @@ module.exports = {
     createUser,
     createSociety,
     editBallot,
-    createBallot
+    createBallot,
+    createBallotItem,
+    addCandidate,
+    createCandidate
 }

@@ -385,6 +385,20 @@ const createOrEditBallot = async(username,ballotid,ballotname,startdate,enddate,
     return await dl.createBallot(ballotid,ballotname,startdate,enddate,societyid)
    }
 }
+
+const createBallotItem= async(username,ballotid,itemtype,itemid,itemname,numvotesallowed,maxnumcandidates)=>
+{
+return await dl.createBallotItem(ballotid,itemtype,itemid,itemname,numvotesallowed,maxnumcandidates);
+}
+
+const addCandidate=async(username,itemid,candidateid)=>
+{
+    return await dl.addCandidate(itemid,candidateid);
+}
+const createCandidate=async(username,candidateid,firstname,lastname,titles,description,photo)=>
+{
+    return await dl.createCandidate(candidateid,firstname,lastname,titles,description,photo);
+}
 // this should be the name of the function to check login, refer to index.js for return type and arguments
 module.exports = {
     userExists,
@@ -398,6 +412,9 @@ module.exports = {
     createUser,
     createNewSociety,
     getBallot,
-    createOrEditBallot
+    createOrEditBallot,
+    createBallotItem,
+    addCandidate,
+    createCandidate
 }
 

@@ -91,20 +91,20 @@ function EditBallotPage(props) {
 
     }
     }
-catch(error)
-  {
-    console.error(error);
-      
-      if (error.response.status!=null && (error.response.status === 401 || error.response.status === 400))
-      {
-        alert("ballot not edited/created");
-      }
-        else
-      { 
-        alert("Internal server error");
-    
-      }
-  }
+    catch(error)
+    {
+        console.error(error);
+        
+        if (error.response.status!=null && (error.response.status === 401 || error.response.status === 400))
+        {
+            alert("ballot not edited/created");
+        }
+            else
+        { 
+            alert("Internal server error");
+        
+        }
+    }
   };
 
   return (

@@ -90,7 +90,9 @@ function MemberHome(props) {
     <div>
       <h2>Home</h2>
       {roleid > 2 && (
-    <button onClick={()=>navigate("/editBallot")}>Create Ballot</button>
+   <div> <button onClick={()=>navigate("/editBallot")}>Create Ballot</button>
+    <button onClick={()=>navigate("/createCandidate")}>Create Candidate</button>
+   </div>
   )}
       <div>
       {ballots.map((ballot, index) => {

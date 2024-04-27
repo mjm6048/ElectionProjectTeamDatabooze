@@ -34,6 +34,7 @@ const Voting = (props) => {
   {
     var response = await axios.get(`http://localhost:5001/candidates?ballotID=${ballotid}`,{ headers: {"Authorization" : `Bearer ${token}`} });
     setCandidates(response.data);
+    console.log(candidates);
 
   }
 
@@ -244,8 +245,8 @@ catch(error)
       </div>
     ) : roleid > 2 && editable ? (
       <div>
-        <button>Add position ballot</button>
-        <button>Add initiative ballot</button>
+        <button onClick={()=>navigate('/addBallotItem',{state:{ballotid:ballotid,itemtype:'position'}})}>Add position ballot</button>
+        <button onClick={()=>navigate('/addBallotItem',{state:{ballotid:ballotid,itemtype:'initiative'}})}> Add initiative ballot</button>
       </div>
     ) : null}
         </form>

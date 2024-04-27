@@ -436,6 +436,131 @@ app.post("/users", async (req, res) => {
     } //catch
   });
 
+  app.post('/ballotitems', async (req, res) => {
+    try
+    {  
+	    const token = req.headers.authorization.split(' ')[1];
+        //Authorization: 'Bearer TOKEN'
+        if (!token) {
+            res.status(600)
+                .json(
+                    {
+                        success: false,
+                        message: "Error!Token was not provided."
+                    }
+                );
+        }
+        //Decoding the token
+        const decodedToken = jwt.verify(token, "dean");
+        const{ballotid,itemtype,itemid,itemname,numvotesallowed,maxnumcandidates} = req.body;
+        username = decodedToken.username;
+        result = await bl.createBallotItem(username,ballotid,itemtype,itemid,itemname,numvotesallowed,maxnumcandidates);
+        if(result){
+            if(result == -1)
+            {
+                res.status(401).json("Invalid ballot");
+            }
+            else
+                { 
+                    res.status(200).json("Ballot item created successfully");
+            }
+        }
+        else{
+            res.status(400).json("Invalid user");
+        }
+
+    }
+    catch(e){
+        console.log(e);
+        res.status(500).json("Internal server error");
+    }
+
+}); 
+
+app.post('/candidate', async (req, res) => {
+    try
+    {  
+	    const token = req.headers.authorization.split(' ')[1];
+        //Authorization: 'Bearer TOKEN'
+        if (!token) {
+            res.status(600)
+                .json(
+                    {
+                        success: false,
+                        message: "Error!Token was not provided."
+                    }
+                );
+        }
+        //Decoding the token
+        const decodedToken = jwt.verify(token, "dean");
+        const{itemid,candidateid} = req.body;
+        console.log(req.body);
+        username = decodedToken.username;
+        result = await bl.addCandidate(username,itemid,candidateid);
+        if(result){
+            if(result == -1)
+            {
+                res.status(401).json("Candidate not added");
+            }
+            else
+                { 
+                    res.status(200).json("candidate added successfully");
+            }
+        }
+        else{
+            res.status(400).json("Invalid user");
+        }
+
+    }
+    catch(e){
+        console.log(e);
+        res.status(500).json("Internal server error");
+    }
+
+}); 
+
+
+app.post('/candidates', async (req, res) => {
+    try
+    {  
+	    const token = req.headers.authorization.split(' ')[1];
+        //Authorization: 'Bearer TOKEN'
+        if (!token) {
+            res.status(600)
+                .json(
+                    {
+                        success: false,
+                        message: "Error!Token was not provided."
+                    }
+                );
+        }
+        //Decoding the token
+        const decodedToken = jwt.verify(token, "dean");
+        const{candidateid,firstname,lastname,titles,description,photo} = req.body;
+        console.log(req.body);
+        username = decodedToken.username;
+        result = await bl.createCandidate(username,candidateid,firstname,lastname,titles,description,photo);
+        if(result){
+            if(result == -1)
+            {
+                res.status(401).json("Candidate not added");
+            }
+            else
+                { 
+                    res.status(200).json("candidate added successfully");
+            }
+        }
+        else{
+            res.status(400).json("Invalid user");
+        }
+
+    }
+    catch(e){
+        console.log(e);
+        res.status(500).json("Internal server error");
+    }
+
+}); 
 app.listen(port,()=>{
     console.log("port connected");
 })

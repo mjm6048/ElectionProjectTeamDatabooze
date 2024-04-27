@@ -25,7 +25,7 @@ function App() {
           <Route path="/voting" element={<Voting />} />
           <Route path ="/societies" element={<ADHome/>}/>
 
-          <Route path ="editBallot" element={<EditBallotPage/>}/>
+          <Route path ="/editBallot" element={<EditBallotPage/>}/>
 
         </Routes>
       </Router>

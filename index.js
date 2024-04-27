@@ -321,46 +321,46 @@ app.get("/societies", async (req, res) => {
     } //catch
   });
  
-// app.post('/ballots', async (req, res) => {
-//     try
-//     {  
-// 	    const token = req.headers.authorization.split(' ')[1];
-//         //Authorization: 'Bearer TOKEN'
-//         if (!token) {
-//             res.status(600)
-//                 .json(
-//                     {
-//                         success: false,
-//                         message: "Error!Token was not provided."
-//                     }
-//                 );
-//         }
-//         //Decoding the token
-//         const decodedToken = jwt.verify(token, "dean");
-//         const{ballotid,ballotName,startDate,endDate} = req.body;
-//         username = decodedToken.username;
-//         result = await bl.createOrEditBallot(username,ballotid,ballotName,startDate,endDate);
-//         if(result){
-//             if(result == -1)
-//             {
-//                 res.status(401).json("Invalid ballot");
-//             }
-//             else
-//                 { 
-//                     res.status(200).json("Ballot successfull");
-//             }
-//         }
-//         else{
-//             res.status(400).json("Vote not cast");
-//         }
+app.post('/ballots', async (req, res) => {
+    try
+    {  
+	    const token = req.headers.authorization.split(' ')[1];
+        //Authorization: 'Bearer TOKEN'
+        if (!token) {
+            res.status(600)
+                .json(
+                    {
+                        success: false,
+                        message: "Error!Token was not provided."
+                    }
+                );
+        }
+        //Decoding the token
+        const decodedToken = jwt.verify(token, "dean");
+        const{ballotid,ballotname,startdate,enddate,societyid,edit} = req.body;
+        username = decodedToken.username;
+        result = await bl.createOrEditBallot(username,ballotid,ballotname,startdate,enddate,societyid,edit);
+        if(result){
+            if(result == -1)
+            {
+                res.status(401).json("Invalid ballot");
+            }
+            else
+                { 
+                    res.status(200).json("Ballot modification successfull");
+            }
+        }
+        else{
+            res.status(400).json("Invalid user");
+        }
 
-//     }
-//     catch(e){
-//         console.log(e);
-//         res.status(500).json("Internal server error");
-//     }
+    }
+    catch(e){
+        console.log(e);
+        res.status(500).json("Internal server error");
+    }
 
-// }); 
+}); 
 
 app.post("/users", async (req, res) => {
     try {

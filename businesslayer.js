@@ -375,7 +375,16 @@ const getBallot = async(ballotID)=>
 {
     return await dl.getBallot(ballotID);
 }
-
+const createOrEditBallot = async(username,ballotid,ballotname,startdate,enddate,societyid,edit)=>
+{if(edit)
+   {
+    return await dl.editBallot(ballotid,ballotname,startdate,enddate,societyid);
+   }
+   else
+   {
+    return await dl.createBallot(ballotid,ballotname,startdate,enddate,societyid)
+   }
+}
 // this should be the name of the function to check login, refer to index.js for return type and arguments
 module.exports = {
     userExists,
@@ -388,6 +397,7 @@ module.exports = {
     getSocieties,
     createUser,
     createNewSociety,
-    getBallot
+    getBallot,
+    createOrEditBallot
 }
 

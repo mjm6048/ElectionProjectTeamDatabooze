@@ -44,7 +44,10 @@ const getBallots=async(societyID, username)=>
     throw error;
   }
 
-
+  finally
+  {
+    client.release();
+  }
 }
 const getBallotItems=async(ballotID)=>
 {  const client = await pool.connect();
@@ -59,7 +62,10 @@ const getBallotItems=async(ballotID)=>
     console.log(error);
     throw error;
   }
-
+  finally
+  {
+    client.release();
+  }
 
 }
 
@@ -330,6 +336,48 @@ const createSociety = async (societyName, societyDescription) => {
   return rows[0];
 };
 
+const editBallot= async(ballotid,ballotname,startdate,enddate,societyid)=>
+{
+  const client = await pool.connect();
+  try{
+    await client.query('BEGIN');
+    const result = await client.query('UPDATE ballots SET ballotname = ($1), startdate = ($2),enddate = ($3), societyid=($4) WHERE ballotid = ($5);',[ballotname,startdate,enddate,societyid,ballotid])
+    await client.query('COMMIT');
+    return result.rowCount;
+    
+  }catch(error){
+    console.log(error);
+    await client.query('ROLLBACK');
+    throw error;
+  }
+
+  finally
+  {
+    client.release();
+  }
+}
+
+const createBallot= async(ballotid,ballotname,startdate,enddate,societyid)=>
+{
+  const client = await pool.connect();
+  try{
+    await client.query('BEGIN');
+    const result = await client.query('INSERT INTO ballots values($1,$2,$3,$4,$5)',[ballotid,ballotname,startdate,enddate,societyid])
+    await client.query('COMMIT');
+   
+    return result.rowCount;
+    
+  }catch(error){
+    console.log(error);
+    await client.query('ROLLBACK');
+    throw error;
+  }
+
+  finally
+  {
+    client.release();
+  }
+}
 
 // this should be the name of the function to check login, refer to index.js for return type and arguments
 module.exports = {
@@ -346,5 +394,7 @@ module.exports = {
     getAllSocieties,
     getAssignedSocieties,
     createUser,
-    createSociety
+    createSociety,
+    editBallot,
+    createBallot
 }

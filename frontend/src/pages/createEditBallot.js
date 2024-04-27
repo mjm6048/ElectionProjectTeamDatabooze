@@ -1,11 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
-
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
+import axios from "axios";
 function EditBallotPage(props) {
+  const navigate = useNavigate();
+  const { state } = useLocation();
 
-  const { state } = useLocation(); 
   const token = localStorage.getItem('adtoken');
-  const ballotid = state.ballotid;
+  if(state!=null)
+  {
+     var ballotid = state.ballotid;
+  }
+  
+  else 
+  { 
+    ballotid = 0;
+  }
   const [formData, setFormData] = useState({
     ballotName: '',
     startDate: '',
@@ -14,6 +23,7 @@ function EditBallotPage(props) {
 
 
   useEffect(() => {
+
     async function fetchBallotData() {
       try {
        
@@ -29,11 +39,14 @@ function EditBallotPage(props) {
         const enddate = new Date(data[0].enddate);
         console.log(startdate.toISOString().split('T')[0].replace(/-/g, '-'));
         // Populate form fields with existing ballot data
+
         setFormData({
           ballotname: data[0].ballotname,
           startdate: startdate.toISOString().split('T')[0].replace(/-/g, '-'),
           enddate:  enddate.toISOString().split('T')[0].replace(/-/g, '-'),
-          societyid: data[0].societyid
+          societyid: data[0].societyid,
+          ballotid:ballotid, 
+          edit:true
         });
         console.log(formData);
       } catch (error) {
@@ -41,7 +54,17 @@ function EditBallotPage(props) {
         // Handle error, e.g., redirect to error page
       }
     }
-    fetchBallotData();
+    if(ballotid!=0)
+    {
+        fetchBallotData();
+       
+    }
+    else
+    {
+        setFormData({
+            edit:false
+          });
+    }
   }, [ballotid]);
 
   const handleInputChange = (e) => {
@@ -52,15 +75,55 @@ function EditBallotPage(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    //ballotid,ballotname,startdate,enddate,societyid,edit
+    const headers = {
+        'Authorization': `Bearer ${token}`
+    }
     console.log(formData);
+    try
+    {
+    const response =  await axios.post(`http://localhost:5001/ballots`,formData,{headers});
+       
+    if(response.status === 200)
+    {
+      alert("Ballot created/edited");
+      navigate("/memberhome");
+
+    }
+    }
+catch(error)
+  {
+    console.error(error);
+      
+      if (error.response.status!=null && (error.response.status === 401 || error.response.status === 400))
+      {
+        alert("ballot not edited/created");
+      }
+        else
+      { 
+        alert("Internal server error");
     
+      }
+  }
   };
 
   return (
     <div>
-      <h2>Edit Ballot</h2>
+      <h2>Create or Edit Ballot</h2>
       <form onSubmit={handleSubmit}>
-        <label>Ballot Name:</label>
+      {ballotid === 0 && (
+        <>
+          <label>Ballot ID:</label>
+          <input
+            type="text"
+            name="ballotid"
+            value={formData.ballotid}
+            onChange={handleInputChange}
+            required
+          />
+        </>
+      )}
+  <label>Ballot Name :</label>
         <input type="text" name="ballotname" value={formData.ballotname} onChange={handleInputChange} required />
         
         <label>Start Date:</label>

@@ -9,7 +9,7 @@ function MemberHome(props) {
   const navigate = useNavigate();
   const { state } = useLocation();
   const [ballots,setBallots]=useState([]);
-
+  const roleid = localStorage.getItem('adroleid');
   useEffect( ()=>
   {
   
@@ -89,6 +89,9 @@ function MemberHome(props) {
   return (
     <div>
       <h2>Home</h2>
+      {roleid > 2 && (
+    <button onClick={()=>navigate("/editBallot")}>Create Ballot</button>
+  )}
       <div>
       {ballots.map((ballot, index) => {
          if (ballot.ballotstatus === 'active') {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+const BACKEND_URL ="http://localhost:5001";
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -38,7 +38,7 @@ function Login() {
   async function submit(e) {
     e.preventDefault();
     try {
-      let response = await axios.post("http://localhost:5001/users/login", {
+      let response = await axios.post(`${BACKEND_URL}/users/login`, {
           username,
           password
         });

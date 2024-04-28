@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import PositionItem from '../components/positionitem';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from "axios";
+const BACKEND_URL ="http://localhost:5001";
 const Voting = (props) => {
   const token = localStorage.getItem('adtoken');
   const roleid = localStorage.getItem('adroleid');
@@ -26,12 +27,12 @@ const Voting = (props) => {
   
   const getBallotItems = async () =>
   {
-    var res = await axios.get(`http://localhost:5001/ballotitems?ballotID=${ballotid}`,{ headers: {"Authorization" : `Bearer ${token}`} })
+    var res = await axios.get(`${BACKEND_URL}/ballotitems?ballotID=${ballotid}`,{ headers: {"Authorization" : `Bearer ${token}`} })
     setBallotItems(res.data);
   }
   const getCandidates = async()=>
   {
-    var response = await axios.get(`http://localhost:5001/candidates?ballotID=${ballotid}`,{ headers: {"Authorization" : `Bearer ${token}`} });
+    var response = await axios.get(`${BACKEND_URL}/candidates?ballotID=${ballotid}`,{ headers: {"Authorization" : `Bearer ${token}`} });
     setCandidates(response.data);
     console.log(candidates);
 
@@ -173,7 +174,7 @@ const Voting = (props) => {
    
     try
     {
-    const response = await axios.post(`http://localhost:5001/votes`,data,{headers});
+    const response = await axios.post(`${BACKEND_URL}/votes`,data,{headers});
     if(response.status === 200)
     {
       alert("Vote succesfully cast");

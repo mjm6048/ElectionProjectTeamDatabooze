@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import axios from "axios";
+const BACKEND_URL ="http://localhost:5001";
 function AddBallotItemPage(props) {
   const navigate = useNavigate();
   const { state } = useLocation();
@@ -32,7 +33,7 @@ function AddBallotItemPage(props) {
     console.log(formData);
     try
     {
-    const response =  await axios.post(`http://localhost:5001/ballotitems`,formData,{headers});
+    const response =  await axios.post(`${BACKEND_URL}/ballotitems`,formData,{headers});
        
     if(response.status === 200)
     {

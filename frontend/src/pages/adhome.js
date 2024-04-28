@@ -4,7 +4,7 @@ import Ballot from "../components/ballot";
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from "axios";
 import '../index.css';
-
+const BACKEND_URL ="http://localhost:5001";
 
 function ADHome(props) {
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ function ADHome(props) {
   const getSocieties = async () =>
   {
     var token= localStorage.getItem("adtoken");
-    var res = await axios.get("http://localhost:5001/societies",{ headers: {"Authorization" : `Bearer ${token}`} });
+    var res = await axios.get(`${BACKEND_URL}/societies`,{ headers: {"Authorization" : `Bearer ${token}`} });
     console.log(res.data);
     setSocieties(Object.values(res.data));
   }

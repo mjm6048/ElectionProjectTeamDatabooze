@@ -1,6 +1,6 @@
 // import './App.css'
 import Home from "./pages/memberhome";
-import Login from "./components/Login";
+import Login from "./pages/Login";
 import Results from "./pages/results";
 import Status from "./pages/status";
 import Voting from "./pages/voting";
@@ -12,7 +12,6 @@ import CreateSociety from "./pages/createSociety";
 import EditBallotPage from "./pages/createEditBallot";
 import AddBallotItemPage from "./pages/addBallotItem";
 import CreateCandidatePage from "./pages/createCandidate";
-
 
 function App() {
 

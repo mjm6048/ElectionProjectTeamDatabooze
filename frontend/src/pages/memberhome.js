@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Ballot from "../components/ballot";
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from "axios";
-
+const BACKEND_URL ="http://localhost:5001";
 
 function MemberHome(props) {
   const navigate = useNavigate();
@@ -34,10 +34,10 @@ function MemberHome(props) {
   {
     var token= localStorage.getItem("adtoken");
     if(societyID ==0)
-    {var res = await axios.get("http://localhost:5001/ballots",{ headers: {"Authorization" : `Bearer ${token}`} });}
+    {var res = await axios.get(`${BACKEND_URL}/ballots`,{ headers: {"Authorization" : `Bearer ${token}`} });}
     else
     {
-      var res = await  axios.get(`http://localhost:5001/ballots?societyID=${societyID}`,{ headers: {"Authorization" : `Bearer ${token}`} });
+      var res = await  axios.get(`${BACKEND_URL}/ballots?societyID=${societyID}`,{ headers: {"Authorization" : `Bearer ${token}`} });
     }
     //console.log(res.data);
     setBallots(Object.values(res.data));
@@ -46,7 +46,7 @@ function MemberHome(props) {
   const handleViewResults = async (ballotID) => {
     try {
       // Make the API call with the ID parameter
-      const response = await axios.get(`http://localhost:5001/results?ballotID=${ballotID}`,{ headers: {"Authorization" : `Bearer ${token}`} });
+      const response = await axios.get(`${BACKEND_URL}/results?ballotID=${ballotID}`,{ headers: {"Authorization" : `Bearer ${token}`} });
       const data = await response.data;
       navigate('/results', {state: { results: data }});
     } catch (error) {
@@ -66,7 +66,7 @@ function MemberHome(props) {
   const handleViewStatus = async (ballotID) => {
     try {
       // Make the API call with the ID parameter
-      const response = await  axios.get(`http://localhost:5001/status?ballotID=${ballotID}`,{ headers: {"Authorization" : `Bearer ${token}`} });
+      const response = await  axios.get(`${BACKEND_URL}/status?ballotID=${ballotID}`,{ headers: {"Authorization" : `Bearer ${token}`} });
       const data = await response.data;
       
       navigate('/status', {state: { status: data }});

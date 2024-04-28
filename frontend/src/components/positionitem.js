@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from 'react-router-dom';
 import '../index.css';
 import axios from "axios";
+const BACKEND_URL ="http://localhost:5001";
 const PositionItem = ({ positionName, positionId, candidates, onVoteChange, onWriteIn, editable, numVotesAllowed }) => {
   const navigate =  useNavigate();
   const token = localStorage.getItem('adtoken');
@@ -32,7 +33,7 @@ const PositionItem = ({ positionName, positionId, candidates, onVoteChange, onWr
   }
   try
   {
-  const response =  await axios.post(`http://localhost:5001/candidate`,{itemid:positionId, candidateid:candidateID},{headers});
+  const response =  await axios.post(`${BACKEND_URL}/candidate`,{itemid:positionId, candidateid:candidateID},{headers});
      
   if(response.status === 200)
   {

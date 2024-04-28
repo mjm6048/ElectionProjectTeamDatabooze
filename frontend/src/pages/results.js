@@ -1,10 +1,8 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import ItemResult from '../components/itemresult';
+
 function Results(props) {
-    //databooze=# select * from materialized_ballotitem_positionvotes where ballotid=1;
- //ballotid | itemid | itemname  | itemtype | candidateid | firstname | lastname  | num_votes
-  // Access the passed state containing the results
   const { state } = useLocation();
  const results = state.results.result;
  const usersvoted = state.results.status.usernames;

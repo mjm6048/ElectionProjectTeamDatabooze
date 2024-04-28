@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import axios from "axios";
+const BACKEND_URL ="http://localhost:5001";
 function EditBallotPage(props) {
   const navigate = useNavigate();
   const { state } = useLocation();
@@ -28,7 +29,7 @@ function EditBallotPage(props) {
       try {
        
         // Fetch existing ballot data from the backend API
-        const response = await fetch(`http://localhost:5001/ballot?ballotID=${ballotid}`,{ headers: {"Authorization" : `Bearer ${token}`} });
+        const response = await fetch(`${BACKEND_URL}/ballot?ballotID=${ballotid}`,{ headers: {"Authorization" : `Bearer ${token}`} });
 
         if (!response.ok) {
           throw new Error('Failed to fetch ballot');
@@ -82,7 +83,7 @@ function EditBallotPage(props) {
     console.log(formData);
     try
     {
-    const response =  await axios.post(`http://localhost:5001/ballots`,formData,{headers});
+    const response =  await axios.post(`${BACKEND_URL}/ballots`,formData,{headers});
        
     if(response.status === 200)
     {

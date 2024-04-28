@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import axios from "axios";
+const BACKEND_URL ="http://localhost:5001";
 function CreateCandidatePage(props) {
   const navigate = useNavigate();
 
@@ -30,7 +31,7 @@ function CreateCandidatePage(props) {
      console.log(formData);
     try
     {
-    const response =  await axios.post(`http://localhost:5001/candidates`,formData,{headers});
+    const response =  await axios.post(`${BACKEND_URL}/candidates`,formData,{headers});
        
     if(response.status === 200)
     {

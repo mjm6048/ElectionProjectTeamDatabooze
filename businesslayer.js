@@ -63,22 +63,17 @@ const getBallots =async(username)=>
 
         if (user == null)
         {   var user = await dl.getUser(username);
-            if(user.length==0)
-              {
-                return 0;
-              }
-            else
-            {
+            
                 loggedInUsers.push(user[0]);
                 user = user[0];
-            }
+            
         }
         // check if ballot votes has already been casted from ballots_users
      
         var ballots = await dl.getBallots(user.societyid, username);  
         if(user.roleid == 1)
         {
-        ballots = ballots.filter(ballot=>ballot.ballotstatus === 'active');
+        ballots = ballots.filter(ballot=>(ballot.ballotstatus === 'active'||ballot.ballotstatus ==='not started'));
         }
             
        
@@ -94,30 +89,19 @@ const getBallotItems =async(ballotID,username)=>
 {
     try
     {
-        var user = loggedInUsers.find(users => users.username== username);
         
-        if (user == null)
-        {
-            var user = await dl.getUser(username);
-            loggedInUsers.push(user[0]);
-            user = user[0];
-        }
 
         var ballot = await dl.getBallot(ballotID);
         if (ballot === null) {
             return -1;
           }
 
-          if (ballot[0].societyid==user.societyid)
-        {
+         
             // check if ballot votes has already been casted from ballots_users
             var ballotitems = await dl.getBallotItems(ballotID);
             return ballotitems;
-        }
-        else
-        {
-            return -1;
-        }
+        
+        
 }
 catch(error)
 {
@@ -347,7 +331,8 @@ const getSocieties = async (username) => {
     lastName,
     password,
     societyIDs, // Update to accept an array of societyIDs
-    roleID
+    roleID,
+    adminusername
   ) => {
     try {
       // Hash the password
@@ -378,26 +363,26 @@ const getBallot = async(ballotID)=>
 const createOrEditBallot = async(username,ballotid,ballotname,startdate,enddate,societyid,edit)=>
 {if(edit)
    {
-    return await dl.editBallot(ballotid,ballotname,startdate,enddate,societyid);
+    return await dl.editBallot(username,ballotid,ballotname,startdate,enddate,societyid);
    }
    else
    {
-    return await dl.createBallot(ballotid,ballotname,startdate,enddate,societyid)
+    return await dl.createBallot(username,ballotid,ballotname,startdate,enddate,societyid)
    }
 }
 
 const createBallotItem= async(username,ballotid,itemtype,itemid,itemname,numvotesallowed,maxnumcandidates)=>
 {
-return await dl.createBallotItem(ballotid,itemtype,itemid,itemname,numvotesallowed,maxnumcandidates);
+return await dl.createBallotItem(username,ballotid,itemtype,itemid,itemname,numvotesallowed,maxnumcandidates);
 }
 
 const addCandidate=async(username,itemid,candidateid)=>
 {
-    return await dl.addCandidate(itemid,candidateid);
+    return await dl.addCandidate(username,itemid,candidateid);
 }
 const createCandidate=async(username,candidateid,firstname,lastname,titles,description,photo)=>
 {
-    return await dl.createCandidate(candidateid,firstname,lastname,titles,description,photo);
+    return await dl.createCandidate(username,candidateid,firstname,lastname,titles,description,photo);
 }
 // this should be the name of the function to check login, refer to index.js for return type and arguments
 module.exports = {

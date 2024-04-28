@@ -27,7 +27,6 @@ const Voting = (props) => {
   const getBallotItems = async () =>
   {
     var res = await axios.get(`http://localhost:5001/ballotitems?ballotID=${ballotid}`,{ headers: {"Authorization" : `Bearer ${token}`} })
-    console.log(res.data);
     setBallotItems(res.data);
   }
   const getCandidates = async()=>

@@ -5,6 +5,7 @@
 \ir InsertBallotData.sql
 \ir InsertBallotItemData.sql
 \ir InsertCandidateData.sql
+\ir InsertCandidateItems.sql
 \ir InsertVoteData.sql
 \ir InsertInitiatives.sql
 \ir StoredProcedures.sql

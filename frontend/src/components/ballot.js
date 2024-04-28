@@ -18,7 +18,7 @@ return (
     {(status === 'active' && roleid > 1) && (
       <button onClick={onViewStatus}>View Status</button>
     )}
-    {status === 'completed' && (
+    {(status === 'completed' && roleid > 1 ) && (
       <button onClick={onViewResults}>View Results</button>
     )}
     {(status === 'not started' && roleid > 2) && (
@@ -29,7 +29,10 @@ return (
     )}
      {(roleid > 2 && status == 'not started') && (
       <button onClick ={onView}>View and Edit Ballot Items</button>
+    )} {(roleid < 3 && status == 'not started') && (
+      <div> Not Started </div>
     )}
+
   </div>
 );
 }

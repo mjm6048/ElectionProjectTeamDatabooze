@@ -70,7 +70,10 @@ app.get('/ballots', async (req, res) => {
             {
                 res.status(401).json("Invalid society");
             }
+        else
+        {
             res.status(200).json(result);
+        }
         }
         else{
             res.status(400).json("Invalid User");

@@ -109,8 +109,8 @@ const getCandidates = async(ballotID)=> {
         const client = await pool.connect();
         try
         {
-          const positionResult = await client.query('SELECT DISTINCT sp2.ID, sp2.name, sp2.type, sp1.candidateid, sp1.firstname, sp1.lastname, sp1.num_votes from (select * from get_items_in_ballot($1)) as sp2 JOIN (select * from count_position_votes()) as sp1 ON sp2.ID = sp1.ID ORDER BY sp2.ID;', [ballotID]);
-          const initiativeResult= await client.query('SELECT DISTINCT sp2.ID, sp2.name, sp2.type, sp1.response, sp1.num_votes from (select * from get_items_in_ballot($1)) as sp2 JOIN (select * from count_initiative_votes()) as sp1 ON sp2.ID = sp1.ID ORDER BY sp2.ID;', [ballotID]);
+          const positionResult = await client.query('select * from materialized_ballotitem_positionvotes where ballotid=($1);', [ballotID]);
+          const initiativeResult= await client.query('select * from materialized_ballotitem_initiativevotes where ballotid=($1);', [ballotID]);
           console.log(positionResult.rows);
           console.log(initiativeResult.rows);
           return positionResult.rows.concat(initiativeResult.rows);
@@ -134,7 +134,7 @@ const getStatus = async(ballotID)=>
   const client = await pool.connect();
   try
   {
-    const result1 = await client.query('SELECT DISTINCT sp2.username from (select * from get_items_in_ballot($1)) as sp1 JOIN (select * from votes) as sp2 ON sp1.ID = sp2.itemID;', [ballotID]);
+    const result1 = await client.query('SELECT * from materialized_votes_username_ballotid where ballotid=($1);', [ballotID]);
     const result2 = await client.query('SELECT COUNT(users.username) AS user_count FROM ballots JOIN users_society ON users_society.societyID = ballots.societyID JOIN users ON users.username = users_society.username WHERE ballots.ballotid = ($1) AND users.roleid IN (1, 2);',[ballotID])
     const result = {
       usernames: result1.rows,
@@ -167,7 +167,7 @@ const castVote = async(username,positionvotes, initiativevotes,ballotID)=>
   initiativevalues.push([initiativevotes[i].voteType,initiativevotes[i].itemID,initiativevotes[i].initiativeResponse,initiativevotes[i].writein,username]);
  }
  try {
-  
+  await client.query('SET audit.user_id ='+username);
    await client.query('BEGIN');
    var eligible =  await client.query('SELECT * FROM ballots_users where username = ($1) and ballotid =($2)',[username,ballotID]);
    if(eligible.rows.length == 0)
@@ -336,10 +336,11 @@ const createSociety = async (societyName, societyDescription) => {
   return rows[0];
 };
 
-const editBallot= async(ballotid,ballotname,startdate,enddate,societyid)=>
+const editBallot= async(username,ballotid,ballotname,startdate,enddate,societyid)=>
 {
   const client = await pool.connect();
   try{
+    await client.query('SET audit.user_id ='+username);
     await client.query('BEGIN');
     const result = await client.query('UPDATE ballots SET ballotname = ($1), startdate = ($2),enddate = ($3), societyid=($4) WHERE ballotid = ($5);',[ballotname,startdate,enddate,societyid,ballotid])
     await client.query('COMMIT');
@@ -357,10 +358,11 @@ const editBallot= async(ballotid,ballotname,startdate,enddate,societyid)=>
   }
 }
 
-const createBallot= async(ballotid,ballotname,startdate,enddate,societyid)=>
+const createBallot= async(username,ballotid,ballotname,startdate,enddate,societyid)=>
 {
   const client = await pool.connect();
   try{
+    await client.query('SET audit.user_id ='+username);
     await client.query('BEGIN');
     const result = await client.query('INSERT INTO ballots values($1,$2,$3,$4,$5)',[ballotid,ballotname,startdate,enddate,societyid])
     await client.query('COMMIT');
@@ -378,10 +380,11 @@ const createBallot= async(ballotid,ballotname,startdate,enddate,societyid)=>
     client.release();
   }
 }
-const createBallotItem = async(ballotid,itemtype,itemid,itemname,numvotesallowed,maxnumcandidates)=>
+const createBallotItem = async(username,ballotid,itemtype,itemid,itemname,numvotesallowed,maxnumcandidates)=>
 {
   const client = await pool.connect();
   try{
+    await client.query('SET audit.user_id ='+username);
     await client.query('BEGIN');
     const result = await client.query('INSERT INTO ballotitem values($1,$2,$3,$4,$5,$6)',[itemid,itemname,itemtype,numvotesallowed,ballotid,maxnumcandidates])
     await client.query('COMMIT');
@@ -400,10 +403,11 @@ const createBallotItem = async(ballotid,itemtype,itemid,itemname,numvotesallowed
   }
 }
 
-const addCandidate=async(itemid,candidateid)=>
+const addCandidate=async(username,itemid,candidateid)=>
 {
   const client = await pool.connect();
   try{
+    await client.query('SET audit.user_id ='+username);
     await client.query('BEGIN');
     const result = await client.query('INSERT INTO candidate_items values($1,$2)',[candidateid,itemid])
     await client.query('COMMIT');
@@ -422,10 +426,11 @@ const addCandidate=async(itemid,candidateid)=>
   }
 }
 
-const createCandidate= async(candidateid,firstname,lastname,titles,description,photo)=>
+const createCandidate= async(username,candidateid,firstname,lastname,titles,description,photo)=>
 {
   const client = await pool.connect();
   try{
+    await client.query('SET audit.user_id ='+username);
     await client.query('BEGIN');
     const result = await client.query('INSERT INTO candidate values($1,$2,$3,$4,$5,$6)',[candidateid,firstname,lastname,titles,description,photo])
     await client.query('COMMIT');

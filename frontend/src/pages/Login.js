@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+const BACKEND_URL ="http://localhost:5001";
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -13,12 +13,7 @@ function Login() {
 
     const getBallots = async () =>
     {
-     // var token= localStorage.getItem("adtoken");
-     // await axios.get("http://localhost:5001/ballots",{ headers: {"Authorization" : `Bearer ${token}`} })
-     // .then((res) => {
-        //var ballots = res.data;
-        history("/memberhome");
-   // });
+      history("/memberhome");
     }
   
     if (localStorage.getItem("adtoken"))
@@ -43,7 +38,7 @@ function Login() {
   async function submit(e) {
     e.preventDefault();
     try {
-      let response = await axios.post("http://localhost:5001/users/login", {
+      let response = await axios.post(`${BACKEND_URL}/users/login`, {
           username,
           password
         });
@@ -52,18 +47,20 @@ function Login() {
           var ballots =[];
           if(response.data.roleid<3)
           {
-          //axios.get("http://localhost:5001/ballots",{ headers: {"Authorization" : `Bearer ${response.data.token}`} })
-         // .then((res) => {
-          //  var ballots = res.data;
+
             history("/memberhome");
-        //});
-      }
-         
+      
+          }
+          else
+          {
+            history("/societies");
+          }
+            
           localStorage.setItem("adtoken",response.data.token);
           localStorage.setItem("adusername",username);
           localStorage.setItem("adroleid",response.data.roleid);
           setIsLoggedIn(true);
-          // Redirect to home page or do any further actions upon successful login
+
         } 
         else {
           alert("Invalid credentials");

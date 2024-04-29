@@ -27,10 +27,11 @@ CREATE TABLE users(
 
 DROP TABLE IF EXISTS society CASCADE;
 CREATE TABLE society(
-    societyID INT NOT NULL PRIMARY KEY,
-    societyName varchar(100), 
-    societyDescription varchar(100)
+    societyID SERIAL PRIMARY KEY,
+    societyName VARCHAR(200), 
+    societyDescription VARCHAR(500)
 );
+
 
 DROP TABLE IF EXISTS ballots CASCADE;
 CREATE TABLE ballots(
@@ -61,11 +62,9 @@ CREATE TABLE candidate(
     candidateID int NOT NULL PRIMARY KEY,
     firstName varchar(50) NOT NULL,
     lastName varchar(50) NOT NULL,
-    itemID int NOT NULL,
     titles varchar(50),
     candidateDescription varchar(500),
-    photo varchar(500),
-    FOREIGN KEY (itemID) REFERENCES BallotItem (itemID)
+    photo varchar(500)
 );
 
 DROP TABLE IF EXISTS votes CASCADE;
@@ -103,6 +102,16 @@ CREATE TABLE ballots_users(
     FOREIGN KEY (username) REFERENCES users(username),
     FOREIGN KEY (ballotID) REFERENCES ballots(ballotID)
 );
+
+DROP TABLE IF EXISTS candidate_items CASCADE;
+CREATE TABLE candidate_items(
+    candidateID INT NOT NULL,
+    itemID INT NOT NULL,
+    CONSTRAINT candidate_items_key PRIMARY KEY (candidateID,itemID),
+    FOREIGN KEY (candidateID) REFERENCES candidate(candidateID),
+    FOREIGN KEY (itemID) REFERENCES ballotitem(itemID)
+);
+
 
 
 

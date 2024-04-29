@@ -3,11 +3,19 @@ import React, { useState, useEffect } from 'react';
 import PositionItem from '../components/positionitem';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from "axios";
+const BACKEND_URL ="http://localhost:5001";
 const Voting = (props) => {
   const token = localStorage.getItem('adtoken');
+  const roleid = localStorage.getItem('adroleid');
   const [ballotItems,setBallotItems]= useState([]);
   const [candidates,setCandidates]=useState([]);
   const { state } = useLocation();
+  var editable = false;
+  if(state.status!=null){
+    var editable = true;
+  }
+ 
+  const navigate = useNavigate();
   const ballotid = state.ballotid;
   useEffect( ()=>
   {
@@ -19,14 +27,14 @@ const Voting = (props) => {
   
   const getBallotItems = async () =>
   {
-    var res = await axios.get(`http://localhost:5001/ballotitems?ballotID=${ballotid}`,{ headers: {"Authorization" : `Bearer ${token}`} })
-    console.log(res.data);
+    var res = await axios.get(`${BACKEND_URL}/ballotitems?ballotID=${ballotid}`,{ headers: {"Authorization" : `Bearer ${token}`} })
     setBallotItems(res.data);
   }
   const getCandidates = async()=>
   {
-    var response = await axios.get(`http://localhost:5001/candidates?ballotID=${ballotid}`,{ headers: {"Authorization" : `Bearer ${token}`} });
+    var response = await axios.get(`${BACKEND_URL}/candidates?ballotID=${ballotid}`,{ headers: {"Authorization" : `Bearer ${token}`} });
     setCandidates(response.data);
+    console.log(candidates);
 
   }
 
@@ -151,8 +159,6 @@ const Voting = (props) => {
 
   const handleSubmit = async(event) => {
     event.preventDefault();
-   
-   
   };
   const handleResetVote=()=>
   {
@@ -165,10 +171,10 @@ const Voting = (props) => {
     console.log('Form data submitted:', {ballotid,positionVotes,initiativeVotes});
     event.preventDefault();
     var data = {ballotid,positionVotes,initiativeVotes};
-    // Here you can handle the submission of form data
+   
     try
     {
-    const response = await axios.post(`http://localhost:5001/votes`,data,{headers});
+    const response = await axios.post(`${BACKEND_URL}/votes`,data,{headers});
     if(response.status === 200)
     {
       alert("Vote succesfully cast");
@@ -209,6 +215,8 @@ catch(error)
               numVotesAllowed={ballotItem.numvotesallowed}
               onWriteIn={(writein)=>handleWriteIn(ballotItem.itemid,ballotItem.itemtype,writein)}
               onVoteChange={(candidateId) => handleVoteChange(ballotItem.itemid,candidateId)}
+              editable = {editable}
+              onEdit ={()=>navigate('/editBallot',{state:{itemid:ballotItem.itemid}})}
             />
           );
         } else {
@@ -216,19 +224,33 @@ catch(error)
           return (
             <div>
             <h2 key={ballotItem.itemid}>{ballotItem.itemname}</h2>
-            <button className={isButtonClicked(ballotItem.itemid,"yes") ? 'gray-button' : ''} onClick ={()=>updateInitiativeData(ballotItem.itemid,"yes")} disabled = {initiativeVotes.some(vote => vote.itemID === ballotItem.itemid && vote.initiativeResponse!="yes") }>Yes</button>
-            <button className={isButtonClicked(ballotItem.itemid,"no") ? 'gray-button' : ''} onClick ={()=>updateInitiativeData(ballotItem.itemid,"no")} disabled = {initiativeVotes.some(vote => vote.itemID === ballotItem.itemid && vote.initiativeResponse!="no")}>No</button>
-            <label>write in :
-            <input type = "text" key ={ballotItem.itemid} onChange={(e)=>handleWriteIn(ballotItem.itemid,ballotItem.itemtype,e)}></input>
-            </label>
+            {roleid < 3 && (
+            <div>
+              <button className={isButtonClicked(ballotItem.itemid, "yes") ? 'gray-button' : ''} onClick={() => updateInitiativeData(ballotItem.itemid, "yes")} disabled={initiativeVotes.some(vote => vote.itemID === ballotItem.itemid && vote.initiativeResponse !== "yes")}>Yes</button>
+              <button className={isButtonClicked(ballotItem.itemid, "no") ? 'gray-button' : ''} onClick={() => updateInitiativeData(ballotItem.itemid, "no")} disabled={initiativeVotes.some(vote => vote.itemID === ballotItem.itemid && vote.initiativeResponse !== "no")}>No</button>
+              <label>Write in:
+                <input type="text" key={ballotItem.itemid} onChange={(e) => handleWriteIn(ballotItem.itemid, ballotItem.itemtype, e)}></input>
+              </label>
+            </div>
+            )}
+
             </div>
           );
         }
       })}
-      <button onClick={handleSubmitVote} type="submit">Submit Vote</button>
-      <button onClick={handleResetVote}>Reset Votes</button>
-    </form>
-  );
+    {roleid < 3 ? (
+      <div>
+        <button onClick={handleSubmitVote} type="submit">Submit Vote</button>
+        <button onClick={handleResetVote}>Reset Votes</button>
+      </div>
+    ) : roleid > 2 && editable ? (
+      <div>
+        <button onClick={()=>navigate('/addBallotItem',{state:{ballotid:ballotid,itemtype:'position'}})}>Add position ballot</button>
+        <button onClick={()=>navigate('/addBallotItem',{state:{ballotid:ballotid,itemtype:'initiative'}})}> Add initiative ballot</button>
+      </div>
+    ) : null}
+        </form>
+      );
 } 
 
 export default Voting;

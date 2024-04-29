@@ -3,6 +3,12 @@ const dl = require('./datalayer');
 const {createHash } = require('crypto');
 var loggedInUsers =[];
 
+const hashPassword = (password) => {
+    const hash = createHash("sha256");
+    hash.update(password);
+    return hash.digest("hex");
+  };
+  
 
 const userExists = async(username,password)=>
 {
@@ -57,22 +63,17 @@ const getBallots =async(username)=>
 
         if (user == null)
         {   var user = await dl.getUser(username);
-            if(user.length==0)
-              {
-                return 0;
-              }
-            else
-            {
+            
                 loggedInUsers.push(user[0]);
                 user = user[0];
-            }
+            
         }
         // check if ballot votes has already been casted from ballots_users
      
         var ballots = await dl.getBallots(user.societyid, username);  
         if(user.roleid == 1)
         {
-        ballots = ballots.filter(ballot=>ballot.ballotstatus === 'active');
+        ballots = ballots.filter(ballot=>(ballot.ballotstatus === 'active'||ballot.ballotstatus ==='not started'));
         }
             
        
@@ -88,30 +89,19 @@ const getBallotItems =async(ballotID,username)=>
 {
     try
     {
-        var user = loggedInUsers.find(users => users.username== username);
         
-        if (user == null)
-        {
-            var user = await dl.getUser(username);
-            loggedInUsers.push(user[0]);
-            user = user[0];
-        }
 
         var ballot = await dl.getBallot(ballotID);
         if (ballot === null) {
             return -1;
           }
 
-          if (ballot[0].societyid==user.societyid)
-        {
+         
             // check if ballot votes has already been casted from ballots_users
             var ballotitems = await dl.getBallotItems(ballotID);
             return ballotitems;
-        }
-        else
-        {
-            return -1;
-        }
+        
+        
 }
 catch(error)
 {
@@ -313,9 +303,87 @@ catch(error)
 
 }
 
+const getSocieties = async (username) => {
+    try {
+      var user = loggedInUsers.find((users) => users.username == username);
+      //must determin  if user is Admin (return all) Employee (return associated) or other (tell them to ** off)
+      if (user.roleid === 3) {
+        //return associated
+        var queryRes = await dl.getAssignedSocieties(username);
+        return queryRes;
+      } else if (user.roleid === 4) {
+        //return all
+        var queryRes = await dl.getAllSocieties();
+        return queryRes;
+      } else {
+        //return nothing of value
+        return null;
+      }
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  }; //getSocieties
 
+  const createUser = async (
+    username,
+    firstName,
+    lastName,
+    password,
+    societyIDs, // Update to accept an array of societyIDs
+    roleID,
+    adminusername
+  ) => {
+    try {
+      // Hash the password
+      const passwordHash = await hashPassword(password);
+      console.log("in bl");
+      await dl.createUser(
+        username,
+        firstName,
+        lastName,
+        roleID,
+        passwordHash,
+        societyIDs
+      ); // Pass societyIDs as an array
+    } catch (error) {
+      throw error;
+    }
+  };
+  
+const createNewSociety = async (societyName, societyDescription) => {
+    // Add any business logic or validation here
+    console.log("in buis layer");
+    return await dl.createSociety(societyName, societyDescription);
+  };
+const getBallot = async(ballotID)=>
+{
+    return await dl.getBallot(ballotID);
+}
+const createOrEditBallot = async(username,ballotid,ballotname,startdate,enddate,societyid,edit)=>
+{if(edit)
+   {
+    return await dl.editBallot(username,ballotid,ballotname,startdate,enddate,societyid);
+   }
+   else
+   {
+    return await dl.createBallot(username,ballotid,ballotname,startdate,enddate,societyid)
+   }
+}
 
+const createBallotItem= async(username,ballotid,itemtype,itemid,itemname,numvotesallowed,maxnumcandidates)=>
+{
+return await dl.createBallotItem(username,ballotid,itemtype,itemid,itemname,numvotesallowed,maxnumcandidates);
+}
 
+const addCandidate=async(username,itemid,candidateid)=>
+{
+    return await dl.addCandidate(username,itemid,candidateid);
+}
+const createCandidate=async(username,candidateid,firstname,lastname,titles,description,photo)=>
+{
+    return await dl.createCandidate(username,candidateid,firstname,lastname,titles,description,photo);
+}
 // this should be the name of the function to check login, refer to index.js for return type and arguments
 module.exports = {
     userExists,
@@ -325,6 +393,13 @@ module.exports = {
     getResults,
     getStatus,
     castVote,
-    
+    getSocieties,
+    createUser,
+    createNewSociety,
+    getBallot,
+    createOrEditBallot,
+    createBallotItem,
+    addCandidate,
+    createCandidate
 }
 

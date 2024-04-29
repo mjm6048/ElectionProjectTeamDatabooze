@@ -1,3 +1,11 @@
+CREATE INDEX ballots_societyid ON ballots(societyid);
+CREATE INDEX ballotitem_ballotid ON ballotitem(ballotid);
+CREATE INDEX votes_itemid ON votes(itemid);
+CREATE INDEX ballots_users_username ON ballots_users (username);
+CREATE INDEX ballots_users_ballotID ON ballots_users (ballotID);
+CREATE INDEX candidate_items_itemID ON candidate_items (itemID);
+CREATE INDEX users_username ON users(username);
+
 
 /* get usernames of society members */
 CREATE OR REPLACE FUNCTION get_society_membernames(societyIDValue INT)
@@ -143,4 +151,43 @@ GROUP BY v.itemid, v.initiativeResponse;
 END;
 $$ LANGUAGE plpgsql;
 
-/* count max votes */
+CREATE MATERIALIZED VIEW materialized_votes_username_ballotid AS
+SELECT DISTINCT votes.username, ballots.ballotid
+FROM votes
+JOIN ballotitem ON votes.itemid = ballotitem.itemid
+JOIN ballots ON ballots.ballotid = ballotitem.ballotid
+ORDER BY ballots.ballotid;
+
+CREATE MATERIALIZED VIEW materialized_ballotitem_positionvotes AS
+SELECT DISTINCT
+    ballotitem.ballotid,
+    ballotitem.itemID,
+    ballotitem.itemname,
+    ballotitem.itemtype,
+    sp1.candidateid,
+    sp1.firstname,
+    sp1.lastname,
+    sp1.num_votes
+FROM
+    ballotitem
+JOIN
+    ballots ON ballotitem.ballotid = ballots.ballotid
+JOIN
+    (SELECT * FROM count_position_votes()) AS sp1 ON ballotitem.itemID = sp1.ID;
+
+CREATE MATERIALIZED VIEW materialized_ballotitem_initiativevotes AS
+SELECT DISTINCT
+    ballotitem.ballotid,
+    ballotitem.itemID,
+    ballotitem.itemname,
+    ballotitem.itemtype,
+    sp1.response,
+    sp1.num_votes
+FROM
+    ballotitem
+JOIN
+    ballots ON ballotitem.ballotid = ballots.ballotid
+JOIN
+    (SELECT * FROM count_initiative_votes()) AS sp1 ON ballotitem.itemID = sp1.ID;
+
+

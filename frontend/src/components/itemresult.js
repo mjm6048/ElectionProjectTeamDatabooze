@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { PieChart } from '@mui/x-charts/PieChart';
 const ItemResult = ({data, id}) => {
+
 const resultsdata = [];
     if (data) {
         data.forEach(vote => {
       
-        if(vote.type == 'position'){
+        if(vote.itemtype == 'position'){
         const candidatename = vote.firstname + " " + vote.lastname;
         resultsdata.push({value:parseInt(vote.num_votes), label:candidatename});
         }

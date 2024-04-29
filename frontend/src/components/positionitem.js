@@ -1,11 +1,15 @@
 
 import Candidate from './candidate';
 import React, { useEffect, useState } from "react";
+import { useNavigate, useLocation } from 'react-router-dom';
 import '../index.css';
-
-const PositionItem = ({ positionName, positionId, candidates, onVoteChange, onWriteIn, numVotesAllowed }) => {
-   // Filter candidates based on currentItem's itemid
- const [writeIn, setWriteIn] = useState("");
+import axios from "axios";
+const BACKEND_URL ="http://localhost:5001";
+const PositionItem = ({ positionName, positionId, candidates, onVoteChange, onWriteIn, editable, numVotesAllowed }) => {
+  const navigate =  useNavigate();
+  const token = localStorage.getItem('adtoken');
+  const roleid = localStorage.getItem('adroleid');
+  const [writeIn, setWriteIn] = useState("");
   const [selectedVotes, setSelectedVotes] = useState(0);
   const filteredcandidates = candidates.filter(candidate => candidate.itemid === positionId);
   const handleVoteChange = (candidateId) => {
@@ -17,10 +21,42 @@ const PositionItem = ({ positionName, positionId, candidates, onVoteChange, onWr
   };
   const handleWriteIn =(e)=>
   {
-   console.log(e.target.value);
     var writein = e.target.value;
     onWriteIn(writein);
   }
+  const handleAddCandidate = async(event) => {
+    const candidateID = event.target.previousElementSibling.value;
+    // Call a function here to submit the candidate ID
+    console.log('Candidate ID submitted:',positionId, candidateID);
+    const headers = {
+      'Authorization': `Bearer ${token}`
+  }
+  try
+  {
+  const response =  await axios.post(`${BACKEND_URL}/candidate`,{itemid:positionId, candidateid:candidateID},{headers});
+     
+  if(response.status === 200)
+  {
+    alert("candidate added ");
+    window.location.reload();
+
+  }
+  }
+catch(error)
+{
+  console.error(error);
+    
+    if (error.response.status!=null && (error.response.status === 401 || error.response.status === 400))
+    {
+      alert("candidate not added");
+    }
+      else
+    { 
+      alert("Internal server error");
+  
+    }
+}
+  };
 
   return (
     <div className='ballot-item'>
@@ -40,11 +76,21 @@ const PositionItem = ({ positionName, positionId, candidates, onVoteChange, onWr
 
       ))}
       </div>
-      <label>write in: 
-<input type = "text"  disabled = {selectedVotes>0} onChange={handleWriteIn}></input>
-</label>
-    </div>
-  );
+      {roleid < 3 ? (
+        <label>
+          Write in:
+          <input type="text" disabled={selectedVotes > 0} onChange={handleWriteIn} />
+        </label>
+        ) : roleid > 2 && editable ? (
+          <div>
+            <label>Enter Candidate ID: </label>
+            <input type = "number" />
+          <button onClick={handleAddCandidate}>Add candidate</button>
+          </div>
+        ) : null
+      }
+            </div>
+      );
 };
 
 export default PositionItem;

@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const jwt = require("jsonwebtoken");
 const app = express();
 const port = 5000;
 const bl = require("./businesslayer");
@@ -12,8 +13,6 @@ app.use(
     extended: true
   })
 );
-
-app.use(bl.recordResponseTime);
 
 app.post("/users/login", async (req, res) => {
   const { username, password } = req.body;
@@ -48,7 +47,6 @@ app.get("/users/society-statistics", async (req, res) => {
 
 app.get("/users/system-statistics", async (req, res) => {
   try {
-    console.log("Entered try Index.js");
     const report = await bl.getSystemStatistics();
     res.status(200).json(report);
   } catch (error) {

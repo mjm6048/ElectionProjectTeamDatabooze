@@ -40,36 +40,102 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-
-
-CREATE OR REPLACE FUNCTION getBallotCountPerSociety(p_societyID INT)
-RETURNS TABLE (societyID INT, societyName VARCHAR(100), activeBallots INT, inactiveBallots INT, current_user_role_id INT) AS
-$$
+/* get ballotitems belonging to a ballot */
+CREATE OR REPLACE FUNCTION get_items_in_ballot(BallotIDValue INT)
+RETURNS TABLE (
+    ID INT,
+    Type BALLOTITEMTYPE
+) AS $$
 BEGIN
-    SELECT get_current_user_role_id() INTO current_user_role_id;
-    IF current_user_role_id = 4 THEN
-        RETURN QUERY
-        SELECT
-            s.societyID,
-            s.societyName AS societyName,
-            COUNT(CASE WHEN b.enddate >= CURRENT_DATE THEN 1 END)::INT AS activeBallots,
-            COUNT(CASE WHEN b.enddate < CURRENT_DATE THEN 1 END)::INT AS inactiveBallots
-        FROM
-            society s
-        JOIN
-            ballots b ON s.societyID = b.societyID
-        WHERE
-            s.societyID = p_societyID
-        GROUP BY
-            s.societyID, s.societyName;
-    ELSE
-        -- Return NULL if the current user's role ID is not 4
-        RETURN NULL;
-    END IF;
-    
+    RETURN QUERY
+    SELECT itemID as ID, itemType as Type
+    FROM BallotItem
+    WHERE ballotID = BallotIDValue;
+END;
+$$ LANGUAGE plpgsql;
+/* count votes */
+CREATE OR REPLACE FUNCTION count_votes()
+RETURNS TABLE (
+    ID INT,
+    voted varchar(50),
+    highest_vote_count INT
+) AS $$
+BEGIN
+RETURN QUERY
+SELECT itemID as ID, votedFor, (CAST(COUNT(*) AS INT)) AS vote_count
+FROM votes
+GROUP BY itemID, votedFor 
+ORDER BY itemID;
 END;
 $$ LANGUAGE plpgsql;
 
+/* count max votes */
+CREATE OR REPLACE FUNCTION highest_votes()
+RETURNS TABLE (
+    itemID INT,
+    votedfor varchar(50),
+    vote_count INT
+) AS $$
+BEGIN
+RETURN QUERY
+SELECT id as itemid, voted as votedfor, highest_vote_count as vote_count
+FROM (
+    SELECT id, voted, highest_vote_count,
+           ROW_NUMBER() OVER (PARTITION BY id ORDER BY highest_vote_count DESC) AS row_num
+    FROM count_votes()
+) AS ranked
+WHERE row_num = 1;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION getBallotCountPerSociety(p_societyID INT)
+RETURNS TABLE (societyID INT, societyName VARCHAR(100), activeBallots INT, inactiveBallots INT) AS
+$$
+BEGIN
+    RETURN QUERY
+    SELECT
+        s.societyID,
+        s.societyName AS societyName,
+        COUNT(CASE WHEN b.enddate >= CURRENT_DATE THEN 1 END)::INT AS activeBallots,
+        COUNT(CASE WHEN b.enddate < CURRENT_DATE THEN 1 END)::INT AS inactiveBallots
+    FROM
+        society s
+    JOIN
+        ballots b ON s.societyID = b.societyID
+    WHERE
+        s.societyID = p_societyID
+    GROUP BY
+        s.societyID, s.societyName;
+END;
+$$ LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE FUNCTION GetMembersOfSociety(p_societyID INT)
+RETURNS TABLE (
+    societyID INT,
+    societyName VARCHAR(100),
+    numMembers INT
+) AS
+$$
+BEGIN
+    RETURN QUERY
+    SELECT
+        us.societyID,
+        s.societyName AS societyName,
+        COUNT(u.username)::INT AS numMembers
+    FROM
+        users_society us
+    INNER JOIN
+        users u ON u.username = us.username
+    INNER JOIN
+        society s ON s.societyID = us.societyID
+    WHERE
+        us.societyID = p_societyID
+    GROUP BY
+        us.societyID, s.societyName;
+END;
+$$
+LANGUAGE plpgsql;
 
 CREATE OR REPLACE FUNCTION GetAverageMembersVotingPerElection(p_societyID INT)
 RETURNS FLOAT AS
@@ -78,39 +144,33 @@ DECLARE
     total_voters_count INT;
     total_elections_count INT;
     average_members_voting FLOAT;
-    current_user_role_id INT;
 BEGIN
-    SELECT get_current_user_role_id() INTO current_user_role_id;
-    IF current_user_role_id = 4 THEN
     -- Get the total number of distinct users who have voted across all elections in the specified society
-        SELECT COUNT(DISTINCT v.username)::FLOAT
-        INTO total_voters_count
-        FROM votes v
-        JOIN BallotItem bi ON v.itemID = bi.itemID
-        JOIN ballots b ON bi.ballotID = b.ballotID
-        WHERE b.societyID = p_societyID;
+    SELECT COUNT(DISTINCT v.username)::FLOAT
+    INTO total_voters_count
+    FROM votes v
+    JOIN BallotItem bi ON v.itemID = bi.itemID
+    JOIN ballots b ON bi.ballotID = b.ballotID
+    WHERE b.societyID = p_societyID;
 
-        -- Get the total number of elections in the specified society
-        SELECT COUNT(DISTINCT b.ballotID)::FLOAT
-        INTO total_elections_count
-        FROM ballots b
-        WHERE b.societyID = p_societyID;
+    -- Get the total number of elections in the specified society
+    SELECT COUNT(DISTINCT b.ballotID)::FLOAT
+    INTO total_elections_count
+    FROM ballots b
+    WHERE b.societyID = p_societyID;
 
-        -- Calculate the average number of distinct users voting per election
-        IF total_elections_count > 0 THEN
-            average_members_voting := total_voters_count / total_elections_count;
-        ELSE
-            average_members_voting := 0;
-        END IF;
-
-        RETURN average_members_voting;
+    -- Calculate the average number of distinct users voting per election
+    IF total_elections_count > 0 THEN
+        average_members_voting := total_voters_count / total_elections_count;
     ELSE
-        -- Return NULL if the current user's role ID is not 4
-        RETURN NULL;
+        average_members_voting := 0;
     END IF;
+
+    RETURN average_members_voting;
 END;
 $$
 LANGUAGE plpgsql;
+
 
 CREATE OR REPLACE FUNCTION calculate_average_query_time()
 RETURNS FLOAT AS
@@ -119,30 +179,18 @@ DECLARE
     total_query_time FLOAT;
     total_query_count BIGINT;
     average_query_time FLOAT;
-    current_user_role_id INT;
 BEGIN
-    -- Get the role ID of the current user
-    SELECT get_current_user_role_id() INTO current_user_role_id;
+    SELECT SUM(total_exec_time)::FLOAT, COUNT(*)
+    INTO total_query_time, total_query_count
+    FROM pg_stat_statements;
 
-    -- Check if the current user's role ID is 4
-    IF current_user_role_id = 4 THEN
-        -- Calculate average query time
-        SELECT SUM(total_exec_time)::FLOAT, COUNT(*)
-        INTO total_query_time, total_query_count
-        FROM pg_stat_statements;
-
-        -- Calculate average query time
-        IF total_query_count > 0 THEN
-            average_query_time := total_query_time / total_query_count;
-        ELSE
-            average_query_time := NULL;
-        END IF;
-
-        RETURN average_query_time;
+    IF total_query_count > 0 THEN
+        average_query_time := total_query_time / total_query_count;
     ELSE
-        -- Return NULL if the current user's role ID is not 4
-        RETURN NULL;
+        average_query_time := NULL;
     END IF;
+
+    RETURN average_query_time;
 END;
 $$
 LANGUAGE plpgsql;
@@ -152,40 +200,14 @@ RETURNS INT AS
 $$
 DECLARE
     active_elections_count INT;
-    current_user_role_id INT;
 BEGIN
-    -- Get the role ID of the current user
-    SELECT get_current_user_role_id() INTO current_user_role_id;
-
-    -- Check if the current user's role ID is 4
-    IF current_user_role_id = 4 THEN
     -- Get the count of active elections
-        SELECT COUNT(*)
-        INTO active_elections_count
-        FROM ballots
-        WHERE enddate >= CURRENT_DATE;
-        RETURN active_elections_count;
+    SELECT COUNT(*)
+    INTO active_elections_count
+    FROM ballots
+    WHERE enddate >= CURRENT_DATE;
 
-    ELSE
-        -- Return NULL if the current user's role ID is not 4
-        RETURN NULL;
-    END IF;
+    RETURN active_elections_count;
 END;
 $$
 LANGUAGE plpgsql;
-
-CREATE OR REPLACE FUNCTION get_current_user_role_id()
-RETURNS INT AS
-$$
-DECLARE
-    current_user_role_id INT;
-BEGIN
-    SELECT roleID INTO current_user_role_id
-    FROM Users
-    WHERE username = current_user;
-
-    RETURN current_user_role_id;
-END;
-$$
-LANGUAGE plpgsql;
-

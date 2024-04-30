@@ -12,7 +12,8 @@ export default class AmericanDreamHome extends React.Component {
       redirectToCreateUser: false,
       redirectToCreateSociety: false,
       redirectToSystemStatistics: false,
-      redirectToSocietyStatistics: false
+      redirectToSocietyStatistics: false,
+      roleID: localStorage.getItem("adroleid")
     };
   }
 
@@ -39,7 +40,8 @@ export default class AmericanDreamHome extends React.Component {
       redirectToCreateUser,
       redirectToCreateSociety,
       redirectToSystemStatistics,
-      redirectToSocietyStatistics
+      redirectToSocietyStatistics,
+      roleID
     } = this.state;
     if (redirectToCreateUser) {
       return <Navigate to="/createUser" />;
@@ -60,14 +62,18 @@ export default class AmericanDreamHome extends React.Component {
       <>
         <p>American Dream Homepage</p>
         <div>
-          <button onClick={this.handleCreateUser}>Create/Edit User</button>
-          <button onClick={this.handleCreateSociety}>Create Society</button>
-          <button onClick={this.handleSystemStatistics}>
-            System Statistics
-          </button>
-          <button onClick={this.handleSocietyStatistics}>
-            Society Statistics
-          </button>
+          {roleID === "4" && (
+            <>
+              <button onClick={this.handleCreateUser}>Create/Edit User</button>
+              <button onClick={this.handleCreateSociety}>Create Society</button>
+              <button onClick={this.handleSystemStatistics}>
+                System Statistics
+              </button>
+              <button onClick={this.handleSocietyStatistics}>
+                Society Statistics
+              </button>
+            </>
+          )}
         </div>
         <p>View all societies</p>
         {societies.map((s) => {

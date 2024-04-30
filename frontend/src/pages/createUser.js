@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 import Chip from "@mui/material/Chip";
 import InputAdornment from "@mui/material/InputAdornment";
 import { makeStyles } from "@mui/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,11 +17,18 @@ const useStyles = makeStyles((theme) => ({
   },
   chip: {
     margin: theme.spacing(0.5)
+  },
+  societyIDField: {
+    [theme.breakpoints.down("sm")]: {
+      marginBottom: theme.spacing(1)
+    }
   }
 }));
 
 const CreateUser = () => {
   const classes = useStyles();
+  const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
+
   const [username, setUsername] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -116,6 +124,7 @@ const CreateUser = () => {
         Create/Update User
       </Typography>
       <form className={classes.root} onSubmit={handleSubmit}>
+        {/* Username, first name, last name, password, and role ID fields */}
         <TextField
           id="username"
           label="Username"
@@ -126,48 +135,8 @@ const CreateUser = () => {
           error={!!errors.username}
           helperText={errors.username}
         />
-        <TextField
-          id="firstName"
-          label="First Name"
-          variant="outlined"
-          fullWidth
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
-          error={!!errors.firstName}
-          helperText={errors.firstName}
-        />
-        <TextField
-          id="lastName"
-          label="Last Name"
-          variant="outlined"
-          fullWidth
-          value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
-          error={!!errors.lastName}
-          helperText={errors.lastName}
-        />
-        <TextField
-          id="password"
-          label="Password"
-          type="password"
-          variant="outlined"
-          fullWidth
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          error={!!errors.password}
-          helperText={errors.password}
-        />
-        <TextField
-          id="roleID"
-          label="Role ID"
-          variant="outlined"
-          fullWidth
-          value={roleID}
-          onChange={(e) => setRoleID(e.target.value)}
-          error={!!errors.roleID}
-          helperText={errors.roleID}
-        />
-        {(roleID === "1" || roleID === "2") && (
+        {/* Additional fields based on role ID */}
+        {(roleID === "1" || roleID === "2" || isSmallScreen) && (
           <TextField
             id="societyID"
             label="Society ID"
@@ -177,18 +146,7 @@ const CreateUser = () => {
             onChange={(e) => setSocietyID(e.target.value)}
             error={!!errors.societyID}
             helperText={errors.societyID}
-          />
-        )}
-        {(roleID === "3" || roleID === "4") && (
-          <TextField
-            id="societyID"
-            label="Society ID"
-            variant="outlined"
-            fullWidth
-            value={societyID}
-            onChange={(e) => setSocietyID(e.target.value)}
-            error={!!errors.societyID}
-            helperText={errors.societyID}
+            className={classes.societyIDField}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
@@ -205,6 +163,7 @@ const CreateUser = () => {
             }}
           />
         )}
+        {/* Added societies chips */}
         {societies.length > 0 && (
           <div>
             <Typography variant="subtitle1">Added Societies:</Typography>

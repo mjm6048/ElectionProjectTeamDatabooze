@@ -4,6 +4,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Grid";
 
 const CreateSociety = () => {
   const [societyName, setSocietyName] = useState("");
@@ -33,29 +34,35 @@ const CreateSociety = () => {
   };
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="md">
       <Typography variant="h4" gutterBottom>
         Create Society
       </Typography>
       <form onSubmit={handleSubmit}>
-        <TextField
-          id="societyName"
-          label="Society Name"
-          variant="outlined"
-          fullWidth
-          value={societyName}
-          onChange={(e) => setSocietyName(e.target.value)}
-        />
-        <TextField
-          id="societyDescription"
-          label="Society Description"
-          variant="outlined"
-          fullWidth
-          multiline
-          rows={4}
-          value={societyDescription}
-          onChange={(e) => setSocietyDescription(e.target.value)}
-        />
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              id="societyName"
+              label="Society Name"
+              variant="outlined"
+              fullWidth
+              value={societyName}
+              onChange={(e) => setSocietyName(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              id="societyDescription"
+              label="Society Description"
+              variant="outlined"
+              fullWidth
+              multiline
+              rows={4}
+              value={societyDescription}
+              onChange={(e) => setSocietyDescription(e.target.value)}
+            />
+          </Grid>
+        </Grid>
         <Button type="submit" variant="contained" color="primary">
           Create Society
         </Button>

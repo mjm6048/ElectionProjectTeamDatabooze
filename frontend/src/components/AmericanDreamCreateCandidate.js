@@ -10,6 +10,7 @@ export default class AmericanDreamCreateCandidate extends React.Component {
             titles: '',
             candidateDescription: '',
             photo: '',
+            candidateID: '',
             clicked: false
         };
     }
@@ -42,12 +43,13 @@ export default class AmericanDreamCreateCandidate extends React.Component {
             titles: '',
             candidateDescription: '',
             photo: '',
+            candidateID: '',
             clicked: false
         });
     }
 
     render(){
-        const { firstName, lastName, titles, candidateDescription, photo, clicked } = this.state;
+        const { firstName, lastName, titles, candidateDescription, photo, clicked, candidateID } = this.state;
         if (!clicked) {
             return <button onClick={() => this.setState({ clicked: true })}>Create New Candidate</button>;
         }
@@ -55,6 +57,10 @@ export default class AmericanDreamCreateCandidate extends React.Component {
         return (
             <>
                 <form onSubmit={this.handleSubmit}>
+
+                <label htmlFor="firstName">candidate ID</label>
+                    <input type="text" id="candidateID" name="candidateID" value={candidateID} onChange={this.handleChange} /><br /><br />
+
                     <label htmlFor="firstName">First Name:</label>
                     <input type="text" id="firstName" name="firstName" value={firstName} onChange={this.handleChange} /><br /><br />
                     

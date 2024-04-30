@@ -21,19 +21,18 @@ export default class AmericanDreamBallot extends React.Component {
   }
 
   async componentDidMount() {
-    const { itemType, itemID } = this.state;
+    const { itemType, itemID, ballotID } = this.state;
     // Check if itemType is "position"
     if (itemType === "position") {
       try {
         // Fetch candidates from the endpoint
         const token = localStorage.getItem("adtoken");
-        const response = await axios.get("http://localhost:5001/ballotitem/candidates", {
-          headers: { "Authorization": `Bearer ${token}` },
-          params: { "itemID": itemID }
-        });
+        const response = await axios.get(`http://localhost:5001/candidates?ballotID=${ballotID}`,{ headers: {"Authorization" : `Bearer ${token}`} });
+  
         console.log(response.data);
+        const candidates = response.data.filter(candidate => candidate.itemid === itemID);
         // Update state with fetched candidates
-        this.setState({ candidates: response.data });
+        this.setState({ candidates: candidates });
       } catch (error) {
         console.error("Error fetching candidates:", error);
       }

@@ -58,7 +58,7 @@ export default class AmericanDreamCreateCandidate extends React.Component {
             <>
                 <form onSubmit={this.handleSubmit}>
 
-                <label htmlFor="firstName">candidate ID</label>
+                <label htmlFor="firstName">Candidate ID:</label>
                     <input type="text" id="candidateID" name="candidateID" value={candidateID} onChange={this.handleChange} /><br /><br />
 
                     <label htmlFor="firstName">First Name:</label>

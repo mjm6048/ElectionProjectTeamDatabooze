@@ -6,7 +6,7 @@ export default class AmericanDreamCreateBallot extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            // itemID: '',
+            itemID: '',
             itemName: '',
             itemType: 'initiative',
             numVotesAllowed: '',
@@ -45,8 +45,7 @@ export default class AmericanDreamCreateBallot extends React.Component {
     }
 
     render(){
-        const { //itemID, 
-            itemName, itemType, numVotesAllowed, maxNumCandidates, clicked } = this.state;
+        const { itemID, itemName, itemType, numVotesAllowed, maxNumCandidates, clicked } = this.state;
         if (!clicked) {
             return <button onClick={() => this.setState({ clicked: true })}>Create New Ballot</button>;
 
@@ -55,10 +54,10 @@ export default class AmericanDreamCreateBallot extends React.Component {
         return (
             <>
                 <form onSubmit={this.handleSubmit}>
-                    {/*
+
                     <label htmlFor="itemID">Item ID:</label>
                     <input type="number" id="itemID" name="itemID" value={itemID} onChange={this.handleChange} /><br /><br />
-                    */}
+
                     <label htmlFor="itemName">Item Name:</label>
                     <input type="text" id="itemName" name="itemName" value={itemName} onChange={this.handleChange} /><br /><br />
                     

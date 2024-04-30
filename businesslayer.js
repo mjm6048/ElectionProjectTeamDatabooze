@@ -219,6 +219,27 @@ const getStatus=async(ballotID,username)=>
     }
 }
 
+const getSocietyBallots = async (societyID) => {
+  try {
+      const ballots = await dl.getBallotsBySociety(societyID);
+      
+      return ballots;
+  } catch (error) {
+      console.log(error);
+      throw error;
+  }
+};//getSocietyBallots
+
+const getBallotItemCandidates = async (itemID) => {
+  try {
+    const candidates = await dl.getBallotItemCandidates(itemID);
+    return candidates;
+  } catch (error) {
+      console.log(error);
+      throw error;
+  }
+}//getBallotItemCandidates
+
 // const castVote= async(username,voteType,itemID,votedFor, writein)=>
 // {
 //     try
@@ -400,6 +421,8 @@ module.exports = {
     createOrEditBallot,
     createBallotItem,
     addCandidate,
-    createCandidate
+    createCandidate,
+    getSocietyBallots,
+    getBallotItemCandidates
 }
 

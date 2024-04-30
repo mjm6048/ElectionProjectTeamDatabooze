@@ -123,40 +123,33 @@ const getResults = async (ballotID, username) => {
     } else {
       return -1;
     }
+  } catch (error) {
+    console.log(error);
+    throw error;
   }
-    catch(error)
-    {
-        console.log(error);
-        throw error;
+};
+const getStatus = async (ballotID, username) => {
+  try {
+    var user = loggedInUsers.find((users) => users.username == username);
+    if (user == null || user.roleid < 2) {
+      return 0;
     }
-    
-}
-const getStatus=async(ballotID,username)=>
-{
-    try
-    {   var user = loggedInUsers.find(users => users.username== username);
-        if (user == null || user.roleid <2)
-        {
-            return 0;
-        }
-        var ballot = await dl.getBallot(ballotID);
-        if (ballot === null) {
-            return -1;
-          }
-        //validate ballot
-        var current = new Date()
-        if (ballot[0].societyid==user.societyid && Date.parse(ballot[0].startdate) <= current)
-        {
-            var results = await dl.getStatus(ballotID);
-            return results;
-        }
-        else
-        {
-            return -1;
-        }
-
+    var ballot = await dl.getBallot(ballotID);
+    if (ballot === null) {
+      return -1;
     }
-   catch (error) {
+    //validate ballot
+    var current = new Date();
+    if (
+      ballot[0].societyid == user.societyid &&
+      Date.parse(ballot[0].startdate) <= current
+    ) {
+      var results = await dl.getStatus(ballotID);
+      return results;
+    } else {
+      return -1;
+    }
+  } catch (error) {
     console.log(error);
     throw error;
   }
@@ -164,24 +157,24 @@ const getStatus=async(ballotID,username)=>
 
 const getSocietyBallots = async (societyID) => {
   try {
-      const ballots = await dl.getBallotsBySociety(societyID);
-      
-      return ballots;
+    const ballots = await dl.getBallotsBySociety(societyID);
+
+    return ballots;
   } catch (error) {
-      console.log(error);
-      throw error;
+    console.log(error);
+    throw error;
   }
-};//getSocietyBallots
+}; //getSocietyBallots
 
 const getBallotItemCandidates = async (itemID) => {
   try {
     const candidates = await dl.getBallotItemCandidates(itemID);
     return candidates;
   } catch (error) {
-      console.log(error);
-      throw error;
+    console.log(error);
+    throw error;
   }
-}//getBallotItemCandidates
+}; //getBallotItemCandidates
 
 // const castVote= async(username,voteType,itemID,votedFor, writein)=>
 // {
@@ -436,6 +429,50 @@ const createNewSociety = async (societyName, societyDescription) => {
   return await dl.createSociety(societyName, societyDescription);
 };
 
+const generateSocietyStatistics = async (societyID) => {
+  try {
+    console.log("inside the function");
+    console.log(societyID);
+
+    const ballotCounts = await dl.getBallotCountPerSociety(societyID);
+    const avgMembers = await dl.getavgMembers(societyID);
+    const members = await dl.getMembersOfSociety(societyID);
+
+    const numOfBallots =
+      ballotCounts[0].activeballots + ballotCounts[0].inactiveballots;
+
+    const report = {
+      numOfBallots,
+      members,
+      avgMembers
+    };
+
+    return report;
+  } catch (error) {
+    console.error("Error generating society statistics report:", error);
+    throw error;
+  }
+};
+
+const getSystemStatistics = async () => {
+  try {
+    const averageQueryTime = await dl.calculateAverageQueryTime();
+    const activeElections = await dl.getNumberOfActiveElections();
+    const loggedInUserArrayLength = loggedInUsers.length;
+
+    const systemStatistics = {
+      activeElections,
+      loggedInUserArrayLength,
+      averageQueryTime
+    };
+
+    return systemStatistics;
+  } catch (error) {
+    console.error("Error retrieving system statistics:", error);
+    throw error;
+  }
+};
+
 // this should be the name of the function to check login, refer to index.js for return type and arguments
 module.exports = {
   userExists,
@@ -457,6 +494,7 @@ module.exports = {
   editUser,
   usernameExists,
   getSocietyBallots,
-  getBallotItemCandidates
-}
-
+  getBallotItemCandidates,
+  generateSocietyStatistics,
+  getSystemStatistics
+};

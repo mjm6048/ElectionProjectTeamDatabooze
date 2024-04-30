@@ -29,28 +29,34 @@ const getUser = async (username) => {
 const getBallotsBySociety = async (societyID) => {
   const client = await pool.connect();
   try {
-      const result = await client.query('SELECT * FROM ballots WHERE societyID = $1', [societyID]);
-      return result.rows;
+    const result = await client.query(
+      "SELECT * FROM ballots WHERE societyID = $1",
+      [societyID]
+    );
+    return result.rows;
   } catch (error) {
-      console.log(error);
-      throw error;
+    console.log(error);
+    throw error;
   } finally {
-      client.release();
+    client.release();
   }
-};//getBallotsBySociety
+}; //getBallotsBySociety
 
 const getBallotItemCandidates = async (itemID) => {
   const client = await pool.connect();
   try {
-    const result = await client.query('SELECT * FROM candidate WHERE itemID = $1', [itemID]);
+    const result = await client.query(
+      "SELECT * FROM candidate WHERE itemID = $1",
+      [itemID]
+    );
     return result.rows;
-} catch (error) {
+  } catch (error) {
     console.log(error);
     throw error;
-} finally {
+  } finally {
     client.release();
-}
-}
+  }
+};
 
 const getBallots = async (societyID, username) => {
   const client = await pool.connect();
@@ -428,7 +434,6 @@ const createCandidate = async (
 };
 
 const createSociety = async (societyName, societyDescription) => {
-  // Start a transaction
   const client = await pool.connect();
   try {
     await client.query("BEGIN");
@@ -440,16 +445,14 @@ const createSociety = async (societyName, societyDescription) => {
     const values = [societyName, societyDescription];
     const { rows } = await client.query(query, values);
 
-    // Commit the transaction if successful
     await client.query("COMMIT");
 
     return rows[0];
   } catch (error) {
-    // Rollback the transaction if an error occurs
     await client.query("ROLLBACK");
-    throw error; // Propagate the error
+    throw error;
   } finally {
-    client.release(); // Release the client back to the pool
+    client.release();
   }
 };
 
@@ -562,6 +565,86 @@ const editUser = async (
   }
 };
 
+const calculateAverageQueryTime = async () => {
+  const client = await pool.connect();
+  try {
+    const result = await client.query(
+      "SELECT * FROM calculate_average_query_time()"
+    );
+
+    return result.rows;
+  } catch (error) {
+    console.error("Error executing stored procedure:", error);
+    throw error;
+  } finally {
+    client.release();
+  }
+};
+
+const getNumberOfActiveElections = async () => {
+  try {
+    const client = await pool.connect();
+
+    const result = await client.query(
+      "SELECT GetNumberOfActiveElections() AS active_elections_count"
+    );
+
+    client.release();
+
+    return result.rows;
+  } catch (error) {
+    console.error("Error executing stored procedure:", error);
+    throw error;
+  }
+};
+
+const getBallotCountPerSociety = async (societyID) => {
+  const client = await pool.connect();
+  try {
+    console.log("inside data layer");
+    const result = await client.query(
+      "SELECT * FROM getBallotCountPerSociety($1)",
+      [societyID]
+    );
+    return result.rows;
+  } catch (error) {
+    console.error("Error executing stored procedure:", error);
+  }
+};
+
+const getavgMembers = async (societyID) => {
+  const client = await pool.connect();
+  try {
+    const { rows } = await client.query(
+      "SELECT GetAverageMembersVotingPerElection($1) AS average_members_voting",
+      [societyID]
+    );
+
+    const averageMembersVoting = rows[0].average_members_voting;
+
+    return averageMembersVoting;
+  } catch (error) {
+    console.error("Error executing stored procedure:", error);
+  }
+};
+
+const getMembersOfSociety = async (societyID) => {
+  try {
+    const client = await pool.connect();
+
+    const { rows } = await client.query(
+      "SELECT * FROM GetMembersOfSociety($1)",
+      [societyID]
+    );
+
+    client.release();
+    return rows;
+  } catch (error) {
+    console.error("Error executing stored procedure:", error);
+    throw error;
+  }
+};
+
 // this should be the name of the function to check login, refer to index.js for return type and arguments
 module.exports = {
   getUser,
@@ -583,7 +666,12 @@ module.exports = {
   createBallotItem,
   addCandidate,
   createCandidate,
-    getBallotsBySociety,
-    getBallotItemCandidates,
-  editUser
+  getBallotsBySociety,
+  getBallotItemCandidates,
+  editUser,
+  calculateAverageQueryTime,
+  getNumberOfActiveElections,
+  getBallotCountPerSociety,
+  getavgMembers,
+  getMembersOfSociety
 };

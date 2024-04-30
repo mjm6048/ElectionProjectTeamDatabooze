@@ -50,66 +50,66 @@ app.post("/users/login", async (req, res) => {
     res.status(500).json("Internal server error");
   }
 });
-app.get('/societies/ballots', async (req, res) => {
+app.get("/societies/ballots", async (req, res) => {
   // console.log("\n\nReached /societies/ballots");
   try {
-      const token = req.headers.authorization.split(' ')[1];
-      // console.log("/societies/ballots req.query:" + req.query.societyID);
-      const SocietyID = req.query.societyID;
+    const token = req.headers.authorization.split(" ")[1];
+    // console.log("/societies/ballots req.query:" + req.query.societyID);
+    const SocietyID = req.query.societyID;
 
-      // console.log("SocietyID is: " + SocietyID);
+    // console.log("SocietyID is: " + SocietyID);
 
-      if (!token) {
-          return res.status(600).json({
-              success: false,
-              message: "Error! Token was not provided."
-          });
-      }
+    if (!token) {
+      return res.status(600).json({
+        success: false,
+        message: "Error! Token was not provided."
+      });
+    }
 
-      // Decode the token to get the username
-      const decodedToken = jwt.verify(token, "dean");
-      const username = decodedToken.username;
+    // Decode the token to get the username
+    const decodedToken = jwt.verify(token, "dean");
+    const username = decodedToken.username;
 
-      // Call the business layer function with SocietyID
-      const result = await bl.getSocietyBallots(SocietyID);
+    // Call the business layer function with SocietyID
+    const result = await bl.getSocietyBallots(SocietyID);
 
-      if (result !== null) {
-          res.status(200).json(result);
-      } else {
-          res.status(400).json("Invalid society or user");
-      }
+    if (result !== null) {
+      res.status(200).json(result);
+    } else {
+      res.status(400).json("Invalid society or user");
+    }
   } catch (error) {
-      console.log(error);
-      res.status(500).json("Internal server error");
+    console.log(error);
+    res.status(500).json("Internal server error");
   }
 });
 
-app.get('/ballotitem/candidates', async (req, res) => {
+app.get("/ballotitem/candidates", async (req, res) => {
   console.log("\n\nReached /ballotitems/candidates");
   try {
-      const token = req.headers.authorization.split(' ')[1];
-      const itemID = req.query.itemID;
+    const token = req.headers.authorization.split(" ")[1];
+    const itemID = req.query.itemID;
 
-      if (!token) {
-          return res.status(600).json({
-              success: false,
-              message: "Error! Token was not provided."
-          });
-      }
-      const decodedToken = jwt.verify(token, "dean");
-      const username = decodedToken.username;
+    if (!token) {
+      return res.status(600).json({
+        success: false,
+        message: "Error! Token was not provided."
+      });
+    }
+    const decodedToken = jwt.verify(token, "dean");
+    const username = decodedToken.username;
 
-      // Call the business layer function with SocietyID
-      const result = await bl.getBallotItemCandidates(itemID);
+    // Call the business layer function with SocietyID
+    const result = await bl.getBallotItemCandidates(itemID);
 
-      if (result !== null) {
-          res.status(200).json(result);
-      } else {
-          res.status(400).json("itemID");
-      }
+    if (result !== null) {
+      res.status(200).json(result);
+    } else {
+      res.status(400).json("itemID");
+    }
   } catch (error) {
-      console.log(error);
-      res.status(500).json("Internal server error");
+    console.log(error);
+    res.status(500).json("Internal server error");
   }
 });
 
@@ -607,6 +607,30 @@ app.post("/societies", verifyToken, async (req, res) => {
     res.status(201).json(newSociety);
   } catch (error) {
     console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+app.get("/users/society-statistics", async (req, res) => {
+  const societyID = parseInt(req.query.societyID);
+
+  try {
+    console.log(societyID);
+    const report = await bl.generateSocietyStatistics(societyID);
+    console.log("in api");
+    res.status(200).json(report);
+  } catch (error) {
+    console.error("Error generating society statistics report:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+app.get("/users/system-statistics", async (req, res) => {
+  try {
+    const report = await bl.getSystemStatistics();
+    res.status(200).json(report);
+  } catch (error) {
+    console.error("Error generating system statistics report:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });

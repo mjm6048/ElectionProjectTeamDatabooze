@@ -14,6 +14,25 @@ app.use(
   })
 );
 
+const verifyToken = (req, res, next) => {
+  const token = req.headers.authorization?.split(" ")[1];
+
+  if (!token) {
+    return res
+      .status(403)
+      .json({ error: "A token is required for authentication" });
+  }
+
+  try {
+    const decoded = jwt.verify(token, "dean");
+    req.user = decoded;
+  } catch (err) {
+    return res.status(401).json({ error: "Invalid token" });
+  }
+
+  return next();
+};
+
 app.post("/users/login", async (req, res) => {
   const { username, password } = req.body;
   try {
@@ -29,6 +48,68 @@ app.post("/users/login", async (req, res) => {
   } catch (e) {
     console.log(e);
     res.status(500).json("Internal server error");
+  }
+});
+app.get('/societies/ballots', async (req, res) => {
+  // console.log("\n\nReached /societies/ballots");
+  try {
+      const token = req.headers.authorization.split(' ')[1];
+      // console.log("/societies/ballots req.query:" + req.query.societyID);
+      const SocietyID = req.query.societyID;
+
+      // console.log("SocietyID is: " + SocietyID);
+
+      if (!token) {
+          return res.status(600).json({
+              success: false,
+              message: "Error! Token was not provided."
+          });
+      }
+
+      // Decode the token to get the username
+      const decodedToken = jwt.verify(token, "dean");
+      const username = decodedToken.username;
+
+      // Call the business layer function with SocietyID
+      const result = await bl.getSocietyBallots(SocietyID);
+
+      if (result !== null) {
+          res.status(200).json(result);
+      } else {
+          res.status(400).json("Invalid society or user");
+      }
+  } catch (error) {
+      console.log(error);
+      res.status(500).json("Internal server error");
+  }
+});
+
+app.get('/ballotitem/candidates', async (req, res) => {
+  console.log("\n\nReached /ballotitems/candidates");
+  try {
+      const token = req.headers.authorization.split(' ')[1];
+      const itemID = req.query.itemID;
+
+      if (!token) {
+          return res.status(600).json({
+              success: false,
+              message: "Error! Token was not provided."
+          });
+      }
+      const decodedToken = jwt.verify(token, "dean");
+      const username = decodedToken.username;
+
+      // Call the business layer function with SocietyID
+      const result = await bl.getBallotItemCandidates(itemID);
+
+      if (result !== null) {
+          res.status(200).json(result);
+      } else {
+          res.status(400).json("itemID");
+      }
+  } catch (error) {
+      console.log(error);
+      res.status(500).json("Internal server error");
   }
 });
 
@@ -472,24 +553,6 @@ app.post("/candidates", async (req, res) => {
     res.status(500).json("Internal server error");
   }
 });
-const verifyToken = (req, res, next) => {
-  const token = req.headers.authorization?.split(" ")[1];
-
-  if (!token) {
-    return res
-      .status(403)
-      .json({ error: "A token is required for authentication" });
-  }
-
-  try {
-    const decoded = jwt.verify(token, "dean");
-    req.user = decoded;
-  } catch (err) {
-    return res.status(401).json({ error: "Invalid token" });
-  }
-
-  return next();
-};
 
 app.post("/users/:username", verifyToken, async (req, res) => {
   try {

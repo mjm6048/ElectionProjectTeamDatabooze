@@ -26,6 +26,32 @@ const getUser = async (username) => {
   }
 };
 
+const getBallotsBySociety = async (societyID) => {
+  const client = await pool.connect();
+  try {
+      const result = await client.query('SELECT * FROM ballots WHERE societyID = $1', [societyID]);
+      return result.rows;
+  } catch (error) {
+      console.log(error);
+      throw error;
+  } finally {
+      client.release();
+  }
+};//getBallotsBySociety
+
+const getBallotItemCandidates = async (itemID) => {
+  const client = await pool.connect();
+  try {
+    const result = await client.query('SELECT * FROM candidate WHERE itemID = $1', [itemID]);
+    return result.rows;
+} catch (error) {
+    console.log(error);
+    throw error;
+} finally {
+    client.release();
+}
+}
+
 const getBallots = async (societyID, username) => {
   const client = await pool.connect();
   try {
@@ -557,5 +583,7 @@ module.exports = {
   createBallotItem,
   addCandidate,
   createCandidate,
+    getBallotsBySociety,
+    getBallotItemCandidates,
   editUser
 };

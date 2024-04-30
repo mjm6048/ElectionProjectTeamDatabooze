@@ -17,6 +17,7 @@ import CreateSociety from "./pages/createSociety";
 import EditBallotPage from "./pages/createEditBallot";
 import AddBallotItemPage from "./pages/addBallotItem";
 import CreateCandidatePage from "./pages/createCandidate";
+import AmericanDreamHome from "./components/AmericanDreamHome";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 const theme = createTheme();
@@ -32,7 +33,7 @@ function App() {
             <Route path="/results" element={<Results />} />
             <Route path="/status" element={<Status />} />
             <Route path="/voting" element={<Voting />} />
-            <Route path="/societies" element={<ADHome />} />
+            <Route path="/societies" element={<AmericanDreamHome/>} />
             <Route path="/createCandidate" element={<CreateCandidatePage />} />
             <Route path="/editBallot" element={<EditBallotPage />} />
             <Route path="/addBallotItem" element={<AddBallotItemPage />} />

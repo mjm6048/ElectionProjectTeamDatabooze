@@ -123,37 +123,65 @@ const getResults = async (ballotID, username) => {
     } else {
       return -1;
     }
-  } catch (error) {
+  }
+    catch(error)
+    {
+        console.log(error);
+        throw error;
+    }
+    
+}
+const getStatus=async(ballotID,username)=>
+{
+    try
+    {   var user = loggedInUsers.find(users => users.username== username);
+        if (user == null || user.roleid <2)
+        {
+            return 0;
+        }
+        var ballot = await dl.getBallot(ballotID);
+        if (ballot === null) {
+            return -1;
+          }
+        //validate ballot
+        var current = new Date()
+        if (ballot[0].societyid==user.societyid && Date.parse(ballot[0].startdate) <= current)
+        {
+            var results = await dl.getStatus(ballotID);
+            return results;
+        }
+        else
+        {
+            return -1;
+        }
+
+    }
+   catch (error) {
     console.log(error);
     throw error;
   }
 };
-const getStatus = async (ballotID, username) => {
+
+const getSocietyBallots = async (societyID) => {
   try {
-    var user = loggedInUsers.find((users) => users.username == username);
-    if (user == null || user.roleid < 2) {
-      return 0;
-    }
-    var ballot = await dl.getBallot(ballotID);
-    if (ballot === null) {
-      return -1;
-    }
-    //validate ballot
-    var current = new Date();
-    if (
-      ballot[0].societyid == user.societyid &&
-      Date.parse(ballot[0].startdate) <= current
-    ) {
-      var results = await dl.getStatus(ballotID);
-      return results;
-    } else {
-      return -1;
-    }
+      const ballots = await dl.getBallotsBySociety(societyID);
+      
+      return ballots;
   } catch (error) {
-    console.log(error);
-    throw error;
+      console.log(error);
+      throw error;
   }
-};
+};//getSocietyBallots
+
+const getBallotItemCandidates = async (itemID) => {
+  try {
+    const candidates = await dl.getBallotItemCandidates(itemID);
+    return candidates;
+  } catch (error) {
+      console.log(error);
+      throw error;
+  }
+}//getBallotItemCandidates
 
 // const castVote= async(username,voteType,itemID,votedFor, writein)=>
 // {
@@ -427,5 +455,8 @@ module.exports = {
   createUser,
   createNewSociety,
   editUser,
-  usernameExists
-};
+  usernameExists,
+  getSocietyBallots,
+  getBallotItemCandidates
+}
+

@@ -36,6 +36,8 @@ function App() {
             <Route path="/createCandidate" element={<CreateCandidatePage />} />
             <Route path="/editBallot" element={<EditBallotPage />} />
             <Route path="/addBallotItem" element={<AddBallotItemPage />} />
+            <Route path="/createUser" element={<CreateUser />} />
+            <Route path="/createSociety" element={<CreateSociety />} />
           </Routes>
         </Router>
       </div>

@@ -32,7 +32,6 @@ CREATE TABLE society(
     societyDescription VARCHAR(500)
 );
 
-
 DROP TABLE IF EXISTS ballots CASCADE;
 CREATE TABLE ballots(
     ballotID SERIAL NOT NULL PRIMARY KEY, 

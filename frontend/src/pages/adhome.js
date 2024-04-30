@@ -43,7 +43,9 @@ function ADHome(props) {
       {/* Conditionally render buttons based on role ID */}
       {roleId == 4 && (
         <div>
-          <button onClick={() => navigate("/createUser")}>Create User</button>
+          <button onClick={() => navigate("/createUser")}>
+            Create/Edit User
+          </button>
           <button onClick={() => navigate("/createSociety")}>
             Create Society
           </button>

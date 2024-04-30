@@ -14,6 +14,25 @@ app.use(
   })
 );
 
+const verifyToken = (req, res, next) => {
+  const token = req.headers.authorization?.split(" ")[1];
+
+  if (!token) {
+    return res
+      .status(403)
+      .json({ error: "A token is required for authentication" });
+  }
+
+  try {
+    const decoded = jwt.verify(token, "dean");
+    req.user = decoded;
+  } catch (err) {
+    return res.status(401).json({ error: "Invalid token" });
+  }
+
+  return next();
+};
+
 app.post("/users/login", async (req, res) => {
   const { username, password } = req.body;
   try {
@@ -592,24 +611,7 @@ app.post("/societies", verifyToken, async (req, res) => {
   }
 });
 
-const verifyToken = (req, res, next) => {
-  const token = req.headers.authorization?.split(" ")[1];
 
-  if (!token) {
-    return res
-      .status(403)
-      .json({ error: "A token is required for authentication" });
-  }
-
-  try {
-    const decoded = jwt.verify(token, "dean");
-    req.user = decoded;
-  } catch (err) {
-    return res.status(401).json({ error: "Invalid token" });
-  }
-
-  return next();
-};
 
 app.listen(port, () => {
   console.log("port connected");

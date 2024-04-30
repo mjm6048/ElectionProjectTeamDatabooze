@@ -9,23 +9,24 @@ import InputAdornment from "@mui/material/InputAdornment";
 import { makeStyles } from "@mui/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    "& > *": {
-      margin: theme.spacing(1)
-    }
-  },
-  chip: {
-    margin: theme.spacing(0.5)
-  },
-  societyIDField: {
-    [theme.breakpoints.down("sm")]: {
-      marginBottom: theme.spacing(1)
-    }
-  }
-}));
+
 
 const CreateUser = () => {
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      "& > *": {
+        margin: theme.spacing(1)
+      }
+    },
+    chip: {
+      margin: theme.spacing(0.5)
+    },
+    societyIDField: {
+      [theme.breakpoints.down("sm")]: {
+        marginBottom: theme.spacing(1)
+      }
+    }
+  }));
   const classes = useStyles();
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
 
@@ -45,7 +46,7 @@ const CreateUser = () => {
       try {
         const token = localStorage.getItem("adtoken");
         const response = await axios.post(
-          `http://localhost:5001/users/${username}`,
+          `https://databooze.webdev.gccis.rit.edu:8001/users/${username}`,
           {
             firstName,
             lastName,

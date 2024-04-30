@@ -59,7 +59,7 @@ export default class AmericanDreamSocAccordian extends React.Component {
         const { societyID } = this.state;
         try {
             var token = localStorage.getItem("adtoken");
-            await axios.get("http://localhost:5001/societies/ballots",{ headers: {"Authorization" : `Bearer ${token}`}, params: {"societyID" : societyID} })
+            await axios.get("https://databooze.webdev.gccis.rit.edu:8001/societies/ballots",{ headers: {"Authorization" : `Bearer ${token}`}, params: {"societyID" : societyID} })
             .then((res) => {
                 this.setState({
                     ballots: res.data

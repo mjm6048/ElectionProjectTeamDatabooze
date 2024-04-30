@@ -11,7 +11,7 @@ const SocietyStatistics = () => {
       try {
         const token = localStorage.getItem("adtoken");
         const response = await axios.get(
-          `http://localhost:5001/users/society-statistics?societyID=${societyId}`,
+          `https://databooze.webdev.gccis.rit.edu:8001/users/society-statistics?societyID=${societyId}`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         setStatistics(response.data);

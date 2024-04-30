@@ -24,7 +24,7 @@ export default class AmericanDreamBallotAccordian extends React.Component {
     async handleAccordionChange(){
         try {
             var token = localStorage.getItem("adtoken");
-            await axios.get("http://localhost:5001/ballotitems",{ headers: {"Authorization" : `Bearer ${token}`}, params: {"ballotID" : this.state.ballotID} })
+            await axios.get("https://databooze.webdev.gccis.rit.edu:8001/ballotitems",{ headers: {"Authorization" : `Bearer ${token}`}, params: {"ballotID" : this.state.ballotID} })
             .then((res) => {
                 // console.log(res.data);
                 this.setState({

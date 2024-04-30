@@ -3,7 +3,7 @@ import Ballot from "../components/ballot";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import "../index.css";
-const BACKEND_URL = "http://localhost:5001";
+const BACKEND_URL = "https://databooze.webdev.gccis.rit.edu:8001";
 
 function ADHome(props) {
   const navigate = useNavigate();

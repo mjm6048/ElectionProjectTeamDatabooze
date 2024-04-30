@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@babel/preset-env": "^7.23.9",
+    "@mui/styles": "^5.15.15",
     "babel-jest": "^29.7.0",
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",

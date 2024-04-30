@@ -27,7 +27,7 @@ export default class AmericanDreamBallot extends React.Component {
       try {
         // Fetch candidates from the endpoint
         const token = localStorage.getItem("adtoken");
-        const response = await axios.get(`http://localhost:5001/candidates?ballotID=${ballotID}`,{ headers: {"Authorization" : `Bearer ${token}`} });
+        const response = await axios.get(`hhttps://databooze.webdev.gccis.rit.edu:8001/candidates?ballotID=${ballotID}`,{ headers: {"Authorization" : `Bearer ${token}`} });
   
         console.log(response.data);
         const candidates = response.data.filter(candidate => candidate.itemid === itemID);

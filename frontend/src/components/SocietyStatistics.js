@@ -9,10 +9,10 @@ const SocietyStatistics = () => {
   useEffect(() => {
     const fetchSocietyStatistics = async () => {
       try {
-        const token = localStorage.getItem("token"); // Retrieve token from localStorage
+        const token = localStorage.getItem("adtoken");
         const response = await axios.get(
-          `http://localhost:5000/users/society-statistics?societyID=${societyId}`,
-          { headers: { Authorization: `Bearer ${token}` } } // Include token in request headers
+          `http://localhost:5001/users/society-statistics?societyID=${societyId}`,
+          { headers: { Authorization: `Bearer ${token}` } }
         );
         setStatistics(response.data);
       } catch (error) {

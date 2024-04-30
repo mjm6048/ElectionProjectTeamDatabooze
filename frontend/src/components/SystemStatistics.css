@@ -32,6 +32,7 @@
   font-weight: bold;
   text-align: center;
   min-width: 60px;
+  color: black
 }
 
 .statistic-value::before {
@@ -42,9 +43,10 @@
   right: 0;
   bottom: 0;
   background-color: #4caf50;
-  z-index: -1; /* Place the green background behind the text */
+  z-index: -1; 
   border-radius: 8px;
-  margin: -5px; /* Adjust the margin to expand the green background */
+  margin: -5px;
+  color:black
 }
 
 .statistics-columns {
@@ -75,4 +77,10 @@
   border-radius: 4px;
   color: #333;
   font-weight: bold;
+}
+
+@media screen and (max-width: 600px) {
+  .statistics-columns  {
+    flex-direction: row;
+  }
 }

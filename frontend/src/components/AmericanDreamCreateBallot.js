@@ -49,6 +49,7 @@ export default class AmericanDreamCreateBallot extends React.Component {
             itemName, itemType, numVotesAllowed, maxNumCandidates, clicked } = this.state;
         if (!clicked) {
             return <button onClick={() => this.setState({ clicked: true })}>Create New Ballot</button>;
+
         }
 
         return (

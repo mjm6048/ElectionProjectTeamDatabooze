@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import getAverageResponseTime from "../utils/getAverageResponseTime";
 import "./SystemStatistics.css";
-import { getToken } from "../utils/auth";
 
 const SystemStatistics = () => {
   const { measuredAxios, getAverage } = getAverageResponseTime();
@@ -12,11 +11,11 @@ const SystemStatistics = () => {
   useEffect(() => {
     const fetchStatistics = async () => {
       try {
-        const token = getToken();
+        var token = localStorage.getItem("adtoken");
         const response = await measuredAxios({
           method: "GET",
-          url: "http://localhost:5000/users/system-statistics",
-          headers: token ? { Authorization: `Bearer ${token}` } : {}
+          url: "http://localhost:5001/users/system-statistics",
+          headers: { Authorization: `Bearer ${token}` }
         });
         setStatistics(response.data);
       } catch (error) {

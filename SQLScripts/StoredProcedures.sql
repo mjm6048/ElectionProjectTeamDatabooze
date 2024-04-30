@@ -327,3 +327,37 @@ BEGIN
 END;
 $$
 LANGUAGE plpgsql;
+
+-- Materialized view for get_ballots_in_society()
+CREATE MATERIALIZED VIEW mv_ballots_in_society
+AS
+SELECT b.ballotID, b.ballotName
+FROM ballots b
+JOIN society s ON b.SocietyID = s.SocietyID
+WHERE b.startDate <= CURRENT_DATE 
+  AND b.endDate >= CURRENT_DATE;
+
+CREATE UNIQUE INDEX ON mv_ballots_in_society (ballotID);
+
+-- Materialized view for getBallotCountPerSociety()
+CREATE MATERIALIZED VIEW mv_ballot_count_per_society
+AS
+SELECT s.societyID, s.societyName, 
+       COUNT(CASE WHEN b.enddate >= CURRENT_DATE THEN 1 END) AS activeBallots,
+       COUNT(CASE WHEN b.enddate < CURRENT_DATE THEN 1 END) AS inactiveBallots
+FROM society s
+JOIN ballots b ON s.societyID = b.societyID
+GROUP BY s.societyID, s.societyName;
+
+CREATE UNIQUE INDEX ON mv_ballot_count_per_society (societyID);
+
+-- Materialized view for GetMembersOfSociety()
+CREATE MATERIALIZED VIEW mv_members_of_society
+AS
+SELECT us.societyID, s.societyName, COUNT(u.username) AS numMembers
+FROM users_society us
+INNER JOIN users u ON u.username = us.username
+INNER JOIN society s ON s.societyID = us.societyID
+GROUP BY us.societyID, s.societyName;
+
+CREATE UNIQUE INDEX ON mv_members_of_society (societyID);

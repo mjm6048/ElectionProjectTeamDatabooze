@@ -460,6 +460,7 @@ const getSystemStatistics = async () => {
     const activeElections = await dl.getNumberOfActiveElections();
     const loggedInUserArrayLength = loggedInUsers.length;
 
+    console.log(averageQueryTime)
     const systemStatistics = {
       activeElections,
       loggedInUserArrayLength,

@@ -571,10 +571,9 @@ const calculateAverageQueryTime = async () => {
     const result = await client.query(
       "SELECT * FROM calculate_average_query_time()"
     );
-
     return result.rows;
   } catch (error) {
-    console.error("Error executing stored procedure:", error);
+    console.error("Error executing view:", error);
     throw error;
   } finally {
     client.release();
@@ -584,16 +583,13 @@ const calculateAverageQueryTime = async () => {
 const getNumberOfActiveElections = async () => {
   try {
     const client = await pool.connect();
-
     const result = await client.query(
       "SELECT GetNumberOfActiveElections() AS active_elections_count"
     );
-
     client.release();
-
     return result.rows;
   } catch (error) {
-    console.error("Error executing stored procedure:", error);
+    console.error("Error executing view:", error);
     throw error;
   }
 };
@@ -603,12 +599,12 @@ const getBallotCountPerSociety = async (societyID) => {
   try {
     console.log("inside data layer");
     const result = await client.query(
-      "SELECT * FROM getBallotCountPerSociety($1)",
+      "SELECT * FROM mv_ballot_count_per_society WHERE societyID = $1",
       [societyID]
     );
     return result.rows;
   } catch (error) {
-    console.error("Error executing stored procedure:", error);
+    console.error("Error executing materialized view:", error);
   }
 };
 
@@ -619,28 +615,24 @@ const getavgMembers = async (societyID) => {
       "SELECT GetAverageMembersVotingPerElection($1) AS average_members_voting",
       [societyID]
     );
-
     const averageMembersVoting = rows[0].average_members_voting;
-
     return averageMembersVoting;
   } catch (error) {
-    console.error("Error executing stored procedure:", error);
+    console.error("Error executing view:", error);
   }
 };
 
 const getMembersOfSociety = async (societyID) => {
   try {
     const client = await pool.connect();
-
     const { rows } = await client.query(
-      "SELECT * FROM GetMembersOfSociety($1)",
+      "SELECT * FROM mv_members_of_society WHERE societyID = $1",
       [societyID]
     );
-
     client.release();
     return rows;
   } catch (error) {
-    console.error("Error executing stored procedure:", error);
+    console.error("Error executing materialized view:", error);
     throw error;
   }
 };

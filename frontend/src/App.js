@@ -5,7 +5,12 @@ import Results from "./pages/results";
 import Status from "./pages/status";
 import Voting from "./pages/voting";
 import ADHome from "./pages/adhome";
-import { BrowserRouter as Router, Routes, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Switch
+} from "react-router-dom";
 import { useState } from "react";
 import CreateUser from "./pages/createUser";
 import CreateSociety from "./pages/createSociety";
@@ -13,9 +18,11 @@ import EditBallotPage from "./pages/createEditBallot";
 import AddBallotItemPage from "./pages/addBallotItem";
 import CreateCandidatePage from "./pages/createCandidate";
 import AmericanDreamHome from "./components/AmericanDreamHome";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+
+const theme = createTheme();
 
 function App() {
-
   return (
     <div className="App">
       <Router>

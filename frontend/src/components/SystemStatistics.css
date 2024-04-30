@@ -1,0 +1,78 @@
+.system-statistics {
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.system-statistics h2 {
+  margin-top: 0;
+  color: #333;
+  text-align: center;
+}
+
+.statistic-row {
+  display: flex;
+  align-items: flex-start; /* Align items to the top */
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.statistic-label {
+  font-weight: bold;
+  color: #555;
+}
+
+.statistic-value {
+  position: relative; /* Create a positioning context for the green background */
+  padding: 5px 15px; /* Adjust padding as needed */
+  background-color: transparent; /* Remove the green background */
+  font-weight: bold;
+  text-align: center;
+  min-width: 60px;
+}
+
+.statistic-value::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #4caf50;
+  z-index: -1; /* Place the green background behind the text */
+  border-radius: 8px;
+  margin: -5px; /* Adjust the margin to expand the green background */
+}
+
+.statistics-columns {
+  display: flex;
+  justify-content: space-between;
+}
+
+.statistics-column {
+  width: 48%;
+}
+
+.query-time-logging h3,
+.http-time-logging h3 {
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.query-time-logging p,
+.http-time-logging p {
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.query-time-value,
+.http-time-value {
+  background-color: #e0e0e0;
+  padding: 8px 12px;
+  border-radius: 4px;
+  color: #333;
+  font-weight: bold;
+}

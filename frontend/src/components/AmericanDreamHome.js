@@ -10,7 +10,9 @@ export default class AmericanDreamHome extends React.Component {
       //define varables to be used in content
       societies: [],
       redirectToCreateUser: false,
-      redirectToCreateSociety: false
+      redirectToCreateSociety: false,
+      redirectToSystemStatistics: false,
+      redirectToSocietyStatistics: false
     };
   }
 
@@ -22,10 +24,23 @@ export default class AmericanDreamHome extends React.Component {
     this.setState({ redirectToCreateSociety: true });
   };
 
+  handleSystemStatistics = () => {
+    this.setState({ redirectToSystemStatistics: true });
+  };
+
+  handleSocietyStatistics = () => {
+    this.setState({ redirectToSocietyStatistics: true });
+  };
+
   //show content
   render() {
-    const { societies, redirectToCreateUser, redirectToCreateSociety } =
-      this.state;
+    const {
+      societies,
+      redirectToCreateUser,
+      redirectToCreateSociety,
+      redirectToSystemStatistics,
+      redirectToSocietyStatistics
+    } = this.state;
     if (redirectToCreateUser) {
       return <Navigate to="/createUser" />;
     }
@@ -33,12 +48,26 @@ export default class AmericanDreamHome extends React.Component {
     if (redirectToCreateSociety) {
       return <Navigate to="/createSociety" />;
     }
+
+    if (redirectToSystemStatistics) {
+      return <Navigate to="/systemStatistics" />;
+    }
+
+    if (redirectToSocietyStatistics) {
+      return <Navigate to="/societyStatistics" />;
+    }
     return (
       <>
         <p>American Dream Homepage</p>
         <div>
           <button onClick={this.handleCreateUser}>Create/Edit User</button>
           <button onClick={this.handleCreateSociety}>Create Society</button>
+          <button onClick={this.handleSystemStatistics}>
+            System Statistics
+          </button>
+          <button onClick={this.handleSocietyStatistics}>
+            Society Statistics
+          </button>
         </div>
         <p>View all societies</p>
         {societies.map((s) => {

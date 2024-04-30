@@ -18,6 +18,8 @@ import EditBallotPage from "./pages/createEditBallot";
 import AddBallotItemPage from "./pages/addBallotItem";
 import CreateCandidatePage from "./pages/createCandidate";
 import AmericanDreamHome from "./components/AmericanDreamHome";
+import SocietyStatistics from "./components/SocietyStatistics";
+import SystemStatistics from "./components/SystemStatistics";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 const theme = createTheme();
@@ -39,6 +41,8 @@ function App() {
             <Route path="/addBallotItem" element={<AddBallotItemPage />} />
             <Route path="/createUser" element={<CreateUser />} />
             <Route path="/createSociety" element={<CreateSociety />} />
+            <Route path="/societyStatistics" element={<SocietyStatistics />} />
+            <Route path="/systemStatistics" element={<SystemStatistics />} />
           </Routes>
         </Router>
       </div>

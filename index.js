@@ -611,7 +611,7 @@ app.post("/societies", verifyToken, async (req, res) => {
   }
 });
 
-app.get("/users/society-statistics", async (req, res) => {
+app.get("/users/society-statistics", verifyToken, async (req, res) => {
   const societyID = parseInt(req.query.societyID);
 
   try {
@@ -625,7 +625,7 @@ app.get("/users/society-statistics", async (req, res) => {
   }
 });
 
-app.get("/users/system-statistics", async (req, res) => {
+app.get("/users/system-statistics", verifyToken, async (req, res) => {
   try {
     const report = await bl.getSystemStatistics();
     res.status(200).json(report);

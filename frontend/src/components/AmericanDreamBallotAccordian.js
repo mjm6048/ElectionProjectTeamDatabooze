@@ -65,6 +65,8 @@ export default class AmericanDreamBallotAccordian extends React.Component {
                                         numVotesAllowed={bi.numvotesallowed}
                                         maxNumCandidates={bi.maxnumcandidates}
                                         ballotID={this.state.ballotID}
+                                        startDate={startDate}
+                                        endDate={endDate}
                                     />
                                     <hr />
                                 </React.Fragment>

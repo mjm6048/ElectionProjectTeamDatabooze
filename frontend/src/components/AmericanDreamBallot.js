@@ -13,6 +13,8 @@ export default class AmericanDreamBallot extends React.Component {
       numVotesAllowed: props.numVotesAllowed,
       maxNumCandidates: props.maxNumCandidates,
       ballotID: props.ballotID,
+      startDate: new Date(props.startDate),
+      endDate: new Date(props.endDate),
       isEditable: false,
       candidates: [],
     };
@@ -60,12 +62,26 @@ export default class AmericanDreamBallot extends React.Component {
     // this.someFunction();
   };
 
+  // Function to handle status button click
+  handleStatusClick = () => {
+    // Implement status button functionality here
+  };
+
+  // Function to handle results button click
+  handleResultsClick = () => {
+    // Implement results button functionality here
+  };
+
   render() {
-    const { itemID, itemName, itemType, numVotesAllowed, maxNumCandidates, isEditable, candidates } = this.state;
+    const { itemID, itemName, itemType, numVotesAllowed, maxNumCandidates, isEditable, candidates, startDate, endDate } = this.state;
+    const currentDate = new Date();
+    const isBeforeStartDate = currentDate < startDate;
+    const isAfterEndDate = currentDate > endDate;
+    const isWithinDateRange = currentDate >= startDate && currentDate <= endDate;
+
     return (
       <>
         <form onSubmit={this.handleSubmit}>
-          {/* Display existing information in input fields */}
           <label htmlFor="itemID"><b>Ballot ID:</b></label>
           <input type="number" id="itemID" name="itemID" value={itemID} onChange={this.handleChange} readOnly={!isEditable} />
           <br />
@@ -84,17 +100,23 @@ export default class AmericanDreamBallot extends React.Component {
           <label htmlFor="maxNumCandidates">Max Number of Candidates:</label>
           <input type="number" id="maxNumCandidates" name="maxNumCandidates" value={maxNumCandidates} onChange={this.handleChange} readOnly={!isEditable} />
           <br />
+
         </form>
         <div>
-        {isEditable ? (
-          <button type="submit" onClick={this.handleSubmit}>Submit</button>
-        ) : (
-          <button type="button" onClick={this.toggleEdit}>Edit Ballot</button>
-        )}
-        {/* Cancel button */}
-        {isEditable && (
-          <button type="button" onClick={this.toggleEdit}>Cancel</button>
-        )}
+          {/* Edit button */}
+          {isEditable ? (
+            <button type="submit" onClick={this.handleSubmit}>Submit</button>
+          ) : (
+            isBeforeStartDate && <button type="button" onClick={this.toggleEdit}>Edit Ballot</button>
+          )}
+          {/* Cancel button */}
+          {isEditable && (
+            <button type="button" onClick={this.toggleEdit}>Cancel</button>
+          )}
+          {/* Status button */}
+          {isWithinDateRange && <button type="button" onClick={this.handleStatusClick}>Status</button>}
+          {/* Results button */}
+          {isAfterEndDate && <button type="button" onClick={this.handleResultsClick}>Results</button>}
           {/* Render candidates if itemType is "position" */}
           {itemType === "position" && (
             <div>
@@ -119,8 +141,6 @@ export default class AmericanDreamBallot extends React.Component {
             </div>
           )}
         </div>
-        {/* Edit button */}
-        
       </>
     );
   }

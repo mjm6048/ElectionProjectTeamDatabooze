@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import 
-const BACKEND_URL ="https://databooze.webdev.gccis.rit.edu:8001/";
+import getAverageResponseTime from "../utils/getAverageResponseTime";
+const BACKEND_URL = "https://databooze.webdev.gccis.rit.edu:8001/";
 function CreateCandidatePage(props) {
   const navigate = useNavigate();
   const { measuredAxios } = getAverageResponseTime();

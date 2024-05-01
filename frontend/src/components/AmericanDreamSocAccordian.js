@@ -25,7 +25,7 @@ const AmericanDreamSocAccordian = (props) => {
       try {
         const token = localStorage.getItem("adtoken");
         const response = await axios.get(
-          "http://localhost:5001/societies/ballots",
+          "https://databooze.webdev.gccis.rit.edu:8001/societies/ballots",
           {
             headers: { Authorization: `Bearer ${token}` },
             params: { societyID: societyID }

@@ -5,7 +5,7 @@ import "../index.css";
 import axios from "axios";
 import getAverageResponseTime from "../utils/getAverageResponseTime";
 
-const BACKEND_URL = "http://localhost:5001";
+const BACKEND_URL = "https://databooze.webdev.gccis.rit.edu:8001";
 const PositionItem = ({
   positionName,
   positionId,

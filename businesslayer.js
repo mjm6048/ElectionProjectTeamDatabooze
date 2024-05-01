@@ -1,6 +1,7 @@
 const dl = require("./datalayer");
 const { createHash } = require("crypto");
 var loggedInUsers = [];
+var countUser = 0;
 
 const userExists = async (username, password) => {
   // hashedpassword = createHash('sha256').update(password)
@@ -13,6 +14,7 @@ const userExists = async (username, password) => {
       var hash = createHash("sha256").update(password).digest("hex");
       if (hash == user[0].passwordhash) {
         loggedInUsers.push(user[0]);
+        countUser++;
         if (user[0].roleid < 3) {
           // return members of society and all ballots that havent started if role>=3
         }
@@ -282,6 +284,11 @@ const getSocieties = async (username) => {
 const getBallot = async (ballotID) => {
   return await dl.getBallot(ballotID);
 };
+
+const decrementArray = () => {
+  countUser = countUser - 1;
+};
+
 const createOrEditBallot = async (
   username,
   ballotid,
@@ -437,9 +444,12 @@ const generateSocietyStatistics = async (societyID) => {
     const ballotCounts = await dl.getBallotCountPerSociety(societyID);
     const avgMembers = await dl.getavgMembers(societyID);
     const members = await dl.getMembersOfSociety(societyID);
-
-    const numOfBallots =
-      ballotCounts[0].activeballots + ballotCounts[0].inactiveballots;
+    console.log(members);
+    console.log(avgMembers);
+    console.log(ballotCounts);
+    const activeBallots = parseInt(ballotCounts[0].activeballots);
+    const inactiveBallots = parseInt(ballotCounts[0].inactiveballots);
+    const numOfBallots = activeBallots + inactiveBallots;
 
     const report = {
       numOfBallots,
@@ -458,15 +468,14 @@ const getSystemStatistics = async () => {
   try {
     const averageQueryTime = await dl.calculateAverageQueryTime();
     const activeElections = await dl.getNumberOfActiveElections();
-    const loggedInUserArrayLength = loggedInUsers.length;
+    const loggedInUserArrayLength = countUser;
 
-    console.log(averageQueryTime)
+    console.log(averageQueryTime);
     const systemStatistics = {
       activeElections,
       loggedInUserArrayLength,
       averageQueryTime
     };
-
     return systemStatistics;
   } catch (error) {
     console.error("Error retrieving system statistics:", error);
@@ -497,5 +506,6 @@ module.exports = {
   getSocietyBallots,
   getBallotItemCandidates,
   generateSocietyStatistics,
-  getSystemStatistics
+  getSystemStatistics,
+  decrementArray
 };

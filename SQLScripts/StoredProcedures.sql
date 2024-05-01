@@ -352,12 +352,15 @@ GROUP BY s.societyID, s.societyName;
 CREATE UNIQUE INDEX ON mv_ballot_count_per_society (societyID);
 
 -- Materialized view for GetMembersOfSociety()
-CREATE MATERIALIZED VIEW mv_members_of_society
-AS
-SELECT us.societyID, s.societyName, COUNT(u.username) AS numMembers
-FROM users_society us
-INNER JOIN users u ON u.username = us.username
-INNER JOIN society s ON s.societyID = us.societyID
-GROUP BY us.societyID, s.societyName;
+CREATE MATERIALIZED VIEW mv_users_count_per_society AS
+SELECT societyID, COUNT(*) AS user_count
+FROM users_society
+GROUP BY societyID;
 
-CREATE UNIQUE INDEX ON mv_members_of_society (societyID);
+-- Materialized view for calculate_average_query_time function
+CREATE MATERIALIZED VIEW mv_average_query_time AS
+SELECT calculate_average_query_time() AS average_query_time;
+
+SELECT cron.schedule('refresh_materialized_views', '*/5 * * * *', 
+     'REFRESH MATERIALIZED VIEW mv_average_query_time;'
+     'REFRESH MATERIALIZED VIEW mv_users_count_per_society;');

@@ -635,6 +635,16 @@ app.get("/users/system-statistics", verifyToken, async (req, res) => {
   }
 });
 
+app.post("/users/num", async (req, res) => {
+  try {
+    const num = await bl.decrementUsersCount();
+    res.status(200).json({ message: "Logged out successfully" });
+  } catch (error) {
+    console.error("Error logging out user:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 app.listen(port, () => {
   console.log("port connected");
 });

@@ -568,9 +568,8 @@ const editUser = async (
 const calculateAverageQueryTime = async () => {
   const client = await pool.connect();
   try {
-    const result = await client.query(
-      "SELECT * FROM calculate_average_query_time()"
-    );
+    console.log("in dl");
+    const result = await client.query("SELECT * FROM mv_average_query_time");
     return result.rows;
   } catch (error) {
     console.error("Error executing view:", error);
@@ -626,13 +625,13 @@ const getMembersOfSociety = async (societyID) => {
   try {
     const client = await pool.connect();
     const { rows } = await client.query(
-      "SELECT * FROM mv_members_of_society WHERE societyID = $1",
+      "SELECT * FROM mv_users_count_per_society WHERE societyid = $1",
       [societyID]
     );
     client.release();
     return rows;
   } catch (error) {
-    console.error("Error executing materialized view:", error);
+    console.error("Error executing:", error);
     throw error;
   }
 };

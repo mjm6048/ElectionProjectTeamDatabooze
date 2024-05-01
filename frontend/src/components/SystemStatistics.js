@@ -14,7 +14,7 @@ const SystemStatistics = () => {
         var token = localStorage.getItem("adtoken");
         const response = await measuredAxios({
           method: "GET",
-          url: "http://localhost:5001/users/system-statistics",
+          url: "https://databooze.webdev.gccis.rit.edu:8001/users/system-statistics",
           headers: { Authorization: `Bearer ${token}` }
         });
         setStatistics(response.data);

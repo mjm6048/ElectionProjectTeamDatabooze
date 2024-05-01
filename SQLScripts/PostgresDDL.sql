@@ -93,7 +93,7 @@ CREATE TABLE users_society(
     FOREIGN KEY (societyID) REFERENCES society(societyID)
 );
 
-DROP TABLE IF EXIST ballots_users CASCADE;
+DROP TABLE IF EXISTS ballots_users CASCADE;
 CREATE TABLE ballots_users(
     ballotID INT NOT NULL,
     username varchar(50) NOT NULL,

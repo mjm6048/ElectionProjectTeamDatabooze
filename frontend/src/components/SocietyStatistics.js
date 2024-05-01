@@ -18,7 +18,7 @@ const SocietyStatistics = () => {
         const token = localStorage.getItem("adtoken");
         const response = await measuredAxios({
           method: 'GET',
-          url: `http://localhost:5001/users/society-statistics?societyID=${societyId}`,
+          url: `https://databooze.webdev.gccis.rit.edu:8001/users/society-statistics?societyID=${societyId}`,
           headers: {
             Authorization: `Bearer ${token}`,
           },

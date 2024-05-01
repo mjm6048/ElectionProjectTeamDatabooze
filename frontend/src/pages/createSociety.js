@@ -16,7 +16,7 @@ const CreateSociety = () => {
     try {
       const token = localStorage.getItem("adtoken");
       const response = await axios.post(
-        "http://localhost:5001/societies",
+        "https://databooze.webdev.gccis.rit.edu:8001",
         {
           societyName,
           societyDescription

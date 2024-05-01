@@ -10,5 +10,7 @@
 \ir InsertInitiatives.sql
 \ir StoredProcedures.sql
 \ir InsertAdmin.sql
--- While inside psql
+-- While inside psql command
+-- Example for Windows:
+-- \i C:/Users/Michael/Desktop/ISTE432/election-project-databooze/SQLScripts/LoadAllScriptsOneRun.sql
 -- \i /path/to/file/LoadAllScriptsOneRun.sql

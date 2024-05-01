@@ -27,7 +27,7 @@ const CreateUser = () => {
 
         // Make POST request with token included in headers
         const response = await axios.post(
-          `http://localhost:5001/users/${username}`,
+          `https://databooze.webdev.gccis.rit.edu:8001/users/${username}`,
           {
             firstName,
             lastName,

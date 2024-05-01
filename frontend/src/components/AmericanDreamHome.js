@@ -83,7 +83,7 @@ export default class AmericanDreamHome extends React.Component {
     try {
       var token = localStorage.getItem("adtoken");
       await axios
-        .get("http://localhost:5001/societies", {
+        .get("https://databooze.webdev.gccis.rit.edu:8001/societies", {
           headers: { Authorization: `Bearer ${token}` }
         })
         .then((res) => {

@@ -2,6 +2,7 @@ import React from "react";
 import CandidateClass from "./CandidateClass";
 import AmericanDreamCreateCandidate from "./AmericanDreamCreateCandidate";
 import getAverageResponseTime from "../utils/getAverageResponseTime";
+import { Navigate } from "react-router-dom";
 
 export default class AmericanDreamBallot extends React.Component {
   constructor(props) {
@@ -16,7 +17,11 @@ export default class AmericanDreamBallot extends React.Component {
       startDate: new Date(props.startDate),
       endDate: new Date(props.endDate),
       isEditable: false,
-      candidates: []
+      candidates: [],
+      navigateToStatus: false,
+      navigateToStatusData: [],
+      navigateToResults: false,
+      navigateToResultsData: []
     };
     this.measuredAxios = getAverageResponseTime().measuredAxios;
   }
@@ -29,7 +34,7 @@ export default class AmericanDreamBallot extends React.Component {
         // Fetch candidates from the endpoint
         const token = localStorage.getItem("adtoken");
         const response = await this.measuredAxios.get(
-          `http://localhost:5001/candidates?ballotID=${ballotID}`,
+          `https://databooze.webdev.gccis.rit.edu:8001/candidates?ballotID=${ballotID}`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
 
@@ -68,13 +73,27 @@ export default class AmericanDreamBallot extends React.Component {
   };
 
   // Function to handle status button click
-  handleStatusClick = () => {
-    // Implement status button functionality here
+  handleStatusClick = async () => {
+    const token = localStorage.getItem("adtoken");
+    const response = await axios.get(
+      `https://databooze.webdev.gccis.rit.edu:8001/status?ballotID=${this.state.ballotID}`,
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    const data = await response.data;
+    this.state.navigateToStatusData = data;
+    this.state.navigateToStatus = true;
   };
 
-  // Function to handle results button click
-  handleResultsClick = () => {
-    // Implement results button functionality here
+  //this should say reports insted of results, bad naming convention
+  handleResultsClick = async () => {
+    const token = localStorage.getItem("adtoken");
+    const response = await axios.get(
+      `https://databooze.webdev.gccis.rit.edu:8001/results?ballotID=${this.state.ballotID}`,
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    const data = await response.data;
+    this.state.navigateToResultsData = data;
+    this.state.navigateToResults = true;
   };
 
   render() {

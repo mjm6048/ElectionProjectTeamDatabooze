@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import axios from "axios";
-const BACKEND_URL ="http://localhost:5001";
+const BACKEND_URL ="https://databooze.webdev.gccis.rit.edu:8001";
 function CreateUser(props) {
   const navigate = useNavigate();
   const { state } = useLocation();

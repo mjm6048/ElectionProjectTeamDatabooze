@@ -5,7 +5,7 @@ const Pool = require('pg').Pool
 const pool = new Pool({
   user: 'postgres',
   database: 'databooze',
-  password:'netra',
+  host:'localhost',
   port: 5432,
 })
 
@@ -541,7 +541,7 @@ const createCandidate= async(username,candidateid,firstname,lastname,titles,desc
       const result = await client.query(
         "SELECT GetNumberOfActiveElections() AS active_elections_count"
       );
-      client.release();
+      
       return result.rows;
     } catch (error) {
       console.error("Error executing view:", error);

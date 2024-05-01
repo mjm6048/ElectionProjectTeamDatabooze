@@ -12,7 +12,8 @@ import CreateSociety from "./pages/createSociety";
 import EditBallotPage from "./pages/createEditBallot";
 import AddBallotItemPage from "./pages/addBallotItem";
 import CreateCandidatePage from "./pages/createCandidate";
-
+import SocietyStatistics from "./pages/SocietyStatistics";
+import SystemStatistics from "./pages/SystemStatistics";
 function App() {
 
   return (
@@ -28,6 +29,10 @@ function App() {
           <Route path ="/createCandidate" element={<CreateCandidatePage/>}/>
           <Route path ="/editBallot" element={<EditBallotPage/>}/>
           <Route path ="/addBallotItem" element={<AddBallotItemPage/>}/>
+          <Route path="/createUser" element={<CreateUser />} />
+          <Route path="/createSociety" element={<CreateSociety />} />
+          <Route path="/societyStatistics" element={<SocietyStatistics />} />
+          <Route path="/systemStatistics" element={<SystemStatistics />} />
         </Routes>
       </Router>
     </div>

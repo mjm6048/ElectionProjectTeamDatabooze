@@ -325,37 +325,7 @@ const getSocieties = async (username) => {
     }
   }; //getSocieties
 
-  const createUser = async (
-    username,
-    firstName,
-    lastName,
-    password,
-    societyIDs, // Update to accept an array of societyIDs
-    roleID,
-    adminusername
-  ) => {
-    try {
-      // Hash the password
-      const passwordHash = await hashPassword(password);
-      console.log("in bl");
-      await dl.createUser(
-        username,
-        firstName,
-        lastName,
-        roleID,
-        passwordHash,
-        societyIDs
-      ); // Pass societyIDs as an array
-    } catch (error) {
-      throw error;
-    }
-  };
-  
-const createNewSociety = async (societyName, societyDescription) => {
-    // Add any business logic or validation here
-    console.log("in buis layer");
-    return await dl.createSociety(societyName, societyDescription);
-  };
+
 const getBallot = async(ballotID)=>
 {
     return await dl.getBallot(ballotID);
@@ -384,6 +354,125 @@ const createCandidate=async(username,candidateid,firstname,lastname,titles,descr
 {
     return await dl.createCandidate(username,candidateid,firstname,lastname,titles,description,photo);
 }
+
+  
+  const createUser = async (
+    username,
+    firstName,
+    lastName,
+    password,
+    societyIDs,
+    roleID
+  ) => {
+    try {
+      const passwordHash = await hashPassword(password);
+      console.log("in bl");
+      await dl.createUser(
+        username,
+        firstName,
+        lastName,
+        roleID,
+        passwordHash,
+        societyIDs
+      );
+    } catch (error) {
+      throw error;
+    }
+  };
+  
+  const editUser = async (
+    username,
+    firstName,
+    lastName,
+    password,
+    societyIDs,
+    roleID
+  ) => {
+    try {
+      console.log("in edit user bl");
+      const passwordHash = await hashPassword(password);
+      await dl.editUser(
+        username,
+        firstName,
+        lastName,
+        roleID,
+        passwordHash,
+        societyIDs
+      );
+    } catch (error) {
+      throw error;
+    }
+  };
+  
+  const usernameExists = async (username, password) => {
+    try {
+      var user = await dl.getUser(username);
+  
+      if (user.length != 0) {
+        return true;
+      }
+  
+      return false;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  };
+  
+  const createNewSociety = async (societyName, societyDescription) => {
+    console.log("in buis layer");
+    return await dl.createSociety(societyName, societyDescription);
+  };
+  
+  const generateSocietyStatistics = async (societyID) => {
+    try {
+      console.log("inside the function");
+      console.log(societyID);
+  
+      const numOfBallots = await dl.getBallotCountPerSociety(societyID);
+      const avgMembers = await dl.getavgMembers(societyID);
+      const members = await dl.getMembersOfSociety(societyID);
+      console.log(numOfBallots,
+        members,
+        avgMembers);
+      const report = {
+        numOfBallots,
+        members,
+        avgMembers
+      };
+  
+      return report;
+    } catch (error) {
+      console.error("Error generating society statistics report:", error);
+      throw error;
+    }
+  };
+  
+  const getSystemStatistics = async () => {
+    try {
+      const averageQueryTime = await dl.calculateAverageQueryTime();
+      const activeElections = await dl.getNumberOfActiveElections();
+      const loggedInUserArrayLength = loggedInUsers.length;
+  
+      console.log(averageQueryTime)
+      const systemStatistics = {
+        activeElections,
+        loggedInUserArrayLength,
+        averageQueryTime
+      };
+  
+      return systemStatistics;
+    } catch (error) {
+      console.error("Error retrieving system statistics:", error);
+      throw error;
+    }
+
+   
+  };
+  const getMembersOfSociety =async(societyID)=>
+  {
+      return await dl.getMembersOfSociety(societyID);
+  };
 // this should be the name of the function to check login, refer to index.js for return type and arguments
 module.exports = {
     userExists,
@@ -395,11 +484,17 @@ module.exports = {
     castVote,
     getSocieties,
     createUser,
-    createNewSociety,
     getBallot,
     createOrEditBallot,
     createBallotItem,
     addCandidate,
-    createCandidate
+    createCandidate,
+    createUser,
+    createNewSociety,
+    editUser,
+    usernameExists,
+    generateSocietyStatistics,
+    getSystemStatistics,
+    getMembersOfSociety
 }
 

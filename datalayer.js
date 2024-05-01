@@ -273,68 +273,7 @@ const getAllSocieties = async () => {
   }
 }; //getAllSocieties
 
-const createUser = async (
-  username,
-  firstName,
-  lastName,
-  roleID,
-  passwordHash,
-  societyIDs
-) => {
-  const client = await pool.connect();
-  try {
-    console.log("in dl");
-    await client.query("BEGIN"); // Start a transaction
 
-    // Insert or update user
-    const userQuery = `
-      INSERT INTO users (username, firstname, lastname, roleid, passwordhash)
-      VALUES ($1, $2, $3, $4, $5);
-    `;
-    const userValues = [username, firstName, lastName, roleID, passwordHash];
-    await client.query(userQuery, userValues);
-
-    // Check and insert/update user_society for each societyID
-    for (const societyID of societyIDs) {
-      const societyCheckQuery = `
-        SELECT 1 FROM society WHERE societyid = $1;
-      `;
-      const societyCheckValues = [societyID];
-      const societyCheckResult = await client.query(
-        societyCheckQuery,
-        societyCheckValues
-      );
-
-      if (societyCheckResult.rowCount === 0) {
-        throw new Error(`Society with ID ${societyID} does not exist.`);
-      }
-
-      const societyQuery = `
-        INSERT INTO users_society (username, societyid)
-        VALUES ($1, $2)
-      `;
-      const societyValues = [username, societyID];
-      await client.query(societyQuery, societyValues);
-    }
-
-    await client.query("COMMIT"); // Commit the transaction
-  } catch (error) {
-    await client.query("ROLLBACK"); // Rollback the transaction if an error occurs
-    throw error;
-  } finally {
-    client.release(); // Release the client back to the pool
-  }
-};
-const createSociety = async (societyName, societyDescription) => {
-  console.log("in dl");
-  const query = `
-    INSERT INTO Society (societyName, societyDescription)
-    VALUES ($1, $2)
-    RETURNING *`;
-  const values = [societyName, societyDescription];
-  const { rows } = await pool.query(query, values);
-  return rows[0];
-};
 
 const editBallot= async(username,ballotid,ballotname,startdate,enddate,societyid)=>
 {
@@ -446,27 +385,252 @@ const createCandidate= async(username,candidateid,firstname,lastname,titles,desc
   finally
   {
     client.release();
-  }
-}
+  }}
+  
+  const createSociety = async (societyName, societyDescription) => {
+    const client = await pool.connect();
+    try {
+      await client.query("BEGIN");
+  
+      const query = `
+        INSERT INTO Society (societyName, societyDescription)
+        VALUES ($1, $2)
+        RETURNING *`;
+      const values = [societyName, societyDescription];
+      const { rows } = await client.query(query, values);
+  
+      await client.query("COMMIT");
+  
+      return rows[0];
+    } catch (error) {
+      await client.query("ROLLBACK");
+      throw error;
+    } finally {
+      client.release();
+    }
+  };
+  
+  const createUser = async (
+    username,
+    firstName,
+    lastName,
+    roleID,
+    passwordHash,
+    societyIDs
+  ) => {
+    const client = await pool.connect();
+    try {
+      console.log("in dl");
+      await client.query("BEGIN"); // Start a transaction
+  
+      const userQuery = `
+        INSERT INTO users (username, firstname, lastname, roleid, passwordhash)
+        VALUES ($1, $2, $3, $4, $5);
+      `;
+      const userValues = [username, firstName, lastName, roleID, passwordHash];
+      await client.query(userQuery, userValues);
+  
+      for (const societyID of societyIDs) {
+        const societyCheckQuery = `
+          SELECT 1 FROM society WHERE societyid = $1;
+        `;
+        const societyCheckValues = [societyID];
+        const societyCheckResult = await client.query(
+          societyCheckQuery,
+          societyCheckValues
+        );
+  
+        if (societyCheckResult.rowCount === 0) {
+          throw new Error(`Society with ID ${societyID} does not exist.`);
+        }
+  
+        const societyQuery = `
+          INSERT INTO users_society (username, societyid)
+          VALUES ($1, $2)
+        `;
+        const societyValues = [username, societyID];
+        await client.query(societyQuery, societyValues);
+      }
+  
+      await client.query("COMMIT"); // Commit the transaction
+    } catch (error) {
+      await client.query("ROLLBACK"); // Rollback the transaction
+      throw error;
+    } finally {
+      client.release(); // Release the client back to the pool
+    }
+  };
+  
+  const editUser = async (
+    username,
+    firstName,
+    lastName,
+    roleID,
+    passwordHash,
+    societyIDs
+  ) => {
+    const client = await pool.connect();
+    try {
+      console.log("in dl edit");
+      await client.query("BEGIN"); // Start a transaction
+  
+      const userQuery = `
+        UPDATE users
+        SET firstname = $2, lastname = $3, roleid = $4, passwordhash = $5
+        WHERE username = $1;
+      `;
+      const userValues = [username, firstName, lastName, roleID, passwordHash];
+      await client.query(userQuery, userValues);
+  
+      const deleteSocietyQuery = `
+        DELETE FROM users_society
+        WHERE username = $1;
+      `;
+      await client.query(deleteSocietyQuery, [username]);
+  
+      for (const societyID of societyIDs) {
+        const societyCheckQuery = `
+          SELECT 1 FROM society WHERE societyid = $1;
+        `;
+        const societyCheckValues = [societyID];
+        const societyCheckResult = await client.query(
+          societyCheckQuery,
+          societyCheckValues
+        );
+  
+        if (societyCheckResult.rowCount === 0) {
+          throw new Error(`Society with ID ${societyID} does not exist.`);
+        }
+  
+        const societyQuery = `
+          INSERT INTO users_society (username, societyid)
+          VALUES ($1, $2)
+        `;
+        const societyValues = [username, societyID]; // Use the integer value
+        await client.query(societyQuery, societyValues);
+      }
+  
+      await client.query("COMMIT"); // Commit the transaction
+    } catch (error) {
+      await client.query("ROLLBACK"); // Rollback the transaction in case of error
+      throw error;
+    } finally {
+      client.release();
+    }
+  };
+  
+  const calculateAverageQueryTime = async () => {
+    const client = await pool.connect();
+    try {
+      const result = await client.query(
+        "SELECT * FROM calculate_average_query_time()"
+      );
+      return result.rows;
+    } catch (error) {
+      console.error("Error executing view:", error);
+      throw error;
+    } finally {
+      client.release();
+    }
+  };
+  
+  const getNumberOfActiveElections = async () => {
+    const client = await pool.connect();
+    try {
+     
+      const result = await client.query(
+        "SELECT GetNumberOfActiveElections() AS active_elections_count"
+      );
+      client.release();
+      return result.rows;
+    } catch (error) {
+      console.error("Error executing view:", error);
+      throw error;
+    }
+    finally{
+      client.release();
+    }
+  };
+  
+  const getBallotCountPerSociety = async (societyID) => {
+    const client = await pool.connect();
+    try {
+      console.log("inside data layer");
+      const result = await client.query(
+        "SELECT COUNT(*) FROM ballots WHERE societyID = $1",
+        [societyID]
+      );
+      return result.rows[0].count;
+    } catch (error) {
+      console.error("invalid society", error);
+    }
+    finally{
+      client.release();
+    }
+  };
+  
+  const getavgMembers = async (societyID) => {
+    const client = await pool.connect();
+    try {
+      const { rows } = await client.query(
+        "SELECT societyid, ROUND(AVG(member_count),3) AS avg_members FROM (SELECT ballots.societyid, ballots.ballotid, COUNT(ballots_users.username) AS member_count FROM ballots JOIN ballots_users ON ballots.ballotid = ballots_users.ballotid WHERE ballots.societyid =$1 GROUP BY ballots.societyid, ballots.ballotid) AS subquery GROUP BY societyid;",
+        [societyID]
+      );
+      const averageMembersVoting = rows[0].avg_members;
+      return averageMembersVoting;
+    } catch (error) {
+      console.error("Error executing view:", error);
+    }
+    finally{
+      client.release();
+    }
+  };
+  
+  const getMembersOfSociety = async (societyID) => {
+    const client = await pool.connect();
+    try {
+      
+      const  result  = await client.query(
+        "SELECT * FROM users_society WHERE societyID = $1",
+        [societyID]
+      );
+    console.log(result.rows);
+      return result.rows;
+      
+    } catch (error) {
+      console.error("Error executing materialized view:", error);
+      throw error;
+    }
+    finally
+    {
+      client.release();
+    }
+  };
 // this should be the name of the function to check login, refer to index.js for return type and arguments
 module.exports = {
-    getUser,
-    getBallots,
-    getBallotItems,
-    getCandidates,
-    getMembersandOfficers,
-    castVote,
-    getResults,
-    getBallot,
-    getStatus,
-    updateVotedBallots,
-    getAllSocieties,
-    getAssignedSocieties,
-    createUser,
-    createSociety,
-    editBallot,
-    createBallot,
-    createBallotItem,
-    addCandidate,
-    createCandidate
+  getUser,
+  getBallots,
+  getBallotItems,
+  getCandidates,
+  getMembersandOfficers,
+  castVote,
+  getResults,
+  getBallot,
+  getStatus,
+  updateVotedBallots,
+  getAllSocieties,
+  getAssignedSocieties,
+  createUser,
+  createSociety,
+  editBallot,
+  createBallot,
+  createBallotItem,
+  addCandidate,
+  createCandidate,
+  editUser,
+  calculateAverageQueryTime,
+  getNumberOfActiveElections,
+  getBallotCountPerSociety,
+  getavgMembers,
+  getMembersOfSociety
 }

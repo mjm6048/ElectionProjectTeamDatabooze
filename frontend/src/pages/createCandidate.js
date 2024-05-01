@@ -57,7 +57,7 @@ catch(error)
 
   return (
     <div>
-      <h2>Add Initiative or Position</h2>
+      <h2>Create Candidate</h2>
       <form onSubmit={handleSubmit}>
 
     <label>Candidate ID:</label>

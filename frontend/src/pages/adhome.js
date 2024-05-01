@@ -52,6 +52,8 @@ function ADHome(props) {
         <div>
           <button onClick={()=>navigate("/createUser")}>Create User</button>
           <button onClick={()=>navigate("/createSociety")}>Create Society</button>
+          <button onClick={()=>navigate("/SystemStatistics")}>View System Statistics</button>
+          <button onClick={()=>navigate("/SocietyStatistics")}>View Society Statistics</button>
         </div>
       )}
   
@@ -68,9 +70,6 @@ function ADHome(props) {
             </div>
           );
         })}
-      </div>
-      <div>
-        <h2>Users</h2>
       </div>
     </div>
   );

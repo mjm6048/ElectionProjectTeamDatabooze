@@ -1,10 +1,11 @@
 // Candidate.js
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-const roleid = localStorage.getItem('adroleid');
+
 
 const Candidate = ({ firstName, lastName,titles, photoUrl, description, onVoteChange, disabled }) => {
   const [pressed,setPressed] = useState(false);
+  const roleid = localStorage.getItem('adroleid');
   const navigate = useNavigate();
   const handleVoteChange = () => {
     setPressed(true);

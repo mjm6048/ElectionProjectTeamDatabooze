@@ -6,6 +6,7 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 
+
 const CreateSociety = () => {
   const [societyName, setSocietyName] = useState("");
   const [societyDescription, setSocietyDescription] = useState("");

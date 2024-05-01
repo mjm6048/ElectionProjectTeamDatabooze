@@ -1,83 +1,72 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-const BACKEND_URL ="http://localhost:5001";
+const BACKEND_URL = "http://localhost:5001";
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const history = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  useEffect( ()=>
-  {
-
-    const getBallots = async () =>
-    {
+  useEffect(() => {
+    const getBallots = async () => {
       history("/memberhome");
-    }
-  
-    if (localStorage.getItem("adtoken"))
-    { var token= localStorage.getItem("adtoken");
+    };
+
+    if (localStorage.getItem("adtoken")) {
+      var token = localStorage.getItem("adtoken");
       var decodedjwt = JSON.parse(atob(token.split(".")[1]));
-      if(decodedjwt.exp*1000>Date.now())
-      {
+      if (decodedjwt.exp * 1000 > Date.now()) {
         localStorage.removeItem("adtoken");
         localStorage.removeItem("adusername");
         localStorage.removeItem("adroleid");
-      }
-      else{
+
+        const sendEmptyRequest = async () => {
+          try {
+            await axios.post(`${BACKEND_URL}/users/num`);
+          } catch (error) {
+            console.error("Error sending empty request:", error);
+          }
+        };
+        sendEmptyRequest();
+      } else {
         var uname = localStorage.getItem("adusername");
         setIsLoggedIn(true);
         getBallots();
       }
-      
     }
-  },[])
+  }, []);
 
- 
   async function submit(e) {
     e.preventDefault();
     try {
       let response = await axios.post(`${BACKEND_URL}/users/login`, {
-          username,
-          password
-        });
-        if (response.status === 200) {
-          alert("Login successful");
-          var ballots =[];
-          if(response.data.roleid<3)
-          {
-
-            history("/memberhome");
-      
-          }
-          else
-          {
-            history("/societies");
-          }
-            
-          localStorage.setItem("adtoken",response.data.token);
-          localStorage.setItem("adusername",username);
-          localStorage.setItem("adroleid",response.data.roleid);
-          setIsLoggedIn(true);
-
-        } 
-        else {
-          alert("Invalid credentials");
+        username,
+        password
+      });
+      if (response.status === 200) {
+        alert("Login successful");
+        var ballots = [];
+        if (response.data.roleid < 3) {
+          history("/memberhome");
+        } else {
+          history("/societies");
         }
-      
-    }
-    catch (error) {
-      console.error(error);
-      
-      if (error.response.status!=null && error.response.status === 401)
-      {
-        alert("Invalid Credentials");
+
+        localStorage.setItem("adtoken", response.data.token);
+        localStorage.setItem("adusername", username);
+        localStorage.setItem("adroleid", response.data.roleid);
+        setIsLoggedIn(true);
+      } else {
+        alert("Invalid credentials");
       }
-        else
-      { 
+    } catch (error) {
+      console.error(error);
+
+      if (error.response.status != null && error.response.status === 401) {
+        alert("Invalid Credentials");
+      } else {
         alert("Internal server error");
-    
       }
     }
   }

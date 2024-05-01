@@ -12,7 +12,6 @@ export default class AmericanDreamHome extends React.Component {
       redirectToCreateUser: false,
       redirectToCreateSociety: false,
       redirectToSystemStatistics: false,
-      redirectToSocietyStatistics: false,
       roleID: localStorage.getItem("adroleid")
     };
   }
@@ -27,10 +26,6 @@ export default class AmericanDreamHome extends React.Component {
 
   handleSystemStatistics = () => {
     this.setState({ redirectToSystemStatistics: true });
-  };
-
-  handleSocietyStatistics = () => {
-    this.setState({ redirectToSocietyStatistics: true });
   };
 
   //show content
@@ -54,10 +49,6 @@ export default class AmericanDreamHome extends React.Component {
     if (redirectToSystemStatistics) {
       return <Navigate to="/systemStatistics" />;
     }
-
-    if (redirectToSocietyStatistics) {
-      return <Navigate to="/societyStatistics" />;
-    }
     return (
       <>
         <p>American Dream Homepage</p>
@@ -68,9 +59,6 @@ export default class AmericanDreamHome extends React.Component {
               <button onClick={this.handleCreateSociety}>Create Society</button>
               <button onClick={this.handleSystemStatistics}>
                 System Statistics
-              </button>
-              <button onClick={this.handleSocietyStatistics}>
-                Society Statistics
               </button>
             </>
           )}

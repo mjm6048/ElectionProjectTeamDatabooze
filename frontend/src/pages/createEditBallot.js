@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import axios from "axios";
+import getAverageResponseTime from "../utils/getAverageResponseTime";
 const BACKEND_URL ="http://localhost:5001";
+
 function EditBallotPage(props) {
   const navigate = useNavigate();
   const { state } = useLocation();
-
+  const { measuredAxios } = getAverageResponseTime();
   const token = localStorage.getItem('adtoken');
   if(state!=null)
   {
@@ -83,7 +85,7 @@ function EditBallotPage(props) {
     console.log(formData);
     try
     {
-    const response =  await axios.post(`${BACKEND_URL}/ballots`,formData,{headers});
+    const response =  await measuredAxios.post(`${BACKEND_URL}/ballots`,formData,{headers});
        
     if(response.status === 200)
     {

@@ -70,7 +70,7 @@ const SystemStatistics = () => {
             <h3>Query Time Logging:</h3>
             <p></p>
             <div className="query-time-value">
-              {averageQueryTime[0].calculate_average_query_time}
+              {averageQueryTime[0].average_query_time}
             </div>
           </div>
         </div>

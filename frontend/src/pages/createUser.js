@@ -161,7 +161,10 @@ const CreateUser = () => {
             helperText={errors.roleID}
           />
         </div>
-        {(roleID === "3" || roleID === "4") && (
+        {(roleID === "1" ||
+          roleID === "2" ||
+          roleID === "3" ||
+          roleID === "4") && (
           <TextField
             id="societyID"
             label="Society ID"
@@ -178,7 +181,7 @@ const CreateUser = () => {
                     variant="contained"
                     color="primary"
                     onClick={handleAddSociety}
-                    disabled={!societyID}
+                    disabled={!societyID || roleID === "1" || roleID === "2"}
                   >
                     Add
                   </Button>

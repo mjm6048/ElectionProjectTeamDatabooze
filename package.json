@@ -34,6 +34,7 @@
     "jsonwebtoken": "^9.0.2",
     "pg": "^8.11.3",
     "pg-format": "^1.0.4",
+    "supertest": "^7.0.0",
     "ts-jest": "^29.1.2",
     "update": "^0.7.4"
   },
